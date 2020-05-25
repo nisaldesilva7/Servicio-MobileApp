@@ -11,7 +11,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.deepPurple[800],
+      backgroundColor: Colors.blue[800],
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -127,7 +127,7 @@ class _HomePageState extends State<HomePage> {
                     margin: EdgeInsets.symmetric(horizontal: 60),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(50),
-                      color: Color.fromRGBO(49, 39, 79, 1),
+                      color: Colors.grey[500],
                     ),
                     child: Center(
                       child: Text(
@@ -147,7 +147,7 @@ class _HomePageState extends State<HomePage> {
                     child: Text(
                       "Create Account",
                       style: TextStyle(
-                        color: Colors.pink[200],
+                        color: Colors.white,
                       ),
                     ),
                   ),
