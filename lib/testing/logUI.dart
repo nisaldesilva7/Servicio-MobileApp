@@ -34,9 +34,7 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
           ),
-          SizedBox(
-            height: 20,
-          ),
+          SizedBox(height: 10),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.0),
             child: Column(
@@ -45,17 +43,15 @@ class _HomePageState extends State<HomePage> {
                 FadeAnimation(
                   1,
                   Text(
-                    "Welcome to \nSERVICIO,",
+                    "WELOCOME TO SERVICIO",
                     style: TextStyle(
-                      fontSize: 30,
+                      fontSize: 25,
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: 40,
-                ),
+                SizedBox(height: 15.0),
                 FadeAnimation(
                   1,
                   Container(
@@ -66,88 +62,105 @@ class _HomePageState extends State<HomePage> {
                     ),
                     child: Column(
                       children: <Widget>[
-                        Container(
-                          padding: EdgeInsets.all(10.0),
-                          decoration: BoxDecoration(
-                            border: Border(
-                              bottom: BorderSide(
-                                color: Colors.grey[100],
-                              ),
-                            ),
+                        TextFormField(
+                          decoration: InputDecoration(
+                            hintText: 'Email',
+                            fillColor: Colors.white,
+                            filled: true,
                           ),
-                          child: TextField(
-                            decoration: InputDecoration(
-                              border: InputBorder.none,
-                              hintText: "Username",
-                              hintStyle: TextStyle(color: Colors.white),
-                            ),
-                          ),
+                          validator: (val) => val.isEmpty ? 'Enter an Email' : null,
+                          onChanged: (val) {
+//                            setState(() => email = val);
+                          },
                         ),
-                        Container(
-                          padding: EdgeInsets.all(10.0),
-                          decoration: BoxDecoration(
-                            border: Border(
-                              bottom: BorderSide(
-                                color: Colors.grey[100],
-                              ),
-                            ),
+                        SizedBox(height: 20.0),
+                        TextFormField(
+                          decoration: InputDecoration(
+                            hintText: 'Password',
+                            fillColor: Colors.white,
+                            filled: true,
                           ),
-                          child: TextField(
-                            decoration: InputDecoration(
-                                border: InputBorder.none,
-                                hintText: "Password",
-                                hintStyle: TextStyle(color: Colors.white)),
-                          ),
-                        )
+                          validator: (val) => val.length < 6 ? 'Passowrd should be length more thana 6 chars' : null,
+                          obscureText: true,
+                          onChanged: (val) {
+//                            setState(() => password = val);
+                          },
+                        ),
                       ],
                     ),
                   ),
                 ),
                 SizedBox(
-                  height: 20.0,
+                  height: 40.0,
                 ),
                 Center(
                   child: FadeAnimation(
                     1,
-                    Text(
-                      "Forgot Password?",
-                      style: TextStyle(
-                        color: Colors.white,
+                      FlatButton(
+                        onPressed: () {
+                          /*...*/
+                        },
+                        child: Text(
+                          "Forget Password",
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
                       ),
-                    ),
                   ),
                 ),
-                SizedBox(
-                  height: 20.0,
-                ),
+                SizedBox(height: 10.0),
                 FadeAnimation(
                   1,
-                  Container(
-                    height: 50,
-                    margin: EdgeInsets.symmetric(horizontal: 60),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(50),
-                      color: Colors.grey[500],
-                    ),
+                  ButtonTheme(
+                    minWidth: 150.0,
+                    height: 40.0,
                     child: Center(
-                      child: Text(
-                        "Login",
-                        style: TextStyle(color: Colors.white),
+                      child: RaisedButton(
+                        shape: RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
+                        color: Colors.blue[900],
+                        child: Text('Sign in',
+                          style: TextStyle(color: Colors.white, fontSize: 15.0),
+                        ),
+                        onPressed: () {},
+//                        sign in function
+//                        async {
+//                          if (_formKey.currentState.validate()) {
+//                            setState(() => loading = true);
+//                            dynamic result = await _auth.signInWithEmail(email, password);
+//                            if (result == null){
+//                              setState(() {
+//                                error = 'Could not Sign In';
+//                                loading = false;
+//                              });
+//                            }
+//                          }
+//                        },
                       ),
                     ),
                   ),
                 ),
-
-                SizedBox(
-                  height: 20.0,
-                ),
+                SizedBox(height: 5.0),
+//error for sign in
+//                Text(
+//                    error,
+//                    style: TextStyle(
+//                      color: Colors.black,
+//                    )
+//                ),
                 FadeAnimation(
                   1,
                   Center(
-                    child: Text(
-                      "Create Account",
-                      style: TextStyle(
-                        color: Colors.white,
+                    child: FlatButton(
+                      onPressed: () {
+//                        toggle between sign up and sign in
+//                        widget.toggleView();
+                        },
+                      child: Text(
+                        "Create Account",
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                   ),
@@ -160,3 +173,5 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
+
+
