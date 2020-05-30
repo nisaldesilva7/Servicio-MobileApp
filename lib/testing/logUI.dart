@@ -11,7 +11,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.blue[800],
+      backgroundColor: Colors.blue[600],
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -79,7 +79,7 @@ class _HomePageState extends State<HomePage> {
                             decoration: InputDecoration(
                               border: InputBorder.none,
                               hintText: "Username",
-                              hintStyle: TextStyle(color: Colors.grey),
+                              hintStyle: TextStyle(color: Colors.white),
                             ),
                           ),
                         ),
@@ -96,7 +96,7 @@ class _HomePageState extends State<HomePage> {
                             decoration: InputDecoration(
                                 border: InputBorder.none,
                                 hintText: "Password",
-                                hintStyle: TextStyle(color: Colors.grey)),
+                                hintStyle: TextStyle(color: Colors.white)),
                           ),
                         )
                       ],
@@ -112,7 +112,7 @@ class _HomePageState extends State<HomePage> {
                     Text(
                       "Forgot Password?",
                       style: TextStyle(
-                        color: Colors.pink[200],
+                        color: Colors.white,
                       ),
                     ),
                   ),
