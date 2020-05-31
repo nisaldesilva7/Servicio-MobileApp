@@ -48,13 +48,13 @@ class AuthServices {
 
 
   //Reg with email and pass
-  Future registerWithEmail(String email,String password) async {
+  Future registerWithEmail(String email,String password, String name, String phone) async {
     try {
       AuthResult result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
       FirebaseUser user = result.user;
       
       //create a new doc for newly registered user
-      await DatabaseService(uid: user.uid).updateUserData('nisal', 'male', 19);
+      await DatabaseService(uid: user.uid).updateUserData(name, email, phone);
       print('auth ok');
 
       return _userFromFirebaseUser(user);

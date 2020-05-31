@@ -81,7 +81,8 @@ class _SignInState extends State<SignIn> {
                         children: <Widget>[
                           TextFormField(
                             decoration: InputDecoration(
-                              hintText: 'Email',
+                              labelText: 'Email',
+                              //hintText: 'Email',
                               fillColor: Colors.white,
                               filled: true,
                             ),
@@ -93,7 +94,8 @@ class _SignInState extends State<SignIn> {
                           SizedBox(height: 20.0),
                           TextFormField(
                             decoration: InputDecoration(
-                              hintText: 'Password',
+                              labelText: 'Password',
+                              //hintText: 'Password',
                               fillColor: Colors.white,
                               filled: true,
                             ),
