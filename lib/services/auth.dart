@@ -5,6 +5,7 @@ import 'package:servicio/services/database.dart';
 class AuthServices {
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  String error = '';
 
   //create user object
   User _userFromFirebaseUser(FirebaseUser user){
@@ -24,7 +25,8 @@ class AuthServices {
       return _userFromFirebaseUser(user);
       
     } catch (e) {
-      print(e.toString());
+      error = e.message;
+      print(error);
       return null;
     }
   }
@@ -38,7 +40,8 @@ class AuthServices {
       FirebaseUser user = result.user;
       return _userFromFirebaseUser(user);
     }catch(e){
-      print(e.toString());
+      error = e.message;
+      print(error);
       return null;
     }
   }
@@ -60,7 +63,8 @@ class AuthServices {
       return _userFromFirebaseUser(user);
 
     }catch(e){
-      print(e.toString());
+      error = e.message;
+      print(error);
       return null;
     }
   }

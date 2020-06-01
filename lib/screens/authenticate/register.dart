@@ -33,6 +33,10 @@ class _RegisterState extends State<Register> {
     return loading ? Loading() : Scaffold(
       backgroundColor: Colors.indigo,
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () {},
+        ),
         backgroundColor: Colors.blue[800],
         title: Text('Sign Up to Servicio'),
         actions: <Widget>[
@@ -113,6 +117,9 @@ class _RegisterState extends State<Register> {
       validator: (String value) {
         if (value.isEmpty) {
           return 'Name is Required';
+        }
+        if (value.length < 4) {
+          return 'Name is too short';
         }
         return null;
       },

@@ -16,12 +16,12 @@
         "source": "C:\\Users\\ASUS\\.gradle\\caches\\transforms-2\\files-2.1\\6caa6b80d259d0c25418eedbd88df9be\\core-1.0.0\\res\\layout\\notification_template_part_time.xml"
     },
     {
-        "merged": "C:\\Users\\ASUS\\Desktop\\servicio_app\\Servicio-MobileApp\\build\\app\\intermediates\\res\\merged\\debug\\drawable_notification_bg_low.xml.flat",
-        "source": "C:\\Users\\ASUS\\.gradle\\caches\\transforms-2\\files-2.1\\6caa6b80d259d0c25418eedbd88df9be\\core-1.0.0\\res\\drawable\\notification_bg_low.xml"
-    },
-    {
         "merged": "C:\\Users\\ASUS\\Desktop\\servicio_app\\Servicio-MobileApp\\build\\app\\intermediates\\res\\merged\\debug\\drawable_launch_background.xml.flat",
         "source": "C:\\Users\\ASUS\\Desktop\\servicio_app\\Servicio-MobileApp\\android\\app\\src\\main\\res\\drawable\\launch_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\ASUS\\Desktop\\servicio_app\\Servicio-MobileApp\\build\\app\\intermediates\\res\\merged\\debug\\drawable_notification_bg_low.xml.flat",
+        "source": "C:\\Users\\ASUS\\.gradle\\caches\\transforms-2\\files-2.1\\6caa6b80d259d0c25418eedbd88df9be\\core-1.0.0\\res\\drawable\\notification_bg_low.xml"
     },
     {
         "merged": "C:\\Users\\ASUS\\Desktop\\servicio_app\\Servicio-MobileApp\\build\\app\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4_common_google_signin_btn_icon_dark_normal_background.9.png.flat",

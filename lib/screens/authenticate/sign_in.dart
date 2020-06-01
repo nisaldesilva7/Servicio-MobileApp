@@ -99,7 +99,7 @@ class _SignInState extends State<SignIn> {
                               fillColor: Colors.white,
                               filled: true,
                             ),
-                            validator: (val) => val.length < 6 ? 'Passowrd should be length more thana 6 chars' : null,
+                            validator: (val) => val.isEmpty ? 'Enter the password' : null,
                             obscureText: true,
                             onChanged: (val) {
                               setState(() => password = val);
@@ -116,7 +116,7 @@ class _SignInState extends State<SignIn> {
                     1,
                     FlatButton(
                       onPressed: () {
-                        /*forget password function*/
+                        Navigator.pushNamed(context, "/forgotPassword");
                       },
                       child: Text("Forget Password",
                         style: TextStyle(
@@ -167,7 +167,7 @@ class _SignInState extends State<SignIn> {
                     ),
                   ),
                 ),
-                SizedBox(height: 60.0),
+                SizedBox(height: 35.0),
                 FadeAnimation(1,
                   Center(
                     child: FlatButton(
@@ -175,8 +175,9 @@ class _SignInState extends State<SignIn> {
                       //toggle between sign up and sign in
                         widget.toggleView();
                       },
-                      child: Text("Create Account",
+                      child: Text("Create My Account",
                         style: TextStyle(
+                          fontSize: 15.0,
                           color: Colors.white,
 
                         ),
