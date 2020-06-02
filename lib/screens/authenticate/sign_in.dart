@@ -118,11 +118,7 @@ class _SignInState extends State<SignIn> {
                       onPressed: () {
                         Navigator.pushNamed(context, "/forgotPassword");
                       },
-                      child: Text("Forget Password",
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                      ),
+                      child: Text("Forgot Password", style: TextStyle(color: Colors.white,),),
                     ),
                   ),
                 ),

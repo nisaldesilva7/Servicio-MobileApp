@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:servicio/services/auth.dart';
+
 
 class ForgotPassword extends StatefulWidget {
-
 
   @override
   _ForgotPasswordState createState() => _ForgotPasswordState();
 }
 
 class _ForgotPasswordState extends State<ForgotPassword> {
-
+  
+  final AuthServices _auth = AuthServices();
   String _email = '';
+
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -28,6 +31,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
         padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
         child: Column(
           children: <Widget>[
+
             Form(
                 key: _formKey,
                 child: _buildEmail(),
@@ -41,18 +45,17 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                 style: TextStyle(color: Colors.white),
               ),
               onPressed: () async {
-//                  if (_formKey.currentState.validate()) {
-//                    setState(() => loading = true);
-//                    dynamic result = await _auth.registerWithEmail(_email, _password, _name, _phoneNumber);
-//                    if (result == null){
-//                      setState(() {
-//                        error = 'Enter Valid Email';
-//                        loading = false;
-//                      });
-//                    }
-//                  }
+                await _auth.forgotPassword(_email);
               },
+
             ),
+            SizedBox(height: 20.0,),
+            Row(
+              children: <Widget>[
+                Text('Go back to SIGN IN page'),
+
+              ],
+            )
 
 
           ],

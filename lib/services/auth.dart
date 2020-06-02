@@ -38,6 +38,11 @@ class AuthServices {
     try {
       AuthResult result = await _auth.signInWithEmailAndPassword(email: email, password: password);
       FirebaseUser user = result.user;
+      if(user.isEmailVerified == true){
+        print('Email verified');
+      }else{
+        print('email not verfied');
+      }
       return _userFromFirebaseUser(user);
     }catch(e){
       error = e.message;
@@ -55,7 +60,8 @@ class AuthServices {
     try {
       AuthResult result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
       FirebaseUser user = result.user;
-      
+
+      sendVerificationMail();
       //create a new doc for newly registered user
       await DatabaseService(uid: user.uid).updateUserData(name, email, phone);
       print('auth ok');
@@ -70,8 +76,40 @@ class AuthServices {
   }
 
 
-    //sign out
-    Future signOut() async {
+  //forgot password
+  Future forgotPassword(String email) async {
+    try {
+     await _auth.sendPasswordResetEmail(email: email);
+    } catch(e) {
+      error = e.message;
+      print(error);
+    }
+  }
+
+  //send verification mail
+  Future sendVerificationMail() async {
+    var user = await _auth.currentUser();
+    user.sendEmailVerification();
+  }
+
+  //check Verification
+  Future checkVerification() async {
+    var user = await _auth.currentUser();
+    if(user.isEmailVerified) {
+      return null;
+    }
+  }
+
+
+  //reset password
+  Future resetPasswordUser() async {
+      //TODO
+  }
+
+
+
+  //sign out
+  Future signOut() async {
       try {
         return await _auth.signOut();
       } catch (e) {
