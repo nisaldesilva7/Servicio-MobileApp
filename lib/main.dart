@@ -39,22 +39,31 @@ void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     return StreamProvider<User>.value(
+      theme: new ThemeData(primarySwatch: Colors.indigo),
       value: AuthServices().user,
       child: MaterialApp(
-//        home: Wrapper(),
+//      home: Wrapper(),
 //      home: HomePage(),
 //      home: FormScreen(),
 //      home: Scrolling(),
 //      home: ForgotPassword(),
-      home: SplashScreen(),
+        home: SplashScreen(),
+    
+//    routes: routes,
 
-
-
-
-      routes: routes,
+          routes: <String, WidgetBuilder>{
+            "profile": (BuildContext context)=> new MyProfile("My Profile "),
+            "bookings": (BuildContext context)=> new MyBookings("My Bookings"),
+            "history": (BuildContext context)=> new History("Recent Activities"),
+            "notifications": (BuildContext context)=> new Notifications("Notifications"),
+            "offers": (BuildContext context)=> new Offers("Offers"),
+            "search": (BuildContext context)=> new Search("Search"),
+            "feedback": (BuildContext context)=> new HelpAndFeedback("Help and Feedback"),
+          }
       ),
+
     );
   }
 }

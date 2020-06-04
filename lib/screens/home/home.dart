@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:servicio/services/auth.dart';
-import 'package:provider/provider.dart';
-import 'package:servicio/models/user.dart';
-import 'package:servicio/screens/wrapper.dart';
 import 'package:flutter/foundation.dart';
 import 'package:servicio/screens/help.dart';
 import 'package:servicio/screens/history.dart';
@@ -157,6 +154,7 @@ class _HomeState extends State<Home>{
               backgroundColor: Colors.teal,
             ),
           ],
+
           onTap: (index){
             setState((){
               _currentIndex =index;

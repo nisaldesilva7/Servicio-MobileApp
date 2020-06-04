@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:servicio/screens/home/home.dart';
 class Notifications extends StatelessWidget{
   final String title;
   Notifications(this.title);
