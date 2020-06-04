@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:servicio/screens/home/home.dart';
+
 class MyBookings extends StatelessWidget{
   final String title;
   MyBookings(this.title);
