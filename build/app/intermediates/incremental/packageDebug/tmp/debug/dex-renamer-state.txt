@@ -1,6 +1,7 @@
-#Fri Jun 05 00:44:15 IST 2020
+#Fri Jun 05 01:21:35 IST 2020
 path.1=classes.dex
 path.0=classes.dex
+renamed.10=classes11.dex
 renamed.9=classes10.dex
 renamed.8=classes9.dex
 renamed.7=classes8.dex
@@ -21,6 +22,8 @@ base.3=C\:\\Users\\ASUS\\Desktop\\servicio_app\\Servicio-MobileApp\\build\\app\\
 base.2=C\:\\Users\\ASUS\\Desktop\\servicio_app\\Servicio-MobileApp\\build\\app\\intermediates\\dex\\debug\\mergeExtDexDebug\\out\\classes2.dex
 base.1=C\:\\Users\\ASUS\\Desktop\\servicio_app\\Servicio-MobileApp\\build\\app\\intermediates\\dex\\debug\\mergeProjectDexDebug\\out\\classes.dex
 base.0=C\:\\Users\\ASUS\\Desktop\\servicio_app\\Servicio-MobileApp\\build\\app\\intermediates\\dex\\debug\\mergeExtDexDebug\\out\\classes.dex
+base.10=C\:\\Users\\ASUS\\Desktop\\servicio_app\\Servicio-MobileApp\\build\\app\\intermediates\\dex\\debug\\mergeLibDexDebug\\out\\classes_7.dex
+path.10=classes_7.dex
 path.9=classes_6.dex
 path.8=classes_5.dex
 path.7=classes_4.dex
