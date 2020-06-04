@@ -19,15 +19,6 @@ import 'package:servicio/testing/formSample.dart';
 import 'package:servicio/testing/logUI.dart';
 import 'package:servicio/testing/selectimage.dart';
 
-
-var routes = <String, WidgetBuilder>{
-
-  "/image": (BuildContext context)=> SelectImages(),
-};
-
-
-
-
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
