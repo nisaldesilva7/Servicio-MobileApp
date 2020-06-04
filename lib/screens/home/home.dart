@@ -17,15 +17,6 @@ class MyApp extends StatelessWidget {
     return new MaterialApp(
         theme: new ThemeData(primarySwatch: Colors.indigo),
         home: new Home(),
-//        routes: <String, WidgetBuilder>{
-//          "/profile": (BuildContext context)=>  MyProfile("My Profile"),
-//          "bookings": (BuildContext context)=> new MyBookings("My Bookings"),
-//          "history": (BuildContext context)=> new History("Recent Activities"),
-//          "notifications": (BuildContext context)=> new Notifications("Notifications"),
-//          "offers": (BuildContext context)=> new Offers("Offers"),
-//          "search": (BuildContext context)=> new Search("Search"),
-//          "feedback": (BuildContext context)=> new HelpAndFeedback("Help and Feedback"),
-//        }
     );
   }
 }

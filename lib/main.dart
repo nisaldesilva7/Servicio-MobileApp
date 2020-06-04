@@ -18,30 +18,12 @@ import 'package:servicio/testing/formSample.dart';
 import 'package:servicio/testing/logUI.dart';
 import 'package:servicio/testing/selectimage.dart';
 
-
-var routes = <String, WidgetBuilder>{
-  "/wrapper": (BuildContext context) => Wrapper(),
-  "/forgotPassword": (BuildContext context) => ForgotPassword(),
-  "/profile": (BuildContext context)=>  MyProfile("My Profile"),
-  "/bookings": (BuildContext context)=>  MyBookings("My Bookings"),
-  "/service": (BuildContext context)=> ServicePage(),
-  "/image": (BuildContext context)=> SelectImages(),
-  "/notifications": (BuildContext context)=>  Notifications("Notifications"),
-  "/offers": (BuildContext context)=>  Offers("Offers"),
-  "/search": (BuildContext context)=>  Search("Search"),
-  "/feedback": (BuildContext context)=>  HelpAndFeedback("Help and Feedback"),
-};
-
-
-
-
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context){
     return StreamProvider<User>.value(
-      theme: new ThemeData(primarySwatch: Colors.indigo),
       value: AuthServices().user,
       child: MaterialApp(
 //      home: Wrapper(),
@@ -51,16 +33,20 @@ class MyApp extends StatelessWidget {
 //      home: ForgotPassword(),
         home: SplashScreen(),
     
-//    routes: routes,
+          theme: ThemeData(primarySwatch: Colors.indigo),
 
           routes: <String, WidgetBuilder>{
-            "profile": (BuildContext context)=> new MyProfile("My Profile "),
-            "bookings": (BuildContext context)=> new MyBookings("My Bookings"),
-            "history": (BuildContext context)=> new History("Recent Activities"),
-            "notifications": (BuildContext context)=> new Notifications("Notifications"),
-            "offers": (BuildContext context)=> new Offers("Offers"),
-            "search": (BuildContext context)=> new Search("Search"),
-            "feedback": (BuildContext context)=> new HelpAndFeedback("Help and Feedback"),
+            "/image": (BuildContext context)=> SelectImages(),
+            "/wrapper": (BuildContext context) => Wrapper(),
+            "/forgotPassword": (BuildContext context) => ForgotPassword(),
+            "/service": (BuildContext context)=> ServicePage(),
+            "/profile": (BuildContext context)=> new MyProfile("My Profile "),
+            "/bookings": (BuildContext context)=> new MyBookings("My Bookings"),
+            "/history": (BuildContext context)=> new History("Recent Activities"),
+            "/notifications": (BuildContext context)=> new Notifications("Notifications"),
+            "/offers": (BuildContext context)=> new Offers("Offers"),
+            "/search": (BuildContext context)=> new Search("Search"),
+            "/feedback": (BuildContext context)=> new HelpAndFeedback("Help and Feedback"),
           }
       ),
 

@@ -11,10 +11,10 @@ class MyApp extends StatelessWidget {
         theme: new ThemeData(primarySwatch: Colors.indigo),
         home: new Home(),
         routes: <String, WidgetBuilder>{
-          "home": (BuildContext context)=> new Home(),
-          "search": (BuildContext context)=> new Search("Search"),
-          "notifications": (BuildContext context)=> new Notifications("Notifications"),
-          "offers": (BuildContext context)=> new Offers("Offers"),
+          "/home": (BuildContext context)=> new Home(),
+          "/search": (BuildContext context)=> new Search("Search"),
+          "/notifications": (BuildContext context)=> new Notifications("Notifications"),
+          "/offers": (BuildContext context)=> new Offers("Offers"),
 
         }
     );
