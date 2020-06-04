@@ -35,6 +35,10 @@ dependencies:
 
   flare_splash_screen: ^3.0.1
 
+  image_picker: ^0.6.7
+  image_cropper: ^1.2.2
+  flutter_image_compress: ^0.6.8
+
 
 
 

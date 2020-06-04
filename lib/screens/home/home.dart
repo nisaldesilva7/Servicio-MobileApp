@@ -11,6 +11,7 @@ import 'package:servicio/screens/myprofile.dart';
 import 'package:servicio/screens/notifications.dart';
 import 'package:servicio/screens/offers.dart';
 import 'package:servicio/screens/search.dart';
+import 'package:servicio/testing/selectimage.dart';
 
 
 class MyApp extends StatelessWidget {
@@ -72,15 +73,25 @@ class _HomeState extends State<Home>{
               new UserAccountsDrawerHeader(
                 accountName: new Text("Tamasha Seneviratne"),
                 accountEmail: new Text("tamzsene@gmail.com"),
-                currentAccountPicture: new CircleAvatar(
-                  backgroundColor: Colors.black26,
-                  child: new Text("T"),
+                currentAccountPicture: InkWell(
+                  child: new CircleAvatar(
+                    backgroundColor: Colors.black26,
+                    child: new Text("T"),
+                  ),
+                  onTap: () {
+                    return Navigator.of(context).pushNamed("/image");
+                  },
                 ),
               ),
               new ListTile(
                 title: new Text("Home"),
                 trailing: new Icon(Icons.home),
                 onTap: () => Navigator.of(context).pop(),
+              ),
+              ListTile(
+                title: new Text("My Vehicles"),
+                trailing: new Icon(Icons.directions_car),
+                  onTap: () => Navigator.of(context).pushNamed('/profile')
               ),
               new ListTile(
                 title: new Text("My Profile"),
@@ -98,9 +109,9 @@ class _HomeState extends State<Home>{
                 onTap: () => Navigator.of(context).pushNamed("/notifications"),
               ),
               new ListTile(
-                title: new Text("History"),
-                trailing: new Icon(Icons.history),
-                onTap: () => Navigator.of(context).pushNamed("/history"),
+                title: new Text("Select Image"),
+                trailing: new Icon(Icons.image),
+                onTap: () => Navigator.of(context).pushNamed("/image"),
               ),
               new ListTile(
                 title: new Text("Help & Feedback"),
