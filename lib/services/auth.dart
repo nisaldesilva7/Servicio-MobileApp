@@ -5,6 +5,7 @@ import 'package:servicio/services/database.dart';
 class AuthServices {
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  String error = '';
 
   //create user object
   User _userFromFirebaseUser(FirebaseUser user){
@@ -24,7 +25,8 @@ class AuthServices {
       return _userFromFirebaseUser(user);
       
     } catch (e) {
-      print(e.toString());
+      error = e.message;
+      print(error);
       return null;
     }
   }
@@ -36,9 +38,15 @@ class AuthServices {
     try {
       AuthResult result = await _auth.signInWithEmailAndPassword(email: email, password: password);
       FirebaseUser user = result.user;
+      if(user.isEmailVerified == true){
+        print('Email verified');
+      }else{
+        print('email not verfied');
+      }
       return _userFromFirebaseUser(user);
     }catch(e){
-      print(e.toString());
+      error = e.message;
+      print(error);
       return null;
     }
   }
@@ -48,26 +56,60 @@ class AuthServices {
 
 
   //Reg with email and pass
-  Future registerWithEmail(String email,String password) async {
+  Future registerWithEmail(String email,String password, String name, String phone) async {
     try {
       AuthResult result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
       FirebaseUser user = result.user;
-      
+
+      sendVerificationMail();
       //create a new doc for newly registered user
-      await DatabaseService(uid: user.uid).updateUserData('nisal', 'male', 19);
+      await DatabaseService(uid: user.uid).updateUserData(name, email, phone);
       print('auth ok');
 
       return _userFromFirebaseUser(user);
 
     }catch(e){
-      print(e.toString());
+      error = e.message;
+      print(error);
       return null;
     }
   }
 
 
-    //sign out
-    Future signOut() async {
+  //forgot password
+  Future forgotPassword(String email) async {
+    try {
+     await _auth.sendPasswordResetEmail(email: email);
+    } catch(e) {
+      error = e.message;
+      print(error);
+    }
+  }
+
+  //send verification mail
+  Future sendVerificationMail() async {
+    var user = await _auth.currentUser();
+    user.sendEmailVerification();
+  }
+
+  //check Verification
+  Future checkVerification() async {
+    var user = await _auth.currentUser();
+    if(user.isEmailVerified) {
+      return null;
+    }
+  }
+
+
+  //reset password
+  Future resetPasswordUser() async {
+      //TODO
+  }
+
+
+
+  //sign out
+  Future signOut() async {
       try {
         return await _auth.signOut();
       } catch (e) {

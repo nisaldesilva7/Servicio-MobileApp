@@ -8,6 +8,7 @@ import 'package:servicio/screens/myprofile.dart';
 import 'package:servicio/screens/notifications.dart';
 import 'package:servicio/screens/offers.dart';
 import 'package:servicio/screens/search.dart';
+import 'package:servicio/testing/selectimage.dart';
 
 
 class MyApp extends StatelessWidget {
@@ -16,27 +17,19 @@ class MyApp extends StatelessWidget {
     return new MaterialApp(
         theme: new ThemeData(primarySwatch: Colors.indigo),
         home: new Home(),
-        routes: <String, WidgetBuilder>{
-          "profile": (BuildContext context)=> new MyProfile("My Profile "),
-          "bookings": (BuildContext context)=> new MyBookings("My Bookings"),
-          "history": (BuildContext context)=> new History("Recent Activities"),
-          "notifications": (BuildContext context)=> new Notifications("Notifications"),
-          "offers": (BuildContext context)=> new Offers("Offers"),
-          "search": (BuildContext context)=> new Search("Search"),
-          "feedback": (BuildContext context)=> new HelpAndFeedback("Help and Feedback"),
-        }
     );
   }
 }
 
-
 class Home extends StatefulWidget{
+
   @override
   _HomeState createState() => _HomeState();
 }
 class _HomeState extends State<Home>{
   int _currentIndex = 0;
   final AuthServices _auth = AuthServices();
+
 
   @override
   Widget build(BuildContext context) {
@@ -68,9 +61,14 @@ class _HomeState extends State<Home>{
               new UserAccountsDrawerHeader(
                 accountName: new Text("Tamasha Seneviratne"),
                 accountEmail: new Text("tamzsene@gmail.com"),
-                currentAccountPicture: new CircleAvatar(
-                  backgroundColor: Colors.black26,
-                  child: new Text("T"),
+                currentAccountPicture: InkWell(
+                  child: new CircleAvatar(
+                    backgroundColor: Colors.black26,
+                    child: new Text("T"),
+                  ),
+                  onTap: () {
+                    return Navigator.of(context).pushNamed("/image");
+                  },
                 ),
               ),
               new ListTile(
@@ -78,34 +76,42 @@ class _HomeState extends State<Home>{
                 trailing: new Icon(Icons.home),
                 onTap: () => Navigator.of(context).pop(),
               ),
+              ListTile(
+                title: new Text("My Vehicles"),
+                trailing: new Icon(Icons.directions_car),
+                  onTap: () => Navigator.of(context).pushNamed('/profile')
+              ),
               new ListTile(
                 title: new Text("My Profile"),
                 trailing: new Icon(Icons.person),
-                onTap: () => Navigator.of(context).pushNamed("profile"),
+                onTap: () => Navigator.of(context).pushNamed('/profile')
               ),
               new ListTile(
                 title: new Text("My Bookings"),
                 trailing: new Icon(Icons.bookmark),
-                onTap: () => Navigator.of(context).pushNamed("bookings"),
+                onTap: () => Navigator.of(context).pushNamed("/bookings"),
               ),
               new ListTile(
                 title: new Text("Notifications"),
                 trailing: new Icon(Icons.message),
-                onTap: () => Navigator.of(context).pushNamed("notifications"),
+                onTap: () => Navigator.of(context).pushNamed("/notifications"),
               ),
               new ListTile(
-                title: new Text("History"),
-                trailing: new Icon(Icons.history),
-                onTap: () => Navigator.of(context).pushNamed("history"),
+                title: new Text("Select Image"),
+                trailing: new Icon(Icons.image),
+                onTap: () => Navigator.of(context).pushNamed("/image"),
               ),
               new ListTile(
                 title: new Text("Help & Feedback"),
                 trailing: new Icon(Icons.feedback),
-                onTap: () => Navigator.of(context).pushNamed("feedback"),
+                onTap: () => Navigator.of(context).pushNamed("/feedback"),
               ),
               new ListTile(
                 title: new Text("Log Out"),
                 trailing: new Icon(Icons.lock),
+                onTap: ()  async {
+                  await _auth.signOut();
+                  },
               ),
             ],
           ),
@@ -126,6 +132,7 @@ class _HomeState extends State<Home>{
               icon: Icon(Icons.search),
               title: new Text("Search"),
               backgroundColor: Colors.teal,
+              //activeIcon: Icon(Icons.accessibility),
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.message),
@@ -138,6 +145,7 @@ class _HomeState extends State<Home>{
               backgroundColor: Colors.teal,
             ),
           ],
+
           onTap: (index){
             setState((){
               _currentIndex =index;
