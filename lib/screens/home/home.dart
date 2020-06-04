@@ -138,6 +138,7 @@ class _HomeState extends State<Home>{
               backgroundColor: Colors.teal,
             ),
           ],
+
           onTap: (index){
             setState((){
               _currentIndex =index;
