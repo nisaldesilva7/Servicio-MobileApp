@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:servicio/screens/home/bottom_navs/bookings_view.dart';
+import 'package:servicio/screens/home/bottom_navs/main_view.dart';
 import 'package:servicio/services/auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:servicio/screens/help.dart';
@@ -7,7 +9,7 @@ import 'package:servicio/screens/mybookings.dart';
 import 'package:servicio/screens/myprofile.dart';
 import 'package:servicio/screens/notifications.dart';
 import 'package:servicio/screens/offers.dart';
-import 'package:servicio/screens/search.dart';
+import 'package:servicio/screens/home/bottom_navs/search.dart';
 import 'package:servicio/testing/selectimage.dart';
 
 
@@ -28,6 +30,12 @@ class Home extends StatefulWidget{
 }
 class _HomeState extends State<Home>{
   int _currentIndex = 0;
+  final List<Widget> _bottomNavs = [
+    MainView(),
+    SearchView(),
+    BookingsView(),
+    BookingsView(),
+  ];
   final AuthServices _auth = AuthServices();
 
 
@@ -40,17 +48,17 @@ class _HomeState extends State<Home>{
           elevation: defaultTargetPlatform == TargetPlatform.android ? 5.0 : 0.0,
           backgroundColor: Colors.blue[600],
           actions: <Widget>[
-            FlatButton.icon(
+            IconButton(
+              icon: Icon(Icons.notifications),
+              onPressed: () {
+
+              },
+            ),
+            FlatButton(
                 onPressed: () async {
                   await _auth.signOut();
                 },
-                icon: Icon(Icons.call_missed_outgoing),
-                label: Text(
-                    'LOGOUT',
-                    style: TextStyle(
-                      color: Colors.grey[100],
-
-                    ),
+                child: Text('LOGOUT', style: TextStyle(color: Colors.grey[100],),
                 ),
             )
           ],
@@ -116,7 +124,7 @@ class _HomeState extends State<Home>{
             ],
           ),
         ),
-        body: new Container(),
+        body:  _bottomNavs[_currentIndex],
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: _currentIndex,
           type: BottomNavigationBarType.fixed,
@@ -126,7 +134,7 @@ class _HomeState extends State<Home>{
             BottomNavigationBarItem(
                 icon: Icon(Icons.home),
                 title: new Text("Home"),
-                backgroundColor: Colors.teal
+                backgroundColor: Colors.grey
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.search),
@@ -135,14 +143,14 @@ class _HomeState extends State<Home>{
               //activeIcon: Icon(Icons.accessibility),
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.message),
-              title: new Text("Notifications"),
-              backgroundColor: Colors.teal,
+              icon: Icon(Icons.collections_bookmark),
+              title: new Text("Bookings"),
+              backgroundColor: Colors.blue,
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.offline_bolt),
               title: new Text("Offers"),
-              backgroundColor: Colors.teal,
+              backgroundColor: Colors.yellow,
             ),
           ],
 

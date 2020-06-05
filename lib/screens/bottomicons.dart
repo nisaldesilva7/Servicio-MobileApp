@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:servicio/screens/notifications.dart';
 import 'package:servicio/screens/offers.dart';
-import 'package:servicio/screens/search.dart';
+import 'package:servicio/screens/home/bottom_navs/search.dart';
 
 import 'home/home.dart';
 class MyApp extends StatelessWidget {

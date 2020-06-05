@@ -8,7 +8,7 @@ import 'package:servicio/screens/mybookings.dart';
 import 'package:servicio/screens/myprofile.dart';
 import 'package:servicio/screens/notifications.dart';
 import 'package:servicio/screens/offers.dart';
-import 'package:servicio/screens/search.dart';
+import 'package:servicio/screens/home/bottom_navs/search.dart';
 import 'package:servicio/screens/service_page/servicePage.dart';
 import 'package:servicio/screens/side_nav/my_vehicles/addNew_vehicle.dart';
 import 'package:servicio/screens/side_nav/my_vehicles/my_vehicles.dart';
@@ -56,7 +56,7 @@ class MyApp extends StatelessWidget {
             "/history": (BuildContext context)=> new History("Recent Activities"),
             "/notifications": (BuildContext context)=> new Notifications("Notifications"),
             "/offers": (BuildContext context)=> new Offers("Offers"),
-            "/search": (BuildContext context)=> new Search("Search"),
+//            "/search": (BuildContext context)=> new Search("Search"),
             "/feedback": (BuildContext context)=> new HelpAndFeedback("Help and Feedback"),
             "/vehicle": (BuildContext context)=> MyVehicles(),
             "/addnewvehicle": (BuildContext context)=> AddNewVehicle(),
