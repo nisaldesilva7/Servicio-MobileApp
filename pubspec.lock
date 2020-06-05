@@ -93,26 +93,12 @@ packages:
     source: hosted
     version: "2.3.4"
   flare_flutter:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: flare_flutter
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.3"
-  flare_loading:
-    dependency: transitive
-    description:
-      name: flare_loading
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.1.1"
-  flare_splash_screen:
-    dependency: "direct main"
-    description:
-      name: flare_splash_screen
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "3.0.1"
+    version: "1.8.3"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -153,6 +139,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.1.2+1"
+  flutter_svg:
+    dependency: "direct main"
+    description:
+      name: flutter_svg
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.14.4"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -214,6 +207,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.8"
+  page_indicator:
+    dependency: "direct main"
+    description:
+      name: page_indicator
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.3.0"
   path:
     dependency: transitive
     description:
@@ -221,6 +221,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.6.4"
+  path_drawing:
+    dependency: transitive
+    description:
+      name: path_drawing
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.4.1"
+  path_parsing:
+    dependency: transitive
+    description:
+      name: path_parsing
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.4"
   pedantic:
     dependency: transitive
     description:
@@ -256,6 +270,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.5"
+  rect_getter:
+    dependency: "direct main"
+    description:
+      name: rect_getter
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.1"
   sa_anicoto:
     dependency: transitive
     description:
