@@ -63,7 +63,11 @@
     },
     {
       "name": "firebase",
+<<<<<<< HEAD
       "rootUri": "file:///C:/flutter/.pub-cache/hosted/pub.dartlang.org/firebase-7.3.0",
+=======
+      "rootUri": "file:///C:/Users/ASUS/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/firebase-7.3.0",
+>>>>>>> 91b432c14fdcf040c823af480c35cffc81eb0dce
       "packageUri": "lib/",
       "languageVersion": "2.7"
     },
@@ -75,19 +79,31 @@
     },
     {
       "name": "firebase_core",
+<<<<<<< HEAD
       "rootUri": "file:///C:/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core-0.4.4+3",
+=======
+      "rootUri": "file:///C:/Users/ASUS/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/firebase_core-0.4.4+3",
+>>>>>>> 91b432c14fdcf040c823af480c35cffc81eb0dce
       "packageUri": "lib/",
       "languageVersion": "2.0"
     },
     {
       "name": "firebase_core_platform_interface",
+<<<<<<< HEAD
       "rootUri": "file:///C:/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core_platform_interface-1.0.4",
+=======
+      "rootUri": "file:///C:/Users/ASUS/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/firebase_core_platform_interface-1.0.4",
+>>>>>>> 91b432c14fdcf040c823af480c35cffc81eb0dce
       "packageUri": "lib/",
       "languageVersion": "2.0"
     },
     {
       "name": "firebase_core_web",
+<<<<<<< HEAD
       "rootUri": "file:///C:/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core_web-0.1.1+2",
+=======
+      "rootUri": "file:///C:/Users/ASUS/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/firebase_core_web-0.1.1+2",
+>>>>>>> 91b432c14fdcf040c823af480c35cffc81eb0dce
       "packageUri": "lib/",
       "languageVersion": "2.0"
     },
@@ -159,7 +175,11 @@
     },
     {
       "name": "flutter_web_plugins",
+<<<<<<< HEAD
       "rootUri": "file:///C:/flutter/packages/flutter_web_plugins",
+=======
+      "rootUri": "file:///C:/src/flutter/packages/flutter_web_plugins",
+>>>>>>> 91b432c14fdcf040c823af480c35cffc81eb0dce
       "packageUri": "lib/",
       "languageVersion": "2.0"
     },
@@ -201,7 +221,11 @@
     },
     {
       "name": "js",
+<<<<<<< HEAD
       "rootUri": "file:///C:/flutter/.pub-cache/hosted/pub.dartlang.org/js-0.6.1+1",
+=======
+      "rootUri": "file:///C:/Users/ASUS/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/js-0.6.1+1",
+>>>>>>> 91b432c14fdcf040c823af480c35cffc81eb0dce
       "packageUri": "lib/",
       "languageVersion": "1.19"
     },
@@ -362,7 +386,11 @@
       "languageVersion": "2.1"
     }
   ],
+<<<<<<< HEAD
   "generated": "2020-06-05T07:55:36.262707Z",
+=======
+  "generated": "2020-06-04T20:12:23.782888Z",
+>>>>>>> 91b432c14fdcf040c823af480c35cffc81eb0dce
   "generator": "pub",
   "generatorVersion": "2.8.2"
 }

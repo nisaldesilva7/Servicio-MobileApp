@@ -14,9 +14,6 @@ import 'package:servicio/screens/side_nav/my_vehicles.dart';
 import 'package:servicio/screens/splash_loading/splash_loading.dart';
 import 'package:servicio/screens/wrapper.dart';
 import 'package:servicio/services/auth.dart';
-import 'package:servicio/testing/dep/scrollCheck.dart';
-import 'package:servicio/testing/formSample.dart';
-import 'package:servicio/testing/logUI.dart';
 import 'package:servicio/testing/selectimage.dart';
 
 void main() => runApp(MyApp());

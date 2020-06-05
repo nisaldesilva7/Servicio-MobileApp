@@ -1,14 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:servicio/services/auth.dart';
 import 'package:flutter/foundation.dart';
-import 'package:servicio/screens/help.dart';
-import 'package:servicio/screens/history.dart';
-import 'package:servicio/screens/mybookings.dart';
-import 'package:servicio/screens/myprofile.dart';
-import 'package:servicio/screens/notifications.dart';
-import 'package:servicio/screens/offers.dart';
-import 'package:servicio/screens/search.dart';
-import 'package:servicio/testing/selectimage.dart';
 
 
 class MyApp extends StatelessWidget {
