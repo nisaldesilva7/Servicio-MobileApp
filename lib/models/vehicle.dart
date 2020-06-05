@@ -6,4 +6,11 @@ class Vehicle {
 
 
   Vehicle(this.model, this.regNo, this.brand, this.year);
+  
+  Map<String, dynamic> toJson() => {
+    'model': model,
+    'regNo': regNo,
+    'brand': brand,
+    'year': year,
+  };
 }

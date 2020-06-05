@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
 //import 'package:intl/intl.dart';
 import 'package:servicio/models/vehicle.dart';
+import 'package:servicio/services/auth.dart';
 
 class MyVehicles extends StatefulWidget {
+
+
 
   @override
   _MyVehiclesState createState() => _MyVehiclesState();
 }
 
 class _MyVehiclesState extends State<MyVehicles> {
+
+  final AuthServices _auth = AuthServices();
+
   final List<Vehicle> vehiclelist = [
     Vehicle('520d', '2017bmw150', 'BMW' , '2020'),
     Vehicle('520d', '2017bmw150', 'BMW' , '2020'),
@@ -43,7 +49,7 @@ class _MyVehiclesState extends State<MyVehicles> {
                 tooltip: 'Add New Vehicle',
                 icon: Icon(Icons.add),
                 onPressed: () {
-
+                  return Navigator.of(context).pushNamed('/addnewvehicle');
                 }
             )
         ],
@@ -70,13 +76,15 @@ class _MyVehiclesState extends State<MyVehicles> {
               Padding(
                 padding: const EdgeInsets.only(top: 8.0, bottom: 4.0),
                 child: Row(children: <Widget>[
-                  Text(vehicle.model, style: new TextStyle(fontSize: 30.0),),
+                  Text(vehicle.brand, style: new TextStyle(fontSize: 30.0),),
                   Spacer(),
                   IconButton(
                     icon: Icon(Icons.add_to_photos),
                     tooltip: 'Modfiy Vehicle',
-                    onPressed: () {
-                    },
+                    onPressed: () async {
+                      final uid = await _auth.getCurrentUID();
+                      print('xxx = $uid');
+                      },
                   ),
                   IconButton(
                     icon: Icon(Icons.delete_outline),
@@ -90,7 +98,7 @@ class _MyVehiclesState extends State<MyVehicles> {
               Padding(
                 padding: const EdgeInsets.only(top: 4.0, bottom: 80.0),
                 child: Row(children: <Widget>[
-                  Text(vehicle.brand),
+                  Text(vehicle.model),
                   Spacer(),
                 ]),
               ),
