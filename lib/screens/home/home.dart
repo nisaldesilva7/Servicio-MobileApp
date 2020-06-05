@@ -79,7 +79,7 @@ class _HomeState extends State<Home>{
               ListTile(
                 title: new Text("My Vehicles"),
                 trailing: new Icon(Icons.directions_car),
-                  onTap: () => Navigator.of(context).pushNamed('/profile')
+                  onTap: () => Navigator.of(context).pushNamed('/vehicle')
               ),
               new ListTile(
                 title: new Text("My Profile"),
