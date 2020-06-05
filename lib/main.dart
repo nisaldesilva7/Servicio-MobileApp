@@ -10,6 +10,7 @@ import 'package:servicio/screens/notifications.dart';
 import 'package:servicio/screens/offers.dart';
 import 'package:servicio/screens/search.dart';
 import 'package:servicio/screens/service_page/servicePage.dart';
+import 'package:servicio/screens/side_nav/my_vehicles.dart';
 import 'package:servicio/screens/splash_loading/splash_loading.dart';
 import 'package:servicio/screens/wrapper.dart';
 import 'package:servicio/services/auth.dart';
@@ -47,6 +48,8 @@ class MyApp extends StatelessWidget {
             "/offers": (BuildContext context)=> new Offers("Offers"),
             "/search": (BuildContext context)=> new Search("Search"),
             "/feedback": (BuildContext context)=> new HelpAndFeedback("Help and Feedback"),
+            "/vehicle": (BuildContext context)=> MyVehicles(),
+
           }
       ),
 
