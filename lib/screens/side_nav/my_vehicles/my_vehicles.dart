@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 //import 'package:intl/intl.dart';
 import 'package:servicio/models/vehicle.dart';
 import 'package:servicio/services/auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class MyVehicles extends StatefulWidget {
-
-
 
   @override
   _MyVehiclesState createState() => _MyVehiclesState();
@@ -14,30 +13,6 @@ class MyVehicles extends StatefulWidget {
 class _MyVehiclesState extends State<MyVehicles> {
 
   final AuthServices _auth = AuthServices();
-
-  final List<Vehicle> vehiclelist = [
-    Vehicle('520d', '2017bmw150', 'BMW' , '2020'),
-    Vehicle('520d', '2017bmw150', 'BMW' , '2020'),
-    Vehicle('520d', '2017bmw150', 'BMW' , '2020'),
-    Vehicle('520d', '2017bmw150', 'BMW' , '2020'),
-    Vehicle('520d', '2017bmw150', 'BMW' , '2020'),
-  ];
-
-
-//  AlertDialog alert = AlertDialog(
-//    title: Text("AlertDialog"),
-//    content: Text("Would you like to continue learning how to use Flutter alerts?"),
-//    actions: [
-//      FlatButton(
-//        child: Text("Cancel"),
-//        onPressed:  () {},
-//      ),
-//      FlatButton(
-//        child: Text("Continue"),
-//        onPressed:  () {},
-//      ),
-//    ],
-//  );
 
   @override
   Widget build(BuildContext context) {
@@ -56,17 +31,25 @@ class _MyVehiclesState extends State<MyVehicles> {
       ),
       body: Container(
         padding: EdgeInsets.symmetric(horizontal: 10.0,vertical: 5.0),
-        child: new ListView.builder(
-            itemCount: vehiclelist.length,
-            itemBuilder: (BuildContext context, int index) =>
-                buildTripCard(context, index)),
+        child: StreamBuilder(
+            stream: getUsersTripsStreamSnapshots(context),
+            builder: (context, snapshot) {
+              if(!snapshot.hasData) return const Text("Loading...");
+              return new ListView.builder(
+                  itemCount: snapshot.data.documents.length,
+                  itemBuilder: (BuildContext context, int index) => buildTripCard(context, snapshot.data.documents[index]));
+            }
+        ),
       ),
     );
   }
 
-  Widget buildTripCard(BuildContext context, int index) {
-    final vehicle = vehiclelist[index];
+  Stream<QuerySnapshot> getUsersTripsStreamSnapshots(BuildContext context) async* {
+    final uid = await _auth.getCurrentUID();
+    yield* Firestore.instance.collection('users').document(uid).collection('vehicles').snapshots();
+  }
 
+  Widget buildTripCard(BuildContext context, DocumentSnapshot vehicle) {
     return  Container(
       child: Card(
         child: Padding(
@@ -76,7 +59,7 @@ class _MyVehiclesState extends State<MyVehicles> {
               Padding(
                 padding: const EdgeInsets.only(top: 8.0, bottom: 4.0),
                 child: Row(children: <Widget>[
-                  Text(vehicle.brand, style: new TextStyle(fontSize: 30.0),),
+                  Text(vehicle['brand'], style: new TextStyle(fontSize: 30.0),),
                   Spacer(),
                   IconButton(
                     icon: Icon(Icons.add_to_photos),
@@ -98,7 +81,7 @@ class _MyVehiclesState extends State<MyVehicles> {
               Padding(
                 padding: const EdgeInsets.only(top: 4.0, bottom: 80.0),
                 child: Row(children: <Widget>[
-                  Text(vehicle.model),
+                  Text(vehicle['model']),
                   Spacer(),
                 ]),
               ),
@@ -106,7 +89,7 @@ class _MyVehiclesState extends State<MyVehicles> {
                 padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
                 child: Row(
                   children: <Widget>[
-                    Text(vehicle.regNo, style: new TextStyle(fontSize: 35.0),),
+                    Text(vehicle['regNo'], style: new TextStyle(fontSize: 35.0),),
                     Spacer(),
                     Icon(Icons.directions_car),
                   ],
