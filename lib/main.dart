@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+//import 'package:servicio/constant/constant.dart';
 import 'package:servicio/models/user.dart';
 import 'package:servicio/screens/authenticate/forgot_password.dart';
 import 'package:servicio/screens/help.dart';
@@ -21,24 +22,33 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context){
-    return StreamProvider<User>.value(
-      value: AuthServices().user,
-      child: MaterialApp(
-//      home: Wrapper(),
-//      home: HomePage(),
-//      home: FormScreen(),
-//      home: Scrolling(),
-//      home: ForgotPassword(),
-        home: SplashScreen(),
+        return StreamProvider<User>.value(
+          value: AuthServices().user,
+          child: MaterialApp(
+            title: 'Fluter Profile Page',
+            debugShowCheckedModeBanner: false,
+            theme: new ThemeData(
+              primaryColor: Color(0xff0082CD),
+    
+              primaryColorDark: Color(0xff0082CD)),
+    //      home: Wrapper(),
+    //      home: HomePage(),
+    //      home: FormScreen(),
+    //      home: Scrolling(),
+    //      home: ForgotPassword(),
+            home: SplashScreen(),
+            
     
           //theme: ThemeData(primarySwatch: Colors.indigo),
 
           routes: <String, WidgetBuilder>{
+            //SPLASH_SCREEN: (BuildContext context) => new MapScreen(),
+        
             "/image": (BuildContext context)=> SelectImages(),
             "/wrapper": (BuildContext context) => Wrapper(),
             "/forgotPassword": (BuildContext context) => ForgotPassword(),
             "/service": (BuildContext context)=> ServicePage(),
-            "/profile": (BuildContext context)=> new MyProfile("My Profile "),
+            "/profile":(BuildContext context)=> MyProfile("My Profile"),
             "/bookings": (BuildContext context)=> new MyBookings("My Bookings"),
             "/history": (BuildContext context)=> new History("Recent Activities"),
             "/notifications": (BuildContext context)=> new Notifications("Notifications"),

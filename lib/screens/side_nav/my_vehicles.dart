@@ -9,6 +9,7 @@ class MyVehicles extends StatefulWidget {
 }
 
 class _MyVehiclesState extends State<MyVehicles> {
+  int _currentIndex = 0;
   final List<Vehicle> vehiclelist = [
     Vehicle('520d', '2017bmw150', 'BMW' , '2020'),
     Vehicle('520d', '2017bmw150', 'BMW' , '2020'),
@@ -55,6 +56,41 @@ class _MyVehiclesState extends State<MyVehicles> {
             itemBuilder: (BuildContext context, int index) =>
                 buildTripCard(context, index)),
       ),
+      bottomNavigationBar: BottomNavigationBar(
+          currentIndex: _currentIndex,
+          type: BottomNavigationBarType.fixed,
+          iconSize: 30,
+          backgroundColor: Colors.white,
+          items: [
+            BottomNavigationBarItem(
+                icon: Icon(Icons.home),
+                title: new Text("Home"),
+                backgroundColor: Colors.teal
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.search),
+              title: new Text("Search"),
+              backgroundColor: Colors.teal,
+              //activeIcon: Icon(Icons.accessibility),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.message),
+              title: new Text("Notifications"),
+              backgroundColor: Colors.teal,
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.offline_bolt),
+              title: new Text("Offers"),
+              backgroundColor: Colors.teal,
+            ),
+          ],
+
+          onTap: (index){
+            setState((){
+              _currentIndex =index;
+            });
+          },
+        ) ,
     );
   }
 
