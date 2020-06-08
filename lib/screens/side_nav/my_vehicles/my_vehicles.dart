@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:servicio/models/vehicle.dart';
 import 'package:servicio/services/auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:solid_bottom_sheet/solid_bottom_sheet.dart';
 
 class MyVehicles extends StatefulWidget {
 
@@ -17,6 +18,27 @@ class _MyVehiclesState extends State<MyVehicles> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      //  fixed swipe up card
+
+//      bottomSheet: SolidBottomSheet(
+//        headerBar: Container(
+//          color: Theme.of(context).primaryColor,
+//          height: 50,
+//          child: Center(
+//            child: Text("Swipe me!"),
+//          ),
+//        ),
+//        body: Container(
+//          color: Colors.white,
+//          height: 30,
+//          child: Center(
+//            child: Text(
+//              "Hello! I'm a bottom sheet :D",
+//              style: Theme.of(context).textTheme.display1,
+//            ),
+//          ),
+//        ),
+//      ),
       appBar: new AppBar(
         title: new Text("My Vehicles"),
         actions: <Widget>[
@@ -34,11 +56,13 @@ class _MyVehiclesState extends State<MyVehicles> {
         child: StreamBuilder(
             stream: getUsersTripsStreamSnapshots(context),
             builder: (context, snapshot) {
-              if (!snapshot.hasData) return const Text("Loading...");
-              return new ListView.builder(
+              if (!snapshot.hasData) return const CircularProgressIndicator();
+              return
+                ListView.builder(
                   itemCount: snapshot.data.documents.length,
                   itemBuilder: (BuildContext context, int index) =>
-                      buildTripCard(context, snapshot.data.documents[index]));
+                      buildTripCard(context, snapshot.data.documents[index])
+                );
             }
         ),
       ),
@@ -69,18 +93,14 @@ class _MyVehiclesState extends State<MyVehicles> {
                   Text(vehicle.brand, style: new TextStyle(fontSize: 30.0),),
                   Spacer(),
                   IconButton(icon: Icon(Icons.add_to_photos), tooltip: 'Modfiy Vehicle',
-                    onPressed: () async {
-                      showAlertDialog(context,vehicle.vehicleId);
-//                      final uid = await _auth.getCurrentUID();
-//                      print('xxx = $uid');
-                    },
+                    onPressed: ()  {
+                      _tripEditModalBottomSheet(context);
+                      },
                   ),
                   IconButton(icon: Icon(Icons.delete_outline), tooltip: 'Delete Vehicle',
                     onPressed: () async {
-                      var uid = await _auth.getCurrentUID();
-                      final doc = Firestore.instance.collection('users').document(uid).collection("vehicles").document(vehicle.vehicleId);
-                      return await doc.delete();
-                      },
+                      showAlertDialog(context,vehicle.vehicleId);
+                    },
                   ),
                 ]
                 ),
@@ -112,13 +132,13 @@ class _MyVehiclesState extends State<MyVehicles> {
   showAlertDialog(BuildContext context , String id) {
     // set up the buttons
     Widget cancelButton = FlatButton(
-      child: Text("Cancel"),
+      child: Text("No"),
       onPressed:  () {
         Navigator.pop(context);
       },
     );
     Widget continueButton = FlatButton(
-      child: Text("Continue"),
+      child: Text("Yes"),
       onPressed:  () async {
         var uid = await _auth.getCurrentUID();
         final doc = Firestore.instance.collection('users').document(uid).collection("vehicles").document(id);
@@ -129,8 +149,8 @@ class _MyVehiclesState extends State<MyVehicles> {
 
     // set up the AlertDialog
     AlertDialog alert = AlertDialog(
-      title: Text("AlertDialog"),
-      content: Text("Would you like to continue learning how to use Flutter alerts?"),
+      title: Text("Are you sure?"),
+      content: Text("dvdsdvvsdv"),
       actions: [
         cancelButton,
         continueButton,
@@ -144,6 +164,44 @@ class _MyVehiclesState extends State<MyVehicles> {
         return alert;
       },
     );
+  }
+
+
+  void _tripEditModalBottomSheet(context) {
+    showModalBottomSheet(context: context, builder: (BuildContext bc) {
+      return Container(
+          height: MediaQuery.of(context).size.height * .60,
+          color: Colors.indigo,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    Text("Edit Trip"),
+                    Spacer(),
+                    IconButton(
+                      icon: Icon(Icons.cancel, color: Colors.orange, size: 25,),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    )
+
+                  ],
+                ),
+                Row(
+                    children: [
+                      Text(
+                        'trip.title',
+                        style: TextStyle(fontSize: 30, color: Colors.green[900]),
+                      ),
+                    ]
+                )
+              ],
+            ),
+          )
+      );
+    });
   }
 
 
