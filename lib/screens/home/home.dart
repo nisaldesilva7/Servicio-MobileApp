@@ -33,8 +33,9 @@ class _HomeState extends State<Home>{
   final List<Widget> _bottomNavs = [
     MainView(),
     SearchView(),
-    BookingsView(),
-    BookingsView(),
+    SchoolList(),
+    //BookingsView(),
+
   ];
   final AuthServices _auth = AuthServices();
 
@@ -149,7 +150,7 @@ class _HomeState extends State<Home>{
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.offline_bolt),
-              title: new Text("Offers"),
+              title: new Text("Profile"),
               backgroundColor: Colors.yellow,
             ),
           ],

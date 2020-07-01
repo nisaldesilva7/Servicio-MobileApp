@@ -12,7 +12,7 @@ class MainView extends StatefulWidget {
 class _MainViewState extends State<MainView> {
 
   final List<String> hotelCategories = StubData().hotelCategories;
-  final List<HotelCard> hotels = StubData().hotels;
+  final List<HotelCard> hotel = StubData().hotels;
 
   int checkedItem = 0;
 
@@ -139,7 +139,7 @@ class _MainViewState extends State<MainView> {
               ParallaxPageView(
                 viewportFraction: 0.7,
                 height: 300,
-                data: hotels,
+                data: hotel,
                 onCardTap: (hotel) {
                   Navigator.of(context).push(
                     PageRouteBuilder<void>(

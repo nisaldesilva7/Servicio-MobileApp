@@ -8,6 +8,7 @@ import 'package:servicio/screens/myprofile.dart';
 import 'package:servicio/screens/notifications.dart';
 import 'package:servicio/screens/offers.dart';
 import 'package:servicio/screens/service_page/servicePage.dart';
+import 'package:servicio/screens/service_page/service_detail_view.dart';
 import 'package:servicio/screens/side_nav/my_vehicles/addNew_vehicle.dart';
 import 'package:servicio/screens/side_nav/my_vehicles/my_vehicles.dart';
 import 'package:servicio/screens/wrapper.dart';
@@ -43,6 +44,8 @@ Route<dynamic> genarteRoute(RouteSettings settings){
       return MaterialPageRoute(builder: (context) => AddNewVehicle());
     case '/bookservice':
       return MaterialPageRoute(builder: (context) => BookService());
+    case '/servicedetailpage':
+      return MaterialPageRoute(builder: (context) => ServiceDetailPage());
 
   }
 }
