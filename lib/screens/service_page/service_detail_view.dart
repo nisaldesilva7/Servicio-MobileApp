@@ -4,11 +4,13 @@ import 'package:flutter/material.dart';
 //import 'package:hotel_booking_concept/sliding_bottom_sheet.dart';
 import 'package:page_indicator/page_indicator.dart';
 import 'package:rect_getter/rect_getter.dart';
+import 'package:servicio/screens/bookings/book_service.dart';
 import 'package:servicio/shared/icons.dart';
 import 'package:servicio/shared/parallax_page_view.dart';
 import 'package:servicio/shared/sliding_bottom_sheet.dart';
 import 'package:servicio/widget/blur_icon.dart';
 import 'package:servicio/widget/theme.dart';
+import 'package:flutter/cupertino.dart';
 
 class ServiceDetailPage extends StatefulWidget {
   final String heroTag;
@@ -54,9 +56,8 @@ class _ServiceDetailPageState extends State<ServiceDetailPage>
   }
 
   void _goToNextPage() {
-//    Navigator.of(context)
-//        .push(FadeRouteBuilder(page: BookScreen()))
-//        .then((_) => setState(() => rect = null));
+    Navigator.of(context)
+        .pushNamed("/bookservice").then((_) => setState(() => rect = null));
   }
 
   @override
@@ -132,7 +133,7 @@ class _ServiceDetailPageState extends State<ServiceDetailPage>
                 tag: "${heroTag}heart",
                 child: BlurIcon(
                   icon: Icon(
-                    HotelBookingConcept.ic_heart_empty,
+                    CupertinoIcons.heart_solid,
                     color: Colors.white,
                     size: 15.2,
                   ),
@@ -155,7 +156,7 @@ class _ServiceDetailPageState extends State<ServiceDetailPage>
                   },
                   child: BlurIcon(
                     icon: Icon(
-                      HotelBookingConcept.ic_chevron_left,
+                      CupertinoIcons.back,
                       color: Colors.white,
                       size: 24,
                     ),

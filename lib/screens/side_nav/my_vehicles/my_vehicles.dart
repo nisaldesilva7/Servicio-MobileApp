@@ -69,11 +69,9 @@ class _MyVehiclesState extends State<MyVehicles> {
     );
   }
 
-  Stream<QuerySnapshot> getUsersTripsStreamSnapshots(
-      BuildContext context) async* {
+  Stream<QuerySnapshot> getUsersTripsStreamSnapshots(BuildContext context) async* {
     final uid = await _auth.getCurrentUID();
-    yield* Firestore.instance.collection('users').document(uid).collection(
-        'vehicles').snapshots();
+    yield* Firestore.instance.collection('users').document(uid).collection('vehicles').snapshots();
   }
 
   Widget buildTripCard(BuildContext context, DocumentSnapshot document) {

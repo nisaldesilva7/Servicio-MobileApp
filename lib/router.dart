@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:servicio/screens/authenticate/forgot_password.dart';
+import 'package:servicio/screens/bookings/book_service.dart';
 import 'package:servicio/screens/help.dart';
 import 'package:servicio/screens/history.dart';
 import 'package:servicio/screens/mybookings.dart';
@@ -40,5 +41,8 @@ Route<dynamic> genarteRoute(RouteSettings settings){
       return MaterialPageRoute(builder: (context) => MyVehicles());
     case '/addnewvehicle':
       return MaterialPageRoute(builder: (context) => AddNewVehicle());
+    case '/bookservice':
+      return MaterialPageRoute(builder: (context) => BookService());
+
   }
 }
