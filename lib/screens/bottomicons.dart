@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:servicio/screens/notifications.dart';
 import 'package:servicio/screens/offers.dart';
-import 'package:servicio/screens/search.dart';
+import 'package:servicio/screens/home/bottom_navs/search.dart';
 
 import 'home/home.dart';
 class MyApp extends StatelessWidget {
@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
         home: new Home(),
         routes: <String, WidgetBuilder>{
           "/home": (BuildContext context)=> new Home(),
-          "/search": (BuildContext context)=> new Search("Search"),
+//          "/search": (BuildContext context)=> new Search("Search"),
           "/notifications": (BuildContext context)=> new Notifications("Notifications"),
           "/offers": (BuildContext context)=> new Offers("Offers"),
 

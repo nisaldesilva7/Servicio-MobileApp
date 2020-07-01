@@ -55,17 +55,6 @@ class _SignInState extends State<SignIn> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-//                FadeAnimation(
-//                  1,
-//                  Text(
-//                    "WELCOME TO SERVICIO",
-//                    style: TextStyle(
-//                      fontSize: 25,
-//                      color: Colors.white,
-//                      fontWeight: FontWeight.bold,
-//                    ),
-//                  ),
-//                ),
                 SizedBox(height: 15.0),
                 FadeAnimation(
                   1,
