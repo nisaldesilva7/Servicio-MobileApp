@@ -94,7 +94,7 @@ class _SchoolListState extends State<SchoolList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xfff0f0f0),
+      backgroundColor: Colors.black45,
       body: SingleChildScrollView(
         child: Container(
           height: MediaQuery.of(context).size.height,
@@ -113,12 +113,9 @@ class _SchoolListState extends State<SchoolList> {
               Container(
                 child: Column(
                   children: <Widget>[
-                    SizedBox(
-                      height: 15,
-                    ),
+                    SizedBox(height: 15,),
                     Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 20.0, horizontal: 5.0),
+                      padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 5.0),
                       child: Container(
                         alignment: Alignment.center,
                         margin: EdgeInsets.symmetric(horizontal: 10),
@@ -130,7 +127,7 @@ class _SchoolListState extends State<SchoolList> {
                             BoxShadow(
                               offset: Offset(2.0, 2.0),
                               color: Colors.blue,
-                              blurRadius: 5.0,
+                              blurRadius: 10.0,
                             ),
                           ],
                         ),
@@ -185,21 +182,21 @@ class _SchoolListState extends State<SchoolList> {
         ),
         width: double.infinity,
         height: 110,
-        margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+        margin: EdgeInsets.symmetric(vertical: 8, horizontal: 20),
+        padding: EdgeInsets.symmetric(vertical: 17, horizontal: 20),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Container(
-              width: 50,
-              height: 50,
+              width: 75,
+              height: 75,
               margin: EdgeInsets.only(right: 15),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(50),
+                borderRadius: BorderRadius.circular(40),
                 border: Border.all(width: 3, color: secondary),
-//              image: DecorationImage(
-//                  image: CachedNetworkImageProvider(schoolLists[index]['logoText']),
-//                  fit: BoxFit.fill),
+              image: DecorationImage(
+                  image: NetworkImage('https://c1.wallpaperflare.com/preview/649/915/591/car-mechanic-automobile-service.jpg'),
+                  fit: BoxFit.fill),
               ),
             ),
             Expanded(

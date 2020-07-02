@@ -12,6 +12,8 @@ import 'package:servicio/screens/offers.dart';
 import 'package:servicio/screens/home/bottom_navs/search.dart';
 import 'package:servicio/testing/selectimage.dart';
 
+import 'bottom_navs/profile.dart';
+
 
 class MyApp extends StatelessWidget {
   @override
@@ -34,7 +36,7 @@ class _HomeState extends State<Home>{
     MainView(),
     SearchView(),
     SchoolList(),
-    //BookingsView(),
+//    HotelDetailsPage(),
 
   ];
   final AuthServices _auth = AuthServices();

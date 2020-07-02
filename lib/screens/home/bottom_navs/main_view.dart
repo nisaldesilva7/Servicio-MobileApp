@@ -1,177 +1,346 @@
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:servicio/screens/service_page/service_detail_view.dart';
-import 'package:servicio/shared/parallax_page_view.dart';
-import 'package:servicio/widget/stub_data.dart';
-import 'package:servicio/widget/theme.dart';
 
-class MainView extends StatefulWidget {
-  @override
-  _MainViewState createState() => _MainViewState();
-}
-
-class _MainViewState extends State<MainView> {
-
-  final List<String> hotelCategories = StubData().hotelCategories;
-  final List<HotelCard> hotel = StubData().hotels;
-
-  int checkedItem = 0;
-
-
+class MainView extends StatelessWidget {
+  static final String path = "lib/src/pages/travel/travel_home.dart";
 
   @override
   Widget build(BuildContext context) {
-    final themeData = ServicioThemeProvider.get();
-
-
-    return ScrollConfiguration(
-      behavior: OverScrollBehavior(),
-      child: GestureDetector(
-        onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
-        child: SingleChildScrollView(
-          child: Column(
-            children: <Widget>[
-              SizedBox(height: MediaQuery.of(context).padding.top),
-              SizedBox(height: 20),
-              Container(
-                child: Center(
-                  child: Container(
-                    alignment: Alignment.center,
-                    margin: EdgeInsets.symmetric(horizontal: 20),
-                    height: 40,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(20),
-                      boxShadow: [
-                        BoxShadow(
-                          offset: Offset(0.0, 10.0),
-                          color: Colors.white,
-                          blurRadius: 15.0,
-                        ),
-                      ],
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: TextField(
-                        decoration: InputDecoration(
-                            prefixIcon: Icon(Icons.search),
-                            hintText: "What do you need?",
-                            hintStyle:
-                                TextStyle(color: Colors.indigo, fontSize: 14),
-                            border: InputBorder.none,
-                            contentPadding: EdgeInsets.symmetric(vertical: 10)),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    const SizedBox(height: 12),
-                    Text("Hello UserName,", style: themeData.textTheme.display2),
-                    const SizedBox(height: 4),
-                    Text("Find your perfect Service",
-                        style: TextStyle(
-                            fontSize: 24, color: themeData.primaryColorLight)),
-                    const SizedBox(height: 10),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Text("Service and Repair Centers",
-                            style: TextStyle(
-                                fontSize: 23,
-                                color: themeData.primaryColorLight,
-                                fontWeight: FontWeight.w600)),
-                        InkWell(
-                          onTap: () {},
-                          child: Text("View all",
-                              style: TextStyle(fontSize: 12, color: themeData.accentColor, fontWeight: FontWeight.w600)),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(height: 5.0,),
-              Container(
-                height: 32,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (BuildContext context, int index) {
-                    return GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          checkedItem = index;
-                        });
-                      },
-                      child: AnimatedContainer(
-                        duration: Duration(milliseconds: 400),
-                        height: double.infinity,
-                        margin: EdgeInsets.only(
-                            left: index == 0 ? 20 : 5, right: 5),
-                        decoration: BoxDecoration(
-                          color: index == checkedItem
-                              ? themeData.accentColor
-                              : themeData.unselectedWidgetColor,
-                          borderRadius: BorderRadius.circular(4),
-                        ),
-                        child: Center(
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 10),
-                            child: Text(
-                              hotelCategories[index],
-                              style: TextStyle(
-                                  color: index == checkedItem
-                                      ? Colors.white
-                                      : themeData.accentColor),
-                            ),
-                          ),
-                        ),
-                      ),
-                    );
-                  },
-                  itemCount: hotelCategories.length,
-                ),
-              ),
-              const SizedBox(height: 10),
-              ParallaxPageView(
-                viewportFraction: 0.7,
-                height: 300,
-                data: hotel,
-                onCardTap: (hotel) {
-                  Navigator.of(context).push(
-                    PageRouteBuilder<void>(
-                      pageBuilder: (BuildContext context,
-                          Animation<double> animation,
-                          Animation<double> secondaryAnimation) {
-                        return AnimatedBuilder(
-                            animation: animation,
-                            builder: (BuildContext context, Widget child) {
-                              return
-                              ServiceDetailPage(
-                                heroTag: "${hotel.cardTitle()}",
-                                imageAsset: hotel.cardImageAsset(),
-                              );
-                            });
-                      },
-                    ),
-                  );
-                },
-              ),
-            ],
-          ),
-        ),
+    return Scaffold(
+      body: ListView(
+        children: <Widget>[
+          HomeScreenTop(),
+          homeScreenBottom,
+        ],
       ),
     );
   }
 }
 
-class OverScrollBehavior extends ScrollBehavior {
+class HomeScreenTop extends StatefulWidget {
   @override
-  Widget buildViewportChrome(
-      BuildContext context, Widget child, AxisDirection axisDirection) {
-    return child;
+  _HomeScreenTopState createState() => _HomeScreenTopState();
+}
+
+class _HomeScreenTopState extends State<HomeScreenTop> {
+  final TextStyle dropdownMenuLabel =
+  TextStyle(color: Colors.white, fontSize: 16);
+  final TextStyle dropdownMenuItem =
+  TextStyle(color: Colors.black, fontSize: 18);
+  List<String> locations = ['Colombo', 'Gampaha'];
+  var selectedLocationIndex = 0;
+  bool isflightSelected = true;
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: <Widget>[
+        ClipPath(
+          clipper: WaveClipper(),
+          child: Container(
+            height: 350,
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    colors: [Colors.indigo, Colors.blue])),
+            child: Column(
+              children: <Widget>[
+                SizedBox(height: 10,),
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Row(
+                    children: <Widget>[
+                      Icon(Icons.location_on, color: Colors.white,),
+                      SizedBox(width: 16,),
+                      PopupMenuButton(
+                        onSelected: (index) {
+                          setState(() {
+                            selectedLocationIndex = index;
+                          });
+                        },
+                        child: Row(
+                          children: <Widget>[
+                            Text(
+                              locations[selectedLocationIndex],
+                              style: dropdownMenuLabel,
+                            ),
+                            Icon(Icons.keyboard_arrow_down, color: Colors.white,)
+                          ],
+                        ),
+                        itemBuilder: (BuildContext context) =>
+                        <PopupMenuItem<int>>[
+                          PopupMenuItem(
+                            child: Text(locations[0], style: dropdownMenuItem,),
+                            value: 0,
+                          ),
+                          PopupMenuItem(
+                            child: Text(locations[1], style: dropdownMenuItem,),
+                            value: 1,
+                          ),
+                        ],
+                      ),
+                      Spacer(),
+                      Icon(Icons.settings, color: Colors.white,)
+                    ],
+                  ),
+                ),
+                SizedBox(height: 30,),
+                Container(
+                    width: 250,
+                    child: Text(
+                      "Where do you want to FIND ?",
+                      style: TextStyle(fontFamily: 'OpenSans', fontSize: 24, color: Colors.white, fontWeight: FontWeight.normal),
+                      textAlign: TextAlign.center,
+                    )),
+                SizedBox(height: 20,),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 32),
+                  child: Material(
+                    elevation: 5.0,
+                    borderRadius: BorderRadius.all(Radius.circular(30)),
+                    child: TextField(
+                      controller: TextEditingController(text: locations[0]),
+                      cursorColor: Theme.of(context).primaryColor,
+                      style: dropdownMenuItem,
+                      decoration: InputDecoration(
+                          suffixIcon: Material(
+                            elevation: 2.0,
+                            borderRadius: BorderRadius.all(Radius.circular(30)),
+                            child: Icon(Icons.search),
+                          ),
+                          border: InputBorder.none,
+                          contentPadding: EdgeInsets.symmetric(horizontal: 25, vertical: 13)
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 20,),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    InkWell(
+                        onTap: () {
+                          setState(() {
+                            isflightSelected = true;
+                          });
+                        },
+                        child: ChoiceChip(
+                            Icons.supervised_user_circle, "Services", isflightSelected)),
+                    SizedBox(width: 20,),
+                    InkWell(
+                        onTap: () {
+                          setState(() {
+                            isflightSelected = false;
+                          });
+                        },
+                        child: ChoiceChip(
+                            CupertinoIcons.gear_solid, "Repair Centers", !isflightSelected)),
+                  ],
+                )
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class ChoiceChip extends StatefulWidget {
+  final IconData icon;
+  final String text;
+  final bool isflightSelected;
+  ChoiceChip(this.icon, this.text, this.isflightSelected);
+  @override
+  _ChoiceChipState createState() => _ChoiceChipState();
+}
+
+class _ChoiceChipState extends State<ChoiceChip> {
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+      decoration: widget.isflightSelected
+          ? BoxDecoration(
+          color: Colors.white.withOpacity(.15),
+          borderRadius: BorderRadius.all(Radius.circular(20)))
+          : null,
+      child: Row(
+        children: <Widget>[
+          Icon(widget.icon, size: 20, color: Colors.white,
+          ),
+          SizedBox(width: 8,),
+          Text(widget.text, style: TextStyle(color: Colors.white, fontSize: 14))
+        ],
+      ),
+    );
+  }
+}
+
+class WaveClipper extends CustomClipper<Path> {
+  @override
+  Path getClip(Size size) {
+    final path = Path();
+    path.lineTo(0.0, size.height);
+
+    var firstEndPoint = Offset(size.width / 2, size.height - 30);
+    var firstControlPoint = Offset(size.width / 4, size.height - 53);
+    path.quadraticBezierTo(firstControlPoint.dx, firstControlPoint.dy,
+        firstEndPoint.dx, firstEndPoint.dy);
+    var secondEndPoint = Offset(size.width, size.height - 90);
+    var secondControlPoint = Offset(size.width * 3 / 4, size.height - 14);
+    path.quadraticBezierTo(secondControlPoint.dx, secondControlPoint.dy,
+        secondEndPoint.dx, secondEndPoint.dy);
+
+    path.lineTo(size.width, size.height);
+    path.lineTo(size.width, 0);
+    path.close();
+
+    return path;
+  }
+
+  @override
+  bool shouldReclip(CustomClipper<Path> oldClipper) => false;
+}
+
+final Widget homeScreenBottom = Column(
+  children: <Widget>[
+    Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+      child: Row(
+        mainAxisSize: MainAxisSize.max,
+        children: <Widget>[
+          Text("Nearby Service Centers",
+              style: TextStyle(color: Colors.black87, fontSize: 15, fontWeight: FontWeight.w700)),
+          Spacer(),
+          Builder(
+              builder: (BuildContext context) => Text(
+                "View All",
+                style: TextStyle(
+                    fontSize: 14, color: Theme.of(context).primaryColor),
+              ))
+        ],
+      ),
+    ),
+    Container(
+        height: 210,
+        child: StreamBuilder<QuerySnapshot>(
+            stream: Firestore.instance.collection('Services').snapshots(),
+            builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> querySnapshot) {
+              if (!querySnapshot.hasData)
+                return Text('No Data');
+              if (querySnapshot.connectionState == ConnectionState.waiting)
+                return const CircularProgressIndicator();
+              else {
+                final list = querySnapshot.data.documents;
+                print(list);
+                return ListView.builder(
+                  itemCount: list.length,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) {
+                    return CityCard(ServiceList: list[index],);
+                  },
+                );
+              }
+            }
+        )
+    ),
+  ],
+);
+
+
+
+class CityCard extends StatelessWidget {
+
+  // ignore: non_constant_identifier_names
+  final DocumentSnapshot ServiceList ;
+  // ignore: non_constant_identifier_names
+  CityCard({Key key, this.ServiceList}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: (){
+        Navigator.push(context, MaterialPageRoute(builder: (context) => ServiceDetailPage(service: ServiceList)));
+       },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+        child: ClipRRect(
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+          child: Stack(
+            children: <Widget>[
+              Container(
+                  width: 160,
+                  height: 210,
+                  child: Image(
+                    image: ExactAssetImage(
+                        'assets/image/3.jpg'),
+                    fit: BoxFit.cover,
+                  )
+              ),
+              Positioned(
+                left: 0,
+                bottom: 0,
+                width: 160,
+                height: 60,
+                child: Container(
+                  decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                          begin: Alignment.bottomCenter,
+                          end: Alignment.topCenter,
+                          colors: [Colors.black, Colors.black12])),
+                ),
+              ),
+              Positioned(
+                left: 10,
+                bottom: 10,
+                width: 145,
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          ServiceList["serviceName"],
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontFamily: 'OpenSans',
+                              fontWeight: FontWeight.w800,
+                              letterSpacing: 1),
+                        ),
+                        Text(
+                          'monthYear',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 13,
+                              fontWeight: FontWeight.normal),
+                        ),
+                      ],
+                    ),
+                    Container(
+                        padding: EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            shape: BoxShape.rectangle,
+                            borderRadius: BorderRadius.all(Radius.circular(10))),
+                        child: Text(
+                          ServiceList["ratings"],
+                          style: TextStyle(color: Colors.black, fontSize: 14),
+                        ))
+                  ],
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
