@@ -39,7 +39,7 @@ dependencies:
   flutter_image_compress: ^0.6.8
 
 
-  flutter_svg: ^0.14.0
+  flutter_svg: ^0.17.0
   page_indicator: ^0.3.0
   rect_getter: 0.0.1
   flare_flutter: ^1.5.5
