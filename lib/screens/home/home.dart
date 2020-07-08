@@ -12,6 +12,8 @@ import 'package:servicio/screens/offers.dart';
 import 'package:servicio/screens/home/bottom_navs/search.dart';
 import 'package:servicio/testing/selectimage.dart';
 
+import 'bottom_navs/profile.dart';
+
 
 class MyApp extends StatelessWidget {
   @override
@@ -33,8 +35,9 @@ class _HomeState extends State<Home>{
   final List<Widget> _bottomNavs = [
     MainView(),
     SearchView(),
-    BookingsView(),
-    BookingsView(),
+    SchoolList(),
+//    HotelDetailsPage(),
+
   ];
   final AuthServices _auth = AuthServices();
 
@@ -149,7 +152,7 @@ class _HomeState extends State<Home>{
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.offline_bolt),
-              title: new Text("Offers"),
+              title: new Text("Profile"),
               backgroundColor: Colors.yellow,
             ),
           ],

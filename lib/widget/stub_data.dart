@@ -12,7 +12,7 @@ class StubData {
   StubData._internal();
 
   List<String> get hotelCategories =>
-      ["All", "Nearby", "Sale", "Services", "Repair Centers"];
+      ["All", "Nearby", "Top", "Services", "Repair Centers"];
 
   List<HotelCard> get hotels => [
         HotelCard(
