@@ -15,6 +15,7 @@ class MainView extends StatelessWidget {
           HomeScreenTop(),
           homeScreenBottom,
         ],
+
       ),
     );
   }
@@ -229,7 +230,7 @@ final Widget homeScreenBottom = Column(
     Container(
         height: 210,
         child: StreamBuilder<QuerySnapshot>(
-            stream: Firestore.instance.collection('Services').snapshots(),
+            stream: Firestore.instance.collection('Services').limit(3).snapshots(),
             builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> querySnapshot) {
               if (!querySnapshot.hasData)
                 return Text('No Data');
@@ -316,7 +317,7 @@ class CityCard extends StatelessWidget {
                               letterSpacing: 1),
                         ),
                         Text(
-                          'monthYear',
+                          'Service Types',
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 13,

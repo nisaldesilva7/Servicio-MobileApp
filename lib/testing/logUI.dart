@@ -1,177 +1,195 @@
+
 import 'package:flutter/material.dart';
-import './dep/animations.dart';
+import 'category.dart';
+import 'demo_values.dart';
 
-class HomePage extends StatefulWidget {
-  @override
-  _HomePageState createState() => _HomePageState();
-}
+class QuizHomePage extends StatelessWidget {
+  static final String path = "lib/src/pages/quiz_app/home.dart";
+  final List<Color> tileColors = [
+    Colors.green,
+    Colors.blue,
+    Colors.purple,
+    Colors.pink,
+    Colors.indigo,
+    Colors.lightBlue,
+    Colors.amber,
+    Colors.deepOrange,
+    Colors.red,
+    Colors.brown
+  ];
 
-class _HomePageState extends State<HomePage> {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.blue[600],
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        appBar: AppBar(
+          backgroundColor: Colors.deepPurple,
+          title: Text('OpenTrivia'),
+          elevation: 0,
+        ),
+        body: Stack(
+          children: <Widget>[
+            ClipPath(
+              clipper: WaveClipperTwo(),
+              child: Container(
+                decoration: BoxDecoration(
+                    color: Colors.deepPurple
+                ),
+                height: 200,
+              ),
+            ),
+            CustomScrollView(
+              physics: BouncingScrollPhysics(),
+              slivers: <Widget>[
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0,vertical: 8.0),
+                    child: Text("Select a category to start the quiz", style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16.0
+                    ),),
+                  ),
+                ),
+                SliverPadding(
+                  padding: const EdgeInsets.all(16.0),
+                  sliver: SliverGrid(
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          childAspectRatio: 1.2,
+                          crossAxisSpacing: 10.0,
+                          mainAxisSpacing: 10.0
+                      ),
+                      delegate: SliverChildBuilderDelegate(
+                        _buildCategoryItem,
+                        childCount: categories.length,
+
+                      )
+
+                  ),
+                ),
+              ],
+            ),
+          ],
+        )
+    );
+  }
+
+  Widget _buildCategoryItem(BuildContext context, int index) {
+    Category category = categories[index];
+    return MaterialButton(
+      elevation: 1.0,
+      highlightElevation: 1.0,
+      onPressed: (){},
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+      color: Colors.grey.shade800,
+      textColor: Colors.white70,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Container(
-            height: 200,
-            child: Stack(
-              children: <Widget>[
-                Positioned(
-                    child: FadeAnimation(
-                      1,
-                      Container(
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: AssetImage("assets/image/1.png"),
-                          ),
-                        ),
-                      ),
-                    ))
-              ],
-            ),
-          ),
-          SizedBox(height: 10),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                FadeAnimation(
-                  1,
-                  Text(
-                    "WELOCOME TO SERVICIO",
-                    style: TextStyle(
-                      fontSize: 25,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                SizedBox(height: 15.0),
-                FadeAnimation(
-                  1,
-                  Container(
-                    padding: EdgeInsets.all(8.0),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.0),
-                      color: Colors.transparent,
-                    ),
-                    child: Column(
-                      children: <Widget>[
-                        TextFormField(
-                          decoration: InputDecoration(
-                            hintText: 'Email',
-                            fillColor: Colors.white,
-                            filled: true,
-                          ),
-                          validator: (val) => val.isEmpty ? 'Enter an Email' : null,
-                          onChanged: (val) {
-//                            setState(() => email = val);
-                          },
-                        ),
-                        SizedBox(height: 20.0),
-                        TextFormField(
-                          decoration: InputDecoration(
-                            hintText: 'Password',
-                            fillColor: Colors.white,
-                            filled: true,
-                          ),
-                          validator: (val) => val.length < 6 ? 'Passowrd should be length more thana 6 chars' : null,
-                          obscureText: true,
-                          onChanged: (val) {
-//                            setState(() => password = val);
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 40.0,
-                ),
-                Center(
-                  child: FadeAnimation(
-                    1,
-                      FlatButton(
-                        onPressed: () {
-                          /*...*/
-                        },
-                        child: Text(
-                          "Forget Password",
-                          style: TextStyle(
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                  ),
-                ),
-                SizedBox(height: 10.0),
-                FadeAnimation(
-                  1,
-                  ButtonTheme(
-                    minWidth: 150.0,
-                    height: 40.0,
-                    child: Center(
-                      child: RaisedButton(
-                        shape: RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
-                        color: Colors.blue[900],
-                        child: Text('Sign in',
-                          style: TextStyle(color: Colors.white, fontSize: 15.0),
-                        ),
-                        onPressed: () {},
-//                        sign in function
-//                        async {
-//                          if (_formKey.currentState.validate()) {
-//                            setState(() => loading = true);
-//                            dynamic result = await _auth.signInWithEmail(email, password);
-//                            if (result == null){
-//                              setState(() {
-//                                error = 'Could not Sign In';
-//                                loading = false;
-//                              });
-//                            }
-//                          }
-//                        },
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 5.0),
-//error for sign in
-//                Text(
-//                    error,
-//                    style: TextStyle(
-//                      color: Colors.black,
-//                    )
-//                ),
-                FadeAnimation(
-                  1,
-                  Center(
-                    child: FlatButton(
-                      onPressed: () {
-//                        toggle between sign up and sign in
-//                        widget.toggleView();
-                        },
-                      child: Text(
-                        "Create Account",
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          )
+            Icon(category.icon),
+          Text(
+            category.name,
+            textAlign: TextAlign.center,
+            maxLines: 3,),
         ],
       ),
     );
   }
+
+  _categoryPressed(BuildContext context,Category category) {
+    showModalBottomSheet(
+      context: context,
+      builder: (sheetContext) => BottomSheet(
+        builder: (_) => QuizOptionsDialog(category: category,),
+        onClosing: (){},
+
+      ),
+
+    );
+
+  }
 }
 
 
+class WaveClipperTwo extends CustomClipper<Path> {
+  bool reverse;
+  bool flip;
+
+  WaveClipperTwo({this.reverse = false,this.flip=false});
+
+  @override
+  Path getClip(Size size) {
+    var path = Path();
+    if (!reverse && !flip) {
+      path.lineTo(0.0, size.height - 20);
+
+      var firstControlPoint = Offset(size.width / 4, size.height);
+      var firstEndPoint = Offset(size.width / 2.25, size.height - 30.0);
+      path.quadraticBezierTo(firstControlPoint.dx, firstControlPoint.dy,
+          firstEndPoint.dx, firstEndPoint.dy);
+
+      var secondControlPoint =
+      Offset(size.width - (size.width / 3.25), size.height - 65);
+      var secondEndPoint = Offset(size.width, size.height - 40);
+      path.quadraticBezierTo(secondControlPoint.dx, secondControlPoint.dy,
+          secondEndPoint.dx, secondEndPoint.dy);
+
+      path.lineTo(size.width, size.height - 40);
+      path.lineTo(size.width, 0.0);
+      path.close();
+    } else if (!reverse && flip) {
+      path.lineTo(0.0, size.height - 40);
+      var firstControlPoint = Offset(size.width/3.25,size.height-65);
+      var firstEndPoint = Offset(size.width/1.75, size.height - 20);
+      path.quadraticBezierTo(firstControlPoint.dx, firstControlPoint.dy, firstEndPoint.dx, firstEndPoint.dy);
+
+      var secondCP = Offset(size.width/1.25,size.height);
+      var secondEP = Offset(size.width, size.height-30);
+      path.quadraticBezierTo(secondCP.dx, secondCP.dy,
+          secondEP.dx, secondEP.dy);
+
+      path.lineTo(size.width, size.height-20);
+      path.lineTo(size.width, 0.0);
+      path.close();
+
+    } else if (reverse && flip) {
+      path.lineTo(0.0, 20);
+      var firstControlPoint = Offset(size.width/3.25,65);
+      var firstEndPoint = Offset(size.width/1.75, 40);
+      path.quadraticBezierTo(firstControlPoint.dx, firstControlPoint.dy, firstEndPoint.dx, firstEndPoint.dy);
+
+      var secondCP = Offset(size.width/1.25,0);
+      var secondEP = Offset(size.width, 30);
+      path.quadraticBezierTo(secondCP.dx, secondCP.dy,
+          secondEP.dx, secondEP.dy);
+
+      path.lineTo(size.width, size.height);
+      path.lineTo(0.0,size.height);
+      path.close();
+
+    } else {
+      path.lineTo(0.0, 20);
+
+      var firstControlPoint = Offset(size.width / 4, 0.0);
+      var firstEndPoint = Offset(size.width / 2.25, 30.0);
+      path.quadraticBezierTo(firstControlPoint.dx, firstControlPoint.dy,
+          firstEndPoint.dx, firstEndPoint.dy);
+
+      var secondControlPoint = Offset(size.width - (size.width / 3.25), 65);
+      var secondEndPoint = Offset(size.width, 40);
+      path.quadraticBezierTo(secondControlPoint.dx, secondControlPoint.dy,
+          secondEndPoint.dx, secondEndPoint.dy);
+
+      path.lineTo(size.width, size.height);
+      path.lineTo(0.0, size.height);
+      path.close();
+    }
+
+    return path;
+  }
+
+  @override
+  bool shouldReclip(CustomClipper<Path> oldClipper) => false;
+}

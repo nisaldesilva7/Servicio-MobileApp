@@ -4,10 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:servicio/screens/bookings/book_service.dart';
 
 class ServiceDetailPage extends StatelessWidget {
-//  static final String path = "lib/src/pages/hotel/details.dart";
+
   final String image = "assets/image/3.jpg";
   final DocumentSnapshot service;
-
   const ServiceDetailPage({Key key, this.service}) : super(key: key);
 
 
@@ -21,7 +20,8 @@ class ServiceDetailPage extends StatelessWidget {
                   color: Colors.black26
               ),
               height: 400,
-              child: Image.asset(image, fit: BoxFit.cover)),
+              child: Image.asset(image, fit: BoxFit.cover)
+          ),
           SingleChildScrollView(
             padding: const EdgeInsets.only(top: 16.0,bottom: 20.0),
             child: Column(
@@ -117,12 +117,12 @@ class ServiceDetailPage extends StatelessWidget {
                           ),
                           Column(
                             children: <Widget>[
-                              Text("\$ 200", style: TextStyle(
+                              Text("Types", style: TextStyle(
                                   color: Colors.purple,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 20.0
                               ),),
-                              Text("/per night",style: TextStyle(
+                              Text("Showing Tabs",style: TextStyle(
                                   fontSize: 12.0,
                                   color: Colors.grey
                               ),)

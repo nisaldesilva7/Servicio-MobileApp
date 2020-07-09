@@ -34,31 +34,11 @@ class MapScreenState extends State<MyProfile>
             Column(
               children: <Widget>[
                 new Container(
-                  height: 250.0,
+                  height: 160.0,
                   color: Colors.white,
                   child: new Column(
                     children: <Widget>[
-                      Padding(
-                          padding: EdgeInsets.only(left: 20.0, top: 20.0),
-                          child: new Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              new Icon(
-                                Icons.arrow_back_ios,
-                                color: Colors.black,
-                                size: 22.0,
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(left: 25.0),
-                                child: new Text('PROFILE',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 20.0,
-                                        fontFamily: 'sans-serif-light',
-                                        color: Colors.black)),
-                              )
-                            ],
-                          )),
+
                       Padding(
                         padding: EdgeInsets.only(top: 20.0),
                         child: new Stack(fit: StackFit.loose, children: <Widget>[
@@ -73,7 +53,7 @@ class MapScreenState extends State<MyProfile>
                                     shape: BoxShape.circle,
                                     image: new DecorationImage(
                                       image: new ExactAssetImage(
-                                          'assets/ill.png'),
+                                          'assets/image/male_user.png'),
                                       fit: BoxFit.cover,
                                     ),
                                   )),
@@ -93,7 +73,8 @@ class MapScreenState extends State<MyProfile>
                                     ),
                                   )
                                 ],
-                              )),
+                              )
+                          ),
                         ]),
                       )
                     ],
@@ -312,41 +293,41 @@ class MapScreenState extends State<MyProfile>
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        type: BottomNavigationBarType.fixed,
-        iconSize: 30,
-        backgroundColor: Colors.white,
-        items: [
-          BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              title: new Text("Home"),
-              backgroundColor: Colors.teal
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            title: new Text("Search"),
-            backgroundColor: Colors.teal,
-            //activeIcon: Icon(Icons.accessibility),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.message),
-            title: new Text("Notifications"),
-            backgroundColor: Colors.teal,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.offline_bolt),
-            title: new Text("Offers"),
-            backgroundColor: Colors.teal,
-          ),
-        ],
-
-        onTap: (index){
-          setState((){
-            _currentIndex =index;
-          });
-        },
-      ) ,
+//      bottomNavigationBar: BottomNavigationBar(
+//        currentIndex: _currentIndex,
+//        type: BottomNavigationBarType.fixed,
+//        iconSize: 30,
+//        backgroundColor: Colors.white,
+//        items: [
+//          BottomNavigationBarItem(
+//              icon: Icon(Icons.home),
+//              title: new Text("Home"),
+//              backgroundColor: Colors.teal
+//          ),
+//          BottomNavigationBarItem(
+//            icon: Icon(Icons.search),
+//            title: new Text("Search"),
+//            backgroundColor: Colors.teal,
+//            //activeIcon: Icon(Icons.accessibility),
+//          ),
+//          BottomNavigationBarItem(
+//            icon: Icon(Icons.message),
+//            title: new Text("Notifications"),
+//            backgroundColor: Colors.teal,
+//          ),
+//          BottomNavigationBarItem(
+//            icon: Icon(Icons.offline_bolt),
+//            title: new Text("Offers"),
+//            backgroundColor: Colors.teal,
+//          ),
+//        ],
+//
+//        onTap: (index){
+//          setState((){
+//            _currentIndex =index;
+//          });
+//        },
+//      ) ,
     );
   }
 

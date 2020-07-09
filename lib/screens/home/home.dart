@@ -12,6 +12,7 @@ import 'package:servicio/screens/offers.dart';
 import 'package:servicio/screens/home/bottom_navs/search.dart';
 import 'package:servicio/testing/selectimage.dart';
 
+import 'bottom_navs/main_menu.dart';
 import 'bottom_navs/profile.dart';
 
 
@@ -35,8 +36,9 @@ class _HomeState extends State<Home>{
   final List<Widget> _bottomNavs = [
     MainView(),
     SearchView(),
-    SchoolList(),
-//    HotelDetailsPage(),
+    MainMenu(),
+    DashboardTwoPage(),
+    ProfileThreePage(),
 
   ];
   final AuthServices _auth = AuthServices();
@@ -146,12 +148,18 @@ class _HomeState extends State<Home>{
               //activeIcon: Icon(Icons.accessibility),
             ),
             BottomNavigationBarItem(
+              icon: Icon(Icons.menu),
+              title: new Text("Main"),
+              backgroundColor: Colors.teal,
+              //activeIcon: Icon(Icons.accessibility),
+            ),
+            BottomNavigationBarItem(
               icon: Icon(Icons.collections_bookmark),
               title: new Text("Bookings"),
               backgroundColor: Colors.blue,
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.offline_bolt),
+              icon: Icon(Icons.assignment_ind),
               title: new Text("Profile"),
               backgroundColor: Colors.yellow,
             ),

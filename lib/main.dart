@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
 //      home: ForgotPassword(),
         home: SplashScreen(),
     
-          theme: ThemeData(primarySwatch: Colors.indigo),
+          theme: ThemeData(primarySwatch: Colors.indigo,),
 
       ),
 

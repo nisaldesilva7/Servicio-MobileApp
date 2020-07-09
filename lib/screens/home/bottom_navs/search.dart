@@ -15,7 +15,7 @@ class _SearchViewState extends State<SearchView> {
   var tempSearchStore = [];
 
 
-  final doc = Firestore.instance.collection("Service").getDocuments();
+  final doc = Firestore.instance.collection("Services").getDocuments();
 
 
   initiateSearch(value) {
@@ -35,12 +35,20 @@ class _SearchViewState extends State<SearchView> {
         for (int i = 0; i < docs.documents.length; ++i) {
           queryResultSet.add(docs.documents[i].data);
           print(queryResultSet);
+          queryResultSet.forEach((element) {
+            if (element['serviceName'].startsWith(capitalizedValue)) {
+              setState(() {
+                tempSearchStore.add(element);
+              });
+            }
+          });
+
         }
       });
     } else {
       tempSearchStore = [];
       queryResultSet.forEach((element) {
-        if (element['businessName'].startsWith(capitalizedValue)) {
+        if (element['serviceName'].startsWith(capitalizedValue)) {
           setState(() {
             tempSearchStore.add(element);
           });
@@ -74,8 +82,8 @@ class _SearchViewState extends State<SearchView> {
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 5),
                 child: TextField(
-                  onChanged: (val) {
-                    initiateSearch(val);
+                  onChanged: (val) async {
+                    await initiateSearch(val);
                     print(val.length);
                   },
                   decoration: InputDecoration(
@@ -103,7 +111,9 @@ class _SearchViewState extends State<SearchView> {
                 return buildResultCard(element);
               }).toList()
           )
-        ]));
+        ]
+        )
+    );
   }
 }
 
@@ -113,7 +123,7 @@ Widget buildResultCard(data) {
       elevation: 2.0,
       child: Container(
           child: Center(
-              child: Text(data['businessName'],
+              child: Text(data['serviceName'],
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Colors.black,

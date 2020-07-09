@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-//import 'package:intl/intl.dart';
 import 'package:servicio/models/vehicle.dart';
 import 'package:servicio/services/auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:solid_bottom_sheet/solid_bottom_sheet.dart';
 
 class MyVehicles extends StatefulWidget {
 
@@ -18,27 +16,6 @@ class _MyVehiclesState extends State<MyVehicles> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //  fixed swipe up card
-
-//      bottomSheet: SolidBottomSheet(
-//        headerBar: Container(
-//          color: Theme.of(context).primaryColor,
-//          height: 50,
-//          child: Center(
-//            child: Text("Swipe me!"),
-//          ),
-//        ),
-//        body: Container(
-//          color: Colors.white,
-//          height: 30,
-//          child: Center(
-//            child: Text(
-//              "Hello! I'm a bottom sheet :D",
-//              style: Theme.of(context).textTheme.display1,
-//            ),
-//          ),
-//        ),
-//      ),
       appBar: new AppBar(
         title: new Text("My Vehicles"),
         actions: <Widget>[
@@ -201,7 +178,4 @@ class _MyVehiclesState extends State<MyVehicles> {
       );
     });
   }
-
-
-
 }
