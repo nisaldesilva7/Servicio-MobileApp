@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:servicio/screens/service_page/service_detail_view.dart';
+import 'package:servicio/services/auth.dart';
 import 'package:servicio/widget/stub_data.dart';
 
 class MainMenu extends StatefulWidget {
@@ -11,6 +12,9 @@ class MainMenu extends StatefulWidget {
 }
 
 class _MainMenuState extends State<MainMenu> {
+
+  final AuthServices _auth = AuthServices();
+
   final TextStyle dropdownMenuItem =
   TextStyle(color: Colors.black, fontSize: 10);
 
@@ -84,7 +88,8 @@ class _MainMenuState extends State<MainMenu> {
                     height: MediaQuery.of(context).size.height,
                     width: double.infinity,
                     child: StreamBuilder<QuerySnapshot>(
-                        stream: Firestore.instance.collection('Services').snapshots(),
+                        stream: getUsersServicesStreamSnapshots(context),
+//                        stream: Firestore.instance.collection("Services").where('searchKey', isEqualTo: 'K').snapshots(),
                         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> querySnapshot) {
                           if (!querySnapshot.hasData)
                             return Text('No Data');
@@ -112,13 +117,28 @@ class _MainMenuState extends State<MainMenu> {
     );
   }
 
-  Widget buildList(BuildContext context, DocumentSnapshot document) {
+  Stream<QuerySnapshot> getUsersServicesStreamSnapshots(BuildContext context) async* {
+    final uid = await _auth.getCurrentUID();
+    yield* Firestore.instance.collection("Services").snapshots();
+  }
 
+
+  Widget buildList(BuildContext context, DocumentSnapshot document) {
+    var serviceTypes = document['Types'];
+    print(serviceTypes);
+
+
+//    ListView.builder
+//      (
+//        itemCount: serviceTypes.length,
+//        itemBuilder: (BuildContext context, int index) {
+//          return new Text(serviceTypes[index]);
+//        }
+//    );
 
     return GestureDetector(
       onTap: () {
         Navigator.push(context, MaterialPageRoute(builder: (context) => ServiceDetailPage(service: document)));
-
       },
       child: Container(
         decoration: BoxDecoration(

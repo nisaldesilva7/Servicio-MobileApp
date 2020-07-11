@@ -27,7 +27,7 @@ Route<dynamic> genarteRoute(RouteSettings settings){
     case '/profile':
       return MaterialPageRoute(builder: (context) => MyProfile("My Profile "));
     case '/bookings':
-      return MaterialPageRoute(builder: (context) => MyBookings("My Bookings"));
+      return MaterialPageRoute(builder: (context) => MyHomePage());
     case '/history':
       return MaterialPageRoute(builder: (context) => History("Recent Activities"));
     case '/notifications':

@@ -4,8 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:servicio/screens/bookings/select_date_time/notifcation_dialog.dart';
-import 'package:servicio/screens/home/bottom_navs/main_view.dart';
-import 'package:servicio/screens/home/home.dart';
 import 'package:servicio/services/auth.dart';
 
 class BookService extends StatefulWidget {
@@ -23,30 +21,45 @@ class _BookServiceState extends State<BookService> {
   final AuthServices _auth = AuthServices();
   final _formKey = GlobalKey<FormState>();
 
-
-
-
-  String _serviceType = '';
-  String _vehicleType = '';
+  String _serviceType ;
+  String _vehicleType ;
   String _dateandtime = '';
-
+  var selectedVehicle,selectedType;
 
   bool loading = false;
   String error = '';
 
+  List<String> _serviceTypes = <String>[
+    'AC Repair',
+    'Full Service',
+    'Body Wash',
+    'Repair'
+  ];
 
   DateTime selectedDate = DateTime.now();
   final DateFormat dateFormat = DateFormat('yyyy-MM-ddTHH:mm:ss');
 
-
   @override
+
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
+      appBar:  AppBar(
+        centerTitle: true,
+        title:  Text("BOOK SERVICE"),
+//        actions: <Widget>[
+//          IconButton(
+//              tooltip: 'Add New Vehicle',
+//              icon: Icon(Icons.add),
+//              onPressed: () {
+//                return Navigator.of(context).pushNamed('/addnewvehicle');
+//              }
+//          )
+//        ],
+      ),      body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            const SizedBox(height: 80.0),
+            const SizedBox(height: 20.0),
             Stack(
               children: <Widget>[
                 Positioned(
@@ -65,26 +78,26 @@ class _BookServiceState extends State<BookService> {
                   child: Text(
                     "BOOKING FORM",
                     style:
-                    TextStyle(color: Colors.grey[700],fontSize: 30.0, fontWeight: FontWeight.bold),
+                    TextStyle(color: Colors.brown,fontSize: 30.0, fontWeight: FontWeight.bold),
                   ),
                 ),
               ],
             ),
-            const SizedBox(height: 30.0),
+            SizedBox(height: 20.0),
             Container(
               child: Form(
                 key: _formKey,
                 child: Column(
                   children: <Widget>[
                     SizedBox(height: 15.0),
-                    _buildName(),
+//                    _buildName(),
                     SizedBox(height: 15.0),
                     _datetime(),
 //                    _buildEmail(),
                     SizedBox(height: 15.0),
-                    _buildVehicleType(),
+                    _buildServiceType(),
                     SizedBox(height: 15.0),
-//                    _buildRePassword(),
+                    _vehicle(),
                     SizedBox(height: 15.0),
                     //_buildURL(),
 //                    _buildPhoneNumber(),
@@ -105,12 +118,14 @@ class _BookServiceState extends State<BookService> {
                             final uid = await _auth.getCurrentUID();
                             db.collection('Bookings').add(
                                 {
-                                  'ServiceType': _serviceType,
-                                  'VehicleType': _vehicleType,
+                                  'ServiceType': selectedType,
+                                  'BookingStatus': 'Pending',
                                   'Date': _dateandtime,
                                   'EndDate': _dateandtime,
                                   'CustName': 'Nisal',
                                   'CustId': uid,
+                                  'ServiceId': widget.serviceInfo['service_id'],
+                                  'Vehicle': selectedVehicle,
                                 }
                             );
                             await _showMyDialog();
@@ -159,18 +174,38 @@ class _BookServiceState extends State<BookService> {
     );
   }
 
-  Widget _buildVehicleType() {
-    return TextFormField(
-      decoration: InputDecoration(labelText: 'Vehicle Type', icon: Icon(Icons.person, color: Colors.white,),),
-      validator: (String value) {
-        if (value.isEmpty) {
-          return 'Name is Required';
-        }
-        return null;
-      },
-      onChanged: (value) {
-        setState(() => _vehicleType = value);
-      },
+  Widget _buildServiceType() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Icon(
+          FontAwesomeIcons.checkSquare,
+          size: 25.0,
+          color: Colors.indigo,
+        ),
+        SizedBox(width: 50.0),
+        DropdownButton(
+          items: _serviceTypes.map((value) => DropdownMenuItem(
+            child: Text(
+              value,
+              style: TextStyle(color: Colors.indigo),
+            ),
+            value: value,
+          )
+          ).toList(),
+          onChanged: (selectedServiceType) {
+            print('$selectedServiceType');
+            setState(() {
+              selectedType = selectedServiceType;
+            });
+          },
+          value: selectedType,
+          isExpanded: false,
+          hint: Text('Choose Service Type',
+            style: TextStyle(color: Colors.indigo),
+          ),
+        )
+      ],
     );
   }
 
@@ -214,14 +249,67 @@ class _BookServiceState extends State<BookService> {
                 });
           },
            ),
-          Text(dateFormat.format(selectedDate),
-            style: TextStyle(fontSize: 15, color: Colors.black54),
+          Text('Selected Date: ${dateFormat.format(selectedDate)}',
+            style: TextStyle(fontSize: 15, color: Colors.grey[800]),
 
           ),
         ],
       );
   }
 
+Widget _vehicle(){
+  return StreamBuilder<QuerySnapshot>(
+      stream: getUsersVehiclesStreamSnapshots(context),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) {
+          return Text("Loading.....");
+        }
+        else {
+          List<DropdownMenuItem> currencyItems = [];
+          for (int i = 0; i < snapshot.data.documents.length; i++) {
+            DocumentSnapshot snap = snapshot.data.documents[i];
+            currencyItems.add(
+              DropdownMenuItem(
+                child: Text(
+                  snap.data['brand'],
+                  style: TextStyle(color: Colors.indigo),
+                ),
+                value: "${snap.documentID}",
+              ),
+            );
+          }
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Icon(FontAwesomeIcons.car, size: 25.0, color: Colors.indigo),
+              SizedBox(width: 50.0),
+              DropdownButton(
+                items: currencyItems,
+                onChanged: (currencyValue) {
+                  final snackBar = SnackBar(
+                    content: Text('Selected Vehicle is $currencyValue',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  );
+                  Scaffold.of(context).showSnackBar(snackBar);
+                  setState(() {
+                    selectedVehicle = currencyValue;
+                  });
+                },
+                value: selectedVehicle,
+                isExpanded: false,
+                hint: new Text("Choose Your Vehicle", style: TextStyle(color: Colors.indigo),),
+              ),
+            ],
+          );
+        }
+      }
+  );
+}
 
+  Stream<QuerySnapshot> getUsersVehiclesStreamSnapshots(BuildContext context) async* {
+    final uid = await _auth.getCurrentUID();
+    yield* Firestore.instance.collection('users').document(uid).collection('vehicles').snapshots();
+  }
 
 }
