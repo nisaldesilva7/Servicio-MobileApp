@@ -54,7 +54,7 @@ class ServiceDetailPage extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal:16.0),
                   child: Text(
-                    service["serviceName"],
+                    service["Service_Name"],
                     style: TextStyle(color: Colors.white, fontSize: 28.0, fontWeight: FontWeight.bold),
                   ),
                 ),

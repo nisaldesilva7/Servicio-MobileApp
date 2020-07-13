@@ -7,7 +7,7 @@ class AddNewVehicle extends StatelessWidget {
 
   final db = Firestore.instance;
   final AuthServices _auth = AuthServices();
-  final temp = Vehicle('7-serise', '111x5cxc12', 'BMW' , '2020');
+  final temp = Vehicle('7-serise', '111x5cxc12', 'BMW' , '2020',['hi','hiii']);
 
 
   @override

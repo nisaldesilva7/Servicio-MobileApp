@@ -308,7 +308,7 @@ class CityCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          ServiceList["serviceName"],
+                          ServiceList["Service_Name"],
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 16,
@@ -332,7 +332,7 @@ class CityCard extends StatelessWidget {
                             shape: BoxShape.rectangle,
                             borderRadius: BorderRadius.all(Radius.circular(10))),
                         child: Text(
-                          ServiceList["ratings"],
+                          ServiceList["Rating"],
                           style: TextStyle(color: Colors.black, fontSize: 14),
                         ))
                   ],

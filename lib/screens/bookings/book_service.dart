@@ -124,7 +124,7 @@ class _BookServiceState extends State<BookService> {
                                   'EndDate': _dateandtime,
                                   'CustName': 'Nisal',
                                   'CustId': uid,
-                                  'ServiceId': widget.serviceInfo['service_id'],
+                                  'ServiceId': widget.serviceInfo['Service_Id'],
                                   'Vehicle': selectedVehicle,
                                 }
                             );

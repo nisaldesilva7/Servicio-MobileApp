@@ -16,8 +16,8 @@
 @import firebase_auth;
 #endif
 
-#if __has_include(<firebase_core/FirebaseCorePlugin.h>)
-#import <firebase_core/FirebaseCorePlugin.h>
+#if __has_include(<firebase_core/FLTFirebaseCorePlugin.h>)
+#import <firebase_core/FLTFirebaseCorePlugin.h>
 #else
 @import firebase_core;
 #endif

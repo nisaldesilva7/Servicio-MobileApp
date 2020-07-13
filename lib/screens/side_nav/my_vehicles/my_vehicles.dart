@@ -51,6 +51,12 @@ class _MyVehiclesState extends State<MyVehicles> {
     yield* Firestore.instance.collection('users').document(uid).collection('vehicles').snapshots();
   }
 
+
+  Widget getTextWidgets(List<String> strings)
+  {
+    return new Row(children: strings.map((item) => new Text(item)).toList());
+  }
+
   Widget buildTripCard(BuildContext context, DocumentSnapshot document) {
 
     final vehicle = Vehicle.fromSnapshot(document);
@@ -83,7 +89,7 @@ class _MyVehiclesState extends State<MyVehicles> {
               Padding(
                 padding: const EdgeInsets.only(top: 4.0, bottom: 80.0),
                 child: Row(children: <Widget>[
-                  Text(vehicle.model),
+                  getTextWidgets(vehicle.num),
                   Spacer(),
                 ]),
               ),
