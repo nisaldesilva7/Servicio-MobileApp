@@ -1,16 +1,17 @@
 # servicio
 
-A new Flutter application.
+Flutter-Firebase Mobile Application
 
-## Getting Started
+App Features
+* Find service or repair centres according to user requirements 
+* Online booking
+* Check availability
+* Check vehicle status
+* Manage your profile
 
-This project is a starting point for a Flutter application.
+To Run this app
+* Clone the project
+* run "flutter pub get"
+* Build & Run the project
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Flutter version - 1.17.1
