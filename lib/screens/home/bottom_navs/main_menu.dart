@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:servicio/models/service.dart';
 import 'package:servicio/screens/service_page/service_detail_view.dart';
 import 'package:servicio/services/auth.dart';
 import 'package:servicio/widget/stub_data.dart';
@@ -122,23 +123,13 @@ class _MainMenuState extends State<MainMenu> {
     yield* Firestore.instance.collection("Services").snapshots();
   }
 
-
   Widget buildList(BuildContext context, DocumentSnapshot document) {
-    var serviceTypes = document['Types'];
-    print(serviceTypes);
-
-
-//    ListView.builder
-//      (
-//        itemCount: serviceTypes.length,
-//        itemBuilder: (BuildContext context, int index) {
-//          return new Text(serviceTypes[index]);
-//        }
-//    );
+    final serviceDoc = Service.fromSnapshot(document);
+    print(serviceDoc);
 
     return GestureDetector(
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => ServiceDetailPage(service: document)));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => ServiceDetailPage(service: serviceDoc)));
       },
       child: Container(
         decoration: BoxDecoration(
@@ -169,7 +160,7 @@ class _MainMenuState extends State<MainMenu> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    document['serviceName'],
+                    serviceDoc.serviceName,
                     style: TextStyle(color: primary, fontWeight: FontWeight.bold, fontSize: 18),),
                   SizedBox(height: 6,),
                   Row(

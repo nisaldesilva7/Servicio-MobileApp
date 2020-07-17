@@ -36,7 +36,7 @@ class _SearchViewState extends State<SearchView> {
           queryResultSet.add(docs.documents[i].data);
           print(queryResultSet);
           queryResultSet.forEach((element) {
-            if (element['serviceName'].startsWith(capitalizedValue)) {
+            if (element['Service_Name'].startsWith(capitalizedValue)) {
               setState(() {
                 tempSearchStore.add(element);
               });
@@ -48,7 +48,7 @@ class _SearchViewState extends State<SearchView> {
     } else {
       tempSearchStore = [];
       queryResultSet.forEach((element) {
-        if (element['serviceName'].startsWith(capitalizedValue)) {
+        if (element['Service_Name'].startsWith(capitalizedValue)) {
           setState(() {
             tempSearchStore.add(element);
           });
@@ -123,7 +123,7 @@ Widget buildResultCard(data) {
       elevation: 2.0,
       child: Container(
           child: Center(
-              child: Text(data['serviceName'],
+              child: Text(data['Service_Name'],
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Colors.black,

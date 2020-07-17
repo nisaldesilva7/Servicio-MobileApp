@@ -25,6 +25,6 @@ class Vehicle {
         regNo = snapshot['regNo'],
         brand = snapshot['brand'],
         year = snapshot['year'],
-        num = List.of(snapshot['num']).cast<String>(),
+        num = List.of(snapshot['num']).cast<String>( ),
         vehicleId = snapshot.documentID;
 }

@@ -3,12 +3,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 //      child: Text(widget.serviceInfo['ratings']),
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:servicio/models/service.dart';
 import 'package:servicio/screens/bookings/select_date_time/notifcation_dialog.dart';
 import 'package:servicio/services/auth.dart';
 
 class BookService extends StatefulWidget {
 
-  final DocumentSnapshot serviceInfo;
+  final Service serviceInfo;
   const BookService({Key key, this.serviceInfo}) : super(key: key);
 
   @override
@@ -22,7 +23,7 @@ class _BookServiceState extends State<BookService> {
   final _formKey = GlobalKey<FormState>();
 
   String _serviceType ;
-  String _vehicleType ;
+  String _description ;
   String _dateandtime = '';
   var selectedVehicle,selectedType;
 
@@ -45,7 +46,7 @@ class _BookServiceState extends State<BookService> {
     return Scaffold(
       appBar:  AppBar(
         centerTitle: true,
-        title:  Text("BOOK SERVICE"),
+        title:  Text("Book ${widget.serviceInfo.serviceName}"),
 //        actions: <Widget>[
 //          IconButton(
 //              tooltip: 'Add New Vehicle',
@@ -84,68 +85,82 @@ class _BookServiceState extends State<BookService> {
               ],
             ),
             SizedBox(height: 20.0),
-            Container(
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  children: <Widget>[
-                    SizedBox(height: 15.0),
-//                    _buildName(),
-                    SizedBox(height: 15.0),
-                    _datetime(),
+            Padding(
+              padding: const EdgeInsets.only(left: 10.0),
+              child: Container(
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    children: <Widget>[
+                      SizedBox(height: 15.0),
+                      _datetime(),
 //                    _buildEmail(),
-                    SizedBox(height: 15.0),
-                    _buildServiceType(),
-                    SizedBox(height: 15.0),
-                    _vehicle(),
-                    SizedBox(height: 15.0),
-                    //_buildURL(),
-//                    _buildPhoneNumber(),
-                    SizedBox(height: 20.0),
-                    //_buildCalories(),
+                      SizedBox(height: 15.0),
+                      _buildServiceType(),
+                      SizedBox(height: 15.0),
+                      _vehicle(),
+                      SizedBox(height: 15.0),
+                      _buildName(),
+                      SizedBox(height: 20.0),
+                      //_buildCalories(),
 
-                    Text(error, style: TextStyle(color: Colors.black,)),
-                    const SizedBox(height: 60.0),
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: RaisedButton(
-                        padding: const EdgeInsets.fromLTRB(40.0, 16.0, 30.0, 16.0),
-                        color: Colors.indigo,
-                        elevation: 0,
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(topLeft: Radius.circular(30.0), bottomLeft: Radius.circular(30.0))),
-                        onPressed: () async {
-                          if (_formKey.currentState.validate()) {
-                            final uid = await _auth.getCurrentUID();
-                            db.collection('Bookings').add(
-                                {
-                                  'ServiceType': selectedType,
-                                  'BookingStatus': 'Pending',
-                                  'Date': _dateandtime,
-                                  'EndDate': _dateandtime,
-                                  'CustName': 'Nisal',
-                                  'CustId': uid,
-                                  'ServiceId': widget.serviceInfo['Service_Id'],
-                                  'Vehicle': selectedVehicle,
-                                }
-                            );
-                            await _showMyDialog();
-                            Navigator.pop(context);
-                          }
+                      Text(error, style: TextStyle(color: Colors.black,)),
+                      const SizedBox(height: 60.0),
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: RaisedButton(
+                          padding: const EdgeInsets.fromLTRB(40.0, 16.0, 30.0, 16.0),
+                          color: Colors.indigo,
+                          elevation: 0,
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(topLeft: Radius.circular(30.0), bottomLeft: Radius.circular(30.0))),
+                          onPressed: () async {
+                            if (_formKey.currentState.validate()) {
+                              final uid = await _auth.getCurrentUID();
+                              db.collection('Services').document('${widget.serviceInfo.serviceId}').collection('Bookings').add(
+                                  {
+                                    'ServiceType': selectedType,
+                                    'BookingStatus': 'Pending',
+                                    'Date': _dateandtime,
+                                    'EndDate': _dateandtime,
+                                    'CustName': 'Nisal',
+                                    'CustId': uid,
+                                    'ServiceId': widget.serviceInfo.serviceId,
+                                    'Vehicle': selectedVehicle,
+                                    'Description': _description,
+                                  }
+                              );
+                              db.collection('users').document('$uid').collection('Bookings').add(
+                                  {
+                                    'ServiceType': selectedType,
+                                    'BookingStatus': 'Pending',
+                                    'Date': _dateandtime,
+                                    'EndDate': _dateandtime,
+                                    'CustName': 'Nisal',
+                                    'CustId': uid,
+                                    'ServiceId': widget.serviceInfo.serviceId,
+                                    'Vehicle': selectedVehicle,
+                                    'Description': _description,
+                                  }
+                              );
+                              await _showMyDialog();
+                              Navigator.pop(context);
+                            }
 
-                        },
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: <Widget>[
-                            Text("Book".toUpperCase(),
-                              style: TextStyle( color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16.0),
-                            ),
-                            const SizedBox(width: 40.0),
-                            Icon(FontAwesomeIcons.arrowRight, size: 18.0,)
-                          ],
+                          },
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: <Widget>[
+                              Text("Book".toUpperCase(),
+                                style: TextStyle( color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16.0),
+                              ),
+                              const SizedBox(width: 40.0),
+                              Icon(FontAwesomeIcons.arrowRight, size: 18.0,)
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -157,20 +172,20 @@ class _BookServiceState extends State<BookService> {
   }
 
   Widget _buildName() {
-    return TextFormField(
-      decoration: InputDecoration(labelText: 'Service Type', icon: Icon(Icons.person, color: Colors.white,),),
-      validator: (String value) {
-        if (value.isEmpty) {
-          return 'Name is Required';
-        }
-        if (value.length < 4) {
-          return 'Name is too short';
-        }
-        return null;
-      },
-      onChanged: (value) {
-        setState(() => _serviceType = value);
-      },
+    return Padding(
+      padding: const EdgeInsets.only(right: 25.0),
+      child: TextFormField(
+        keyboardType: TextInputType.multiline,
+        textInputAction: TextInputAction.newline,
+        maxLines: 2,
+        decoration: InputDecoration(labelText: 'Description', icon: Icon(Icons.description, color: Colors.indigo,),),
+        validator: (String value) {
+          return null;
+        },
+        onChanged: (value) {
+          setState(() => _description = value);
+        },
+      ),
     );
   }
 
@@ -178,14 +193,10 @@ class _BookServiceState extends State<BookService> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        Icon(
-          FontAwesomeIcons.checkSquare,
-          size: 25.0,
-          color: Colors.indigo,
-        ),
+        Icon(FontAwesomeIcons.checkSquare, size: 25.0, color: Colors.indigo,),
         SizedBox(width: 50.0),
         DropdownButton(
-          items: _serviceTypes.map((value) => DropdownMenuItem(
+          items: widget.serviceInfo.serviceTypes.map((value) => DropdownMenuItem(
             child: Text(
               value,
               style: TextStyle(color: Colors.indigo),

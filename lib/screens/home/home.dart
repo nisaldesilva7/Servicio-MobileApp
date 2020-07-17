@@ -37,7 +37,7 @@ class _HomeState extends State<Home>{
     MainView(),
     SearchView(),
     MainMenu(),
-    DashboardTwoPage(),
+    HomePage(),
     ProfileThreePage(),
 
   ];

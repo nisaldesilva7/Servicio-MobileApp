@@ -3,6 +3,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:flutter/material.dart';
+import 'package:servicio/services/uploader.dart';
 
 class SelectImages extends StatefulWidget {
   @override
@@ -15,11 +16,9 @@ class _SelectImagesState extends State<SelectImages> {
   getImageFile(ImageSource source) async {
 
     //Clicking or Picking from Gallery
-
     var image = await ImagePicker.pickImage(source: source);
 
     //Cropping the image
-
     File croppedFile = await ImageCropper.cropImage(
 
       sourcePath: image.path,
@@ -59,6 +58,7 @@ class _SelectImagesState extends State<SelectImages> {
 //      croppedFile.path,
 //      quality: 50,
 //    );
+
     var result = croppedFile;
     setState(() {
       _image = result;
@@ -66,21 +66,40 @@ class _SelectImagesState extends State<SelectImages> {
     });
   }
 
+  void _clear(){
+    setState(() {
+      _image = null;
+    });
+  }
+
+
   @override
   Widget build(BuildContext context) {
     print(_image?.lengthSync());
     return Scaffold(
       appBar: AppBar(
-        title: Text("Click | Pick | Crop | Compress | Hi"),
+        title: Text("Select Image"),
       ),
-      body: Center(
-        child: _image == null
-            ? Text("Image")
-            : Image.file(
-          _image,
-          height: 200,
-          width: 200,
-        ),
+      body: Column(
+        children: <Widget>[
+          Center(
+            child: _image == null
+                ? Image.asset('assets/image/no-image.png', fit: BoxFit.cover)
+                : Image.file(
+              _image,
+              height: 200,
+              width: 200,
+            ),
+          ),
+          SizedBox(height: 10.0,),
+          RaisedButton.icon(
+            color: Colors.red,
+              onPressed: () => _clear(),
+              icon: Icon(Icons.clear, color: Colors.white,),
+              label: Text("Delete",style: TextStyle(color: Colors.white),),
+          ),
+          ImageUploader(_image),
+        ],
       ),
       floatingActionButton: Row(
         mainAxisAlignment: MainAxisAlignment.end,
@@ -91,9 +110,7 @@ class _SelectImagesState extends State<SelectImages> {
             heroTag: UniqueKey(),
             icon: Icon(Icons.camera),
           ),
-          SizedBox(
-            width: 20,
-          ),
+          SizedBox(width: 20,),
           FloatingActionButton.extended(
             label: Text("Gallery"),
             onPressed: () => getImageFile(ImageSource.gallery),
@@ -105,3 +122,4 @@ class _SelectImagesState extends State<SelectImages> {
     );
   }
 }
+

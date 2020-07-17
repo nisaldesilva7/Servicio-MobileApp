@@ -1,93 +1,81 @@
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:servicio/screens/home/bottom_navs/theme/light_colors.dart';
+import 'package:servicio/screens/home/bottom_navs/widgets/top_container.dart';
 
 class ProfileThreePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context){
+    double width = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Colors.grey.shade300,
       body: SingleChildScrollView(
         child: Stack(
           children: <Widget>[
             Container(
-              margin: EdgeInsets.fromLTRB(16.0, 20.0, 16.0, 16.0),
+              margin: EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 16.0),
               child: Column(
                 children: <Widget>[
-                  Stack(
-                    children: <Widget>[
-                      Container(
-                        padding: EdgeInsets.all(16.0),
-                        margin: EdgeInsets.only(top: 16.0),
-                        decoration: BoxDecoration(
-                            color: Colors.grey,
-                            borderRadius: BorderRadius.circular(5.0)
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Container(
-                              margin: EdgeInsets.only(left: 96.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Text("Little Butterfly", style: Theme.of(context).textTheme.title,),
-                                  ListTile(
-                                    contentPadding: EdgeInsets.all(0),
-                                    title: Text("Selected Vehicle"),
-//                                    subtitle: Text("Kathmandu"),
+                  TopContainer(
+                    height: 125,
+                    width: width,
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0.0),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: <Widget>[
+                                CircularPercentIndicator(
+                                  radius: 90.0,
+                                  lineWidth: 5.0,
+                                  animation: true,
+                                  percent: 0.5,
+                                  circularStrokeCap: CircularStrokeCap.round,
+                                  progressColor: LightColors.kRed,
+                                  backgroundColor: LightColors.kDarkYellow,
+                                  center: CircleAvatar(
+                                    backgroundColor: LightColors.kBlue,
+                                    radius: 35.0,
+                                    backgroundImage: AssetImage(
+                                      'assets/image/user.png',
+                                    ),
                                   ),
-                                ],
-                              ),
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: <Widget>[
+                                    Container(
+                                      child: Text(
+                                        'My Profile',
+                                        textAlign: TextAlign.start,
+                                        style: TextStyle(fontSize: 22.0, color: LightColors.kDarkBlue,fontFamily: 'Cabin', fontWeight: FontWeight.w800,),
+                                      ),
+                                    ),
+                                    Container(
+                                      child: Text(
+                                        'Dashboard',
+                                        textAlign: TextAlign.start,
+                                        style: TextStyle(fontSize: 16.0, color: Colors.black45, fontWeight: FontWeight.w400,),
+                                      ),
+                                    ),
+                                  ],
+                                )
+                              ],
                             ),
-                            SizedBox(height: 10.0),
-//                            Row(
-//                              children: <Widget>[
-//                                Expanded(child: Column(
-//                                  children: <Widget>[
-//                                    Text("285"),
-//                                    Text("Likes")
-//                                  ],
-//                                ),),
-//                                Expanded(child: Column(
-//                                  children: <Widget>[
-//                                    Text("3025"),
-//                                    Text("Comments")
-//                                  ],
-//                                ),),
-//                                Expanded(child: Column(
-//                                  children: <Widget>[
-//                                    Text("650"),
-//                                    Text("Favourites")
-//                                  ],
-//                                ),),
-//                              ],
-//                            ),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        height: 80,
-                        width: 80,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10.0),
-                            image: DecorationImage(
-                                image: ExactAssetImage(
-                                    'assets/image/3.jpg'),
-                                fit: BoxFit.cover
-                            )
-                        ),
-                        margin: EdgeInsets.only(left: 16.0),
-                      ),
-                    ],
+                          )
+                        ]),
                   ),
-
-                  SizedBox(height: 20.0),
+                  SizedBox(height: 10.0),
                   Container(
                     decoration: BoxDecoration(
                       color: Colors.white,
-                      borderRadius: BorderRadius.circular(5.0),
+                      borderRadius: BorderRadius.circular(25.0),
                     ),
                     child: Column(
                       children: <Widget>[

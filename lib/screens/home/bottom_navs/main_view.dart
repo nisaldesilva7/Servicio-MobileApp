@@ -2,6 +2,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:servicio/models/service.dart';
 import 'package:servicio/screens/service_page/service_detail_view.dart';
 
 class MainView extends StatelessWidget {
@@ -243,7 +244,7 @@ final Widget homeScreenBottom = Column(
                   itemCount: list.length,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) {
-                    return CityCard(ServiceList: list[index],);
+                    return cityCard(context, list[index]);
                   },
                 );
               }
@@ -253,20 +254,25 @@ final Widget homeScreenBottom = Column(
   ],
 );
 
+Widget getTextWidgets(List<String> strings)
+{
+  return new Row(children: strings.map((item) => new Text('$item ...',
+    style: TextStyle(
+        color: Colors.white,
+        fontSize: 13,
+        fontWeight: FontWeight.normal),
+  )).toList().sublist(0,1));
+}
 
 
-class CityCard extends StatelessWidget {
+Widget cityCard(BuildContext context, DocumentSnapshot serviceList) {
 
-  // ignore: non_constant_identifier_names
-  final DocumentSnapshot ServiceList ;
-  // ignore: non_constant_identifier_names
-  CityCard({Key key, this.ServiceList}) : super(key: key);
+  final serviceDoc = Service.fromSnapshot(serviceList);
+  print(serviceDoc.searchKey);
 
-  @override
-  Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context) => ServiceDetailPage(service: ServiceList)));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => ServiceDetailPage(service: serviceDoc)));
        },
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -277,17 +283,12 @@ class CityCard extends StatelessWidget {
               Container(
                   width: 160,
                   height: 210,
-                  child: Image(
-                    image: ExactAssetImage(
-                        'assets/image/3.jpg'),
+                  child: Image.network(
+                    serviceDoc.photo,
                     fit: BoxFit.cover,
-                  )
+                  ),
               ),
-              Positioned(
-                left: 0,
-                bottom: 0,
-                width: 160,
-                height: 60,
+              Positioned(left: 0, bottom: 0, width: 160, height: 60,
                 child: Container(
                   decoration: BoxDecoration(
                       gradient: LinearGradient(
@@ -296,10 +297,7 @@ class CityCard extends StatelessWidget {
                           colors: [Colors.black, Colors.black12])),
                 ),
               ),
-              Positioned(
-                left: 10,
-                bottom: 10,
-                width: 145,
+              Positioned(left: 10, bottom: 10, width: 145,
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -308,21 +306,12 @@ class CityCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          ServiceList["Service_Name"],
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                              fontFamily: 'OpenSans',
-                              fontWeight: FontWeight.w800,
-                              letterSpacing: 1),
+                          serviceDoc.serviceName,
+                          style: TextStyle(color: Colors.white, fontSize: 16, fontFamily: 'OpenSans', fontWeight: FontWeight.w800, letterSpacing: 1),
                         ),
-                        Text(
-                          'Service Types',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 13,
-                              fontWeight: FontWeight.normal),
-                        ),
+                         SingleChildScrollView(
+                           scrollDirection: Axis.horizontal,
+                             child: getTextWidgets(serviceDoc.serviceTypes))
                       ],
                     ),
                     Container(
@@ -332,7 +321,7 @@ class CityCard extends StatelessWidget {
                             shape: BoxShape.rectangle,
                             borderRadius: BorderRadius.all(Radius.circular(10))),
                         child: Text(
-                          ServiceList["Rating"],
+                          serviceDoc.rating.toString(),
                           style: TextStyle(color: Colors.black, fontSize: 14),
                         ))
                   ],
@@ -344,4 +333,4 @@ class CityCard extends StatelessWidget {
       ),
     );
   }
-}
+

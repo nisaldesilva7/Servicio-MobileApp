@@ -1,18 +1,44 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:servicio/screens/bookings/book_service.dart';
+import 'package:servicio/models/service.dart';
 
 class ServiceDetailPage extends StatelessWidget {
 
   final String image = "assets/image/3.jpg";
-  final DocumentSnapshot service;
+  final Service service;
   const ServiceDetailPage({Key key, this.service}) : super(key: key);
 
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      backgroundColor: Colors.indigo,
+      appBar: AppBar(
+//        backgroundColor: Colors.transparent,
+        backgroundColor: Color(0x20000000),
+        elevation: 0,
+        title: Text(service.serviceName),
+        actions: <Widget>[
+        IconButton(
+          color: Colors.white,
+          icon: Icon(Icons.message),
+          onPressed: () {
+
+            },
+        ),
+          IconButton(
+            color: Colors.white,
+            icon: Icon(Icons.call),
+            onPressed: () {
+
+            },
+          ),
+        ],
+      ),
       body: Stack(
         children: <Widget>[
           Container(
@@ -27,35 +53,12 @@ class ServiceDetailPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                SizedBox(height: 20.0,),
-                Row(
-                  children: <Widget>[
-                    IconButton(
-                      color: Colors.white,
-                      icon: Icon(Icons.arrow_back_ios),
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                    ),
-                    Spacer(),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 100.0),
-                      child: IconButton(
-                        color: Colors.white,
-                        icon: Icon(Icons.message),
-                        onPressed: () {
-
-                        },
-                      ),
-                    ),
-                  ],
-                ),
                 const SizedBox(height: 230),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal:16.0),
                   child: Text(
-                    service["Service_Name"],
-                    style: TextStyle(color: Colors.white, fontSize: 28.0, fontWeight: FontWeight.bold),
+                    service.serviceName,
+                    style: TextStyle(color: Colors.white, fontSize: 28.0,fontFamily: 'MyFlutterApp', fontWeight: FontWeight.bold),
                   ),
                 ),
                 Row(
@@ -83,7 +86,7 @@ class ServiceDetailPage extends StatelessWidget {
                   ],
                 ),
                 Container(
-                  padding: const EdgeInsets.all(32.0),
+                  padding: const EdgeInsets.all(20.0),
                   color: Colors.white,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -95,15 +98,7 @@ class ServiceDetailPage extends StatelessWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                Row(
-                                  children: <Widget>[
-                                    Icon(Icons.star, color: Colors.purple,),
-                                    Icon(Icons.star, color: Colors.purple,),
-                                    Icon(Icons.star, color: Colors.purple,),
-                                    Icon(Icons.star, color: Colors.purple,),
-                                    Icon(Icons.star_border, color: Colors.purple,),
-                                  ],
-                                ),
+                                showStars(service.rating),
                                 Text.rich(TextSpan(children: [
                                   WidgetSpan(
                                       child: Icon(Icons.location_on, size: 16.0, color: Colors.grey,)
@@ -130,7 +125,39 @@ class ServiceDetailPage extends StatelessWidget {
                           )
                         ],
                       ),
-                      const SizedBox(height: 30.0),
+                      const SizedBox(height: 10.0),
+                      GridView.count(
+                        shrinkWrap: true,
+                        scrollDirection: Axis.vertical,
+                        padding: EdgeInsets.all(1),
+                        crossAxisCount: 4,
+                        crossAxisSpacing: 4,
+                        mainAxisSpacing: 4,
+                        children: service.serviceTypes
+                            .map(
+                              (serviceTypes) => Column(
+                            children: <Widget>[
+                              Container(
+                                height: 35.0,
+                                width: 100.0,
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 6.0,
+                                  horizontal: 6.0,
+                                ),
+                                decoration: BoxDecoration(
+                                    color: Colors.indigo[400],
+                                    borderRadius: BorderRadius.circular(12.0)),
+                                child: Center(
+                                  child: Text(
+                                    serviceTypes,
+                                    style: TextStyle(color: Colors.white,fontFamily: 'cabin', fontSize: 13.0),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ).toList(),
+                      ),
                       SizedBox(
                         width: double.infinity,
                         child: RaisedButton(
@@ -149,7 +176,7 @@ class ServiceDetailPage extends StatelessWidget {
                           },
                         ),
                       ),
-                      const SizedBox(height: 30.0),
+                      const SizedBox(height: 20.0),
                       Text("Description".toUpperCase(), style: TextStyle(
                           fontWeight: FontWeight.w600,
                           fontSize: 14.0
@@ -164,47 +191,27 @@ class ServiceDetailPage extends StatelessWidget {
                       Text(
                         "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ratione architecto autem quasi nisi iusto eius ex dolorum velit! Atque, veniam! Atque incidunt laudantium eveniet sint quod harum facere numquam molestias?", textAlign: TextAlign.justify, style: TextStyle(
                           fontWeight: FontWeight.w300,
-                          fontSize: 14.0
-                      ),),
+                          fontSize: 14.0),
+                      ),
+                      SizedBox(height: 10.0,),
                     ],
                   ),
                 ),
               ],
             ),
           ),
-//          Positioned(
-//            top: 0,
-//            left: 0,
-//            right: 0,
-//            child: AppBar(
-//              backgroundColor: Colors.transparent,
-//              elevation: 0,
-//              centerTitle: true,
-//              title: Text("DETAIL",style: TextStyle(
-//                  fontSize: 16.0,
-//                  fontWeight: FontWeight.normal
-//              ),),
-//            ),
-//          ),
-//          Align(
-//            alignment: Alignment.bottomLeft,
-//            child: BottomNavigationBar(
-//              backgroundColor: Colors.white54,
-//              elevation: 0,
-//              selectedItemColor: Colors.black,
-//              items: [
-//                BottomNavigationBarItem(
-//                    icon: Icon(Icons.search), title: Text("Search")),
-//                BottomNavigationBarItem(
-//                    icon: Icon(Icons.favorite_border),
-//                    title: Text("Favorites")),
-//                BottomNavigationBarItem(
-//                    icon: Icon(Icons.settings), title: Text("Settings")),
-//              ],
-//            ),
-//          )
         ],
       ),
     );
+  }
+
+  Widget showStars(num rating){
+    print(rating);
+      return Row(
+        children: [
+          for (num i = 0; i < rating; i++) Icon(Icons.star, color: Colors.purple,),
+          for (num i = 0; i < (5-rating); i++) Icon(Icons.star_border, color: Colors.purple,)
+        ],
+      );
   }
 }

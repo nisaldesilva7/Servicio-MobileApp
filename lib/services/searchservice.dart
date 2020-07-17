@@ -4,7 +4,7 @@ class SearchService {
   searchByName(String searchField) {
     return Firestore.instance
         .collection('Services')
-        .where('searchKey',isEqualTo: searchField.substring(0, 1).toUpperCase())
+        .where('SearchKey',isEqualTo: searchField.substring(0, 1).toUpperCase())
         .getDocuments();
   }
 }

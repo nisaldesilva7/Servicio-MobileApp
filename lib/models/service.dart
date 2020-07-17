@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Service {
   final String photo;
-  final String rating;
+  final num rating;
   final String searchKey;
   final String serviceName;
   final List serviceTypes;
@@ -25,6 +25,6 @@ class Service {
         rating = snapshot['Rating'],
         searchKey = snapshot['SearchKey'],
         serviceName = snapshot['Service_Name'],
-        serviceTypes = List.of(snapshot['Service_Types']).cast<String>(),
+        serviceTypes = List.of(snapshot['Service_types']).cast<String>(),
         serviceId = snapshot.documentID;
 }

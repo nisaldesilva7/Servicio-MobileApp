@@ -14,7 +14,7 @@ description: A new Flutter application.
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.5.2 <3.0.0"
 
 dependencies:
   flutter:
@@ -26,6 +26,7 @@ dependencies:
 
   firebase_auth: ^0.14.0+5
   cloud_firestore: ^0.12.9+4
+  firebase_storage: ^3.1.6
 
   provider: ^3.1.0
   flutter_spinkit: "^4.1.2"
@@ -44,6 +45,7 @@ dependencies:
   rect_getter: 0.0.1
   flare_flutter: ^1.5.5
   solid_bottom_sheet: ^0.1.9
+  percent_indicator: ^2.1.3
 
   cached_network_image: ^2.0.0
   font_awesome_flutter: ^8.5.0
@@ -79,6 +81,7 @@ flutter:
   assets:
     - assets/app_icon.png
     - assets/image/
+    - assets/
     - img/
 
 
@@ -98,6 +101,9 @@ flutter:
       fonts:
         - asset: assets/fonts/icomoon.ttf
 
+    - family: Cabin
+      fonts:
+        - asset: assets/fonts/Cabin-Regular.ttf
 
     - family: MyFlutterApp
       fonts:

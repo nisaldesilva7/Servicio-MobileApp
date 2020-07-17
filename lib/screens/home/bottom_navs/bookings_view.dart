@@ -1,198 +1,232 @@
-
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:percent_indicator/percent_indicator.dart';
+import 'package:servicio/screens/home/bottom_navs/theme/light_colors.dart';
+import 'package:servicio/screens/home/bottom_navs/widgets/active_project_card.dart';
+import 'package:servicio/screens/home/bottom_navs/widgets/bottom_booking_card.dart';
+import 'package:servicio/screens/home/bottom_navs/widgets/task_column.dart';
+import 'package:servicio/screens/home/bottom_navs/widgets/top_container.dart';
 
-class DashboardTwoPage extends StatelessWidget {
-  final TextStyle whiteText = TextStyle(color: Colors.white);
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.grey.shade800,
-      body: _buildBody(context),
+class HomePage extends StatelessWidget {
+
+
+  Text subheading(String title) {
+    return Text(
+      title,
+      style: TextStyle(
+          color: LightColors.kDarkBlue,
+          fontSize: 20.0,
+          fontWeight: FontWeight.w700,
+          letterSpacing: 1.2),
     );
   }
+  final String temp = '4';
 
-  Widget _buildBody(BuildContext context) {
-    return SingleChildScrollView(
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
-        children: <Widget>[
-          _buildHeader(),
-          const SizedBox(height: 50.0),
-          Row(
-            children: <Widget>[
-              Expanded(
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                      height: 190,
-                      color: Colors.blue,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          ListTile(
-                            title: Text(
-                              "Current Service",
-                              style:
-                              Theme.of(context).textTheme.display1.copyWith(
-                                color: Colors.white,
-                                fontSize: 24.0,
-                              ),
-                            ),
-                            trailing: Icon(
-                              FontAwesomeIcons.carBattery,
-                              color: Colors.white,
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 16.0),
-                            child: Text(
-                              '',
-                              style: whiteText,
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 10.0),
-                    Container(
-                      height: 120,
-                      color: Colors.green,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          ListTile(
-                            title: Text(
-                              "Previous Services",
-                              style:
-                              Theme.of(context).textTheme.display1.copyWith(
-                                color: Colors.white,
-                                fontSize: 24.0,
-                              ),
-                            ),
-                            trailing: Icon(
-                              FontAwesomeIcons.backward,
-                              color: Colors.white,
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 16.0),
-                            child: Text(
-                              '',
-                              style: whiteText,
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(width: 10.0),
-              Expanded(
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                      height: 120,
-                      color: Colors.red,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          ListTile(
-                            title: Text(
-                              "Upcoming Bookings",
-                              style:
-                              Theme.of(context).textTheme.display1.copyWith(
-                                color: Colors.white,
-                                fontSize: 24.0,
-                              ),
-                            ),
-                            trailing: Icon(
-                              FontAwesomeIcons.car,
-                              color: Colors.white,
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 16.0),
-                            child: Text(
-                              '',
-                              style: whiteText,
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 10.0),
-                    Container(
-                      height: 190,
-                      color: Colors.yellow,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          ListTile(
-                            title: Text(
-                              "Previous Repairs",
-                              style:
-                              Theme.of(context).textTheme.display1.copyWith(
-                                fontSize: 24.0,
-                                color: Colors.black,
-                              ),
-                            ),
-                            trailing: Icon(
-                              FontAwesomeIcons.carAlt,
-                              color: Colors.black,
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 16.0),
-                            child: Text(
-                              '',
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              )
-            ],
-          )
-        ],
+  static CircleAvatar calendarIcon() {
+    return CircleAvatar(
+      radius: 25.0,
+      backgroundColor: LightColors.kGreen,
+      child: Icon(
+        Icons.calendar_today,
+        size: 20.0,
+        color: Colors.white,
       ),
     );
   }
 
-  Widget _buildHeader() {
-    return Row(
-      children: <Widget>[
-        Container(
-          height: 100,
-          width: 100,
-          padding: const EdgeInsets.all(8.0),
-          child: CircularProgressIndicator(
-            value: 0.5,
-            valueColor: AlwaysStoppedAnimation(Colors.indigo),
-            backgroundColor: Colors.grey,
-          ),
+  showProgress () {
+    return ActiveProjectsCard(
+      cardColor: LightColors.kGreen,
+      loadingPercent: 0.25,
+      title: 'Medical App',
+      subtitle: '9 hours progress',
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    return Scaffold(
+      backgroundColor: LightColors.kLightYellow,
+      body: SafeArea(
+        child: Column(
+          children: <Widget>[
+            TopContainer(
+              height: 100,
+              width: width,
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0.0),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          CircularPercentIndicator(
+                            radius: 90.0,
+                            lineWidth: 5.0,
+                            animation: true,
+                            percent: 0.5,
+                            circularStrokeCap: CircularStrokeCap.round,
+                            progressColor: LightColors.kRed,
+                            backgroundColor: LightColors.kDarkYellow,
+                            center: CircleAvatar(
+                              backgroundColor: LightColors.kBlue,
+                              radius: 35.0,
+                              backgroundImage: AssetImage(
+                                'assets/images/avatar.png',
+                              ),
+                            ),
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              Container(
+                                child: Text(
+                                  'My Bookings',
+                                  textAlign: TextAlign.start,
+                                  style: TextStyle(fontSize: 22.0, color: LightColors.kDarkBlue, fontWeight: FontWeight.w800,),
+                                ),
+                              ),
+                              Container(
+                                child: Text(
+                                  'Dashboard',
+                                  textAlign: TextAlign.start,
+                                  style: TextStyle(fontSize: 16.0, color: Colors.black45, fontWeight: FontWeight.w400,),
+                                ),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
+                    )
+                  ]),
+            ),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: <Widget>[
+//                    Container(
+//                      color: Colors.transparent,
+//                      padding: EdgeInsets.symmetric(
+//                          horizontal: 20.0, vertical: 10.0),
+//                      child: Column(
+//                        children: <Widget>[
+//                          Row(
+//                            crossAxisAlignment: CrossAxisAlignment.center,
+//                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                            children: <Widget>[
+//                              subheading('My Tasks'),
+////                              GestureDetector(
+////                                onTap: () {
+////                                  Navigator.push(
+////                                    context,
+////                                    MaterialPageRoute(
+////                                        builder: (context) => CalendarPage()),
+////                                  );
+////                                },
+////                                child: calendarIcon(),
+////                              ),
+//                            ],
+//                          ),
+//                          SizedBox(height: 15.0),
+//                          TaskColumn(
+//                            icon: Icons.alarm,
+//                            iconBackgroundColor: LightColors.kRed,
+//                            title: 'To Do',
+//                            subtitle: '5 tasks now. 1 started',
+//                          ),
+//                          SizedBox(height: 15.0,),
+//                          TaskColumn(
+//                            icon: Icons.blur_circular,
+//                            iconBackgroundColor: LightColors.kDarkYellow,
+//                            title: 'In Progress',
+//                            subtitle: '1 tasks now. 1 started',
+//                          ),
+//                          SizedBox(height: 15.0),
+//                          TaskColumn(
+//                            icon: Icons.check_circle_outline,
+//                            iconBackgroundColor: LightColors.kBlue,
+//                            title: 'Done',
+//                            subtitle: '18 tasks now. 13 started',
+//                          ),
+//                        ],
+//                      ),
+//                    ),
+                    Container(
+                      color: Colors.transparent,
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 20.0, vertical: 10.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          subheading('Active Projects'),
+                          SizedBox(height: 5.0),
+                          GestureDetector(
+                            onTap:(){
+                              print('Card Tap');
+                            },
+                            child: Row(
+                              children: <Widget>[
+                                if(temp == '1')
+                                  ActiveProjectsCard(
+                                    cardColor: LightColors.indigoLight,
+                                    loadingPercent: 0.00,
+                                    title: 'Vehicle Reached',
+                                    subtitle: 'In the queue',
+                                  ),
+                                if(temp == '2')
+                                  ActiveProjectsCard(
+                                    cardColor: LightColors.indigoLight,
+                                    loadingPercent: 0.25,
+                                    title: 'Sports App',
+                                    subtitle: '5 hours progress',
+                                  ),
+                                if(temp == '3')
+                                  ActiveProjectsCard(
+                                    cardColor: LightColors.indigoLight,
+                                    loadingPercent: 0.50,
+                                    title: 'Sports App',
+                                    subtitle: '5 hours progress',
+                                  ),
+                                if(temp == '4')
+                                  ActiveProjectsCard(
+                                    cardColor: LightColors.indigoLight,
+                                    loadingPercent: 1.00,
+                                    title: 'Sports App',
+                                    subtitle: '5 hours progress',
+                                  ),
+
+                              ],
+                            ),
+                          ),
+                          Row(
+                            children: <Widget>[
+                              BottomBookingCard(
+                                cardColor: LightColors.kGreen,
+                                loadingPercent: 0.25,
+                                title: 'UPCOMING BOOKINGS',
+                                subtitle: '9 hours progress',
+                              ),
+                              SizedBox(width: 20.0),
+                              BottomBookingCard(
+                                cardColor: LightColors.kRed,
+                                loadingPercent: 0.6,
+                                title: 'PREVIOUS BOOKINGS',
+                                subtitle: '20 hours progress',
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
         ),
-        const SizedBox(width: 20.0),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text(
-                "Current \nBooking Progress",
-                style: whiteText.copyWith(fontSize: 20.0),
-              ),
-              const SizedBox(height: 20.0),
-              Text(
-                "45% to go",
-                style: TextStyle(color: Colors.grey, fontSize: 16.0),
-              ),
-            ],
-          ),
-        )
-      ],
+      ),
     );
   }
 }
