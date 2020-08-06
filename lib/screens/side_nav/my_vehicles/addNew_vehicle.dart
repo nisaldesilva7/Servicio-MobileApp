@@ -21,7 +21,7 @@ class AddNewVehicle extends StatelessWidget {
           child: Text("Finish"),
           onPressed: () async {
             final uid = await _auth.getCurrentUID();
-            await db.collection("users").document(uid).collection("vehicles").add(temp.toJson());
+            await db.collection("Customers").document(uid).collection("Vehicles").add(temp.toJson());
             print('succes collection');
           },
         ),

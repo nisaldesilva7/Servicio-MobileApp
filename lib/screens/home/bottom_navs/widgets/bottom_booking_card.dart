@@ -24,26 +24,29 @@ class BottomBookingCard extends StatelessWidget {
         height: 200,
         decoration: BoxDecoration(
           color: cardColor,
-          borderRadius: BorderRadius.circular(40.0),
+          borderRadius: BorderRadius.circular(22.0),
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  title,
-                  style: TextStyle(fontSize: 14.0, color: Colors.white, fontWeight: FontWeight.w700,),
-                ),
-                Text(
-                  subtitle,
-                  style: TextStyle(fontSize: 12.0, color: Colors.white54, fontWeight: FontWeight.w400,),
-                ),
-              ],
-            ),
-          ],
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    title,
+                    style: TextStyle(fontSize: 14.0, color: Colors.white, fontWeight: FontWeight.w700,),
+                  ),
+                  Text(
+                    subtitle,
+                    style: TextStyle(fontSize: 12.0, color: Colors.white54, fontWeight: FontWeight.w400,),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

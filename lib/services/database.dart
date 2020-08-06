@@ -6,7 +6,7 @@ class DatabaseService {
   DatabaseService({this.uid});
 
   //Collection reference
-  final CollectionReference userCollection = Firestore.instance.collection('users');
+  final CollectionReference userCollection = Firestore.instance.collection('Customers');
 
   Future updateUserData(String name, String email, String telNum) async {
     print('update user data');

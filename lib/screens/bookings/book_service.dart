@@ -24,7 +24,7 @@ class _BookServiceState extends State<BookService> {
 
   String _serviceType ;
   String _description ;
-  String _dateandtime = '';
+  String _dateandtime  ;
   var selectedVehicle,selectedType;
 
   bool loading = false;
@@ -38,7 +38,9 @@ class _BookServiceState extends State<BookService> {
   ];
 
   DateTime selectedDate = DateTime.now();
+  DateTime _nisalwanttime = DateTime.now();
   final DateFormat dateFormat = DateFormat('yyyy-MM-ddTHH:mm:ss');
+  final DateFormat ShowDateTime = DateFormat('  kk:mm:ss\nEEE d MMM');
 
   @override
 
@@ -46,7 +48,9 @@ class _BookServiceState extends State<BookService> {
     return Scaffold(
       appBar:  AppBar(
         centerTitle: true,
-        title:  Text("Book ${widget.serviceInfo.serviceName}"),
+        title:  Text("Book ${widget.serviceInfo.serviceName}",
+                    style: TextStyle(fontWeight: FontWeight.w400),
+                ),
 //        actions: <Widget>[
 //          IconButton(
 //              tooltip: 'Add New Vehicle',
@@ -114,47 +118,65 @@ class _BookServiceState extends State<BookService> {
                           elevation: 0,
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(topLeft: Radius.circular(30.0), bottomLeft: Radius.circular(30.0))),
                           onPressed: () async {
-                            if (_formKey.currentState.validate()) {
-                              final uid = await _auth.getCurrentUID();
-                              db.collection('Services').document('${widget.serviceInfo.serviceId}').collection('Bookings').add(
-                                  {
-                                    'ServiceType': selectedType,
-                                    'BookingStatus': 'Pending',
-                                    'Date': _dateandtime,
-                                    'EndDate': _dateandtime,
-                                    'CustName': 'Nisal',
-                                    'CustId': uid,
-                                    'ServiceId': widget.serviceInfo.serviceId,
-                                    'Vehicle': selectedVehicle,
-                                    'Description': _description,
-                                  }
-                              );
-                              db.collection('users').document('$uid').collection('Bookings').add(
-                                  {
-                                    'ServiceType': selectedType,
-                                    'BookingStatus': 'Pending',
-                                    'Date': _dateandtime,
-                                    'EndDate': _dateandtime,
-                                    'CustName': 'Nisal',
-                                    'CustId': uid,
-                                    'ServiceId': widget.serviceInfo.serviceId,
-                                    'Vehicle': selectedVehicle,
-                                    'Description': _description,
-                                  }
-                              );
-                              await _showMyDialog();
-                              Navigator.pop(context);
-                            }
+                            if (_formKey.currentState.validate() && selectedVehicle != null && selectedType != null) {
+                              if (_dateandtime != null) {
+                                final uid = await _auth.getCurrentUID();
+                                db.collection('Services')
+                                    .document('${widget.serviceInfo.serviceId}')
+                                    .collection('Bookings')
+                                    .add(
+                                    {
+                                      'ServiceType': selectedType,
+                                      'BookingStatus': 'Pending',
+                                      'Date': _dateandtime,
+                                      'EndDate': _dateandtime,
+                                      'CustName': 'Nisal',
+                                      'CustId': uid,
+                                      'ServiceId': widget.serviceInfo.serviceId,
+                                      'Vehicle': selectedVehicle,
+                                      'Description': _description,
+                                      'DateTime': _nisalwanttime,
 
+                                    }
+                                )
+                                    .then((docRef) {
+                                  var temp = docRef.documentID;
+                                  print('hello ${docRef.documentID}');
+                                  db.collection('Customers').document('$uid')
+                                      .collection('Bookings').document('$temp')
+                                      .setData(
+                                      {
+                                        'ServiceType': selectedType,
+                                        'BookingStatus': 'Pending',
+                                        'Date': _dateandtime,
+                                        'EndDate': _dateandtime,
+                                        'CustName': 'Nisal',
+                                        'CustId': uid,
+                                        'ServiceId': widget.serviceInfo
+                                            .serviceId,
+                                        'Vehicle': selectedVehicle,
+                                        'Description': _description,
+                                      }
+                                  );
+                                }
+                                );
+                                await _showMyDialog();
+                                Navigator.pop(context);
+                              }
+                              else{
+                                _showError('Please Select Date And Time');
+                              }
+                            }
+                            else{
+                              _showError('Plllssss');
+                            }
                           },
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: <Widget>[
-                              Text("Book".toUpperCase(),
-                                style: TextStyle( color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16.0),
-                              ),
+                              Text("Book".toUpperCase(), style: TextStyle( color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16.0),),
                               const SizedBox(width: 40.0),
-                              Icon(FontAwesomeIcons.arrowRight, size: 18.0,)
+                              Icon(FontAwesomeIcons.arrowRight, size: 18.0, color: Colors.white,)
                             ],
                           ),
                         ),
@@ -240,6 +262,28 @@ class _BookServiceState extends State<BookService> {
     );
   }
 
+  Future<void> _showError(String msg) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          elevation: 5.0,
+          backgroundColor: Colors.brown ,
+          title: Text('$msg',style: TextStyle(color: Colors.white,fontFamily: 'cabin'),),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('OK',style: TextStyle(color: Colors.white),),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
 
   Widget _datetime() {
     return Column(
@@ -254,16 +298,23 @@ class _BookServiceState extends State<BookService> {
                 onSelectedDate: (selectedDate) {
                   setState(() {
                     this.selectedDate = selectedDate;
+                    print(this.selectedDate);
                   });
                   print(dateFormat.format(selectedDate));
                   _dateandtime = dateFormat.format(selectedDate);
+                  _nisalwanttime = selectedDate;
                 });
           },
            ),
-          Text('Selected Date: ${dateFormat.format(selectedDate)}',
-            style: TextStyle(fontSize: 15, color: Colors.grey[800]),
-
+          Text('Selected Date and Time:',
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 15 , color: Colors.grey[800]),
           ),
+          Text('${ShowDateTime.format(selectedDate)}',
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 25, color: Colors.grey[800], fontWeight: FontWeight.w800),
+          ),
+
         ],
       );
   }
@@ -320,7 +371,7 @@ Widget _vehicle(){
 
   Stream<QuerySnapshot> getUsersVehiclesStreamSnapshots(BuildContext context) async* {
     final uid = await _auth.getCurrentUID();
-    yield* Firestore.instance.collection('users').document(uid).collection('vehicles').snapshots();
+    yield* Firestore.instance.collection('Customers').document(uid).collection('Vehicles').snapshots();
   }
 
 }

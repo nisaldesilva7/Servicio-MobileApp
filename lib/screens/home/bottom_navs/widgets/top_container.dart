@@ -14,7 +14,7 @@ class TopContainer extends StatelessWidget {
     return Container(
       padding: padding!=null ? padding : EdgeInsets.symmetric(horizontal: 20.0),
       decoration: BoxDecoration(
-          color: Colors.blue,
+          color: Colors.blue[600],
           borderRadius: BorderRadius.only(
             bottomRight: Radius.circular(25.0),
             bottomLeft: Radius.circular(25.0),

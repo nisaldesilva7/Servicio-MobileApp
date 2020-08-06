@@ -3,14 +3,7 @@ import 'package:servicio/screens/home/bottom_navs/bookings_view.dart';
 import 'package:servicio/screens/home/bottom_navs/main_view.dart';
 import 'package:servicio/services/auth.dart';
 import 'package:flutter/foundation.dart';
-import 'package:servicio/screens/help.dart';
-import 'package:servicio/screens/history.dart';
-import 'package:servicio/screens/mybookings.dart';
-import 'package:servicio/screens/myprofile.dart';
-import 'package:servicio/screens/notifications.dart';
-import 'package:servicio/screens/offers.dart';
 import 'package:servicio/screens/home/bottom_navs/search.dart';
-import 'package:servicio/testing/selectimage.dart';
 
 import 'bottom_navs/main_menu.dart';
 import 'bottom_navs/profile.dart';
@@ -49,7 +42,7 @@ class _HomeState extends State<Home>{
       return Scaffold(
         backgroundColor: Colors.grey[100],
         appBar: AppBar(
-          title: Text('Servicio '),
+          title: Text('Servicio', style: TextStyle(fontFamily: 'icomoon'),),
           elevation: defaultTargetPlatform == TargetPlatform.android ? 5.0 : 0.0,
           backgroundColor: Colors.blue[600],
           actions: <Widget>[
@@ -86,42 +79,45 @@ class _HomeState extends State<Home>{
               ),
               new ListTile(
                 title: new Text("Home"),
-                trailing: new Icon(Icons.home),
+                trailing: new Icon(Icons.home, color: Colors.indigo,),
                 onTap: () => Navigator.of(context).pop(),
               ),
+              _divider(),
               ListTile(
                 title: new Text("My Vehicles"),
-                trailing: new Icon(Icons.directions_car),
+                trailing: new Icon(Icons.directions_car, color: Colors.indigo,),
                   onTap: () => Navigator.of(context).pushNamed('/vehicle')
               ),
               new ListTile(
                 title: new Text("My Profile"),
-                trailing: new Icon(Icons.person),
+                trailing: new Icon(Icons.person,color: Colors.indigo,),
                 onTap: () => Navigator.of(context).pushNamed('/profile')
               ),
               new ListTile(
                 title: new Text("My Bookings"),
-                trailing: new Icon(Icons.bookmark),
+                trailing: new Icon(Icons.bookmark,color: Colors.indigo,),
                 onTap: () => Navigator.of(context).pushNamed("/bookings"),
               ),
+              _divider(),
               new ListTile(
                 title: new Text("Notifications"),
-                trailing: new Icon(Icons.message),
+                trailing: new Icon(Icons.message,color: Colors.indigo,),
                 onTap: () => Navigator.of(context).pushNamed("/notifications"),
               ),
               new ListTile(
                 title: new Text("Select Image"),
-                trailing: new Icon(Icons.image),
+                trailing: new Icon(Icons.image, color: Colors.indigo,),
                 onTap: () => Navigator.of(context).pushNamed("/image"),
               ),
               new ListTile(
                 title: new Text("Help & Feedback"),
-                trailing: new Icon(Icons.feedback),
+                trailing: new Icon(Icons.feedback,color: Colors.indigo,),
                 onTap: () => Navigator.of(context).pushNamed("/feedback"),
               ),
+              _divider(),
               new ListTile(
                 title: new Text("Log Out"),
-                trailing: new Icon(Icons.lock),
+                trailing: new Icon(Icons.lock,color: Colors.indigo,),
                 onTap: ()  async {
                   await _auth.signOut();
                   },
@@ -164,7 +160,6 @@ class _HomeState extends State<Home>{
               backgroundColor: Colors.yellow,
             ),
           ],
-
           onTap: (index){
             setState((){
               _currentIndex =index;
@@ -172,5 +167,9 @@ class _HomeState extends State<Home>{
           },
         ) ,
       );
+
+  }
+  Widget _divider(){
+    return Divider(thickness: 3.0, indent: 13.0, endIndent: 20.0, height: 1.0, color: Colors.indigo[200],);
   }
 }

@@ -133,7 +133,7 @@ class _MainMenuState extends State<MainMenu> {
       },
       child: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(25),
+          borderRadius: BorderRadius.circular(22),
           color: Colors.white,
         ),
         width: double.infinity,
@@ -149,10 +149,10 @@ class _MainMenuState extends State<MainMenu> {
               margin: EdgeInsets.only(right: 15),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(40),
-                border: Border.all(width: 3, color: Colors.green),
+                border: Border.all(width: 3, color: Colors.red),
                 image: DecorationImage(
-                    image: NetworkImage('https://c1.wallpaperflare.com/preview/649/915/591/car-mechanic-automobile-service.jpg'),
-                    fit: BoxFit.fill),
+                    image: NetworkImage('${serviceDoc.photo}'),
+                    fit: BoxFit.cover),
               ),
             ),
             Expanded(

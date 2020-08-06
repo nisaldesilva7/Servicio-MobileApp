@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+import 'package:servicio/screens/bookings/UpcomingBookings.dart';
 import 'package:servicio/screens/home/bottom_navs/theme/light_colors.dart';
 import 'package:servicio/screens/home/bottom_navs/widgets/active_project_card.dart';
 import 'package:servicio/screens/home/bottom_navs/widgets/bottom_booking_card.dart';
@@ -13,13 +14,14 @@ class HomePage extends StatelessWidget {
     return Text(
       title,
       style: TextStyle(
-          color: LightColors.kDarkBlue,
+          fontFamily: 'Lobster',
+          color: Colors.indigo,
           fontSize: 20.0,
           fontWeight: FontWeight.w700,
           letterSpacing: 1.2),
     );
   }
-  final String temp = '4';
+   String temp = '3';
 
   static CircleAvatar calendarIcon() {
     return CircleAvatar(
@@ -50,57 +52,53 @@ class HomePage extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: <Widget>[
-            TopContainer(
-              height: 100,
-              width: width,
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0.0),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: <Widget>[
-                          CircularPercentIndicator(
-                            radius: 90.0,
-                            lineWidth: 5.0,
-                            animation: true,
-                            percent: 0.5,
-                            circularStrokeCap: CircularStrokeCap.round,
-                            progressColor: LightColors.kRed,
-                            backgroundColor: LightColors.kDarkYellow,
-                            center: CircleAvatar(
-                              backgroundColor: LightColors.kBlue,
-                              radius: 35.0,
-                              backgroundImage: AssetImage(
-                                'assets/images/avatar.png',
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: TopContainer(
+                height: 110,
+                width: width,
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0.0),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                            CircularPercentIndicator(
+                              radius: 80.0,
+                              lineWidth: 5.0,
+                              animation: true,
+                              percent: 0.5,
+                              circularStrokeCap: CircularStrokeCap.round,
+                              progressColor: Colors.blueGrey,
+                              backgroundColor: Colors.grey[100],
+                              center: CircleAvatar(
+                                backgroundColor: LightColors.kBlue,
+                                radius: 22.0,
+                                backgroundImage: AssetImage(
+                                  'assets/booing.png',
+                                ),
                               ),
                             ),
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: <Widget>[
-                              Container(
-                                child: Text(
-                                  'My Bookings',
-                                  textAlign: TextAlign.start,
-                                  style: TextStyle(fontSize: 22.0, color: LightColors.kDarkBlue, fontWeight: FontWeight.w800,),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: <Widget>[
+                                Container(
+                                  child: Text('My Bookings', textAlign: TextAlign.start, style: TextStyle(fontSize: 22.0, color: Colors.white, fontWeight: FontWeight.w800,),),
                                 ),
-                              ),
-                              Container(
-                                child: Text(
-                                  'Dashboard',
-                                  textAlign: TextAlign.start,
-                                  style: TextStyle(fontSize: 16.0, color: Colors.black45, fontWeight: FontWeight.w400,),
+                                Container(
+                                  child: Text('Dashboard', textAlign: TextAlign.start, style: TextStyle(fontSize: 16.0, color: Colors.white, fontWeight: FontWeight.w400,),),
                                 ),
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
-                    )
-                  ]),
+                              ],
+                            )
+                          ],
+                        ),
+                      )
+                    ]
+                ),
+              ),
             ),
             Expanded(
               child: SingleChildScrollView(
@@ -160,11 +158,11 @@ class HomePage extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          subheading('Active Projects'),
-                          SizedBox(height: 5.0),
+//                          Center(child: subheading('Active Booking')),
+//                          SizedBox(height: 5.0),
                           GestureDetector(
                             onTap:(){
-                              print('Card Tap');
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => UpcomingBookings()));
                             },
                             child: Row(
                               children: <Widget>[
@@ -179,21 +177,21 @@ class HomePage extends StatelessWidget {
                                   ActiveProjectsCard(
                                     cardColor: LightColors.indigoLight,
                                     loadingPercent: 0.25,
-                                    title: 'Sports App',
+                                    title: 'SERVICE TYPE',
                                     subtitle: '5 hours progress',
                                   ),
                                 if(temp == '3')
                                   ActiveProjectsCard(
                                     cardColor: LightColors.indigoLight,
                                     loadingPercent: 0.50,
-                                    title: 'Sports App',
+                                    title: 'SERVICE TYPE',
                                     subtitle: '5 hours progress',
                                   ),
                                 if(temp == '4')
                                   ActiveProjectsCard(
                                     cardColor: LightColors.indigoLight,
                                     loadingPercent: 1.00,
-                                    title: 'Sports App',
+                                    title: 'SERVICE TYPE',
                                     subtitle: '5 hours progress',
                                   ),
 
@@ -210,7 +208,7 @@ class HomePage extends StatelessWidget {
                               ),
                               SizedBox(width: 20.0),
                               BottomBookingCard(
-                                cardColor: LightColors.kRed,
+                                cardColor: Colors.lightBlue,
                                 loadingPercent: 0.6,
                                 title: 'PREVIOUS BOOKINGS',
                                 subtitle: '20 hours progress',

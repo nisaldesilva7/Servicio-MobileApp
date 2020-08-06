@@ -25,6 +25,6 @@ class Service {
         rating = snapshot['Rating'],
         searchKey = snapshot['SearchKey'],
         serviceName = snapshot['Service_Name'],
-        serviceTypes = List.of(snapshot['Service_types']).cast<String>(),
+        serviceTypes = List.of(snapshot['Service_Types']).cast<String>(),
         serviceId = snapshot.documentID;
 }

@@ -49,7 +49,7 @@ class _MyVehiclesState extends State<MyVehicles> {
 
   Stream<QuerySnapshot> getUsersTripsStreamSnapshots(BuildContext context) async* {
     final uid = await _auth.getCurrentUID();
-    yield* Firestore.instance.collection('users').document(uid).collection('vehicles').snapshots();
+    yield* Firestore.instance.collection('Customers').document(uid).collection('Vehicles').snapshots();
   }
 
 
@@ -132,7 +132,7 @@ class _MyVehiclesState extends State<MyVehicles> {
       child: Text("Yes"),
       onPressed:  () async {
         var uid = await _auth.getCurrentUID();
-        final doc = Firestore.instance.collection('users').document(uid).collection("vehicles").document(id);
+        final doc = Firestore.instance.collection('Customers').document(uid).collection("Vehicles").document(id);
         Navigator.pop(context);
         return await doc.delete();
       },

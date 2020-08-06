@@ -12,6 +12,7 @@ class Wrapper extends StatelessWidget {
     print(user);
 
     //return either home or auth widget
+
     if (user == null) {
       return Authenticate();
     }else{

@@ -27,6 +27,10 @@ dependencies:
   firebase_auth: ^0.14.0+5
   cloud_firestore: ^0.12.9+4
   firebase_storage: ^3.1.6
+  firebase_messaging: ^6.0.16
+
+
+  flutter_local_notifications: ^1.4.4+2
 
   provider: ^3.1.0
   flutter_spinkit: "^4.1.2"
@@ -51,6 +55,8 @@ dependencies:
   font_awesome_flutter: ^8.5.0
   intl: ^0.15.8
 
+
+  carousel_slider: ^2.2.1
 
 
 dev_dependencies:
@@ -108,6 +114,12 @@ flutter:
     - family: MyFlutterApp
       fonts:
         - asset: assets/fonts/MyFlutterApp.ttf
+
+    - family: Lobster
+      fonts:
+         - asset: assets/fonts/Lobster-Regular.ttf
+
+
 
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

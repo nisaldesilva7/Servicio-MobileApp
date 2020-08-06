@@ -31,7 +31,7 @@ Route<dynamic> genarteRoute(RouteSettings settings){
     case '/history':
       return MaterialPageRoute(builder: (context) => History("Recent Activities"));
     case '/notifications':
-      return MaterialPageRoute(builder: (context) => Notifications("Notifications"));
+      return MaterialPageRoute(builder: (context) => Notifications());
     case '/offers':
       return MaterialPageRoute(builder: (context) => Offers("Offers"));
 //  case /search:

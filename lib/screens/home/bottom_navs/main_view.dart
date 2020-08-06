@@ -1,9 +1,13 @@
 
+import 'package:carousel_slider/carousel_options.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:servicio/models/service.dart';
+import 'package:servicio/screens/home/bottom_navs/search.dart';
 import 'package:servicio/screens/service_page/service_detail_view.dart';
+import 'package:servicio/shared/SliderImages.dart' as assets;
 
 class MainView extends StatelessWidget {
   static final String path = "lib/src/pages/travel/travel_home.dart";
@@ -15,6 +19,10 @@ class MainView extends StatelessWidget {
         children: <Widget>[
           HomeScreenTop(),
           homeScreenBottom,
+          SizedBox(height: 15.0,),
+          SlideBar(),
+          SizedBox(height: 15.0,),
+
         ],
 
       ),
@@ -88,15 +96,15 @@ class _HomeScreenTopState extends State<HomeScreenTop> {
                     ],
                   ),
                 ),
-                SizedBox(height: 30,),
+                SizedBox(height: 10,),
                 Container(
                     width: 250,
                     child: Text(
                       "Where do you want to FIND ?",
-                      style: TextStyle(fontFamily: 'OpenSans', fontSize: 24, color: Colors.white, fontWeight: FontWeight.normal),
+                      style: TextStyle(fontFamily: 'Cabin', fontSize: 24, color: Colors.white, fontWeight: FontWeight.normal),
                       textAlign: TextAlign.center,
                     )),
-                SizedBox(height: 20,),
+                SizedBox(height: 25,),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 32),
                   child: Material(
@@ -220,11 +228,17 @@ final Widget homeScreenBottom = Column(
               style: TextStyle(color: Colors.black87, fontSize: 15, fontWeight: FontWeight.w700)),
           Spacer(),
           Builder(
-              builder: (BuildContext context) => Text(
-                "View All",
-                style: TextStyle(
-                    fontSize: 14, color: Theme.of(context).primaryColor),
-              ))
+                builder: (BuildContext context) => GestureDetector(
+                  onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => SearchView()));
+                      },
+                  child: Text(
+                    "View All",
+                    style: TextStyle(
+                        fontSize: 14, color: Theme.of(context).primaryColor),
+                  ),
+                )),
+
         ],
       ),
     ),
@@ -311,7 +325,8 @@ Widget cityCard(BuildContext context, DocumentSnapshot serviceList) {
                         ),
                          SingleChildScrollView(
                            scrollDirection: Axis.horizontal,
-                             child: getTextWidgets(serviceDoc.serviceTypes))
+                             child: getTextWidgets(serviceDoc.serviceTypes)
+                         )
                       ],
                     ),
                     Container(
@@ -333,4 +348,50 @@ Widget cityCard(BuildContext context, DocumentSnapshot serviceList) {
       ),
     );
   }
+
+class SlideBar extends StatelessWidget {
+  final List<String> images = [assets.images[0],assets.images[2],assets.images[1], assets.images[3]];
+
+
+  @override
+  Widget build(BuildContext context) {
+      return CarouselSlider(
+        options: CarouselOptions(
+          height: 200.0,
+          viewportFraction: 0.8,
+          initialPage: 0,
+          enableInfiniteScroll: true,
+          reverse: false,
+          autoPlay: true,
+          autoPlayInterval: Duration(seconds: 4),
+          autoPlayAnimationDuration: Duration(milliseconds: 100),
+          autoPlayCurve: Curves.easeInOutCubic,
+          enlargeCenterPage: true,
+//        onPageChanged: callbackFunction,
+          scrollDirection: Axis.horizontal,
+
+        ),
+        items: images.map((i) {
+          return Builder(
+            builder: (BuildContext context) {
+              return ClipRRect(
+                borderRadius: BorderRadius.all(Radius.circular(25)),
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  margin: EdgeInsets.symmetric(horizontal: 2.0),
+                  decoration: BoxDecoration(
+                      color: Colors.amber
+                  ),
+                  child: Image.network(
+                    i,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              );
+            },
+          );
+        }).toList(),
+      );
+  }
+}
 
