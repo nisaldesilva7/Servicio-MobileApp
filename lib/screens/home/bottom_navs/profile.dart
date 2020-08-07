@@ -5,6 +5,7 @@ import 'package:servicio/models/customer.dart';
 import 'package:servicio/screens/home/bottom_navs/theme/light_colors.dart';
 import 'package:servicio/screens/home/bottom_navs/widgets/top_container.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:servicio/screens/myprofile.dart';
 import 'package:servicio/services/auth.dart';
 
 class ProfileThreePage extends StatefulWidget {
@@ -50,11 +51,14 @@ class _ProfileThreePageState extends State<ProfileThreePage> {
                                   circularStrokeCap: CircularStrokeCap.round,
                                   progressColor: Colors.blueAccent ,
                                   backgroundColor: LightColors.kDarkYellow,
-                                  center: CircleAvatar(
-                                    backgroundColor: LightColors.kBlue,
-                                    radius: 35.0,
-                                    backgroundImage: AssetImage(
-                                      'assets/image/user.png',
+                                  center: GestureDetector(
+                                    onTap: () => _showImageDialog(context, 'assets/image/no_dp.png'),
+                                    child: CircleAvatar(
+                                      backgroundColor: LightColors.kBlue,
+                                      radius: 35.0,
+                                      backgroundImage: AssetImage(
+                                        'assets/image/no_dp.png',
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -62,17 +66,22 @@ class _ProfileThreePageState extends State<ProfileThreePage> {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: <Widget>[
                                     Container(
-                                      child: Text(
-                                        'My Profile',
-                                        textAlign: TextAlign.start,
-                                        style: TextStyle(fontSize: 22.0, color: Colors.white,fontFamily: 'Cabin', fontWeight: FontWeight.w800,),
+                                      child: Row(
+                                        children: <Widget>[
+                                          Text(
+                                            'My Profile ',
+                                            textAlign: TextAlign.start,
+                                            style: TextStyle(fontSize: 22.0, color: Colors.white,fontFamily: 'Cabin', fontWeight: FontWeight.w800,),
+                                          ),
+                                          _getEditIcon(),
+                                        ],
                                       ),
                                     ),
                                     Container(
                                       child: Text(
                                         'Dashboard',
                                         textAlign: TextAlign.start,
-                                        style: TextStyle(fontSize: 16.0, color: Colors.grey[200], fontWeight: FontWeight.w400,),
+                                        style: TextStyle(fontSize: 15.0, color: Colors.grey[200], fontWeight: FontWeight.w400,),
                                       ),
                                     ),
                                   ],
@@ -142,24 +151,80 @@ class _ProfileThreePageState extends State<ProfileThreePage> {
     );
   }
 
-  Widget test(BuildContext context) {
-    return new FutureBuilder(
-        future:  getUsersTripsStreamSnapshots(),
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return new Text("Loading");
-          }
-          var userDocument = snapshot.data;
-          return new Text(userDocument["email"]);
-        }
-    );
-  }
+//  Widget test(BuildContext context) {
+//    return new FutureBuilder(
+//        future:  getUsersTripsStreamSnapshots(),
+//        builder: (context, snapshot) {
+//          if (!snapshot.hasData) {
+//            return new Text("Loading");
+//          }
+//          var userDocument = snapshot.data;
+//          return new Text(userDocument["email"]);
+//        }
+//    );
+//  }
 
   Future<DocumentSnapshot> getUsersTripsStreamSnapshots() async {
     final uid = await _auth.getCurrentUID();
     return Firestore.instance.collection('Customers').document(uid).get();
   }
 
+
+
+  Widget _getEditIcon() {
+    return new GestureDetector(
+      child: new CircleAvatar(
+        backgroundColor: Colors.transparent,
+        radius: 20.0,
+        child: new Icon(
+          Icons.edit,
+          color: Colors.white,
+          size: 25.0,
+        ),
+      ),
+      onTap: () {
+        Navigator.push(context, MaterialPageRoute(builder: (context) => MyProfile()));
+//        Navigator.push(context, MaterialPageRoute(builder: (context) => MyProfile(user: userDoc)));
+
+      },
+    );
+  }
+
+  _showImageDialog(BuildContext context, String image) {
+    showDialog(
+      context: context,
+      builder: (_) => Dialog(
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        child: Column(
+          children: <Widget>[
+            Expanded(
+              child: Container(
+                width: double.infinity,
+                child: Image.asset(image, fit: BoxFit.contain)
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                IconButton(
+                  color: Colors.white,
+                  icon: Icon(Icons.close),
+                  onPressed: () => Navigator.pop(context),
+                ),
+//                const SizedBox(width: 10.0),
+//                IconButton(
+//                  color: Colors.white,
+//                  icon: Icon(Icons.share),
+//                  onPressed: () {},
+//                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }
 
 

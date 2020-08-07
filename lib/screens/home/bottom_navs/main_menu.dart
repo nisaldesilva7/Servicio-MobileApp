@@ -26,7 +26,7 @@ class _MainMenuState extends State<MainMenu> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.indigo[200],
+      backgroundColor: Colors.grey[300],
       body: SingleChildScrollView(
         child: Container(
           height: MediaQuery.of(context).size.height,

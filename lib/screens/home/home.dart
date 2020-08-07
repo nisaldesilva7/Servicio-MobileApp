@@ -1,10 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:servicio/models/customer.dart';
 import 'package:servicio/screens/home/bottom_navs/bookings_view.dart';
 import 'package:servicio/screens/home/bottom_navs/main_view.dart';
 import 'package:servicio/services/auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:servicio/screens/home/bottom_navs/search.dart';
-
 import 'bottom_navs/main_menu.dart';
 import 'bottom_navs/profile.dart';
 
@@ -32,7 +33,6 @@ class _HomeState extends State<Home>{
     MainMenu(),
     HomePage(),
     ProfileThreePage(),
-
   ];
   final AuthServices _auth = AuthServices();
 
@@ -61,22 +61,34 @@ class _HomeState extends State<Home>{
             )
           ],
         ),
-        drawer: new Drawer(
-          child: new ListView(
+        drawer: Drawer(
+          child: ListView(
             children: <Widget>[
-              new UserAccountsDrawerHeader(
-                accountName: new Text("Tamasha Seneviratne"),
-                accountEmail: new Text("tamzsene@gmail.com"),
-                currentAccountPicture: InkWell(
-                  child: new CircleAvatar(
-                    backgroundColor: Colors.black26,
-                    child: new Text("T"),
-                  ),
-                  onTap: () {
-                    return Navigator.of(context).pushNamed("/image");
-                  },
-                ),
-              ),
+               FutureBuilder(
+                 future: getUsersTripsStreamSnapshots(),
+                 builder: (context, snapshot) {
+                   if (!snapshot.hasData) {
+                     return Padding(
+                       padding: const EdgeInsets.only(top: 100),
+                       child: Center(child: CircularProgressIndicator()),
+                     );
+                   }
+                   final customer = Customer.fromSnapshot(snapshot.data);
+                   return UserAccountsDrawerHeader(
+                     accountName: Text(customer.name),
+                     accountEmail: Text(customer.email),
+                     currentAccountPicture: InkWell(
+                       child: CircleAvatar(
+                         backgroundColor: Colors.black26,
+                         child: Image.asset('assets/image/no_dp.png'),
+                       ),
+                       onTap: () {
+                         return Navigator.of(context).pushNamed("/image");
+                       },
+                     ),
+                   );
+                 }
+               ),
               new ListTile(
                 title: new Text("Home"),
                 trailing: new Icon(Icons.home, color: Colors.indigo,),
@@ -169,6 +181,12 @@ class _HomeState extends State<Home>{
       );
 
   }
+
+  Future<DocumentSnapshot> getUsersTripsStreamSnapshots() async {
+    final uid = await _auth.getCurrentUID();
+    return Firestore.instance.collection('Customers').document(uid).get();
+  }
+
   Widget _divider(){
     return Divider(thickness: 3.0, indent: 13.0, endIndent: 20.0, height: 1.0, color: Colors.indigo[200],);
   }

@@ -15,8 +15,9 @@ MERGED from [:sqflite] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\bui
 MERGED from [:image_picker] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-22:12
 MERGED from [:flutter_plugin_android_lifecycle] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\flutter_plugin_android_lifecycle\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
 MERGED from [:firebase_messaging] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-20:12
-MERGED from [:flutter_local_notifications] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\flutter_local_notifications\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
+MERGED from [:url_launcher] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\url_launcher\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-14:12
 MERGED from [:path_provider] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\path_provider\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
+MERGED from [:flutter_local_notifications] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\flutter_local_notifications\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
 MERGED from [:image_cropper] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\image_cropper\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
 MERGED from [com.google.firebase:firebase-messaging:20.0.1] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\48222d1eef8a978e3e0d33ab60727530\jetified-firebase-messaging-20.0.1\AndroidManifest.xml:17:1-37:12
 MERGED from [com.google.firebase:firebase-storage:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\d72512d7990195efc98cae7b44d13da5\jetified-firebase-storage-17.0.0\AndroidManifest.xml:15:1-37:12
@@ -96,6 +97,8 @@ MERGED from [:image_picker] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileAp
 MERGED from [:image_picker] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:10:5-20:19
 MERGED from [:firebase_messaging] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-18:19
 MERGED from [:firebase_messaging] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-18:19
+MERGED from [:url_launcher] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\url_launcher\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-12:19
+MERGED from [:url_launcher] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\url_launcher\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-12:19
 MERGED from [com.google.firebase:firebase-messaging:20.0.1] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\48222d1eef8a978e3e0d33ab60727530\jetified-firebase-messaging-20.0.1\AndroidManifest.xml:22:5-35:19
 MERGED from [com.google.firebase:firebase-messaging:20.0.1] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\48222d1eef8a978e3e0d33ab60727530\jetified-firebase-messaging-20.0.1\AndroidManifest.xml:22:5-35:19
 MERGED from [com.google.firebase:firebase-storage:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\d72512d7990195efc98cae7b44d13da5\jetified-firebase-storage-17.0.0\AndroidManifest.xml:29:5-35:19
@@ -206,10 +209,12 @@ MERGED from [:flutter_plugin_android_lifecycle] C:\Users\ASUS\Desktop\servicio_a
 MERGED from [:flutter_plugin_android_lifecycle] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\flutter_plugin_android_lifecycle\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:firebase_messaging] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:firebase_messaging] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
-MERGED from [:flutter_local_notifications] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\flutter_local_notifications\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
-MERGED from [:flutter_local_notifications] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\flutter_local_notifications\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:url_launcher] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\url_launcher\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:url_launcher] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\url_launcher\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:path_provider] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\path_provider\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:path_provider] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\path_provider\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:flutter_local_notifications] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\flutter_local_notifications\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:flutter_local_notifications] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\flutter_local_notifications\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:image_cropper] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\image_cropper\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:image_cropper] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\image_cropper\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [com.google.firebase:firebase-messaging:20.0.1] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\48222d1eef8a978e3e0d33ab60727530\jetified-firebase-messaging-20.0.1\AndroidManifest.xml:20:5-44
@@ -418,6 +423,14 @@ ADDED from [:firebase_messaging] C:\Users\ASUS\Desktop\servicio_app\Servicio-Mob
 		ADDED from [:firebase_messaging] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:16:17-82
 	android:name
 		ADDED from [:firebase_messaging] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:15:17-127
+activity#io.flutter.plugins.urllauncher.WebViewActivity
+ADDED from [:url_launcher] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\url_launcher\intermediates\library_manifest\debug\AndroidManifest.xml:8:9-11:74
+	android:exported
+		ADDED from [:url_launcher] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\url_launcher\intermediates\library_manifest\debug\AndroidManifest.xml:10:13-37
+	android:theme
+		ADDED from [:url_launcher] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\url_launcher\intermediates\library_manifest\debug\AndroidManifest.xml:11:13-71
+	android:name
+		ADDED from [:url_launcher] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\url_launcher\intermediates\library_manifest\debug\AndroidManifest.xml:9:13-74
 service#com.google.firebase.messaging.FirebaseMessagingService
 ADDED from [com.google.firebase:firebase-messaging:20.0.1] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\48222d1eef8a978e3e0d33ab60727530\jetified-firebase-messaging-20.0.1\AndroidManifest.xml:28:9-34:19
 	android:exported

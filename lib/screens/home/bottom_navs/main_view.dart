@@ -225,7 +225,7 @@ final Widget homeScreenBottom = Column(
         mainAxisSize: MainAxisSize.max,
         children: <Widget>[
           Text("Nearby Service Centers",
-              style: TextStyle(color: Colors.black87, fontSize: 15, fontWeight: FontWeight.w700)),
+              style: TextStyle(color: Colors.black87, fontSize: 15, fontFamily: 'icomoon', fontWeight:FontWeight.w400)),
           Spacer(),
           Builder(
                 builder: (BuildContext context) => GestureDetector(

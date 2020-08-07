@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
 class MyProfile extends StatefulWidget {
-  final String title;
-  MyProfile(this.title);
+
   @override
   MapScreenState createState() => MapScreenState();
 
@@ -38,76 +37,83 @@ class MapScreenState extends State<MyProfile>
                   color: Colors.white,
                   child: new Column(
                     children: <Widget>[
-
                       Padding(
                         padding: EdgeInsets.only(top: 20.0),
-                        child: new Stack(fit: StackFit.loose, children: <Widget>[
-                          new Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              new Container(
-                                  width: 140.0,
-                                  height: 140.0,
-                                  decoration: new BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    image: new DecorationImage(
-                                      image: new ExactAssetImage(
-                                          'assets/image/male_user.png'),
-                                      fit: BoxFit.cover,
-                                    ),
-                                  )),
-                            ],
+                        child: GestureDetector(
+                          onTap: (){
+                            print('photo');
+                          },
+                          child: Stack(
+                              fit: StackFit.loose,
+                              children: <Widget>[
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    Container(
+                                        width: 140.0,
+                                        height: 140.0,
+                                        decoration: new BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          image: new DecorationImage(
+                                            image: new ExactAssetImage(
+                                                'assets/image/male_user.png'),
+                                            fit: BoxFit.cover,),
+                                        )),
+                                  ],
+                                ),
+                                Padding(
+                                    padding: EdgeInsets.only(
+                                        top: 90.0,right: 100.0),
+                                    child: new Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: <Widget>[
+                                        new CircleAvatar(
+                                          backgroundColor: Colors.red,
+                                          radius: 25.0,
+                                          child: new Icon(
+                                            Icons.camera_alt,
+                                            color: Colors.white,
+                                          ),
+                                        )
+                                      ],
+                                    )
+                                ),
+                              ]
                           ),
-                          Padding(
-                              padding: EdgeInsets.only(top: 90.0, right: 100.0),
-                              child: new Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  new CircleAvatar(
-                                    backgroundColor: Colors.red,
-                                    radius: 25.0,
-                                    child: new Icon(
-                                      Icons.camera_alt,
-                                      color: Colors.white,
-                                    ),
-                                  )
-                                ],
-                              )
-                          ),
-                        ]),
+                        ),
                       )
                     ],
                   ),
                 ),
-                new Container(
+                Container(
                   color: Color(0xffFFFFFF),
                   child: Padding(
                     padding: EdgeInsets.only(bottom: 25.0),
-                    child: new Column(
+                    child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: <Widget>[
                         Padding(
                             padding: EdgeInsets.only(
                                 left: 25.0, right: 25.0, top: 25.0),
-                            child: new Row(
+                            child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               mainAxisSize: MainAxisSize.max,
                               children: <Widget>[
-                                new Column(
+                                Column(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   mainAxisSize: MainAxisSize.min,
                                   children: <Widget>[
-                                    new Text(
-                                      'Parsonal Information',
+                                    Text(
+                                      'User Information(Click to Edit)',
                                       style: TextStyle(
                                           fontSize: 18.0,
                                           fontWeight: FontWeight.bold),
                                     ),
                                   ],
                                 ),
-                                new Column(
+                                Column(
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   mainAxisSize: MainAxisSize.min,
                                   children: <Widget>[
@@ -139,11 +145,11 @@ class MapScreenState extends State<MyProfile>
                         Padding(
                             padding: EdgeInsets.only(
                                 left: 25.0, right: 25.0, top: 2.0),
-                            child: new Row(
+                            child: Row(
                               mainAxisSize: MainAxisSize.max,
                               children: <Widget>[
-                                new Flexible(
-                                  child: new TextField(
+                                Flexible(
+                                  child: TextField(
                                     decoration: const InputDecoration(
                                       hintText: "Enter Your Name",
                                     ),
@@ -157,14 +163,14 @@ class MapScreenState extends State<MyProfile>
                         Padding(
                             padding: EdgeInsets.only(
                                 left: 25.0, right: 25.0, top: 25.0),
-                            child: new Row(
+                            child: Row(
                               mainAxisSize: MainAxisSize.max,
                               children: <Widget>[
-                                new Column(
+                                Column(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   mainAxisSize: MainAxisSize.min,
                                   children: <Widget>[
-                                    new Text(
+                                    Text(
                                       'Email ID',
                                       style: TextStyle(
                                           fontSize: 16.0,
@@ -293,6 +299,7 @@ class MapScreenState extends State<MyProfile>
           ],
         ),
       ),
+
 //      bottomNavigationBar: BottomNavigationBar(
 //        currentIndex: _currentIndex,
 //        type: BottomNavigationBarType.fixed,
@@ -394,11 +401,11 @@ class MapScreenState extends State<MyProfile>
     return new GestureDetector(
       child: new CircleAvatar(
         backgroundColor: Colors.red,
-        radius: 14.0,
+        radius: 18.0,
         child: new Icon(
           Icons.edit,
           color: Colors.white,
-          size: 16.0,
+          size: 22.0,
         ),
       ),
       onTap: () {

@@ -194,81 +194,90 @@
 109-->[:firebase_messaging] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:10:25-75
 110            </intent-filter>
 111        </service>
-112        <!--
-113             FirebaseMessagingService performs security checks at runtime,
-114             but set to not exported to explicitly avoid allowing another app to call it.
-115        -->
-116        <service
-116-->[com.google.firebase:firebase-messaging:20.0.1] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\48222d1eef8a978e3e0d33ab60727530\jetified-firebase-messaging-20.0.1\AndroidManifest.xml:28:9-34:19
-117            android:name="com.google.firebase.messaging.FirebaseMessagingService"
-117-->[com.google.firebase:firebase-messaging:20.0.1] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\48222d1eef8a978e3e0d33ab60727530\jetified-firebase-messaging-20.0.1\AndroidManifest.xml:29:13-82
-118            android:exported="false" >
-118-->[com.google.firebase:firebase-messaging:20.0.1] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\48222d1eef8a978e3e0d33ab60727530\jetified-firebase-messaging-20.0.1\AndroidManifest.xml:30:13-37
-119            <intent-filter android:priority="-500" >
-119-->[:firebase_messaging] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:9:13-11:29
-120                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-120-->[:firebase_messaging] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:10:17-78
-120-->[:firebase_messaging] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:10:25-75
-121            </intent-filter>
-122        </service>
-123
-124        <activity
-124-->[com.google.firebase:firebase-auth:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\3c89e438db4a5b07154cd874213f0909\jetified-firebase-auth-17.0.0\AndroidManifest.xml:24:9-31:50
-125            android:name="com.google.firebase.auth.internal.FederatedSignInActivity"
-125-->[com.google.firebase:firebase-auth:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\3c89e438db4a5b07154cd874213f0909\jetified-firebase-auth-17.0.0\AndroidManifest.xml:25:13-85
-126            android:excludeFromRecents="true"
-126-->[com.google.firebase:firebase-auth:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\3c89e438db4a5b07154cd874213f0909\jetified-firebase-auth-17.0.0\AndroidManifest.xml:26:13-46
-127            android:exported="true"
-127-->[com.google.firebase:firebase-auth:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\3c89e438db4a5b07154cd874213f0909\jetified-firebase-auth-17.0.0\AndroidManifest.xml:27:13-36
-128            android:launchMode="singleTask"
-128-->[com.google.firebase:firebase-auth:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\3c89e438db4a5b07154cd874213f0909\jetified-firebase-auth-17.0.0\AndroidManifest.xml:28:13-44
-129            android:permission="com.google.firebase.auth.api.gms.permission.LAUNCH_FEDERATED_SIGN_IN"
-129-->[com.google.firebase:firebase-auth:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\3c89e438db4a5b07154cd874213f0909\jetified-firebase-auth-17.0.0\AndroidManifest.xml:29:13-102
-130            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-130-->[com.google.firebase:firebase-auth:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\3c89e438db4a5b07154cd874213f0909\jetified-firebase-auth-17.0.0\AndroidManifest.xml:30:13-72
-131
-132        <receiver
-132-->[com.google.firebase:firebase-iid:20.0.1] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\71dc868852144548b68266a076cea9c7\firebase-iid-20.0.1\AndroidManifest.xml:37:9-44:20
-133            android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver"
-133-->[com.google.firebase:firebase-iid:20.0.1] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\71dc868852144548b68266a076cea9c7\firebase-iid-20.0.1\AndroidManifest.xml:38:13-78
-134            android:exported="true"
-134-->[com.google.firebase:firebase-iid:20.0.1] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\71dc868852144548b68266a076cea9c7\firebase-iid-20.0.1\AndroidManifest.xml:39:13-36
-135            android:permission="com.google.android.c2dm.permission.SEND" >
-135-->[com.google.firebase:firebase-iid:20.0.1] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\71dc868852144548b68266a076cea9c7\firebase-iid-20.0.1\AndroidManifest.xml:40:13-73
-136            <intent-filter>
-136-->[com.google.firebase:firebase-iid:20.0.1] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\71dc868852144548b68266a076cea9c7\firebase-iid-20.0.1\AndroidManifest.xml:41:13-43:29
-137                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-137-->[com.google.firebase:firebase-iid:20.0.1] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\71dc868852144548b68266a076cea9c7\firebase-iid-20.0.1\AndroidManifest.xml:42:17-81
-137-->[com.google.firebase:firebase-iid:20.0.1] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\71dc868852144548b68266a076cea9c7\firebase-iid-20.0.1\AndroidManifest.xml:42:25-78
-138            </intent-filter>
-139        </receiver>
-140
-141        <provider
-141-->[com.google.firebase:firebase-common:19.3.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\efce6419cef185abce48282468c18d20\jetified-firebase-common-19.3.0\AndroidManifest.xml:26:9-30:39
-142            android:name="com.google.firebase.provider.FirebaseInitProvider"
-142-->[com.google.firebase:firebase-common:19.3.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\efce6419cef185abce48282468c18d20\jetified-firebase-common-19.3.0\AndroidManifest.xml:27:13-77
-143            android:authorities="com.example.servicio.firebaseinitprovider"
-143-->[com.google.firebase:firebase-common:19.3.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\efce6419cef185abce48282468c18d20\jetified-firebase-common-19.3.0\AndroidManifest.xml:28:13-72
-144            android:exported="false"
-144-->[com.google.firebase:firebase-common:19.3.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\efce6419cef185abce48282468c18d20\jetified-firebase-common-19.3.0\AndroidManifest.xml:29:13-37
-145            android:initOrder="100" />
-145-->[com.google.firebase:firebase-common:19.3.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\efce6419cef185abce48282468c18d20\jetified-firebase-common-19.3.0\AndroidManifest.xml:30:13-36
-146
-147        <activity
-147-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\dfda874e59ae708b9dea8d783cda1c4f\play-services-base-17.0.0\AndroidManifest.xml:23:9-26:75
-148            android:name="com.google.android.gms.common.api.GoogleApiActivity"
-148-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\dfda874e59ae708b9dea8d783cda1c4f\play-services-base-17.0.0\AndroidManifest.xml:24:13-79
+112
+113        <activity
+113-->[:url_launcher] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\url_launcher\intermediates\library_manifest\debug\AndroidManifest.xml:8:9-11:74
+114            android:name="io.flutter.plugins.urllauncher.WebViewActivity"
+114-->[:url_launcher] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\url_launcher\intermediates\library_manifest\debug\AndroidManifest.xml:9:13-74
+115            android:exported="false"
+115-->[:url_launcher] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\url_launcher\intermediates\library_manifest\debug\AndroidManifest.xml:10:13-37
+116            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+116-->[:url_launcher] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\url_launcher\intermediates\library_manifest\debug\AndroidManifest.xml:11:13-71
+117        <!--
+118             FirebaseMessagingService performs security checks at runtime,
+119             but set to not exported to explicitly avoid allowing another app to call it.
+120        -->
+121        <service
+121-->[com.google.firebase:firebase-messaging:20.0.1] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\48222d1eef8a978e3e0d33ab60727530\jetified-firebase-messaging-20.0.1\AndroidManifest.xml:28:9-34:19
+122            android:name="com.google.firebase.messaging.FirebaseMessagingService"
+122-->[com.google.firebase:firebase-messaging:20.0.1] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\48222d1eef8a978e3e0d33ab60727530\jetified-firebase-messaging-20.0.1\AndroidManifest.xml:29:13-82
+123            android:exported="false" >
+123-->[com.google.firebase:firebase-messaging:20.0.1] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\48222d1eef8a978e3e0d33ab60727530\jetified-firebase-messaging-20.0.1\AndroidManifest.xml:30:13-37
+124            <intent-filter android:priority="-500" >
+124-->[:firebase_messaging] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:9:13-11:29
+125                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+125-->[:firebase_messaging] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:10:17-78
+125-->[:firebase_messaging] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:10:25-75
+126            </intent-filter>
+127        </service>
+128
+129        <activity
+129-->[com.google.firebase:firebase-auth:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\3c89e438db4a5b07154cd874213f0909\jetified-firebase-auth-17.0.0\AndroidManifest.xml:24:9-31:50
+130            android:name="com.google.firebase.auth.internal.FederatedSignInActivity"
+130-->[com.google.firebase:firebase-auth:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\3c89e438db4a5b07154cd874213f0909\jetified-firebase-auth-17.0.0\AndroidManifest.xml:25:13-85
+131            android:excludeFromRecents="true"
+131-->[com.google.firebase:firebase-auth:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\3c89e438db4a5b07154cd874213f0909\jetified-firebase-auth-17.0.0\AndroidManifest.xml:26:13-46
+132            android:exported="true"
+132-->[com.google.firebase:firebase-auth:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\3c89e438db4a5b07154cd874213f0909\jetified-firebase-auth-17.0.0\AndroidManifest.xml:27:13-36
+133            android:launchMode="singleTask"
+133-->[com.google.firebase:firebase-auth:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\3c89e438db4a5b07154cd874213f0909\jetified-firebase-auth-17.0.0\AndroidManifest.xml:28:13-44
+134            android:permission="com.google.firebase.auth.api.gms.permission.LAUNCH_FEDERATED_SIGN_IN"
+134-->[com.google.firebase:firebase-auth:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\3c89e438db4a5b07154cd874213f0909\jetified-firebase-auth-17.0.0\AndroidManifest.xml:29:13-102
+135            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+135-->[com.google.firebase:firebase-auth:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\3c89e438db4a5b07154cd874213f0909\jetified-firebase-auth-17.0.0\AndroidManifest.xml:30:13-72
+136
+137        <receiver
+137-->[com.google.firebase:firebase-iid:20.0.1] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\71dc868852144548b68266a076cea9c7\firebase-iid-20.0.1\AndroidManifest.xml:37:9-44:20
+138            android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver"
+138-->[com.google.firebase:firebase-iid:20.0.1] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\71dc868852144548b68266a076cea9c7\firebase-iid-20.0.1\AndroidManifest.xml:38:13-78
+139            android:exported="true"
+139-->[com.google.firebase:firebase-iid:20.0.1] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\71dc868852144548b68266a076cea9c7\firebase-iid-20.0.1\AndroidManifest.xml:39:13-36
+140            android:permission="com.google.android.c2dm.permission.SEND" >
+140-->[com.google.firebase:firebase-iid:20.0.1] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\71dc868852144548b68266a076cea9c7\firebase-iid-20.0.1\AndroidManifest.xml:40:13-73
+141            <intent-filter>
+141-->[com.google.firebase:firebase-iid:20.0.1] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\71dc868852144548b68266a076cea9c7\firebase-iid-20.0.1\AndroidManifest.xml:41:13-43:29
+142                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+142-->[com.google.firebase:firebase-iid:20.0.1] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\71dc868852144548b68266a076cea9c7\firebase-iid-20.0.1\AndroidManifest.xml:42:17-81
+142-->[com.google.firebase:firebase-iid:20.0.1] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\71dc868852144548b68266a076cea9c7\firebase-iid-20.0.1\AndroidManifest.xml:42:25-78
+143            </intent-filter>
+144        </receiver>
+145
+146        <provider
+146-->[com.google.firebase:firebase-common:19.3.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\efce6419cef185abce48282468c18d20\jetified-firebase-common-19.3.0\AndroidManifest.xml:26:9-30:39
+147            android:name="com.google.firebase.provider.FirebaseInitProvider"
+147-->[com.google.firebase:firebase-common:19.3.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\efce6419cef185abce48282468c18d20\jetified-firebase-common-19.3.0\AndroidManifest.xml:27:13-77
+148            android:authorities="com.example.servicio.firebaseinitprovider"
+148-->[com.google.firebase:firebase-common:19.3.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\efce6419cef185abce48282468c18d20\jetified-firebase-common-19.3.0\AndroidManifest.xml:28:13-72
 149            android:exported="false"
-149-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\dfda874e59ae708b9dea8d783cda1c4f\play-services-base-17.0.0\AndroidManifest.xml:25:13-37
-150            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-150-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\dfda874e59ae708b9dea8d783cda1c4f\play-services-base-17.0.0\AndroidManifest.xml:26:13-72
+149-->[com.google.firebase:firebase-common:19.3.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\efce6419cef185abce48282468c18d20\jetified-firebase-common-19.3.0\AndroidManifest.xml:29:13-37
+150            android:initOrder="100" />
+150-->[com.google.firebase:firebase-common:19.3.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\efce6419cef185abce48282468c18d20\jetified-firebase-common-19.3.0\AndroidManifest.xml:30:13-36
 151
-152        <meta-data
-152-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\31cd1bf96086511c6babe8e40e870ce1\jetified-play-services-basement-17.0.0\AndroidManifest.xml:23:9-25:69
-153            android:name="com.google.android.gms.version"
-153-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\31cd1bf96086511c6babe8e40e870ce1\jetified-play-services-basement-17.0.0\AndroidManifest.xml:24:13-58
-154            android:value="@integer/google_play_services_version" />
-154-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\31cd1bf96086511c6babe8e40e870ce1\jetified-play-services-basement-17.0.0\AndroidManifest.xml:25:13-66
-155    </application>
+152        <activity
+152-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\dfda874e59ae708b9dea8d783cda1c4f\play-services-base-17.0.0\AndroidManifest.xml:23:9-26:75
+153            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+153-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\dfda874e59ae708b9dea8d783cda1c4f\play-services-base-17.0.0\AndroidManifest.xml:24:13-79
+154            android:exported="false"
+154-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\dfda874e59ae708b9dea8d783cda1c4f\play-services-base-17.0.0\AndroidManifest.xml:25:13-37
+155            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+155-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\dfda874e59ae708b9dea8d783cda1c4f\play-services-base-17.0.0\AndroidManifest.xml:26:13-72
 156
-157</manifest>
+157        <meta-data
+157-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\31cd1bf96086511c6babe8e40e870ce1\jetified-play-services-basement-17.0.0\AndroidManifest.xml:23:9-25:69
+158            android:name="com.google.android.gms.version"
+158-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\31cd1bf96086511c6babe8e40e870ce1\jetified-play-services-basement-17.0.0\AndroidManifest.xml:24:13-58
+159            android:value="@integer/google_play_services_version" />
+159-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\31cd1bf96086511c6babe8e40e870ce1\jetified-play-services-basement-17.0.0\AndroidManifest.xml:25:13-66
+160    </application>
+161
+162</manifest>

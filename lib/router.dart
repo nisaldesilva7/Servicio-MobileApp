@@ -25,7 +25,7 @@ Route<dynamic> genarteRoute(RouteSettings settings){
     case '/service':
       return MaterialPageRoute(builder: (context) => ServicePage());
     case '/profile':
-      return MaterialPageRoute(builder: (context) => MyProfile("My Profile "));
+      return MaterialPageRoute(builder: (context) => MyProfile());
     case '/bookings':
       return MaterialPageRoute(builder: (context) => MyHomePage());
     case '/history':

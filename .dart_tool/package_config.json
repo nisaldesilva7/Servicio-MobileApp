@@ -218,8 +218,14 @@
       "languageVersion": "2.0"
     },
     {
+      "name": "get_it",
+      "rootUri": "file:///C:/Users/ASUS/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/get_it-1.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.0"
+    },
+    {
       "name": "http",
-      "rootUri": "file:///C:/Users/ASUS/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/http-0.12.1",
+      "rootUri": "file:///C:/Users/ASUS/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/http-0.12.2",
       "packageUri": "lib/",
       "languageVersion": "2.4"
     },
@@ -350,6 +356,12 @@
       "languageVersion": "1.24"
     },
     {
+      "name": "platform_detect",
+      "rootUri": "file:///C:/Users/ASUS/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/platform_detect-1.4.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.4"
+    },
+    {
       "name": "plugin_platform_interface",
       "rootUri": "file:///C:/Users/ASUS/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/plugin_platform_interface-1.0.2",
       "packageUri": "lib/",
@@ -364,6 +376,12 @@
     {
       "name": "provider",
       "rootUri": "file:///C:/Users/ASUS/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/provider-3.2.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.0"
+    },
+    {
+      "name": "pub_semver",
+      "rootUri": "file:///C:/Users/ASUS/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/pub_semver-1.4.4",
       "packageUri": "lib/",
       "languageVersion": "2.0"
     },
@@ -465,13 +483,19 @@
     },
     {
       "name": "supercharged",
-      "rootUri": "file:///C:/Users/ASUS/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/supercharged-1.6.0",
+      "rootUri": "file:///C:/Users/ASUS/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/supercharged-1.8.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.7"
+    },
+    {
+      "name": "supercharged_dart",
+      "rootUri": "file:///C:/Users/ASUS/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/supercharged_dart-1.0.1",
       "packageUri": "lib/",
       "languageVersion": "2.7"
     },
     {
       "name": "synchronized",
-      "rootUri": "file:///C:/Users/ASUS/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/synchronized-2.2.0+1",
+      "rootUri": "file:///C:/Users/ASUS/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/synchronized-2.2.0+2",
       "packageUri": "lib/",
       "languageVersion": "2.8"
     },
@@ -492,6 +516,36 @@
       "rootUri": "file:///C:/Users/ASUS/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/typed_data-1.1.6",
       "packageUri": "lib/",
       "languageVersion": "2.0"
+    },
+    {
+      "name": "url_launcher",
+      "rootUri": "file:///C:/Users/ASUS/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/url_launcher-5.5.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.1"
+    },
+    {
+      "name": "url_launcher_linux",
+      "rootUri": "file:///C:/Users/ASUS/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/url_launcher_linux-0.0.1+1",
+      "packageUri": "lib/",
+      "languageVersion": "2.1"
+    },
+    {
+      "name": "url_launcher_macos",
+      "rootUri": "file:///C:/Users/ASUS/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/url_launcher_macos-0.0.1+7",
+      "packageUri": "lib/",
+      "languageVersion": "2.1"
+    },
+    {
+      "name": "url_launcher_platform_interface",
+      "rootUri": "file:///C:/Users/ASUS/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/url_launcher_platform_interface-1.0.7",
+      "packageUri": "lib/",
+      "languageVersion": "2.1"
+    },
+    {
+      "name": "url_launcher_web",
+      "rootUri": "file:///C:/Users/ASUS/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/url_launcher_web-0.1.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.2"
     },
     {
       "name": "uuid",
@@ -530,7 +584,7 @@
       "languageVersion": "2.5"
     }
   ],
-  "generated": "2020-08-03T13:07:54.072919Z",
+  "generated": "2020-08-07T16:56:01.491186Z",
   "generator": "pub",
   "generatorVersion": "2.8.4"
 }

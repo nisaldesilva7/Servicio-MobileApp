@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 
@@ -18,15 +19,12 @@ class _ImageUploaderState extends State<ImageUploader> {
   StorageUploadTask _uploadTask;
 
   void _startUpload() {
-
     /// Unique file name for the file
     String filePath = 'images/${DateTime.now()}.png';
-
     setState(() {
       _uploadTask = _storage.ref().child(filePath).putFile(widget.file);
     });
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -43,12 +41,9 @@ class _ImageUploaderState extends State<ImageUploader> {
                 : 0;
 
             return Column(
-
               children: [
                 if(_uploadTask.isComplete)
-                  Text('🎉🎉🎉'),
-
-
+                  Text('PROFILE PHOTO UPLOADED SUCCESFULLY'),
                 if (_uploadTask.isPaused)
                   FlatButton(
                     child: Icon(Icons.play_arrow),
@@ -66,16 +61,15 @@ class _ImageUploaderState extends State<ImageUploader> {
                 Text(
                     '${(progressPercent * 100).toStringAsFixed(2)} % '
                 ),
-
               ],
             );
           });
-    }else {
-
+    }
+    else {
       // Allows user to decide when to start the upload
       return FlatButton.icon(
-        label: Text('Upload to Firebase'),
-        icon: Icon(Icons.cloud_upload),
+        label: Text('Set As Profile Picture'),
+        icon: Icon(CupertinoIcons.profile_circled, color: Colors.blueAccent,),
         onPressed: _startUpload,
       );
 

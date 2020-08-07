@@ -4,13 +4,25 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:servicio/screens/bookings/book_service.dart';
 import 'package:servicio/models/service.dart';
+import 'package:servicio/screens/chatui.dart';
+import 'package:servicio/services/service_locator.dart';
+import 'package:servicio/services/urlService.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-class ServiceDetailPage extends StatelessWidget {
 
-  final String image = "assets/image/3.jpg";
+class ServiceDetailPage extends StatefulWidget {
+
   final Service service;
   const ServiceDetailPage({Key key, this.service}) : super(key: key);
 
+  @override
+  _ServiceDetailPageState createState() => _ServiceDetailPageState();
+}
+
+class _ServiceDetailPageState extends State<ServiceDetailPage> {
+  final String image = "assets/image/3.jpg";
+  final String number = "123456789";
+  final CallsAndMessagesService _service = locator<CallsAndMessagesService>();
 
   @override
   Widget build(BuildContext context) {
@@ -21,21 +33,19 @@ class ServiceDetailPage extends StatelessWidget {
 //        backgroundColor: Colors.transparent,
         backgroundColor: Color(0x20000000),
         elevation: 0,
-        title: Text(service.serviceName),
+        title: Text(widget.service.serviceName.toUpperCase()),
         actions: <Widget>[
         IconButton(
           color: Colors.white,
           icon: Icon(Icons.message),
           onPressed: () {
-
+            Navigator.push(context, MaterialPageRoute(builder: (context) => ChatBox()));
             },
         ),
           IconButton(
             color: Colors.white,
             icon: Icon(Icons.call),
-            onPressed: () {
-
-            },
+            onPressed: () => _service.call(number),
           ),
         ],
       ),
@@ -57,7 +67,7 @@ class ServiceDetailPage extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal:16.0),
                   child: Text(
-                    service.serviceName,
+                    widget.service.serviceName,
                     style: TextStyle(color: Colors.white, fontSize: 28.0,fontFamily: 'MyFlutterApp', fontWeight: FontWeight.bold),
                   ),
                 ),
@@ -98,7 +108,7 @@ class ServiceDetailPage extends StatelessWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                showStars(service.rating),
+                                showStars(widget.service.rating),
                                 Text.rich(TextSpan(children: [
                                   WidgetSpan(
                                       child: Icon(Icons.location_on, size: 16.0, color: Colors.grey,)
@@ -133,7 +143,7 @@ class ServiceDetailPage extends StatelessWidget {
                         crossAxisCount: 4,
                         crossAxisSpacing: 4,
                         mainAxisSpacing: 4,
-                        children: service.serviceTypes
+                        children: widget.service.serviceTypes
                             .map(
                               (serviceTypes) => Column(
                             children: <Widget>[
@@ -172,7 +182,7 @@ class ServiceDetailPage extends StatelessWidget {
                             horizontal: 32.0,
                           ),
                           onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => BookService(serviceInfo: service)));
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => BookService(serviceInfo: widget.service)));
                           },
                         ),
                       ),

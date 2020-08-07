@@ -12,15 +12,12 @@ class SelectImages extends StatefulWidget {
 
 class _SelectImagesState extends State<SelectImages> {
   File _image;
-
   getImageFile(ImageSource source) async {
-
     //Clicking or Picking from Gallery
     var image = await ImagePicker.pickImage(source: source);
 
     //Cropping the image
     File croppedFile = await ImageCropper.cropImage(
-
       sourcePath: image.path,
       aspectRatioPresets: Platform.isAndroid
           ? [
@@ -72,7 +69,6 @@ class _SelectImagesState extends State<SelectImages> {
     });
   }
 
-
   @override
   Widget build(BuildContext context) {
     print(_image?.lengthSync());
@@ -82,23 +78,37 @@ class _SelectImagesState extends State<SelectImages> {
       ),
       body: Column(
         children: <Widget>[
-          Center(
-            child: _image == null
-                ? Image.asset('assets/image/no-image.png', fit: BoxFit.cover)
-                : Image.file(
-              _image,
-              height: 200,
-              width: 200,
+          Padding(
+            padding: const EdgeInsets.only(top: 25),
+            child: Center(
+              child: _image == null
+                  ? ClipRRect(borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(8.0),
+                          topRight: Radius.circular(8.0),
+                             ),
+                   child: Image.asset('assets/image/no-image.png', height: 300, width: 300, fit: BoxFit.contain)
+              )
+                  : Image.file(
+                       _image,
+                        height: 300,
+                        width: 300,
+                        fit:  BoxFit.contain,
+
+                      ),
             ),
           ),
           SizedBox(height: 10.0,),
-          RaisedButton.icon(
+          _image != null ? RaisedButton.icon(
             color: Colors.red,
-              onPressed: () => _clear(),
-              icon: Icon(Icons.clear, color: Colors.white,),
-              label: Text("Delete",style: TextStyle(color: Colors.white),),
-          ),
-          ImageUploader(_image),
+            onPressed: () => _clear(),
+            icon: Icon(Icons.clear, color: Colors.white,),
+            label: Text("Delete",style: TextStyle(color: Colors.white),),
+          ): SizedBox.shrink(),
+
+          _image != null ? Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 35.0,vertical: 10.0 ),
+            child: ImageUploader(_image),
+          ): Text('Select a Profile Picture'),
         ],
       ),
       floatingActionButton: Row(
