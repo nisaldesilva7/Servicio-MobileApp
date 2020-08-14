@@ -145,10 +145,10 @@ class _MainMenuState extends State<MainMenu> {
           children: <Widget>[
             Container(
               width: 75,
-              height: 75,
+              height: 110,
               margin: EdgeInsets.only(right: 15),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(40),
+                borderRadius: BorderRadius.circular(25),
                 border: Border.all(width: 3, color: Colors.red),
                 image: DecorationImage(
                     image: NetworkImage('${serviceDoc.photo}'),
@@ -160,7 +160,7 @@ class _MainMenuState extends State<MainMenu> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    serviceDoc.serviceName,
+                    serviceDoc.serviceName.toUpperCase(),
                     style: TextStyle(color: primary, fontWeight: FontWeight.bold, fontSize: 18),),
                   SizedBox(height: 6,),
                   Row(
@@ -178,12 +178,17 @@ class _MainMenuState extends State<MainMenu> {
                       Icon(Icons.format_list_bulleted, color: Colors.indigo, size: 20,),
                       SizedBox(width: 5,),
                       Text(
-                          'Categories',
+                          '${serviceDoc.serviceTypes[0]}..'.toUpperCase(),
                           style: TextStyle(color: primary, fontSize: 13, letterSpacing: .3)),
                     ],
                   ),
                 ],
               ),
+            ),
+            SizedBox(width: 10),
+            Padding(
+              padding: const EdgeInsets.only(top: 20),
+              child: Icon(Icons.chevron_right, size: 40, color: Colors.indigo,),
             )
           ],
         ),

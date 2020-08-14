@@ -67,7 +67,7 @@ class _ServiceDetailPageState extends State<ServiceDetailPage> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal:16.0),
                   child: Text(
-                    widget.service.serviceName,
+                    widget.service.serviceName.toUpperCase(),
                     style: TextStyle(color: Colors.white, fontSize: 28.0,fontFamily: 'MyFlutterApp', fontWeight: FontWeight.bold),
                   ),
                 ),
@@ -114,7 +114,7 @@ class _ServiceDetailPageState extends State<ServiceDetailPage> {
                                       child: Icon(Icons.location_on, size: 16.0, color: Colors.grey,)
                                   ),
                                   TextSpan(
-                                      text: "8 km to centrum"
+                                      text: "Show location"
                                   )
                                 ]), style: TextStyle(color: Colors.grey, fontSize: 12.0),)
                               ],
@@ -122,7 +122,7 @@ class _ServiceDetailPageState extends State<ServiceDetailPage> {
                           ),
                           Column(
                             children: <Widget>[
-                              Text("Types", style: TextStyle(
+                              Text("Categories", style: TextStyle(
                                   color: Colors.purple,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 20.0
@@ -219,8 +219,8 @@ class _ServiceDetailPageState extends State<ServiceDetailPage> {
     print(rating);
       return Row(
         children: [
-          for (num i = 0; i < rating; i++) Icon(Icons.star, color: Colors.purple,),
-          for (num i = 0; i < (5-rating); i++) Icon(Icons.star_border, color: Colors.purple,)
+          for (num i = 0; i < rating.round(); i++) Icon(Icons.star, color: Colors.purple,),
+          for (num i = 0; i < (5-rating.round()); i++) Icon(Icons.star_border, color: Colors.purple,)
         ],
       );
   }

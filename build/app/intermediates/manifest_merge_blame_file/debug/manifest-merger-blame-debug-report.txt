@@ -46,8 +46,8 @@
 31        android:debuggable="true"
 32        android:icon="@mipmap/launcher_icon"
 32-->C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\android\app\src\main\AndroidManifest.xml:11:9-45
-33        android:label="XX" >
-33-->C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\android\app\src\main\AndroidManifest.xml:10:9-27
+33        android:label="Servicio" >
+33-->C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\android\app\src\main\AndroidManifest.xml:10:9-33
 34        <activity
 34-->C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\android\app\src\main\AndroidManifest.xml:12:9-27:20
 35            android:name="com.example.servicio.MainActivity"

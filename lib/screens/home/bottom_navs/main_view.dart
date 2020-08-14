@@ -270,9 +270,9 @@ final Widget homeScreenBottom = Column(
 
 Widget getTextWidgets(List<String> strings)
 {
-  return new Row(children: strings.map((item) => new Text('$item ...',
+  return new Row(children: strings.map((item) => new Text('$item ...'.toUpperCase(),
     style: TextStyle(
-        color: Colors.white,
+        color: Colors.grey,
         fontSize: 13,
         fontWeight: FontWeight.normal),
   )).toList().sublist(0,1));
@@ -295,14 +295,14 @@ Widget cityCard(BuildContext context, DocumentSnapshot serviceList) {
           child: Stack(
             children: <Widget>[
               Container(
-                  width: 160,
+                  width: 170,
                   height: 210,
                   child: Image.network(
                     serviceDoc.photo,
                     fit: BoxFit.cover,
                   ),
               ),
-              Positioned(left: 0, bottom: 0, width: 160, height: 60,
+              Positioned(left: 0, bottom: 0, width: 170, height: 60,
                 child: Container(
                   decoration: BoxDecoration(
                       gradient: LinearGradient(
@@ -311,7 +311,7 @@ Widget cityCard(BuildContext context, DocumentSnapshot serviceList) {
                           colors: [Colors.black, Colors.black12])),
                 ),
               ),
-              Positioned(left: 10, bottom: 10, width: 145,
+              Positioned(left: 10, bottom: 10, width: 155,
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -320,7 +320,7 @@ Widget cityCard(BuildContext context, DocumentSnapshot serviceList) {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          serviceDoc.serviceName,
+                          serviceDoc.serviceName.toUpperCase(),
                           style: TextStyle(color: Colors.white, fontSize: 16, fontFamily: 'OpenSans', fontWeight: FontWeight.w800, letterSpacing: 1),
                         ),
                          SingleChildScrollView(
@@ -352,10 +352,9 @@ Widget cityCard(BuildContext context, DocumentSnapshot serviceList) {
 class SlideBar extends StatelessWidget {
   final List<String> images = [assets.images[0],assets.images[2],assets.images[1], assets.images[3]];
 
-
   @override
   Widget build(BuildContext context) {
-      return CarouselSlider(
+      return images != null ? CarouselSlider(
         options: CarouselOptions(
           height: 200.0,
           viewportFraction: 0.8,
@@ -374,13 +373,13 @@ class SlideBar extends StatelessWidget {
         items: images.map((i) {
           return Builder(
             builder: (BuildContext context) {
-              return ClipRRect(
-                borderRadius: BorderRadius.all(Radius.circular(25)),
+              return  ClipRRect(
+                borderRadius: BorderRadius.all(Radius.circular(15)),
                 child: Container(
                   width: MediaQuery.of(context).size.width,
-                  margin: EdgeInsets.symmetric(horizontal: 2.0),
+                  margin: EdgeInsets.symmetric(horizontal: 1.0),
                   decoration: BoxDecoration(
-                      color: Colors.amber
+                      color: Colors.white
                   ),
                   child: Image.network(
                     i,
@@ -391,7 +390,7 @@ class SlideBar extends StatelessWidget {
             },
           );
         }).toList(),
-      );
+      ): CircularProgressIndicator();
   }
 }
 
