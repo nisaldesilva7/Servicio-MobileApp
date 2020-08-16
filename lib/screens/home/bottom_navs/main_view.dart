@@ -7,10 +7,12 @@ import 'package:flutter/material.dart';
 import 'package:servicio/models/service.dart';
 import 'package:servicio/screens/home/bottom_navs/search.dart';
 import 'package:servicio/screens/service_page/service_detail_view.dart';
+import 'package:servicio/services/auth.dart';
 import 'package:servicio/shared/SliderImages.dart' as assets;
 
 class MainView extends StatelessWidget {
   static final String path = "lib/src/pages/travel/travel_home.dart";
+  final AuthServices _auth = AuthServices();
 
   @override
   Widget build(BuildContext context) {
@@ -22,12 +24,12 @@ class MainView extends StatelessWidget {
           SizedBox(height: 15.0,),
           SlideBar(),
           SizedBox(height: 15.0,),
-
         ],
 
       ),
     );
   }
+
 }
 
 class HomeScreenTop extends StatefulWidget {
@@ -239,6 +241,48 @@ final Widget homeScreenBottom = Column(
                   ),
                 )),
 
+        ],
+      ),
+    ),
+    Container(
+        height: 210,
+        child: StreamBuilder<QuerySnapshot>(
+            stream: Firestore.instance.collection('Services').limit(3).snapshots(),
+            builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> querySnapshot) {
+              if (!querySnapshot.hasData)
+                return Text('No Data');
+              if (querySnapshot.connectionState == ConnectionState.waiting)
+                return const CircularProgressIndicator();
+              else {
+                final list = querySnapshot.data.documents;
+                print(list);
+                return ListView.builder(
+                  itemCount: list.length,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) {
+                    return cityCard(context, list[index]);
+                  },
+                );
+              }
+            }
+        )
+    ),
+  ],
+);
+
+
+
+
+
+final Widget favouriteCardList = Column(
+  children: <Widget>[
+    Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+      child: Row(
+        mainAxisSize: MainAxisSize.max,
+        children: <Widget>[
+          Text("Favourite Service Centers",
+              style: TextStyle(color: Colors.black87, fontSize: 15, fontFamily: 'icomoon', fontWeight:FontWeight.w400)),
         ],
       ),
     ),

@@ -8,6 +8,7 @@ import 'package:servicio/screens/chatui.dart';
 import 'package:servicio/services/service_locator.dart';
 import 'package:servicio/services/urlService.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:servicio/services/auth.dart';
 
 
 class ServiceDetailPage extends StatefulWidget {
@@ -20,9 +21,33 @@ class ServiceDetailPage extends StatefulWidget {
 }
 
 class _ServiceDetailPageState extends State<ServiceDetailPage> {
-  final String image = "assets/image/3.jpg";
+  bool isFav = false;
   final String number = "123456789";
+  final AuthServices _auth = AuthServices();
   final CallsAndMessagesService _service = locator<CallsAndMessagesService>();
+
+
+  checkStatus() async {
+    final uid = await _auth.getCurrentUID();
+    print('length${widget.service.favs.length}');
+    for(int i=0; i<widget.service.favs.length;i++){
+      if(widget.service.favs[i] == 'fv7ICvE5V1f3LMTAGyXWvASgTty1'){
+        print('autorun');
+        setState(() {
+          isFav = true;
+        });
+      }
+      print('no==');
+
+    }
+  }
+
+
+  @override
+  void initState() {
+    checkStatus();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +81,8 @@ class _ServiceDetailPageState extends State<ServiceDetailPage> {
                   color: Colors.black26
               ),
               height: 400,
-              child: Image.asset(image, fit: BoxFit.cover)
+              child: Image.network(widget.service.photo, fit: BoxFit.cover)
+
           ),
           SingleChildScrollView(
             padding: const EdgeInsets.only(top: 16.0,bottom: 20.0),
@@ -88,11 +114,33 @@ class _ServiceDetailPageState extends State<ServiceDetailPage> {
                       ),
                     ),
                     Spacer(),
-                    IconButton(
+                    isFav == true ? IconButton(
                       color: Colors.white,
                       icon: Icon(Icons.favorite),
-                      onPressed: () {},
+                      onPressed: () async {
+                        setState(() {
+                          isFav = false;
+                        });
+                        final uid = await _auth.getCurrentUID();
+                        await Firestore.instance.collection("Customers").document(uid).updateData({"data": FieldValue.arrayRemove([widget.service.serviceId])});
+                        await Firestore.instance.collection("Services").document(widget.service.serviceId).updateData({"Favs": FieldValue.arrayRemove([uid])});
+                        print('succes collection');
+                      },
+                    ):
+                    IconButton(
+                      color: Colors.white,
+                      icon: Icon(Icons.favorite_border),
+                      onPressed: () async {
+                        setState(() {
+                          isFav = true;
+                        });
+                        final uid = await _auth.getCurrentUID();
+                        await Firestore.instance.collection("Customers").document(uid).updateData({"data": FieldValue.arrayUnion([widget.service.serviceId])});
+                        await Firestore.instance.collection("Services").document(widget.service.serviceId).updateData({"Favs": FieldValue.arrayUnion([uid])});
+                        print('succes collection');
+                      },
                     )
+
                   ],
                 ),
                 Container(

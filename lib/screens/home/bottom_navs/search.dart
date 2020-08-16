@@ -27,14 +27,14 @@ class _SearchViewState extends State<SearchView> {
       });
     }
 
-    var capitalizedValue =
-        value.substring(0, 1).toUpperCase() + value.substring(1);
+    var capitalizedValue = value.substring(0, 1).toUpperCase() + value.substring(1);
+    print('hiiiiiiiii${value.substring(1)}');
 
     if (queryResultSet.length == 0 && value.length == 1) {
       SearchService().searchByName(value).then((QuerySnapshot docs) {
         for (int i = 0; i < docs.documents.length; ++i) {
           queryResultSet.add(docs.documents[i].data);
-          print(queryResultSet);
+          print('helooo$queryResultSet');
           queryResultSet.forEach((element) {
             if (element['Service_Name'].startsWith(capitalizedValue)) {
               setState(() {

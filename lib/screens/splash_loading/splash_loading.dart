@@ -11,12 +11,12 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    Timer(Duration(seconds: 2), () => Navigator.pushNamed(context, "/wrapper"));
-  }
+//  @override
+//  void initState() {
+//    // TODO: implement initState
+//    super.initState();
+//    Timer(Duration(seconds: 2), () => Navigator.pushNamed(context, "/wrapper"));
+//  }
 
   @override
   Widget build(BuildContext context) {

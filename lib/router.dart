@@ -37,7 +37,7 @@ Route<dynamic> genarteRoute(RouteSettings settings){
 //  case /search:
 //        return MaterialPageRoute(builder: (context) => Search("Search"));
     case '/feedback':
-      return MaterialPageRoute(builder: (context) => HelpAndFeedback("Help and Feedback"));
+      return MaterialPageRoute(builder: (context) => HelpAndFeedback());
     case '/vehicle':
       return MaterialPageRoute(builder: (context) => MyVehicles());
     case '/addnewvehicle':

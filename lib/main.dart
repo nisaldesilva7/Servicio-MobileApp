@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:servicio/models/user.dart';
 import 'package:servicio/screens/splash_loading/splash_loading.dart';
+import 'package:servicio/screens/wrapper.dart';
 import 'package:servicio/services/auth.dart';
 import 'package:servicio/router.dart' as router;
 import 'package:servicio/services/service_locator.dart';
@@ -19,13 +20,12 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         onGenerateRoute: router.genarteRoute,
-//      home: Wrapper(),
+      home: Wrapper(),
 //      home: HomePage(),
 //      home: FormScreen(),
 //      home: Scrolling(),
 //      home: ForgotPassword(),
-        home: SplashScreen(),
-    
+
           theme: ThemeData(primarySwatch: Colors.indigo,),
 
       ),

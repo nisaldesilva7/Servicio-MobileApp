@@ -80,6 +80,12 @@
       "languageVersion": "2.0"
     },
     {
+      "name": "dio",
+      "rootUri": "file:///C:/Users/ASUS/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/dio-3.0.10",
+      "packageUri": "lib/",
+      "languageVersion": "2.4"
+    },
+    {
       "name": "file",
       "rootUri": "file:///C:/Users/ASUS/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/file-5.2.1",
       "packageUri": "lib/",
@@ -584,7 +590,7 @@
       "languageVersion": "2.5"
     }
   ],
-  "generated": "2020-08-14T10:06:49.246723Z",
+  "generated": "2020-08-14T12:56:14.005884Z",
   "generator": "pub",
   "generatorVersion": "2.8.4"
 }

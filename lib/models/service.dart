@@ -6,10 +6,11 @@ class Service {
   final String searchKey;
   final String serviceName;
   final List serviceTypes;
+  final List favs;
   String serviceId;
 
 
-  Service(this.photo, this.rating, this.searchKey, this.serviceName, this.serviceTypes);
+  Service(this.photo, this.rating, this.searchKey, this.serviceName, this.serviceTypes,this.favs);
   
   Map<String, dynamic> toJson() => {
     'Photo': photo,
@@ -26,5 +27,7 @@ class Service {
         searchKey = snapshot['SearchKey'],
         serviceName = snapshot['Service_Name'],
         serviceTypes = List.of(snapshot['Service_Types']).cast<String>(),
+        favs = snapshot['Favs'],
         serviceId = snapshot.documentID;
+
 }

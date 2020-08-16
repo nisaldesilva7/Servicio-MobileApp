@@ -123,6 +123,7 @@ class _MainMenuState extends State<MainMenu> {
     yield* Firestore.instance.collection("Services").snapshots();
   }
 
+
   Widget buildList(BuildContext context, DocumentSnapshot document) {
     final serviceDoc = Service.fromSnapshot(document);
     print(serviceDoc);
