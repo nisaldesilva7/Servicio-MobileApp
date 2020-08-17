@@ -1,5 +1,13 @@
+import 'dart:async';
+import 'dart:convert';
+import 'dart:io';
+
+
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:servicio/models/customer.dart';
 import 'package:servicio/screens/home/bottom_navs/bookings_view.dart';
 import 'package:servicio/screens/home/bottom_navs/main_view.dart';
@@ -8,6 +16,7 @@ import 'package:flutter/foundation.dart';
 import 'package:servicio/screens/home/bottom_navs/search.dart';
 import 'bottom_navs/main_menu.dart';
 import 'bottom_navs/profile.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 
 class MyApp extends StatelessWidget {
@@ -25,6 +34,7 @@ class Home extends StatefulWidget{
   @override
   _HomeState createState() => _HomeState();
 }
+
 class _HomeState extends State<Home>{
   int _currentIndex = 0;
   final List<Widget> _bottomNavs = [
@@ -36,6 +46,97 @@ class _HomeState extends State<Home>{
   ];
   final AuthServices _auth = AuthServices();
 
+
+
+  final FirebaseMessaging firebaseMessaging = FirebaseMessaging();
+  final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+
+  @override
+  void initState() {
+    super.initState();
+    registerNotification();
+    configLocalNotification();
+  }
+
+
+  void registerNotification() {
+    firebaseMessaging.requestNotificationPermissions();
+
+    firebaseMessaging.configure(
+        onMessage: (Map<String, dynamic> message) {
+      print('onMessage: $message');
+      print('notification workssss');
+      alert(message);
+//      Platform.isAndroid ? showNotification(message['notification']) : showNotification(message['aps']['alert']);
+      return;
+    }, onResume: (Map<String, dynamic> message) {
+      print('onResume: $message');
+      return;
+    }, onLaunch: (Map<String, dynamic> message) {
+      print('onLaunch: $message');
+      return;
+    });
+
+    firebaseMessaging.getToken().then((token) {
+      print('token: $token');
+      Firestore.instance.collection('Customers').document('fv7ICvE5V1f3LMTAGyXWvASgTty1').updateData({'pushToken': token});
+    }).catchError((err) {
+      Fluttertoast.showToast(msg: err.message.toString());
+    });
+  }
+
+  void configLocalNotification() {
+    var initializationSettingsAndroid = new AndroidInitializationSettings('app_icon');
+    var initializationSettingsIOS = new IOSInitializationSettings();
+    var initializationSettings = new InitializationSettings(initializationSettingsAndroid, initializationSettingsIOS);
+    flutterLocalNotificationsPlugin.initialize(initializationSettings);
+  }
+
+  void alert(message) {
+    showDialog(
+      context: context,
+      builder: (context) =>
+          AlertDialog(
+            content: ListTile(
+              title: Text(message['notification']['title']),
+              subtitle: Text(message['notification']['body']),
+            ),
+            actions: <Widget>[
+              FlatButton(
+                child: Text('Ok'),
+                onPressed: () => Navigator.of(context).pop(),
+              ),
+            ],
+          ),
+    );
+  }
+
+  void showNotification(message) async {
+    var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
+      Platform.isAndroid ? 'com.dfa.flutterchatdemo' : 'com.duytq.flutterchatdemo',
+      'Flutter chat demo',
+      'your channel description',
+      playSound: true,
+      enableVibration: true,
+      importance: Importance.Max,
+      priority: Priority.High,
+    );
+    var iOSPlatformChannelSpecifics = new IOSNotificationDetails();
+    var platformChannelSpecifics =
+    new NotificationDetails(androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
+
+    print(message);
+//    print(message['body'].toString());
+//    print(json.encode(message));
+
+    await flutterLocalNotificationsPlugin.show(
+        0, message['title'].toString(), message['body'].toString(), platformChannelSpecifics,
+        payload: json.encode(message));
+
+//    await flutterLocalNotificationsPlugin.show(
+//        0, 'plain title', 'plain body', platformChannelSpecifics,
+//        payload: 'item x');
+  }
 
   @override
   Widget build(BuildContext context) {
