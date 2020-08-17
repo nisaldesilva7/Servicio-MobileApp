@@ -5337,7 +5337,6 @@ SOFTWARE.
 firebase_auth
 firebase_core
 firebase_core_platform_interface
-firebase_messaging
 firebase_storage
 url_launcher
 
