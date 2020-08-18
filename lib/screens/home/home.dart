@@ -66,8 +66,8 @@ class _HomeState extends State<Home>{
         onMessage: (Map<String, dynamic> message) {
       print('onMessage: $message');
       print('notification workssss');
-      alert(message);
-//      Platform.isAndroid ? showNotification(message['notification']) : showNotification(message['aps']['alert']);
+//      alert(message);
+      Platform.isAndroid ? showNotification(message['notification']) : showNotification(message['aps']['alert']);
       return;
     }, onResume: (Map<String, dynamic> message) {
       print('onResume: $message');
@@ -76,13 +76,38 @@ class _HomeState extends State<Home>{
       print('onLaunch: $message');
       return;
     });
+    _saveDeviceToken();
+//    firebaseMessaging.getToken().then((token) {
+//      print('token: $token');
+//      Firestore.instance.collection('Customers').document('fv7ICvE5V1f3LMTAGyXWvASgTty1').updateData({'pushToken': token});
+//    }).catchError((err) {
+//      Fluttertoast.showToast(msg: err.message.toString());
+//    });
+  }
 
-    firebaseMessaging.getToken().then((token) {
-      print('token: $token');
-      Firestore.instance.collection('Customers').document('fv7ICvE5V1f3LMTAGyXWvASgTty1').updateData({'pushToken': token});
-    }).catchError((err) {
-      Fluttertoast.showToast(msg: err.message.toString());
-    });
+  _saveDeviceToken() async {
+    print('_saveDeviceToken working 100%');
+    // Get the current user
+    String uid = 'fv7ICvE5V1f3LMTAGyXWvASgTty1';
+    // FirebaseUser user = await _auth.currentUser();
+
+    // Get the token for this device
+    String fcmToken = await firebaseMessaging.getToken();
+
+    // Save it to Firestore
+    if (fcmToken != null) {
+      var tokens = Firestore.instance
+          .collection('Customers')
+          .document(uid)
+          .collection('tokens')
+          .document(fcmToken);
+
+      await tokens.setData({
+        'token': fcmToken,
+        'createdAt': FieldValue.serverTimestamp(), // optional
+        'platform': Platform.operatingSystem // optional
+      });
+    }
   }
 
   void configLocalNotification() {

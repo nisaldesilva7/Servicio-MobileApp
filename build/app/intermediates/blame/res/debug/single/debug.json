@@ -772,6 +772,10 @@
         "source": "C:\\Users\\ASUS\\.gradle\\caches\\transforms-2\\files-2.1\\b6cd2b58394760cbe3b1ef23eabd6533\\appcompat-1.1.0\\res\\drawable-hdpi-v4\\abc_list_selector_disabled_holo_light.9.png"
     },
     {
+        "merged": "C:\\Users\\ASUS\\Desktop\\servicio_app\\Servicio-MobileApp\\build\\app\\intermediates\\res\\merged\\debug\\drawable_app_icon.png.flat",
+        "source": "C:\\Users\\ASUS\\Desktop\\servicio_app\\Servicio-MobileApp\\android\\app\\src\\main\\res\\drawable\\app_icon.png"
+    },
+    {
         "merged": "C:\\Users\\ASUS\\Desktop\\servicio_app\\Servicio-MobileApp\\build\\app\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4_abc_list_focused_holo.9.png.flat",
         "source": "C:\\Users\\ASUS\\.gradle\\caches\\transforms-2\\files-2.1\\b6cd2b58394760cbe3b1ef23eabd6533\\appcompat-1.1.0\\res\\drawable-hdpi-v4\\abc_list_focused_holo.9.png"
     },
