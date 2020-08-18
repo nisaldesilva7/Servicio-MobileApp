@@ -86,9 +86,10 @@ class _HomeState extends State<Home>{
   }
 
   _saveDeviceToken() async {
-    print('_saveDeviceToken working 100%');
+//    print('_saveDeviceToken working 100%');
     // Get the current user
-    String uid = 'fv7ICvE5V1f3LMTAGyXWvASgTty1';
+    final uid = await _auth.getCurrentUID();
+//    String uid = 'fv7ICvE5V1f3LMTAGyXWvASgTty1';
     // FirebaseUser user = await _auth.currentUser();
 
     // Get the token for this device
@@ -108,6 +109,8 @@ class _HomeState extends State<Home>{
         'platform': Platform.operatingSystem // optional
       });
     }
+    print('_saveDeviceToken working 100%');
+
   }
 
   void configLocalNotification() {

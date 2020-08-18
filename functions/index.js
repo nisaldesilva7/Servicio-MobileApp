@@ -107,15 +107,19 @@ var uid ='fv7ICvE5V1f3LMTAGyXWvASgTty1'
 
 
 exports.sendBookingConfirmation  = functions.firestore
-                         .document('clients/{clientsId}')
-                         .onCreate(async snapshot => {
+                         .document('Services/{ServicesId}/Bookings/{BookingsId}')
+                         .onUpdate(async (snapshot, context) => {
 
-    const order = snapshot.data();
-    var uid ='fv7ICvE5V1f3LMTAGyXWvASgTty1';
+    const order = snapshot.after.data();
+    const uid = snapshot.before.data().CustId;
+    const serviceId = snapshot.before.data().ServiceId;
+
+//    const serviceRef = admin.firestore().collection('Services').doc(serviceId).get()
+//    const serviceName = serviceRef.before.date().Service_Name
+
 
     // ref to the parent document
     const docRef = admin.firestore().collection('Customers').doc(uid)
-
     // get all comments and aggregate
     return docRef.collection('tokens')
          .get()
@@ -128,8 +132,8 @@ exports.sendBookingConfirmation  = functions.firestore
             console.log(recentComments);
             payload = {
                   notification: {
-                    title: 'Booking Confirmed',
-                    body: order.msg,
+                    title: 'Booking Confirmed by ' + serviceId,
+                    body: order.ServiceType,
                     click_action: 'FLUTTER_NOTIFICATION_CLICK'
                   }
                 };
@@ -138,3 +142,10 @@ exports.sendBookingConfirmation  = functions.firestore
          })
          .catch(err => console.log(err) )
   });
+
+
+//  .firestore()
+//                .collection('users')
+//                .where('id', '==', idFrom)
+//                .get()
+//                .then(querySnapshot2 => {
