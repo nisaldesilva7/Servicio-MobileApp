@@ -3,6 +3,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:flutter/material.dart';
+import 'package:servicio/services/uploader.dart';
 
 class SelectImages extends StatefulWidget {
   @override
@@ -11,17 +12,12 @@ class SelectImages extends StatefulWidget {
 
 class _SelectImagesState extends State<SelectImages> {
   File _image;
-
   getImageFile(ImageSource source) async {
-
     //Clicking or Picking from Gallery
-
     var image = await ImagePicker.pickImage(source: source);
 
     //Cropping the image
-
     File croppedFile = await ImageCropper.cropImage(
-
       sourcePath: image.path,
       aspectRatioPresets: Platform.isAndroid
           ? [
@@ -59,10 +55,17 @@ class _SelectImagesState extends State<SelectImages> {
 //      croppedFile.path,
 //      quality: 50,
 //    );
+
     var result = croppedFile;
     setState(() {
       _image = result;
       print(_image.lengthSync());
+    });
+  }
+
+  void _clear(){
+    setState(() {
+      _image = null;
     });
   }
 
@@ -71,16 +74,42 @@ class _SelectImagesState extends State<SelectImages> {
     print(_image?.lengthSync());
     return Scaffold(
       appBar: AppBar(
-        title: Text("Click | Pick | Crop | Compress | Hi"),
+        title: Text("Select Image"),
       ),
-      body: Center(
-        child: _image == null
-            ? Text("Image")
-            : Image.file(
-          _image,
-          height: 200,
-          width: 200,
-        ),
+      body: Column(
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.only(top: 25),
+            child: Center(
+              child: _image == null
+                  ? ClipRRect(borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(8.0),
+                          topRight: Radius.circular(8.0),
+                             ),
+                   child: Image.asset('assets/image/no-image.png', height: 300, width: 300, fit: BoxFit.contain)
+              )
+                  : Image.file(
+                       _image,
+                        height: 300,
+                        width: 300,
+                        fit:  BoxFit.contain,
+
+                      ),
+            ),
+          ),
+          SizedBox(height: 10.0,),
+          _image != null ? RaisedButton.icon(
+            color: Colors.red,
+            onPressed: () => _clear(),
+            icon: Icon(Icons.clear, color: Colors.white,),
+            label: Text("Delete",style: TextStyle(color: Colors.white),),
+          ): SizedBox.shrink(),
+
+          _image != null ? Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 35.0,vertical: 10.0 ),
+            child: ImageUploader(_image),
+          ): Text('Select a Profile Picture'),
+        ],
       ),
       floatingActionButton: Row(
         mainAxisAlignment: MainAxisAlignment.end,
@@ -91,9 +120,7 @@ class _SelectImagesState extends State<SelectImages> {
             heroTag: UniqueKey(),
             icon: Icon(Icons.camera),
           ),
-          SizedBox(
-            width: 20,
-          ),
+          SizedBox(width: 20,),
           FloatingActionButton.extended(
             label: Text("Gallery"),
             onPressed: () => getImageFile(ImageSource.gallery),
@@ -105,3 +132,4 @@ class _SelectImagesState extends State<SelectImages> {
     );
   }
 }
+

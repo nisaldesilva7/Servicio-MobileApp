@@ -1,11 +1,18 @@
 
+import 'package:carousel_slider/carousel_options.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:servicio/models/service.dart';
+import 'package:servicio/screens/home/bottom_navs/search.dart';
 import 'package:servicio/screens/service_page/service_detail_view.dart';
+import 'package:servicio/services/auth.dart';
+import 'package:servicio/shared/SliderImages.dart' as assets;
 
 class MainView extends StatelessWidget {
   static final String path = "lib/src/pages/travel/travel_home.dart";
+  final AuthServices _auth = AuthServices();
 
   @override
   Widget build(BuildContext context) {
@@ -14,10 +21,15 @@ class MainView extends StatelessWidget {
         children: <Widget>[
           HomeScreenTop(),
           homeScreenBottom,
+          SizedBox(height: 15.0,),
+          SlideBar(),
+          SizedBox(height: 15.0,),
         ],
+
       ),
     );
   }
+
 }
 
 class HomeScreenTop extends StatefulWidget {
@@ -86,15 +98,15 @@ class _HomeScreenTopState extends State<HomeScreenTop> {
                     ],
                   ),
                 ),
-                SizedBox(height: 30,),
+                SizedBox(height: 10,),
                 Container(
                     width: 250,
                     child: Text(
                       "Where do you want to FIND ?",
-                      style: TextStyle(fontFamily: 'OpenSans', fontSize: 24, color: Colors.white, fontWeight: FontWeight.normal),
+                      style: TextStyle(fontFamily: 'Cabin', fontSize: 24, color: Colors.white, fontWeight: FontWeight.normal),
                       textAlign: TextAlign.center,
                     )),
-                SizedBox(height: 20,),
+                SizedBox(height: 25,),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 32),
                   child: Material(
@@ -215,21 +227,27 @@ final Widget homeScreenBottom = Column(
         mainAxisSize: MainAxisSize.max,
         children: <Widget>[
           Text("Nearby Service Centers",
-              style: TextStyle(color: Colors.black87, fontSize: 15, fontWeight: FontWeight.w700)),
+              style: TextStyle(color: Colors.black87, fontSize: 15, fontFamily: 'icomoon', fontWeight:FontWeight.w400)),
           Spacer(),
           Builder(
-              builder: (BuildContext context) => Text(
-                "View All",
-                style: TextStyle(
-                    fontSize: 14, color: Theme.of(context).primaryColor),
-              ))
+                builder: (BuildContext context) => GestureDetector(
+                  onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => SearchView()));
+                      },
+                  child: Text(
+                    "View All",
+                    style: TextStyle(
+                        fontSize: 14, color: Theme.of(context).primaryColor),
+                  ),
+                )),
+
         ],
       ),
     ),
     Container(
         height: 210,
         child: StreamBuilder<QuerySnapshot>(
-            stream: Firestore.instance.collection('Services').snapshots(),
+            stream: Firestore.instance.collection('Services').limit(3).snapshots(),
             builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> querySnapshot) {
               if (!querySnapshot.hasData)
                 return Text('No Data');
@@ -242,7 +260,7 @@ final Widget homeScreenBottom = Column(
                   itemCount: list.length,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) {
-                    return CityCard(ServiceList: list[index],);
+                    return cityCard(context, list[index]);
                   },
                 );
               }
@@ -254,18 +272,65 @@ final Widget homeScreenBottom = Column(
 
 
 
-class CityCard extends StatelessWidget {
 
-  // ignore: non_constant_identifier_names
-  final DocumentSnapshot ServiceList ;
-  // ignore: non_constant_identifier_names
-  CityCard({Key key, this.ServiceList}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
+final Widget favouriteCardList = Column(
+  children: <Widget>[
+    Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+      child: Row(
+        mainAxisSize: MainAxisSize.max,
+        children: <Widget>[
+          Text("Favourite Service Centers",
+              style: TextStyle(color: Colors.black87, fontSize: 15, fontFamily: 'icomoon', fontWeight:FontWeight.w400)),
+        ],
+      ),
+    ),
+    Container(
+        height: 210,
+        child: StreamBuilder<QuerySnapshot>(
+            stream: Firestore.instance.collection('Services').limit(3).snapshots(),
+            builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> querySnapshot) {
+              if (!querySnapshot.hasData)
+                return Text('No Data');
+              if (querySnapshot.connectionState == ConnectionState.waiting)
+                return const CircularProgressIndicator();
+              else {
+                final list = querySnapshot.data.documents;
+                print(list);
+                return ListView.builder(
+                  itemCount: list.length,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) {
+                    return cityCard(context, list[index]);
+                  },
+                );
+              }
+            }
+        )
+    ),
+  ],
+);
+
+Widget getTextWidgets(List<String> strings)
+{
+  return new Row(children: strings.map((item) => new Text('$item ...'.toUpperCase(),
+    style: TextStyle(
+        color: Colors.grey,
+        fontSize: 13,
+        fontWeight: FontWeight.normal),
+  )).toList().sublist(0,1));
+}
+
+
+Widget cityCard(BuildContext context, DocumentSnapshot serviceList) {
+
+  final serviceDoc = Service.fromSnapshot(serviceList);
+  print(serviceDoc.searchKey);
+
     return GestureDetector(
       onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context) => ServiceDetailPage(service: ServiceList)));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => ServiceDetailPage(service: serviceDoc)));
        },
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -274,19 +339,14 @@ class CityCard extends StatelessWidget {
           child: Stack(
             children: <Widget>[
               Container(
-                  width: 160,
+                  width: 170,
                   height: 210,
-                  child: Image(
-                    image: ExactAssetImage(
-                        'assets/image/3.jpg'),
+                  child: Image.network(
+                    serviceDoc.photo,
                     fit: BoxFit.cover,
-                  )
+                  ),
               ),
-              Positioned(
-                left: 0,
-                bottom: 0,
-                width: 160,
-                height: 60,
+              Positioned(left: 0, bottom: 0, width: 170, height: 60,
                 child: Container(
                   decoration: BoxDecoration(
                       gradient: LinearGradient(
@@ -295,10 +355,7 @@ class CityCard extends StatelessWidget {
                           colors: [Colors.black, Colors.black12])),
                 ),
               ),
-              Positioned(
-                left: 10,
-                bottom: 10,
-                width: 145,
+              Positioned(left: 10, bottom: 10, width: 155,
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -307,21 +364,13 @@ class CityCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          ServiceList["serviceName"],
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                              fontFamily: 'OpenSans',
-                              fontWeight: FontWeight.w800,
-                              letterSpacing: 1),
+                          serviceDoc.serviceName.toUpperCase(),
+                          style: TextStyle(color: Colors.white, fontSize: 16, fontFamily: 'OpenSans', fontWeight: FontWeight.w800, letterSpacing: 1),
                         ),
-                        Text(
-                          'monthYear',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 13,
-                              fontWeight: FontWeight.normal),
-                        ),
+                         SingleChildScrollView(
+                           scrollDirection: Axis.horizontal,
+                             child: getTextWidgets(serviceDoc.serviceTypes)
+                         )
                       ],
                     ),
                     Container(
@@ -331,7 +380,7 @@ class CityCard extends StatelessWidget {
                             shape: BoxShape.rectangle,
                             borderRadius: BorderRadius.all(Radius.circular(10))),
                         child: Text(
-                          ServiceList["ratings"],
+                          serviceDoc.rating.toString(),
                           style: TextStyle(color: Colors.black, fontSize: 14),
                         ))
                   ],
@@ -343,4 +392,49 @@ class CityCard extends StatelessWidget {
       ),
     );
   }
+
+class SlideBar extends StatelessWidget {
+  final List<String> images = [assets.images[0],assets.images[2],assets.images[1], assets.images[3]];
+
+  @override
+  Widget build(BuildContext context) {
+      return images != null ? CarouselSlider(
+        options: CarouselOptions(
+          height: 200.0,
+          viewportFraction: 0.8,
+          initialPage: 0,
+          enableInfiniteScroll: true,
+          reverse: false,
+          autoPlay: true,
+          autoPlayInterval: Duration(seconds: 4),
+          autoPlayAnimationDuration: Duration(milliseconds: 100),
+          autoPlayCurve: Curves.easeInOutCubic,
+          enlargeCenterPage: true,
+//        onPageChanged: callbackFunction,
+          scrollDirection: Axis.horizontal,
+
+        ),
+        items: images.map((i) {
+          return Builder(
+            builder: (BuildContext context) {
+              return  ClipRRect(
+                borderRadius: BorderRadius.all(Radius.circular(15)),
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  margin: EdgeInsets.symmetric(horizontal: 1.0),
+                  decoration: BoxDecoration(
+                      color: Colors.white
+                  ),
+                  child: Image.network(
+                    i,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              );
+            },
+          );
+        }).toList(),
+      ): CircularProgressIndicator();
+  }
 }
+

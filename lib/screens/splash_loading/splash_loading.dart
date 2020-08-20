@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:servicio/screens/wrapper.dart';
+import 'package:shimmer/shimmer.dart';
 
 
 class SplashScreen extends StatefulWidget {
@@ -10,12 +11,12 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    Timer(Duration(seconds: 2), () => Navigator.pushNamed(context, "/wrapper"));
-  }
+//  @override
+//  void initState() {
+//    // TODO: implement initState
+//    super.initState();
+//    Timer(Duration(seconds: 2), () => Navigator.pushNamed(context, "/wrapper"));
+//  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,13 +48,17 @@ class _SplashScreenState extends State<SplashScreen> {
                       Padding(
                         padding: EdgeInsets.only(top: 10.0),
                       ),
-                      Text(
+                      Shimmer.fromColors(
+                          baseColor: Color(0x80D4FF),
+                          highlightColor: const Color(0xFFFF8C00),
+                          child: Text(
                         'SERVICIO',
                         style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
                             fontSize: 24.0),
-                      )
+                      ),
+                      ),
                     ],
                   ),
                 ),

@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
         routes: <String, WidgetBuilder>{
           "/home": (BuildContext context)=> new Home(),
 //          "/search": (BuildContext context)=> new Search("Search"),
-          "/notifications": (BuildContext context)=> new Notifications("Notifications"),
+          "/notifications": (BuildContext context)=> new Notifications(),
           "/offers": (BuildContext context)=> new Offers("Offers"),
 
         }

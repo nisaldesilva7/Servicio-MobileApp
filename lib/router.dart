@@ -25,19 +25,19 @@ Route<dynamic> genarteRoute(RouteSettings settings){
     case '/service':
       return MaterialPageRoute(builder: (context) => ServicePage());
     case '/profile':
-      return MaterialPageRoute(builder: (context) => MyProfile("My Profile "));
+      return MaterialPageRoute(builder: (context) => MyProfile());
     case '/bookings':
-      return MaterialPageRoute(builder: (context) => MyBookings("My Bookings"));
+      return MaterialPageRoute(builder: (context) => MyHomePage());
     case '/history':
       return MaterialPageRoute(builder: (context) => History("Recent Activities"));
     case '/notifications':
-      return MaterialPageRoute(builder: (context) => Notifications("Notifications"));
+      return MaterialPageRoute(builder: (context) => Notifications());
     case '/offers':
       return MaterialPageRoute(builder: (context) => Offers("Offers"));
 //  case /search:
 //        return MaterialPageRoute(builder: (context) => Search("Search"));
     case '/feedback':
-      return MaterialPageRoute(builder: (context) => HelpAndFeedback("Help and Feedback"));
+      return MaterialPageRoute(builder: (context) => HelpAndFeedback());
     case '/vehicle':
       return MaterialPageRoute(builder: (context) => MyVehicles());
     case '/addnewvehicle':

@@ -44,13 +44,15 @@ class AuthServices {
   Future signInWithEmail(String email,String password) async {
     try {
       AuthResult result = await _auth.signInWithEmailAndPassword(email: email, password: password);
-      FirebaseUser user = result.user;
-      if(user.isEmailVerified == true){
+      if(result.user.isEmailVerified){
         print('Email verified');
+        FirebaseUser user = result.user;
+        await user.reload();
+        return _userFromFirebaseUser(user);
       }else{
         print('email not verfied');
+        return null;
       }
-      return _userFromFirebaseUser(user);
     }catch(e){
       error = e.message;
       print(error);
@@ -59,20 +61,15 @@ class AuthServices {
   }
 
 
-
-
-
   //Reg with email and pass
   Future registerWithEmail(String email,String password, String name, String phone) async {
     try {
       AuthResult result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
-      FirebaseUser user = result.user;
-
       sendVerificationMail();
+      FirebaseUser user = result.user;
       //create a new doc for newly registered user
       await DatabaseService(uid: user.uid).updateUserData(name, email, phone);
       print('auth ok');
-
       return _userFromFirebaseUser(user);
 
     }catch(e){

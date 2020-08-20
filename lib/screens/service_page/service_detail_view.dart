@@ -1,19 +1,79 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:servicio/screens/bookings/book_service.dart';
+import 'package:servicio/models/service.dart';
+import 'package:servicio/screens/chatui.dart';
+import 'package:servicio/services/service_locator.dart';
+import 'package:servicio/services/urlService.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:servicio/services/auth.dart';
 
-class ServiceDetailPage extends StatelessWidget {
-//  static final String path = "lib/src/pages/hotel/details.dart";
-  final String image = "assets/image/3.jpg";
-  final DocumentSnapshot service;
 
+class ServiceDetailPage extends StatefulWidget {
+
+  final Service service;
   const ServiceDetailPage({Key key, this.service}) : super(key: key);
 
+  @override
+  _ServiceDetailPageState createState() => _ServiceDetailPageState();
+}
+
+class _ServiceDetailPageState extends State<ServiceDetailPage> {
+  bool isFav = false;
+  final String number = "123456789";
+  final AuthServices _auth = AuthServices();
+  final CallsAndMessagesService _service = locator<CallsAndMessagesService>();
+
+
+  checkStatus() async {
+    final uid = await _auth.getCurrentUID();
+    print('length${widget.service.favs.length}');
+    for(int i=0; i<widget.service.favs.length;i++){
+      if(widget.service.favs[i] == 'fv7ICvE5V1f3LMTAGyXWvASgTty1'){
+        print('autorun');
+        setState(() {
+          isFav = true;
+        });
+      }
+      print('no==');
+
+    }
+  }
+
+
+  @override
+  void initState() {
+    checkStatus();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      backgroundColor: Colors.indigo,
+      appBar: AppBar(
+//        backgroundColor: Colors.transparent,
+        backgroundColor: Color(0x20000000),
+        elevation: 0,
+        title: Text(widget.service.serviceName.toUpperCase()),
+        actions: <Widget>[
+        IconButton(
+          color: Colors.white,
+          icon: Icon(Icons.message),
+          onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => ChatBox()));
+            },
+        ),
+          IconButton(
+            color: Colors.white,
+            icon: Icon(Icons.call),
+            onPressed: () => _service.call(number),
+          ),
+        ],
+      ),
       body: Stack(
         children: <Widget>[
           Container(
@@ -21,41 +81,20 @@ class ServiceDetailPage extends StatelessWidget {
                   color: Colors.black26
               ),
               height: 400,
-              child: Image.asset(image, fit: BoxFit.cover)),
+              child: Image.network(widget.service.photo, fit: BoxFit.cover)
+
+          ),
           SingleChildScrollView(
             padding: const EdgeInsets.only(top: 16.0,bottom: 20.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                SizedBox(height: 20.0,),
-                Row(
-                  children: <Widget>[
-                    IconButton(
-                      color: Colors.white,
-                      icon: Icon(Icons.arrow_back_ios),
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                    ),
-                    Spacer(),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 100.0),
-                      child: IconButton(
-                        color: Colors.white,
-                        icon: Icon(Icons.message),
-                        onPressed: () {
-
-                        },
-                      ),
-                    ),
-                  ],
-                ),
                 const SizedBox(height: 230),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal:16.0),
                   child: Text(
-                    service["serviceName"],
-                    style: TextStyle(color: Colors.white, fontSize: 28.0, fontWeight: FontWeight.bold),
+                    widget.service.serviceName.toUpperCase(),
+                    style: TextStyle(color: Colors.white, fontSize: 28.0,fontFamily: 'MyFlutterApp', fontWeight: FontWeight.bold),
                   ),
                 ),
                 Row(
@@ -75,15 +114,37 @@ class ServiceDetailPage extends StatelessWidget {
                       ),
                     ),
                     Spacer(),
-                    IconButton(
+                    isFav == true ? IconButton(
                       color: Colors.white,
                       icon: Icon(Icons.favorite),
-                      onPressed: () {},
+                      onPressed: () async {
+                        setState(() {
+                          isFav = false;
+                        });
+                        final uid = await _auth.getCurrentUID();
+                        await Firestore.instance.collection("Customers").document(uid).updateData({"data": FieldValue.arrayRemove([widget.service.serviceId])});
+                        await Firestore.instance.collection("Services").document(widget.service.serviceId).updateData({"Favs": FieldValue.arrayRemove([uid])});
+                        print('succes collection');
+                      },
+                    ):
+                    IconButton(
+                      color: Colors.white,
+                      icon: Icon(Icons.favorite_border),
+                      onPressed: () async {
+                        setState(() {
+                          isFav = true;
+                        });
+                        final uid = await _auth.getCurrentUID();
+                        await Firestore.instance.collection("Customers").document(uid).updateData({"data": FieldValue.arrayUnion([widget.service.serviceId])});
+                        await Firestore.instance.collection("Services").document(widget.service.serviceId).updateData({"Favs": FieldValue.arrayUnion([uid])});
+                        print('succes collection');
+                      },
                     )
+
                   ],
                 ),
                 Container(
-                  padding: const EdgeInsets.all(32.0),
+                  padding: const EdgeInsets.all(20.0),
                   color: Colors.white,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -95,21 +156,13 @@ class ServiceDetailPage extends StatelessWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                Row(
-                                  children: <Widget>[
-                                    Icon(Icons.star, color: Colors.purple,),
-                                    Icon(Icons.star, color: Colors.purple,),
-                                    Icon(Icons.star, color: Colors.purple,),
-                                    Icon(Icons.star, color: Colors.purple,),
-                                    Icon(Icons.star_border, color: Colors.purple,),
-                                  ],
-                                ),
+                                showStars(widget.service.rating),
                                 Text.rich(TextSpan(children: [
                                   WidgetSpan(
                                       child: Icon(Icons.location_on, size: 16.0, color: Colors.grey,)
                                   ),
                                   TextSpan(
-                                      text: "8 km to centrum"
+                                      text: "Show location"
                                   )
                                 ]), style: TextStyle(color: Colors.grey, fontSize: 12.0),)
                               ],
@@ -117,12 +170,12 @@ class ServiceDetailPage extends StatelessWidget {
                           ),
                           Column(
                             children: <Widget>[
-                              Text("\$ 200", style: TextStyle(
+                              Text("Categories", style: TextStyle(
                                   color: Colors.purple,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 20.0
                               ),),
-                              Text("/per night",style: TextStyle(
+                              Text("Showing Tabs",style: TextStyle(
                                   fontSize: 12.0,
                                   color: Colors.grey
                               ),)
@@ -130,7 +183,39 @@ class ServiceDetailPage extends StatelessWidget {
                           )
                         ],
                       ),
-                      const SizedBox(height: 30.0),
+                      const SizedBox(height: 10.0),
+                      GridView.count(
+                        shrinkWrap: true,
+                        scrollDirection: Axis.vertical,
+                        padding: EdgeInsets.all(1),
+                        crossAxisCount: 4,
+                        crossAxisSpacing: 4,
+                        mainAxisSpacing: 4,
+                        children: widget.service.serviceTypes
+                            .map(
+                              (serviceTypes) => Column(
+                            children: <Widget>[
+                              Container(
+                                height: 35.0,
+                                width: 100.0,
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 6.0,
+                                  horizontal: 6.0,
+                                ),
+                                decoration: BoxDecoration(
+                                    color: Colors.indigo[400],
+                                    borderRadius: BorderRadius.circular(12.0)),
+                                child: Center(
+                                  child: Text(
+                                    serviceTypes,
+                                    style: TextStyle(color: Colors.white,fontFamily: 'cabin', fontSize: 13.0),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ).toList(),
+                      ),
                       SizedBox(
                         width: double.infinity,
                         child: RaisedButton(
@@ -145,11 +230,11 @@ class ServiceDetailPage extends StatelessWidget {
                             horizontal: 32.0,
                           ),
                           onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => BookService(serviceInfo: service)));
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => BookService(serviceInfo: widget.service)));
                           },
                         ),
                       ),
-                      const SizedBox(height: 30.0),
+                      const SizedBox(height: 20.0),
                       Text("Description".toUpperCase(), style: TextStyle(
                           fontWeight: FontWeight.w600,
                           fontSize: 14.0
@@ -164,47 +249,27 @@ class ServiceDetailPage extends StatelessWidget {
                       Text(
                         "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ratione architecto autem quasi nisi iusto eius ex dolorum velit! Atque, veniam! Atque incidunt laudantium eveniet sint quod harum facere numquam molestias?", textAlign: TextAlign.justify, style: TextStyle(
                           fontWeight: FontWeight.w300,
-                          fontSize: 14.0
-                      ),),
+                          fontSize: 14.0),
+                      ),
+                      SizedBox(height: 10.0,),
                     ],
                   ),
                 ),
               ],
             ),
           ),
-//          Positioned(
-//            top: 0,
-//            left: 0,
-//            right: 0,
-//            child: AppBar(
-//              backgroundColor: Colors.transparent,
-//              elevation: 0,
-//              centerTitle: true,
-//              title: Text("DETAIL",style: TextStyle(
-//                  fontSize: 16.0,
-//                  fontWeight: FontWeight.normal
-//              ),),
-//            ),
-//          ),
-//          Align(
-//            alignment: Alignment.bottomLeft,
-//            child: BottomNavigationBar(
-//              backgroundColor: Colors.white54,
-//              elevation: 0,
-//              selectedItemColor: Colors.black,
-//              items: [
-//                BottomNavigationBarItem(
-//                    icon: Icon(Icons.search), title: Text("Search")),
-//                BottomNavigationBarItem(
-//                    icon: Icon(Icons.favorite_border),
-//                    title: Text("Favorites")),
-//                BottomNavigationBarItem(
-//                    icon: Icon(Icons.settings), title: Text("Settings")),
-//              ],
-//            ),
-//          )
         ],
       ),
     );
+  }
+
+  Widget showStars(num rating){
+    print(rating);
+      return Row(
+        children: [
+          for (num i = 0; i < rating.round(); i++) Icon(Icons.star, color: Colors.purple,),
+          for (num i = 0; i < (5-rating.round()); i++) Icon(Icons.star_border, color: Colors.purple,)
+        ],
+      );
   }
 }

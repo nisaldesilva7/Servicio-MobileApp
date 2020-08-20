@@ -1,233 +1,227 @@
-//import 'package:flutter/material.dart';
-//class BookingsView extends StatelessWidget{
-//
-//  @override
-//  Widget build(BuildContext context){
-//    return Container(
-//      child: Center(
-//          child: new Text(''),
-//        ),
-//    );
-//  }
-//}
-
 import 'package:flutter/material.dart';
-import 'package:servicio/screens/service_page/service_detail_view.dart';
-import 'package:servicio/widget/stub_data.dart';
-//import 'package:cached_network_image/cached_network_image.dart';
+import 'package:percent_indicator/percent_indicator.dart';
+import 'package:servicio/screens/bookings/UpcomingBookings.dart';
+import 'package:servicio/screens/home/bottom_navs/theme/light_colors.dart';
+import 'package:servicio/screens/home/bottom_navs/widgets/active_project_card.dart';
+import 'package:servicio/screens/home/bottom_navs/widgets/bottom_booking_card.dart';
+import 'package:servicio/screens/home/bottom_navs/widgets/task_column.dart';
+import 'package:servicio/screens/home/bottom_navs/widgets/top_container.dart';
 
-class SchoolList extends StatefulWidget {
-  SchoolList({Key key}) : super(key: key);
-  static final String path = "lib/src/pages/lists/list2.dart";
-
-  _SchoolListState createState() => _SchoolListState();
-}
-
-class _SchoolListState extends State<SchoolList> {
-  final TextStyle dropdownMenuItem =
-      TextStyle(color: Colors.black, fontSize: 10);
-
-  final primary = Color(0xff696b9e);
-  final secondary = Color(0xfff29a94);
-  final List<HotelCard> hotel = StubData().hotels;
+class HomePage extends StatelessWidget {
 
 
-  final List<Map> schoolLists = [
-    {
-      "name": "Edgewick Scchol",
-      "location": "572 Statan NY, 12483",
-      "type": "Higher Secondary School",
-      "logoText":
-          "https://cdn.pixabay.com/photo/2017/03/16/21/18/logo-2150297_960_720.png"
-    },
-    {
-      "name": "Xaviers International",
-      "location": "234 Road Kathmandu, Nepal",
-      "type": "Higher Secondary School",
-      "logoText":
-          "https://cdn.pixabay.com/photo/2017/01/31/13/14/animal-2023924_960_720.png"
-    },
-    {
-      "name": "Kinder Garden",
-      "location": "572 Statan NY, 12483",
-      "type": "Play Group School",
-      "logoText":
-          "https://cdn.pixabay.com/photo/2016/06/09/18/36/logo-1446293_960_720.png"
-    },
-    {
-      "name": "WilingTon Cambridge",
-      "location": "Kasai Pantan NY, 12483",
-      "type": "Lower Secondary School",
-      "logoText":
-          "https://cdn.pixabay.com/photo/2017/01/13/01/22/rocket-1976107_960_720.png"
-    },
-    {
-      "name": "Fredik Panlon",
-      "location": "572 Statan NY, 12483",
-      "type": "Higher Secondary School",
-      "logoText":
-          "https://cdn.pixabay.com/photo/2017/03/16/21/18/logo-2150297_960_720.png"
-    },
-    {
-      "name": "Whitehouse International",
-      "location": "234 Road Kathmandu, Nepal",
-      "type": "Higher Secondary School",
-      "logoText":
-          "https://cdn.pixabay.com/photo/2017/01/31/13/14/animal-2023924_960_720.png"
-    },
-    {
-      "name": "Haward Play",
-      "location": "572 Statan NY, 12483",
-      "type": "Play Group School",
-      "logoText":
-          "https://cdn.pixabay.com/photo/2016/06/09/18/36/logo-1446293_960_720.png"
-    },
-    {
-      "name": "Campare Handeson",
-      "location": "Kasai Pantan NY, 12483",
-      "type": "Lower Secondary School",
-      "logoText":
-          "https://cdn.pixabay.com/photo/2017/01/13/01/22/rocket-1976107_960_720.png"
-    },
-  ];
+  Text subheading(String title) {
+    return Text(
+      title,
+      style: TextStyle(
+          fontFamily: 'Lobster',
+          color: Colors.indigo,
+          fontSize: 20.0,
+          fontWeight: FontWeight.w700,
+          letterSpacing: 1.2),
+    );
+  }
+   String temp = '3';
+
+  static CircleAvatar calendarIcon() {
+    return CircleAvatar(
+      radius: 25.0,
+      backgroundColor: LightColors.kGreen,
+      child: Icon(
+        Icons.calendar_today,
+        size: 20.0,
+        color: Colors.white,
+      ),
+    );
+  }
+
+  showProgress () {
+    return ActiveProjectsCard(
+      cardColor: LightColors.kGreen,
+      loadingPercent: 0.25,
+      title: 'Medical App',
+      subtitle: '9 hours progress',
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
     return Scaffold(
-      backgroundColor: Colors.black45,
-      body: SingleChildScrollView(
-        child: Container(
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
-          child: Stack(
-            children: <Widget>[
-              Container(
-                height: 95,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                    color: Colors.indigo,
-                    borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(30),
-                        bottomRight: Radius.circular(30))),
-              ),
-              Container(
+      backgroundColor: LightColors.kLightYellow,
+      body: SafeArea(
+        child: Column(
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: TopContainer(
+                height: 110,
+                width: width,
                 child: Column(
-                  children: <Widget>[
-                    SizedBox(height: 15,),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 5.0),
-                      child: Container(
-                        alignment: Alignment.center,
-                        margin: EdgeInsets.symmetric(horizontal: 10),
-                        height: 40,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(20),
-                          boxShadow: [
-                            BoxShadow(
-                              offset: Offset(2.0, 2.0),
-                              color: Colors.blue,
-                              blurRadius: 10.0,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0.0),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                            CircularPercentIndicator(
+                              radius: 80.0,
+                              lineWidth: 5.0,
+                              animation: true,
+                              percent: 0.5,
+                              circularStrokeCap: CircularStrokeCap.round,
+                              progressColor: Colors.blueGrey,
+                              backgroundColor: Colors.grey[100],
+                              center: CircleAvatar(
+                                backgroundColor: LightColors.kBlue,
+                                radius: 22.0,
+                                backgroundImage: AssetImage(
+                                  'assets/booing.png',
+                                ),
+                              ),
                             ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: <Widget>[
+                                Container(
+                                  child: Text('My Bookings', textAlign: TextAlign.start, style: TextStyle(fontSize: 22.0, color: Colors.white, fontWeight: FontWeight.w800,),),
+                                ),
+                                Container(
+                                  child: Text('Dashboard', textAlign: TextAlign.start, style: TextStyle(fontSize: 16.0, color: Colors.white, fontWeight: FontWeight.w400,),),
+                                ),
+                              ],
+                            )
                           ],
                         ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 5),
-                          child: TextField(
-                            onChanged: (val) {},
-                            decoration: InputDecoration(
-                                prefixIcon: Icon(Icons.search),
-                                hintText: "What do you need?",
-                                hintStyle: TextStyle(
-                                    color: Colors.indigo, fontSize: 14),
-                                border: InputBorder.none,
-                                contentPadding:
-                                    EdgeInsets.symmetric(vertical: 7)),
+                      )
+                    ]
+                ),
+              ),
+            ),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: <Widget>[
+//                    Container(
+//                      color: Colors.transparent,
+//                      padding: EdgeInsets.symmetric(
+//                          horizontal: 20.0, vertical: 10.0),
+//                      child: Column(
+//                        children: <Widget>[
+//                          Row(
+//                            crossAxisAlignment: CrossAxisAlignment.center,
+//                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                            children: <Widget>[
+//                              subheading('My Tasks'),
+////                              GestureDetector(
+////                                onTap: () {
+////                                  Navigator.push(
+////                                    context,
+////                                    MaterialPageRoute(
+////                                        builder: (context) => CalendarPage()),
+////                                  );
+////                                },
+////                                child: calendarIcon(),
+////                              ),
+//                            ],
+//                          ),
+//                          SizedBox(height: 15.0),
+//                          TaskColumn(
+//                            icon: Icons.alarm,
+//                            iconBackgroundColor: LightColors.kRed,
+//                            title: 'To Do',
+//                            subtitle: '5 tasks now. 1 started',
+//                          ),
+//                          SizedBox(height: 15.0,),
+//                          TaskColumn(
+//                            icon: Icons.blur_circular,
+//                            iconBackgroundColor: LightColors.kDarkYellow,
+//                            title: 'In Progress',
+//                            subtitle: '1 tasks now. 1 started',
+//                          ),
+//                          SizedBox(height: 15.0),
+//                          TaskColumn(
+//                            icon: Icons.check_circle_outline,
+//                            iconBackgroundColor: LightColors.kBlue,
+//                            title: 'Done',
+//                            subtitle: '18 tasks now. 13 started',
+//                          ),
+//                        ],
+//                      ),
+//                    ),
+                    Container(
+                      color: Colors.transparent,
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 20.0, vertical: 10.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+//                          Center(child: subheading('Active Booking')),
+//                          SizedBox(height: 5.0),
+                          GestureDetector(
+                            onTap:(){
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => UpcomingBookings()));
+                            },
+                            child: Row(
+                              children: <Widget>[
+                                if(temp == '1')
+                                  ActiveProjectsCard(
+                                    cardColor: LightColors.indigoLight,
+                                    loadingPercent: 0.00,
+                                    title: 'Vehicle Reached',
+                                    subtitle: 'In the queue',
+                                  ),
+                                if(temp == '2')
+                                  ActiveProjectsCard(
+                                    cardColor: LightColors.indigoLight,
+                                    loadingPercent: 0.25,
+                                    title: 'SERVICE TYPE',
+                                    subtitle: '5 hours progress',
+                                  ),
+                                if(temp == '3')
+                                  ActiveProjectsCard(
+                                    cardColor: LightColors.indigoLight,
+                                    loadingPercent: 0.50,
+                                    title: 'SERVICE TYPE',
+                                    subtitle: '5 hours progress',
+                                  ),
+                                if(temp == '4')
+                                  ActiveProjectsCard(
+                                    cardColor: LightColors.indigoLight,
+                                    loadingPercent: 1.00,
+                                    title: 'SERVICE TYPE',
+                                    subtitle: '5 hours progress',
+                                  ),
+
+                              ],
+                            ),
                           ),
-                        ),
+                          Row(
+                            children: <Widget>[
+                              BottomBookingCard(
+                                cardColor: LightColors.kGreen,
+                                loadingPercent: 0.25,
+                                title: 'UPCOMING BOOKINGS',
+                                subtitle: '9 hours progress',
+                              ),
+                              SizedBox(width: 20.0),
+                              BottomBookingCard(
+                                cardColor: Colors.lightBlue,
+                                loadingPercent: 0.6,
+                                title: 'PREVIOUS BOOKINGS',
+                                subtitle: '20 hours progress',
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
                     ),
                   ],
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 90),
-                child: Container(
-                  padding: EdgeInsets.only(top: 10),
-                  height: MediaQuery.of(context).size.height,
-                  width: double.infinity,
-                  child: ListView.builder(
-                      itemCount: schoolLists.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return buildList(context, index);
-                      }),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget buildList(BuildContext context, int index) {
-    return GestureDetector(
-      onTap: () {
-        
-      },
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(25),
-          color: Colors.white,
-        ),
-        width: double.infinity,
-        height: 110,
-        margin: EdgeInsets.symmetric(vertical: 8, horizontal: 20),
-        padding: EdgeInsets.symmetric(vertical: 17, horizontal: 20),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Container(
-              width: 75,
-              height: 75,
-              margin: EdgeInsets.only(right: 15),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(40),
-                border: Border.all(width: 3, color: secondary),
-              image: DecorationImage(
-                  image: NetworkImage('https://c1.wallpaperflare.com/preview/649/915/591/car-mechanic-automobile-service.jpg'),
-                  fit: BoxFit.fill),
-              ),
             ),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    schoolLists[index]['name'],
-                    style: TextStyle(color: primary, fontWeight: FontWeight.bold, fontSize: 18),),
-                  SizedBox(height: 6,),
-                  Row(
-                    children: <Widget>[
-                      Icon(Icons.location_on, color: secondary, size: 20,),
-                      SizedBox(width: 5,),
-                      Text(
-                          schoolLists[index]['location'],
-                          style: TextStyle(color: primary, fontSize: 13, letterSpacing: .3)),
-                    ],
-                  ),
-                  SizedBox(height: 6,),
-                  Row(
-                    children: <Widget>[
-                      Icon(Icons.school, color: secondary, size: 20,),
-                      SizedBox(width: 5,),
-                      Text(schoolLists[index]['type'],
-                          style: TextStyle(color: primary, fontSize: 13, letterSpacing: .3)),
-                    ],
-                  ),
-                ],
-              ),
-            )
           ],
         ),
       ),

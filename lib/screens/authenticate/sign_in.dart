@@ -127,8 +127,9 @@ class _SignInState extends State<SignIn> {
                           if (_formKey.currentState.validate()) {
                             print("ok");
                             setState(() => loading = true);
-                            dynamic result = await _auth.signInWithEmail(email, password);
-                            if (result == null){
+                            dynamic result = await _auth.signInWithEmail(
+                                email,password);
+                            if (result == null) {
                               setState(() {
                                 error = 'Could not Sign In';
                                 print(error);

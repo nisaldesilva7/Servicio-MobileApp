@@ -7,7 +7,7 @@ class AddNewVehicle extends StatelessWidget {
 
   final db = Firestore.instance;
   final AuthServices _auth = AuthServices();
-  final temp = Vehicle('7-serise', '111x5cxc12', 'BMW' , '2020');
+  final temp = Vehicle('7-serise', '111x5cxc12', 'BMW' , '2020',['hi','hiii']);
 
 
   @override
@@ -21,7 +21,7 @@ class AddNewVehicle extends StatelessWidget {
           child: Text("Finish"),
           onPressed: () async {
             final uid = await _auth.getCurrentUID();
-            await db.collection("users").document(uid).collection("vehicles").add(temp.toJson());
+            await db.collection("Customers").document(uid).collection("Vehicles").add(temp.toJson());
             print('succes collection');
           },
         ),

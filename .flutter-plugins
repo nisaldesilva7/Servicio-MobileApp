@@ -1,4 +1,5 @@
 # This is a generated file; do not edit or check into version control.
+<<<<<<< HEAD
 cloud_firestore=C:\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\cloud_firestore-0.12.11\\
 firebase_auth=C:\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\firebase_auth-0.14.0+9\\
 firebase_core=C:\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\firebase_core-0.4.0+8\\
@@ -10,3 +11,25 @@ path_provider=C:\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\path_provider-1
 path_provider_linux=C:\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\path_provider_linux-0.0.1+2\\
 path_provider_macos=C:\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\path_provider_macos-0.0.4+3\\
 sqflite=C:\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\sqflite-1.3.1\\
+=======
+cloud_firestore=C:\\Users\\ASUS\\AppData\\Roaming\\Pub\\Cache\\hosted\\pub.dartlang.org\\cloud_firestore-0.12.11\\
+firebase_auth=C:\\Users\\ASUS\\AppData\\Roaming\\Pub\\Cache\\hosted\\pub.dartlang.org\\firebase_auth-0.14.0+9\\
+firebase_core=C:\\Users\\ASUS\\AppData\\Roaming\\Pub\\Cache\\hosted\\pub.dartlang.org\\firebase_core-0.4.5\\
+firebase_core_web=C:\\Users\\ASUS\\AppData\\Roaming\\Pub\\Cache\\hosted\\pub.dartlang.org\\firebase_core_web-0.1.1+2\\
+firebase_messaging=C:\\Users\\ASUS\\AppData\\Roaming\\Pub\\Cache\\hosted\\pub.dartlang.org\\firebase_messaging-6.0.16\\
+firebase_storage=C:\\Users\\ASUS\\AppData\\Roaming\\Pub\\Cache\\hosted\\pub.dartlang.org\\firebase_storage-3.1.6\\
+flutter_image_compress=C:\\Users\\ASUS\\AppData\\Roaming\\Pub\\Cache\\hosted\\pub.dartlang.org\\flutter_image_compress-0.6.8\\
+flutter_local_notifications=C:\\Users\\ASUS\\AppData\\Roaming\\Pub\\Cache\\hosted\\pub.dartlang.org\\flutter_local_notifications-1.4.4+2\\
+flutter_plugin_android_lifecycle=C:\\Users\\ASUS\\AppData\\Roaming\\Pub\\Cache\\hosted\\pub.dartlang.org\\flutter_plugin_android_lifecycle-1.0.8\\
+fluttertoast=C:\\Users\\ASUS\\AppData\\Roaming\\Pub\\Cache\\hosted\\pub.dartlang.org\\fluttertoast-3.1.3\\
+image_cropper=C:\\Users\\ASUS\\AppData\\Roaming\\Pub\\Cache\\hosted\\pub.dartlang.org\\image_cropper-1.2.3\\
+image_picker=C:\\Users\\ASUS\\AppData\\Roaming\\Pub\\Cache\\hosted\\pub.dartlang.org\\image_picker-0.6.7+4\\
+path_provider=C:\\Users\\ASUS\\AppData\\Roaming\\Pub\\Cache\\hosted\\pub.dartlang.org\\path_provider-1.6.11\\
+path_provider_linux=C:\\Users\\ASUS\\AppData\\Roaming\\Pub\\Cache\\hosted\\pub.dartlang.org\\path_provider_linux-0.0.1+2\\
+path_provider_macos=C:\\Users\\ASUS\\AppData\\Roaming\\Pub\\Cache\\hosted\\pub.dartlang.org\\path_provider_macos-0.0.4+3\\
+sqflite=C:\\Users\\ASUS\\AppData\\Roaming\\Pub\\Cache\\hosted\\pub.dartlang.org\\sqflite-1.3.1\\
+url_launcher=C:\\Users\\ASUS\\AppData\\Roaming\\Pub\\Cache\\hosted\\pub.dartlang.org\\url_launcher-5.5.0\\
+url_launcher_linux=C:\\Users\\ASUS\\AppData\\Roaming\\Pub\\Cache\\hosted\\pub.dartlang.org\\url_launcher_linux-0.0.1+1\\
+url_launcher_macos=C:\\Users\\ASUS\\AppData\\Roaming\\Pub\\Cache\\hosted\\pub.dartlang.org\\url_launcher_macos-0.0.1+7\\
+url_launcher_web=C:\\Users\\ASUS\\AppData\\Roaming\\Pub\\Cache\\hosted\\pub.dartlang.org\\url_launcher_web-0.1.2\\
+>>>>>>> origin/nisal
