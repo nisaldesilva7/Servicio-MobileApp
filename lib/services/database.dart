@@ -10,11 +10,13 @@ class DatabaseService {
 
   Future updateUserData(String name, String email, String telNum) async {
     print('update user data');
+    String photo;
     return await userCollection.document(uid).setData({
       'name': name,
       'email': email,
       'tel_num': telNum,
       'user_id': uid,
+      'Photo': photo,
     });
   }
 

@@ -4,20 +4,25 @@ import 'package:flutter/cupertino.dart';
 import 'package:servicio/models/customer.dart';
 import 'package:servicio/services/auth.dart';
 
-class MyProfile extends StatefulWidget {
+import 'home/bottom_navs/image_change/customer_dp.dart';
+
+class EditProfile extends StatefulWidget {
 
   @override
   MapScreenState createState() => MapScreenState();
 
 }
 
-class MapScreenState extends State<MyProfile>
-
+class MapScreenState extends State<EditProfile>
     with SingleTickerProviderStateMixin {
+
   final AuthServices _auth = AuthServices();
   bool _status = true;
   final FocusNode myFocusNode = FocusNode();
   int _currentIndex = 0;
+
+  String uid;
+  String photo;
 
   @override
   void initState() {
@@ -43,30 +48,29 @@ class MapScreenState extends State<MyProfile>
                     children: <Widget>[
                       Padding(
                         padding: EdgeInsets.only(top: 20.0),
-                        child: GestureDetector(
-                          onTap: (){
-                            print('photo');
-                          },
-                          child: Stack(
-                              fit: StackFit.loose,
-                              children: <Widget>[
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    Container(
-                                        width: 140.0,
-                                        height: 140.0,
-                                        decoration: new BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          image: new DecorationImage(
-                                            image: new ExactAssetImage(
-                                                'assets/image/male_user.png'),
-                                            fit: BoxFit.cover,),
-                                        )),
-                                  ],
-                                ),
-                                Padding(
+                        child: Stack(
+                            fit: StackFit.loose,
+                            children: <Widget>[
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  Container(
+                                      width: 140.0,
+                                      height: 140.0,
+                                      decoration: new BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        image:  DecorationImage(
+                                          image:  ExactAssetImage(
+                                              'assets/image/no_dp.png'),
+                                          fit: BoxFit.cover,),
+                                      )),
+                                ],
+                              ),
+                              GestureDetector(
+                                onTap: (){
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => CustomerDp(customerPhoto: photo, uid: uid,)));                                },
+                                child: Padding(
                                     padding: EdgeInsets.only(
                                         top: 90.0,right: 100.0),
                                     child: new Row(
@@ -83,15 +87,15 @@ class MapScreenState extends State<MyProfile>
                                       ],
                                     )
                                 ),
-                              ]
-                          ),
+                              ),
+                            ]
                         ),
                       )
                     ],
                   ),
                 ),
                 FutureBuilder(
-                  future: getUsersTripsStreamSnapshots(),
+                  future: getCustomerdetailsStreamSnapshots(),
                     builder: (context, snapshot) {
                       if (!snapshot.hasData) {
                         return Padding(
@@ -100,6 +104,8 @@ class MapScreenState extends State<MyProfile>
                         );
                       }
                       final customer = Customer.fromSnapshot(snapshot.data);
+                      photo = customer.photo;
+                      uid = customer.userId;
                       return Container(
                         color: Color(0xffFFFFFF),
                         child: Padding(
@@ -442,7 +448,7 @@ class MapScreenState extends State<MyProfile>
   }
 
 
-  Future<DocumentSnapshot> getUsersTripsStreamSnapshots() async {
+  Future<DocumentSnapshot> getCustomerdetailsStreamSnapshots() async {
     final uid = await _auth.getCurrentUID();
     return Firestore.instance.collection('Customers').document(uid).get();
   }

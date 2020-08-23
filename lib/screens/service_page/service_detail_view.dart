@@ -2,8 +2,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:servicio/screens/bookings/book_service.dart';
 import 'package:servicio/models/service.dart';
+import 'package:servicio/screens/bookings/view_service_schedule.dart';
 import 'package:servicio/screens/chatui.dart';
 import 'package:servicio/services/service_locator.dart';
 import 'package:servicio/services/urlService.dart';
@@ -31,7 +33,7 @@ class _ServiceDetailPageState extends State<ServiceDetailPage> {
     final uid = await _auth.getCurrentUID();
     print('length${widget.service.favs.length}');
     for(int i=0; i<widget.service.favs.length;i++){
-      if(widget.service.favs[i] == 'fv7ICvE5V1f3LMTAGyXWvASgTty1'){
+      if(widget.service.favs[i] == uid){
         print('autorun');
         setState(() {
           isFav = true;
@@ -70,7 +72,7 @@ class _ServiceDetailPageState extends State<ServiceDetailPage> {
           IconButton(
             color: Colors.white,
             icon: Icon(Icons.call),
-            onPressed: () => _service.call(number),
+            onPressed: () => _service.call(widget.service.telephone),
           ),
         ],
       ),
@@ -122,7 +124,7 @@ class _ServiceDetailPageState extends State<ServiceDetailPage> {
                           isFav = false;
                         });
                         final uid = await _auth.getCurrentUID();
-                        await Firestore.instance.collection("Customers").document(uid).updateData({"data": FieldValue.arrayRemove([widget.service.serviceId])});
+                        await Firestore.instance.collection("Customers").document(uid).updateData({"Favs": FieldValue.arrayRemove([widget.service.serviceId])});
                         await Firestore.instance.collection("Services").document(widget.service.serviceId).updateData({"Favs": FieldValue.arrayRemove([uid])});
                         print('succes collection');
                       },
@@ -135,7 +137,7 @@ class _ServiceDetailPageState extends State<ServiceDetailPage> {
                           isFav = true;
                         });
                         final uid = await _auth.getCurrentUID();
-                        await Firestore.instance.collection("Customers").document(uid).updateData({"data": FieldValue.arrayUnion([widget.service.serviceId])});
+                        await Firestore.instance.collection("Customers").document(uid).updateData({"Favs": FieldValue.arrayUnion([widget.service.serviceId])});
                         await Firestore.instance.collection("Services").document(widget.service.serviceId).updateData({"Favs": FieldValue.arrayUnion([uid])});
                         print('succes collection');
                       },
@@ -190,13 +192,13 @@ class _ServiceDetailPageState extends State<ServiceDetailPage> {
                         padding: EdgeInsets.all(1),
                         crossAxisCount: 4,
                         crossAxisSpacing: 4,
-                        mainAxisSpacing: 4,
+                        mainAxisSpacing: 0.0,
                         children: widget.service.serviceTypes
                             .map(
                               (serviceTypes) => Column(
                             children: <Widget>[
                               Container(
-                                height: 35.0,
+                                height: 50.0,
                                 width: 100.0,
                                 padding: const EdgeInsets.symmetric(
                                   vertical: 6.0,
@@ -207,7 +209,7 @@ class _ServiceDetailPageState extends State<ServiceDetailPage> {
                                     borderRadius: BorderRadius.circular(12.0)),
                                 child: Center(
                                   child: Text(
-                                    serviceTypes,
+                                    serviceTypes.toString().toUpperCase(),
                                     style: TextStyle(color: Colors.white,fontFamily: 'cabin', fontSize: 13.0),
                                   ),
                                 ),
@@ -219,14 +221,14 @@ class _ServiceDetailPageState extends State<ServiceDetailPage> {
                       SizedBox(
                         width: double.infinity,
                         child: RaisedButton(
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
                           color: Colors.purple,
                           textColor: Colors.white,
-                          child: Text("Book Now", style: TextStyle(
-                              fontWeight: FontWeight.normal
+                          child: Text("Book Now".toUpperCase(), style: GoogleFonts.bebasNeue(
+                            fontSize: 30,
                           ),),
                           padding: const EdgeInsets.symmetric(
-                            vertical: 16.0,
+                            vertical: 10.0,
                             horizontal: 32.0,
                           ),
                           onPressed: () {
@@ -241,7 +243,7 @@ class _ServiceDetailPageState extends State<ServiceDetailPage> {
                       ),),
                       const SizedBox(height: 10.0),
                       Text(
-                        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ratione architecto autem quasi nisi iusto eius ex dolorum velit! Atque, veniam! Atque incidunt laudantium eveniet sint quod harum facere numquam molestias?", textAlign: TextAlign.justify, style: TextStyle(
+                          widget.service.description, textAlign: TextAlign.justify, style: TextStyle(
                           fontWeight: FontWeight.w300,
                           fontSize: 14.0
                       ),),

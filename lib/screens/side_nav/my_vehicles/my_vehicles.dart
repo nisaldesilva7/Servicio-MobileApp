@@ -66,13 +66,14 @@ class _MyVehiclesState extends State<MyVehicles> {
     return GestureDetector(
       onTap: (){
         print('Vehicle card tap');
-        Navigator.push(context, MaterialPageRoute(builder: (context) => VehiclePage()));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => VehiclePage(serviceInfo: vehicle)));
       },
-      child: Container(
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: 5),
         child: Card(
           shadowColor: Colors.grey,
-          elevation: 5.0,
-          color: Colors.cyan,
+          elevation: 10.0,
+          color: Colors.indigo,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Column(
@@ -80,14 +81,14 @@ class _MyVehiclesState extends State<MyVehicles> {
                 Padding(
                   padding: const EdgeInsets.only(top: 8.0, bottom: 4.0),
                   child: Row(children: <Widget>[
-                    Text(vehicle.brand, style: new TextStyle(fontSize: 30.0),),
+                    Text(vehicle.brand, style: new TextStyle(fontSize: 30.0, fontFamily: 'Cabin', color: Colors.white),),
                     Spacer(),
-                    IconButton(icon: Icon(Icons.add_to_photos), tooltip: 'Modfiy Vehicle',
+                    IconButton(icon: Icon(Icons.add_to_photos),color: Colors.white, tooltip: 'Modfiy Vehicle',
                       onPressed: ()  {
                         _tripEditModalBottomSheet(context);
                         },
                     ),
-                    IconButton(icon: Icon(Icons.delete_outline), tooltip: 'Delete Vehicle',
+                    IconButton(icon: Icon(Icons.delete_outline),color: Colors.white, tooltip: 'Delete Vehicle',
                       onPressed: () async {
                         showAlertDialog(context,vehicle.vehicleId);
                       },
@@ -96,7 +97,7 @@ class _MyVehiclesState extends State<MyVehicles> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 4.0, bottom: 80.0),
+                  padding: const EdgeInsets.only(top: 4.0, bottom: 40.0),
                   child: Row(children: <Widget>[
                     getTextWidgets(vehicle.num),
                     Spacer(),
@@ -106,9 +107,9 @@ class _MyVehiclesState extends State<MyVehicles> {
                   padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
                   child: Row(
                     children: <Widget>[
-                      Text(vehicle.regNo, style: new TextStyle(fontSize: 35.0),),
+                      Text(vehicle.regNo, style: new TextStyle(fontSize: 35.0,fontFamily: 'Cabin', color: Colors.white),),
                       Spacer(),
-                      Icon(Icons.directions_car),
+                      Icon(Icons.directions_car,color: Colors.white,),
                     ],
                   ),
                 )

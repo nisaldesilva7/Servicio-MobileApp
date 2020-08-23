@@ -10,9 +10,35 @@ import 'package:servicio/screens/service_page/service_detail_view.dart';
 import 'package:servicio/services/auth.dart';
 import 'package:servicio/shared/SliderImages.dart' as assets;
 
-class MainView extends StatelessWidget {
+class MainView extends StatefulWidget {
   static final String path = "lib/src/pages/travel/travel_home.dart";
+
+  @override
+  _MainViewState createState() => _MainViewState();
+}
+
+class _MainViewState extends State<MainView> {
   final AuthServices _auth = AuthServices();
+  List userFavourites ;
+
+  @override
+  void initState()  {
+    super.initState();
+    getUserFavs();
+  }
+
+
+  getUserFavs() async {
+    final AuthServices _auth = AuthServices();
+    final uid = await _auth.getCurrentUID();
+    DocumentSnapshot result = await Firestore.instance.collection('Customers').document(uid).get();
+    List favs = result.data['Favs'];
+    print('xxxxxxxx$favs');
+    setState(() {
+      userFavourites = favs;
+    });
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,13 +49,49 @@ class MainView extends StatelessWidget {
           homeScreenBottom,
           SizedBox(height: 15.0,),
           SlideBar(),
-          SizedBox(height: 15.0,),
+          Column(
+          children: <Widget>[
+            Padding(
+             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+               child: Row(
+               mainAxisSize: MainAxisSize.max,
+                children: <Widget>[
+                 Text("Favourite Service Centers",
+                    style: TextStyle(color: Colors.black87, fontSize: 15, fontFamily: 'icomoon', fontWeight:FontWeight.w400)),
+                  Icon(Icons.favorite,color: Colors.redAccent,)
+              ],
+            ),
+          ),
+          Container(
+              height: 210,
+              child: StreamBuilder<QuerySnapshot>(
+                  stream: getUsersServicesStreamSnapshots(userFavourites),
+                  builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> querySnapshot) {
+                    if (!querySnapshot.hasData)
+                      return Text('No Data');
+                    if (querySnapshot.connectionState == ConnectionState.waiting)
+                      return const CircularProgressIndicator();
+                    else {
+                      final list = querySnapshot.data.documents;
+                      print(list);
+                      return ListView.builder(
+                        itemCount: list.length,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) {
+                          return cityCard(context, list[index]);
+                        },
+                      );
+                    }
+                  }
+              )
+          ),
+        ],
+      )
         ],
 
       ),
     );
   }
-
 }
 
 class HomeScreenTop extends StatefulWidget {
@@ -56,7 +118,8 @@ class _HomeScreenTopState extends State<HomeScreenTop> {
             height: 350,
             decoration: BoxDecoration(
                 gradient: LinearGradient(
-                    colors: [Colors.indigo, Colors.blue])),
+                    colors: [Colors.indigo, Colors.blue])
+            ),
             child: Column(
               children: <Widget>[
                 SizedBox(height: 10,),
@@ -94,7 +157,11 @@ class _HomeScreenTopState extends State<HomeScreenTop> {
                         ],
                       ),
                       Spacer(),
-                      Icon(Icons.settings, color: Colors.white,)
+                      GestureDetector(
+                          onTap: () {
+
+                          },
+                          child: Icon(Icons.settings, color: Colors.white,))
                     ],
                   ),
                 ),
@@ -246,8 +313,8 @@ final Widget homeScreenBottom = Column(
     ),
     Container(
         height: 210,
-        child: StreamBuilder<QuerySnapshot>(
-            stream: Firestore.instance.collection('Services').limit(3).snapshots(),
+        child: FutureBuilder<QuerySnapshot>(
+            future: Firestore.instance.collection('Services').where('').limit(3).getDocuments(),
             builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> querySnapshot) {
               if (!querySnapshot.hasData)
                 return Text('No Data');
@@ -273,44 +340,53 @@ final Widget homeScreenBottom = Column(
 
 
 
+//
+// Widget favouriteCardList = Column(
+//  children: <Widget>[
+//    Padding(
+//      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+//      child: Row(
+//        mainAxisSize: MainAxisSize.max,
+//        children: <Widget>[
+//          Text("Favourite Service Centers",
+//              style: TextStyle(color: Colors.black87, fontSize: 15, fontFamily: 'icomoon', fontWeight:FontWeight.w400)),
+//        ],
+//      ),
+//    ),
+//    Container(
+//        height: 210,
+//        child: StreamBuilder<QuerySnapshot>(
+//            stream: getUsersServicesStreamSnapshots(userFavourites),
+//            builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> querySnapshot) {
+//              if (!querySnapshot.hasData)
+//                return Text('No Data');
+//              if (querySnapshot.connectionState == ConnectionState.waiting)
+//                return const CircularProgressIndicator();
+//              else {
+//                final list = querySnapshot.data.documents;
+//                print(list);
+//                return ListView.builder(
+//                  itemCount: list.length,
+//                  scrollDirection: Axis.horizontal,
+//                  itemBuilder: (context, index) {
+//                    return cityCard(context, list[index]);
+//                  },
+//                );
+//              }
+//            }
+//        )
+//    ),
+//  ],
+//);
+//
 
-final Widget favouriteCardList = Column(
-  children: <Widget>[
-    Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-      child: Row(
-        mainAxisSize: MainAxisSize.max,
-        children: <Widget>[
-          Text("Favourite Service Centers",
-              style: TextStyle(color: Colors.black87, fontSize: 15, fontFamily: 'icomoon', fontWeight:FontWeight.w400)),
-        ],
-      ),
-    ),
-    Container(
-        height: 210,
-        child: StreamBuilder<QuerySnapshot>(
-            stream: Firestore.instance.collection('Services').limit(3).snapshots(),
-            builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> querySnapshot) {
-              if (!querySnapshot.hasData)
-                return Text('No Data');
-              if (querySnapshot.connectionState == ConnectionState.waiting)
-                return const CircularProgressIndicator();
-              else {
-                final list = querySnapshot.data.documents;
-                print(list);
-                return ListView.builder(
-                  itemCount: list.length,
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) {
-                    return cityCard(context, list[index]);
-                  },
-                );
-              }
-            }
-        )
-    ),
-  ],
-);
+
+
+Stream<QuerySnapshot> getUsersServicesStreamSnapshots(List favs) async* {
+  print('under stream $favs');
+  yield* Firestore.instance.collection("Services").where('Service_Id', whereIn: favs).snapshots();
+}
+
 
 Widget getTextWidgets(List<String> strings)
 {

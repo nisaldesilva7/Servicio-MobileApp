@@ -56,12 +56,15 @@ dependencies:
   font_awesome_flutter: ^8.5.0
   intl: ^0.15.8
   shimmer: ^1.1.0
+  google_fonts: ^1.1.0
 
   carousel_slider: ^2.2.1
   url_launcher: ^5.5.0
   get_it: ^1.0.3+2
 
   dio: ^3.0.10
+  table_calendar: ^2.2.3
+  timeline_tile: ^0.1.0
 
 
 
@@ -91,6 +94,7 @@ flutter:
   assets:
     - assets/app_icon.png
     - assets/image/
+    - assets/delivery/
     - assets/
     - img/
 

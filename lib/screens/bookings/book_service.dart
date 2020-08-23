@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:servicio/models/service.dart';
 import 'package:servicio/screens/bookings/select_date_time/notifcation_dialog.dart';
+import 'package:servicio/screens/bookings/view_service_schedule.dart';
 import 'package:servicio/services/auth.dart';
 
 class BookService extends StatefulWidget {
@@ -390,7 +391,9 @@ Widget _vehicle(){
               ),
             ),
             trailing: FloatingActionButton(
-              onPressed: null,
+              onPressed: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context) => ServiceSchedule()));
+              },
               tooltip: 'View Schedule',
               child: Icon(Icons.calendar_today),
             )

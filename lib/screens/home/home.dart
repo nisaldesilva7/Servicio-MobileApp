@@ -8,6 +8,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:servicio/models/customer.dart';
 import 'package:servicio/screens/home/bottom_navs/bookings_view.dart';
 import 'package:servicio/screens/home/bottom_navs/main_view.dart';
@@ -41,23 +42,31 @@ class _HomeState extends State<Home>{
     MainView(),
     SearchView(),
     MainMenu(),
-    HomePage(),
+    BookingsPage(),
     ProfileThreePage(),
   ];
   final AuthServices _auth = AuthServices();
-
+   bool emailverification;
 
 
   final FirebaseMessaging firebaseMessaging = FirebaseMessaging();
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
   @override
-  void initState() {
+  void initState()  {
     super.initState();
     registerNotification();
     configLocalNotification();
+    checkEmailVerification();
   }
 
+  void checkEmailVerification() async {
+    print('email verify');
+    emailverification =  await _auth.checkVerification();
+    if(emailverification == false){
+      alert('Please Verfiy Your E-mail address');
+    }
+  }
 
   void registerNotification() {
     firebaseMessaging.requestNotificationPermissions();
@@ -114,7 +123,7 @@ class _HomeState extends State<Home>{
   }
 
   void configLocalNotification() {
-    var initializationSettingsAndroid = new AndroidInitializationSettings('app_icon');
+    var initializationSettingsAndroid = new AndroidInitializationSettings('launch_icon');
     var initializationSettingsIOS = new IOSInitializationSettings();
     var initializationSettings = new InitializationSettings(initializationSettingsAndroid, initializationSettingsIOS);
     flutterLocalNotificationsPlugin.initialize(initializationSettings);
@@ -126,8 +135,11 @@ class _HomeState extends State<Home>{
       builder: (context) =>
           AlertDialog(
             content: ListTile(
-              title: Text(message['notification']['title']),
-              subtitle: Text(message['notification']['body']),
+                leading: Icon(Icons.announcement, color: Colors.red, size: 40,),
+              title: Text(message,style: GoogleFonts.ubuntu(),),
+//              subtitle: Text(message),
+//              title: Text(message['notification']['title']),
+//              subtitle: Text(message['notification']['body']),
             ),
             actions: <Widget>[
               FlatButton(
@@ -209,7 +221,8 @@ class _HomeState extends State<Home>{
                      currentAccountPicture: InkWell(
                        child: CircleAvatar(
                          backgroundColor: Colors.black26,
-                         child: Image.asset('assets/image/no_dp.png'),
+                         child: customer.photo == null ? Image.asset('assets/image/no_dp.png'):
+                         Image.network(customer.photo, )
                        ),
                        onTap: () {
                          return Navigator.of(context).pushNamed("/image");
@@ -241,7 +254,7 @@ class _HomeState extends State<Home>{
               ),
               _divider(),
               new ListTile(
-                title: new Text("Notifications"),
+                title: new Text("Settings"),
                 trailing: new Icon(Icons.message,color: Colors.indigo,),
                 onTap: () => Navigator.of(context).pushNamed("/notifications"),
               ),
@@ -315,6 +328,7 @@ class _HomeState extends State<Home>{
     final uid = await _auth.getCurrentUID();
     return Firestore.instance.collection('Customers').document(uid).get();
   }
+
 
   Widget _divider(){
     return Divider(thickness: 3.0, indent: 13.0, endIndent: 20.0, height: 1.0, color: Colors.indigo[200],);

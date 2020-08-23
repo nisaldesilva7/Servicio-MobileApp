@@ -1,11 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:servicio/models/customer.dart';
 import 'package:servicio/screens/home/bottom_navs/theme/light_colors.dart';
 import 'package:servicio/screens/home/bottom_navs/widgets/top_container.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:servicio/screens/myprofile.dart';
+import 'package:servicio/screens/side_nav/my_vehicles/my_vehicles.dart';
 import 'package:servicio/services/auth.dart';
 
 class ProfileThreePage extends StatefulWidget {
@@ -81,7 +83,7 @@ class _ProfileThreePageState extends State<ProfileThreePage> {
                                       child: Text(
                                         'Dashboard',
                                         textAlign: TextAlign.start,
-                                        style: TextStyle(fontSize: 15.0, color: Colors.grey[200], fontWeight: FontWeight.w400,),
+                                        style: TextStyle(fontSize: 15.0, color: Colors.white, fontWeight: FontWeight.w400,),
                                       ),
                                     ),
                                   ],
@@ -90,6 +92,25 @@ class _ProfileThreePageState extends State<ProfileThreePage> {
                             ),
                           )
                         ]),
+                  ),
+                  SizedBox(height: 10.0),
+                  Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => MyVehicles()));
+                          },
+                          child: _buildWikiCategory(FontAwesomeIcons.car,
+                              "My Vehicles", Colors.deepOrange.withOpacity(0.7)),
+                        ),
+                      ),
+                      const SizedBox(width: 10.0),
+                      Expanded(
+                        child: _buildWikiCategory(FontAwesomeIcons.lock,
+                            "My private notes", Colors.blue.withOpacity(0.6)),
+                      ),
+                    ],
                   ),
                   SizedBox(height: 10.0),
                   FutureBuilder(
@@ -183,7 +204,7 @@ class _ProfileThreePageState extends State<ProfileThreePage> {
         ),
       ),
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => MyProfile()));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => EditProfile()));
 //        Navigator.push(context, MaterialPageRoute(builder: (context) => MyProfile(user: userDoc)));
 
       },
@@ -225,6 +246,51 @@ class _ProfileThreePageState extends State<ProfileThreePage> {
       ),
     );
   }
+
+
+  Stack _buildWikiCategory(IconData icon, String label, Color color) {
+    return Stack(
+      children: <Widget>[
+        Container(
+          padding: const EdgeInsets.all(26.0),
+          alignment: Alignment.centerRight,
+          child: Opacity(
+              opacity: 0.3,
+              child: Icon(
+                icon,
+                size: 40,
+                color: Colors.white,
+              )),
+          decoration: BoxDecoration(
+            color: color,
+            borderRadius: BorderRadius.circular(20.0),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Icon(
+                icon,
+                color: Colors.white,
+              ),
+              const SizedBox(height: 16.0),
+              Text(
+                label,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              )
+            ],
+          ),
+        )
+      ],
+    );
+  }
+
 }
 
 

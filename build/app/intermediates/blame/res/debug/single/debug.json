@@ -700,10 +700,6 @@
         "source": "C:\\Users\\ASUS\\.gradle\\caches\\transforms-2\\files-2.1\\dfda874e59ae708b9dea8d783cda1c4f\\play-services-base-17.0.0\\res\\drawable-xhdpi-v4\\common_google_signin_btn_text_light_normal_background.9.png"
     },
     {
-        "merged": "C:\\Users\\ASUS\\Desktop\\servicio_app\\Servicio-MobileApp\\build\\app\\intermediates\\res\\merged\\debug\\drawable_splash_icon.png.flat",
-        "source": "C:\\Users\\ASUS\\Desktop\\servicio_app\\Servicio-MobileApp\\android\\app\\src\\main\\res\\drawable\\splash_icon.png"
-    },
-    {
         "merged": "C:\\Users\\ASUS\\Desktop\\servicio_app\\Servicio-MobileApp\\build\\app\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4_abc_btn_check_to_on_mtrl_015.png.flat",
         "source": "C:\\Users\\ASUS\\.gradle\\caches\\transforms-2\\files-2.1\\b6cd2b58394760cbe3b1ef23eabd6533\\appcompat-1.1.0\\res\\drawable-xxhdpi-v4\\abc_btn_check_to_on_mtrl_015.png"
     },
@@ -1830,6 +1826,10 @@
     {
         "merged": "C:\\Users\\ASUS\\Desktop\\servicio_app\\Servicio-MobileApp\\build\\app\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_launcher_icon.png.flat",
         "source": "C:\\Users\\ASUS\\Desktop\\servicio_app\\Servicio-MobileApp\\android\\app\\src\\main\\res\\mipmap-xhdpi\\launcher_icon.png"
+    },
+    {
+        "merged": "C:\\Users\\ASUS\\Desktop\\servicio_app\\Servicio-MobileApp\\build\\app\\intermediates\\res\\merged\\debug\\drawable_launch_icon.png.flat",
+        "source": "C:\\Users\\ASUS\\Desktop\\servicio_app\\Servicio-MobileApp\\android\\app\\src\\main\\res\\drawable\\launch_icon.png"
     },
     {
         "merged": "C:\\Users\\ASUS\\Desktop\\servicio_app\\Servicio-MobileApp\\build\\app\\intermediates\\res\\merged\\debug\\drawable-ldrtl-xxhdpi-v17_abc_ic_menu_copy_mtrl_am_alpha.png.flat",

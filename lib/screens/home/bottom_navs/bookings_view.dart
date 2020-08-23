@@ -1,27 +1,20 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/percent_indicator.dart';
-import 'package:servicio/screens/bookings/UpcomingBookings.dart';
+import 'package:servicio/models/ongoingBooking.dart';
+import 'package:servicio/screens/home/bottom_navs/bookings_views/booking_progress.dart';
+import 'package:servicio/services/auth.dart';
+import 'bookings_views/upcoming_bookings.dart';
+import 'package:servicio/screens/home/bottom_navs/bookings_views/prev_bookings.dart';
 import 'package:servicio/screens/home/bottom_navs/theme/light_colors.dart';
 import 'package:servicio/screens/home/bottom_navs/widgets/active_project_card.dart';
-import 'package:servicio/screens/home/bottom_navs/widgets/bottom_booking_card.dart';
-import 'package:servicio/screens/home/bottom_navs/widgets/task_column.dart';
 import 'package:servicio/screens/home/bottom_navs/widgets/top_container.dart';
 
-class HomePage extends StatelessWidget {
+class BookingsPage extends StatefulWidget {
 
 
-  Text subheading(String title) {
-    return Text(
-      title,
-      style: TextStyle(
-          fontFamily: 'Lobster',
-          color: Colors.indigo,
-          fontSize: 20.0,
-          fontWeight: FontWeight.w700,
-          letterSpacing: 1.2),
-    );
-  }
-   String temp = '3';
 
   static CircleAvatar calendarIcon() {
     return CircleAvatar(
@@ -32,6 +25,25 @@ class HomePage extends StatelessWidget {
         size: 20.0,
         color: Colors.white,
       ),
+    );
+  }
+
+  @override
+  _BookingsPageState createState() => _BookingsPageState();
+}
+
+class _BookingsPageState extends State<BookingsPage> {
+
+  final AuthServices _auth = AuthServices();
+
+  Text subheading(String title) {
+    return Text(
+      title.toUpperCase(),
+      style: GoogleFonts.abel(
+        fontWeight: FontWeight.w800 ,
+          color: Colors.indigo[300],
+          fontSize: 20
+      )
     );
   }
 
@@ -48,8 +60,8 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
-      backgroundColor: LightColors.kLightYellow,
-      body: SafeArea(
+      backgroundColor: Colors.grey[50],
+      body: Container(
         child: Column(
           children: <Widget>[
             Padding(
@@ -102,55 +114,7 @@ class HomePage extends StatelessWidget {
             ),
             Expanded(
               child: SingleChildScrollView(
-                child: Column(
-                  children: <Widget>[
-//                    Container(
-//                      color: Colors.transparent,
-//                      padding: EdgeInsets.symmetric(
-//                          horizontal: 20.0, vertical: 10.0),
-//                      child: Column(
-//                        children: <Widget>[
-//                          Row(
-//                            crossAxisAlignment: CrossAxisAlignment.center,
-//                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                            children: <Widget>[
-//                              subheading('My Tasks'),
-////                              GestureDetector(
-////                                onTap: () {
-////                                  Navigator.push(
-////                                    context,
-////                                    MaterialPageRoute(
-////                                        builder: (context) => CalendarPage()),
-////                                  );
-////                                },
-////                                child: calendarIcon(),
-////                              ),
-//                            ],
-//                          ),
-//                          SizedBox(height: 15.0),
-//                          TaskColumn(
-//                            icon: Icons.alarm,
-//                            iconBackgroundColor: LightColors.kRed,
-//                            title: 'To Do',
-//                            subtitle: '5 tasks now. 1 started',
-//                          ),
-//                          SizedBox(height: 15.0,),
-//                          TaskColumn(
-//                            icon: Icons.blur_circular,
-//                            iconBackgroundColor: LightColors.kDarkYellow,
-//                            title: 'In Progress',
-//                            subtitle: '1 tasks now. 1 started',
-//                          ),
-//                          SizedBox(height: 15.0),
-//                          TaskColumn(
-//                            icon: Icons.check_circle_outline,
-//                            iconBackgroundColor: LightColors.kBlue,
-//                            title: 'Done',
-//                            subtitle: '18 tasks now. 13 started',
-//                          ),
-//                        ],
-//                      ),
-//                    ),
+                child:
                     Container(
                       color: Colors.transparent,
                       padding: EdgeInsets.symmetric(
@@ -158,67 +122,52 @@ class HomePage extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-//                          Center(child: subheading('Active Booking')),
-//                          SizedBox(height: 5.0),
-                          GestureDetector(
-                            onTap:(){
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => UpcomingBookings()));
-                            },
-                            child: Row(
-                              children: <Widget>[
-                                if(temp == '1')
-                                  ActiveProjectsCard(
-                                    cardColor: LightColors.indigoLight,
-                                    loadingPercent: 0.00,
-                                    title: 'Vehicle Reached',
-                                    subtitle: 'In the queue',
-                                  ),
-                                if(temp == '2')
-                                  ActiveProjectsCard(
-                                    cardColor: LightColors.indigoLight,
-                                    loadingPercent: 0.25,
-                                    title: 'SERVICE TYPE',
-                                    subtitle: '5 hours progress',
-                                  ),
-                                if(temp == '3')
-                                  ActiveProjectsCard(
-                                    cardColor: LightColors.indigoLight,
-                                    loadingPercent: 0.50,
-                                    title: 'SERVICE TYPE',
-                                    subtitle: '5 hours progress',
-                                  ),
-                                if(temp == '4')
-                                  ActiveProjectsCard(
-                                    cardColor: LightColors.indigoLight,
-                                    loadingPercent: 1.00,
-                                    title: 'SERVICE TYPE',
-                                    subtitle: '5 hours progress',
-                                  ),
-
-                              ],
+                          Center(child: subheading('Active Bookings')),
+                          SizedBox(height: 5.0),
+                          SingleChildScrollView(
+                            scrollDirection: Axis.vertical,
+                            child: StreamBuilder(
+                                stream: getUsersTripsStreamSnapshots(context),
+                                builder: (context, snapshot) {
+                                  if (!snapshot.hasData) return const CircularProgressIndicator();
+                                  return
+                                    ListView.builder(
+                                        physics: const NeverScrollableScrollPhysics(),
+                                        scrollDirection: Axis.vertical,
+                                        shrinkWrap: true,
+                                        itemCount: snapshot.data.documents.length,
+                                        itemBuilder: (BuildContext context, int index) =>
+                                            progressCard(context, snapshot.data.documents[index])
+                                    );
+                                }
                             ),
                           ),
+                          SizedBox(height: 5.0),
                           Row(
                             children: <Widget>[
-                              BottomBookingCard(
-                                cardColor: LightColors.kGreen,
-                                loadingPercent: 0.25,
-                                title: 'UPCOMING BOOKINGS',
-                                subtitle: '9 hours progress',
+                              Expanded(
+                                child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => UpcomingBookings()));
+                                  },
+                                  child: _buildWikiCategory(FontAwesomeIcons.list,
+                                      "UPCOMING BOOKINGS", Colors.blue.withOpacity(0.7)),
+                                ),
                               ),
-                              SizedBox(width: 20.0),
-                              BottomBookingCard(
-                                cardColor: Colors.lightBlue,
-                                loadingPercent: 0.6,
-                                title: 'PREVIOUS BOOKINGS',
-                                subtitle: '20 hours progress',
+                              const SizedBox(width: 10.0),
+                              Expanded(
+                                child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => PrevBookings()));
+                                  },
+                                  child: _buildWikiCategory(
+                                      FontAwesomeIcons.backward, "PREVIOUS BOOKINGS", Colors.greenAccent),
+                                ),
                               ),
                             ],
                           ),
                         ],
-                      ),
                     ),
-                  ],
                 ),
               ),
             ),
@@ -226,5 +175,121 @@ class HomePage extends StatelessWidget {
         ),
       ),
     );
+
+  }
+
+  Widget progressCard(BuildContext context, DocumentSnapshot document) {
+    final onBookings = OnBooking.fromSnapshot(document);
+    print(onBookings.progressStage);
+
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+            context,MaterialPageRoute(builder: (context) => BookingProgress(bookingProgress: onBookings.progressStage)));
+      },
+      child: Row(
+        children: <Widget>[
+          if(onBookings.progressStage == 1)
+            ActiveProjectsCard(
+              cardColor: Color(0xFF84ace8),
+              loadingPercent: 0.10,
+              title: 'Vehicle Reached',
+              subtitle: onBookings.vehicleDetails['brand'],
+              model: onBookings.vehicleDetails['model'],
+              serviceType: onBookings.serviceType,
+
+            ),
+          if(onBookings.progressStage == 2)
+            ActiveProjectsCard(
+              cardColor: Color(0xFF4371b5),
+              loadingPercent: 0.25,
+              title: 'process started ',
+              subtitle: onBookings.vehicleDetails['brand'],
+              model: onBookings.vehicleDetails['model'],
+              serviceType: onBookings.serviceType,
+
+            ),
+          if(onBookings.progressStage == 3)
+            ActiveProjectsCard(
+              cardColor: Color(0xFF235194),
+              loadingPercent: 0.50,
+              title: 'process finished',
+              subtitle: onBookings.vehicleDetails['brand'],
+              model: onBookings.vehicleDetails['model'],
+              serviceType: onBookings.serviceType,
+
+            ),
+          if(onBookings.progressStage == 4)
+            ActiveProjectsCard(
+              cardColor: Color(0xFF103a78),
+              loadingPercent: 0.9,
+              title: 'ready to pickup',
+              subtitle: onBookings.vehicleDetails['brand'],
+              model: onBookings.vehicleDetails['model'],
+              serviceType: onBookings.serviceType,
+            ),
+          if(onBookings.progressStage == 5)
+            ActiveProjectsCard(
+              cardColor: Color(0xFF003082),
+              loadingPercent: 1.00,
+              title: 'complete',
+              subtitle: onBookings.vehicleDetails['brand'],
+              model: onBookings.vehicleDetails['model'],
+              serviceType: onBookings.serviceType,
+
+            ),
+
+        ],
+      ),
+    );
+  }
+
+  Stack _buildWikiCategory(IconData icon, String label, Color color) {
+    return Stack(
+      children: <Widget>[
+        Container(
+          padding: const EdgeInsets.all(26.0),
+          alignment: Alignment.centerRight,
+          child: Opacity(
+              opacity: 0.3,
+              child: Icon(
+                icon,
+                size: 40,
+                color: Colors.white,
+              )),
+          decoration: BoxDecoration(
+            color: color,
+            borderRadius: BorderRadius.circular(20.0),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Icon(
+                icon,
+                color: Colors.white,
+              ),
+              const SizedBox(height: 16.0),
+              Text(
+                label,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              )
+            ],
+          ),
+        )
+      ],
+    );
+  }
+
+
+  Stream<QuerySnapshot> getUsersTripsStreamSnapshots(BuildContext context) async* {
+    final uid = await _auth.getCurrentUID();
+    yield* Firestore.instance.collection('Services').document('Flsu3hG8AMUvYAdpN2KT2FOoJ5A3').collection('ongoing').where('BookingStatus', isEqualTo: 'Accepted').snapshots();
   }
 }

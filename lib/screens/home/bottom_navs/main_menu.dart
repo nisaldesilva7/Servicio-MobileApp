@@ -93,7 +93,7 @@ class _MainMenuState extends State<MainMenu> {
 //                        stream: Firestore.instance.collection("Services").where('searchKey', isEqualTo: 'K').snapshots(),
                         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> querySnapshot) {
                           if (!querySnapshot.hasData)
-                            return Text('No Data');
+                            return Center(child: CircularProgressIndicator());
                           if (querySnapshot.connectionState == ConnectionState.waiting)
                             return const CircularProgressIndicator();
                           else {

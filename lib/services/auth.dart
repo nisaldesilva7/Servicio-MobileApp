@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:servicio/models/user.dart';
 import 'package:servicio/services/database.dart';
 
@@ -98,9 +99,10 @@ class AuthServices {
 
   //check Verification
   Future checkVerification() async {
+    print("check verfication");
     var user = await _auth.currentUser();
-    if(user.isEmailVerified) {
-      return null;
+    if(!user.isEmailVerified) {
+      return false;
     }
   }
 

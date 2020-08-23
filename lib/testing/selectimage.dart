@@ -14,7 +14,7 @@ class _SelectImagesState extends State<SelectImages> {
   File _image;
   getImageFile(ImageSource source) async {
     //Clicking or Picking from Gallery
-    var image = await ImagePicker.pickImage(source: source);
+    var image = await ImagePicker.pickImage(source: source,preferredCameraDevice: CameraDevice.front);
 
     //Cropping the image
     File croppedFile = await ImageCropper.cropImage(
