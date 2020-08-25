@@ -55,7 +55,7 @@ class _ServiceDetailPageState extends State<ServiceDetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-      backgroundColor: Colors.indigo,
+      backgroundColor: Colors.white,
       appBar: AppBar(
 //        backgroundColor: Colors.transparent,
         backgroundColor: Color(0x20000000),

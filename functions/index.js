@@ -10,8 +10,8 @@ exports.sendToDevices  = functions.firestore
   .document('orders/{ordersId}')
   .onCreate(async snapshot => {
 
-    const order = snapshot.data();
 
+    const order = snapshot.data();
 //    const querySnapshot = await db
 //      .collection('Customers')
 //      .document('fv7ICvE5V1f3LMTAGyXWvASgTty1')
@@ -112,7 +112,7 @@ exports.sendBookingConfirmation  = functions.firestore
 
     const order = snapshot.after.data();
     const uid = snapshot.before.data().CustId;
-    const serviceId = snapshot.before.data().ServiceId;
+    const serviceId = snapshot.before.data().ServiceName;
 
 //    const serviceRef = admin.firestore().collection('Services').doc(serviceId).get()
 //    const serviceName = serviceRef.before.date().Service_Name
@@ -137,11 +137,102 @@ exports.sendBookingConfirmation  = functions.firestore
                     click_action: 'FLUTTER_NOTIFICATION_CLICK'
                   }
                 };
+            return fcm.sendToDevice(recentComments, payload);
+         })
+         .catch(err => console.log(err) )
+  });
+
+
+
+exports.sendBookingProgress  = functions.firestore
+                         .document('Customers/{CustomersId}/ongoing/{ongoingId}')
+                         .onUpdate(async (snapshot, context) => {
+
+    const ongoing = snapshot.after.data();
+    const uid = snapshot.before.data().CustId;
+    const prevprogressStage = snapshot.before.data().progressStage;
+    const ServiceName = snapshot.before.data().ServiceName;
+
+//    const serviceRef = admin.firestore().collection('Services').doc(serviceId).get()
+//    const serviceName = serviceRef.before.date().Service_Name
+
+
+    // ref to the parent document
+    const docRef = admin.firestore().collection('Customers').doc(uid)
+    // get all comments and aggregate
+    return docRef.collection('tokens')
+         .get()
+         .then(querySnapshot => {
+           const recentComments = [];
+            // add data from the 5 most recent comments to the array
+            querySnapshot.forEach(doc => {
+                recentComments.push( doc.data().token )
+            });
+            console.log(recentComments);
+
+            if(ongoing.progressStage  == 1){
+            payload = {
+                  notification: {
+                    title: 'Vehicle Reached  ' + ServiceName,
+                    body: ongoing.Vehicle,
+                    click_action: 'FLUTTER_NOTIFICATION_CLICK'
+                  }
+                };
+            }
+            else if(ongoing.progressStage == 2){
+                        payload = {
+                              notification: {
+                                title: 'Service Started  ' + ServiceName,
+                                body: ongoing.Vehicle,
+                                click_action: 'FLUTTER_NOTIFICATION_CLICK'
+                              }
+                            };
+             }
+              else if(ongoing.progressStage == 3){
+                         payload = {
+                               notification: {
+                                 title: 'Service Finished  ' + ServiceName,
+                                 body: ongoing.Vehicle,
+                                 click_action: 'FLUTTER_NOTIFICATION_CLICK'
+                               }
+                             };
+              }
+               else if(ongoing.progressStage == 4){
+                                       payload = {
+                                             notification: {
+                                               title: 'Ready to Pick up  ' + ServiceName,
+                                               body: ongoing.Vehicle,
+                                               click_action: 'FLUTTER_NOTIFICATION_CLICK'
+                                             }
+                                           };
+               }
+                else if(ongoing.progressStage == 5){
+                                        payload = {
+                                              notification: {
+                                                title: 'Service Completed  ' + ServiceName,
+                                                body: ongoing.Vehicle,
+                                                click_action: 'FLUTTER_NOTIFICATION_CLICK'
+                                              }
+                                            };
+               }
+                else{
+                    payload = {
+                      notification: {
+                        title: 'Service Finished  ' + ServiceName,
+                        body: ongoing.Vehicle,
+                        click_action: 'FLUTTER_NOTIFICATION_CLICK'
+                  }
+                };
+            }
+
+
+            console.log(ongoing.progressStage);
 
             return fcm.sendToDevice(recentComments, payload);
          })
          .catch(err => console.log(err) )
   });
+
 
 
 //  .firestore()

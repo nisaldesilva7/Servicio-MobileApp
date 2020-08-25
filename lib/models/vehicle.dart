@@ -5,18 +5,19 @@ class Vehicle {
   final String regNo;
   final String brand;
   final String year;
-  final List num;
+  final String mileage;
+  final String tireSize;
+  final String transmission;
   String vehicleId;
 
 
-  Vehicle(this.model, this.regNo, this.brand, this.year, this.num);
+  Vehicle(this.model, this.regNo, this.brand, this.year,this.mileage,this.tireSize,this.transmission);
   
   Map<String, dynamic> toJson() => {
     'model': model,
     'regNo': regNo,
     'brand': brand,
     'year': year,
-    'num': num,
 
   };
 
@@ -24,7 +25,9 @@ class Vehicle {
         model = snapshot['model'],
         regNo = snapshot['regNo'],
         brand = snapshot['brand'],
+        mileage = snapshot['mileage'],
+        tireSize = snapshot['tireSize'],
+        transmission = snapshot['transmission'],
         year = snapshot['year'],
-        num = List.of(snapshot['num']).cast<String>( ),
         vehicleId = snapshot.documentID;
 }

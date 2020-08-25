@@ -41,6 +41,9 @@ class AuthServices {
 
 
 
+
+
+
   //Sign in Email and pass
   Future signInWithEmail(String email,String password) async {
     try {
@@ -91,10 +94,23 @@ class AuthServices {
     }
   }
 
+  Future changePassword(String password) async {
+    //Create an instance of the current user.
+    var user = await _auth.currentUser();
+    //Pass in the password to updatePassword.
+    user.updatePassword(password).then((_){
+      print("Succesfull changed password");
+    }).catchError((error){
+      print("Password can't be changed" + error.toString());
+      //This might happen, when the wrong password is in, the user isn't found, or if the user hasn't logged in recently.
+    });
+  }
+
   //send verification mail
   Future sendVerificationMail() async {
     var user = await _auth.currentUser();
     user.sendEmailVerification();
+    print('send verification mail');
   }
 
   //check Verification
@@ -104,8 +120,8 @@ class AuthServices {
     if(!user.isEmailVerified) {
       return false;
     }
+    else return true;
   }
-
 
   //reset password
   Future resetPasswordUser() async {

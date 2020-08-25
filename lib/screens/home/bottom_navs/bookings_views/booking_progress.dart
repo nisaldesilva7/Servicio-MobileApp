@@ -21,8 +21,8 @@ class _BookingProgressState extends State<BookingProgress> {
           begin: Alignment.topCenter,
           end: Alignment.bottomLeft,
           colors: [
-            Color(0xFF1049e6),
-            Color(0xFF082e96),
+            Color(0xFF6563db),
+            Color(0xFF3765ad),
           ],
         ),
       ),
@@ -36,7 +36,7 @@ class _BookingProgressState extends State<BookingProgress> {
               elevation: 0,
               backgroundColor: Colors.transparent,
               title: Text(
-                'Upcoming Bookings',
+                'Bookings Progress',
                 style: GoogleFonts.manrope(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
@@ -79,265 +79,355 @@ class _TimelineDeliveryState extends State<TimelineDelivery> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: ListView(
-        shrinkWrap: true,
-        children: <Widget>[
-          TimelineTile(
-            alignment: TimelineAlign.manual,
-            lineX: 0.1,
-            isFirst: true,
-            indicatorStyle: const IndicatorStyle(
-              width: 20,
-              color: Color(0xFF27AA69),
-              padding: EdgeInsets.all(6),
-            ),
-            rightChild:
-            widget.bookingProgress == 1  ? _RightChild(
-              disabled: false,
-              asset: 'assets/delivery/order_placed.png',
-              title: 'VEHICLE REACHED',
-              message: 'We have received your vehicle.',
-            ):
-            widget.bookingProgress == 2  ? _RightChild(
-              disabled: false,
-              asset: 'assets/delivery/order_placed.png',
-              title: 'VEHICLE REACHED',
-              message: 'We have received your vehicle.',
-            ):widget.bookingProgress == 3  ? _RightChild(
-              disabled: false,
-              asset: 'assets/delivery/order_placed.png',
-              title: 'VEHICLE REACHED',
-              message: 'We have received your vehicle.',
-            ): widget.bookingProgress == 4  ? _RightChild(
-              disabled: false,
-              asset: 'assets/delivery/order_placed.png',
-              title: 'VEHICLE REACHED',
-              message: 'We have received your vehicle.',
-            ): widget.bookingProgress == 5  ? _RightChild(
-              disabled: false,
-              asset: 'assets/delivery/order_placed.png',
-              title: 'VEHICLE REACHED',
-              message: 'We have received your vehicle.',
-            ):
-            _RightChild(
-              disabled: true,
-              asset: 'assets/delivery/order_placed.png',
-              title: 'VEHICLE REACHED',
-              message: 'We have received your vehicle.',
-            ),
-            topLineStyle: const LineStyle(
-              color: Color(0xFF27AA69),
-            ),
-          ),
-
-          TimelineTile(
-            alignment: TimelineAlign.manual,
-            lineX: 0.1,
-            indicatorStyle: const IndicatorStyle(
-              width: 20,
-              color: Color(0xFF27AA69),
-              padding: EdgeInsets.all(6),
-            ),
-            rightChild:
-            widget.bookingProgress == 1  ? _RightChild(
-              disabled: true,
-              asset: 'assets/delivery/order_placed.png',
-              title: 'PROCESS STARTED',
-              message: 'Your service has been started.',
-            ):
-            widget.bookingProgress == 2  ? _RightChild(
-              disabled: false,
-              asset: 'assets/delivery/order_placed.png',
-              title: 'PROCESS STARTED',
-              message: 'Your service has been started.',
-            ):
-            widget.bookingProgress == 3  ? _RightChild(
-              disabled: false,
-              asset: 'assets/delivery/order_placed.png',
-              title: 'PROCESS STARTED',
-              message: 'Your service has been started.',
-            ):widget.bookingProgress == 4  ? _RightChild(
-              disabled: false,
-              asset: 'assets/delivery/order_placed.png',
-              title: 'PROCESS STARTED',
-              message: 'Your service has been started.',
-            ):widget.bookingProgress == 5  ? _RightChild(
-              disabled: false,
-              asset: 'assets/delivery/order_placed.png',
-              title: 'PROCESS STARTED',
-              message: 'Your service has been started.',
-            ):
-            _RightChild(
-              disabled: true,
-              asset: 'assets/delivery/order_placed.png',
-              title: 'PROCESS STARTED',
-              message: 'Your service has been started.',
-            ),
-            topLineStyle: const LineStyle(
-              color: Color(0xFF27AA69),
-            ),
-          ),
-
-          TimelineTile(
-            alignment: TimelineAlign.manual,
-            lineX: 0.1,
-            indicatorStyle: const IndicatorStyle(
-              indicator: _IconIndicator(
-                iconData: Icons.calendar_today,
-                size: 20,
-                color: Colors.red,
+    return Column(
+      children: <Widget>[
+        Center(
+          child: ListView(
+            shrinkWrap: true,
+            children: <Widget>[
+              TimelineTile(
+                alignment: TimelineAlign.manual,
+                lineX: 0.1,
+                isFirst: true,
+                indicatorStyle: const IndicatorStyle(
+                  width: 20,
+                  color: Color(0xFF27AA69),
+                  padding: EdgeInsets.all(6),
+                ),
+                rightChild:
+                widget.bookingProgress == 1  ? _RightChild(
+                  disabled: false,
+                  asset: 'assets/delivery/order_placed.png',
+                  title: 'VEHICLE REACHED',
+                  message: 'We have received your vehicle.',
+                ):
+                widget.bookingProgress == 2  ? _RightChild(
+                  disabled: false,
+                  asset: 'assets/delivery/order_placed.png',
+                  title: 'VEHICLE REACHED',
+                  message: 'We have received your vehicle.',
+                ):widget.bookingProgress == 3  ? _RightChild(
+                  disabled: false,
+                  asset: 'assets/delivery/order_placed.png',
+                  title: 'VEHICLE REACHED',
+                  message: 'We have received your vehicle.',
+                ): widget.bookingProgress == 4  ? _RightChild(
+                  disabled: false,
+                  asset: 'assets/delivery/order_placed.png',
+                  title: 'VEHICLE REACHED',
+                  message: 'We have received your vehicle.',
+                ): widget.bookingProgress == 5  ? _RightChild(
+                  disabled: false,
+                  asset: 'assets/delivery/order_placed.png',
+                  title: 'VEHICLE REACHED',
+                  message: 'We have received your vehicle.',
+                ):
+                _RightChild(
+                  disabled: true,
+                  asset: 'assets/delivery/order_placed.png',
+                  title: 'VEHICLE REACHED',
+                  message: 'We have received your vehicle.',
+                ),
+                topLineStyle: const LineStyle(
+                  color: Color(0xFF27AA69),
+                ),
               ),
+
+              TimelineTile(
+                alignment: TimelineAlign.manual,
+                lineX: 0.1,
+                indicatorStyle: const IndicatorStyle(
+                  width: 20,
+                  color: Color(0xFF27AA69),
+                  padding: EdgeInsets.all(6),
+                ),
+                rightChild:
+                widget.bookingProgress == 1  ? _RightChild(
+                  disabled: true,
+                  asset: 'assets/delivery/order_placed.png',
+                  title: 'PROCESS STARTED',
+                  message: 'Your service has been started.',
+                ):
+                widget.bookingProgress == 2  ? _RightChild(
+                  disabled: false,
+                  asset: 'assets/delivery/order_placed.png',
+                  title: 'PROCESS STARTED',
+                  message: 'Your service has been started.',
+                ):
+                widget.bookingProgress == 3  ? _RightChild(
+                  disabled: false,
+                  asset: 'assets/delivery/order_placed.png',
+                  title: 'PROCESS STARTED',
+                  message: 'Your service has been started.',
+                ):widget.bookingProgress == 4  ? _RightChild(
+                  disabled: false,
+                  asset: 'assets/delivery/order_placed.png',
+                  title: 'PROCESS STARTED',
+                  message: 'Your service has been started.',
+                ):widget.bookingProgress == 5  ? _RightChild(
+                  disabled: false,
+                  asset: 'assets/delivery/order_placed.png',
+                  title: 'PROCESS STARTED',
+                  message: 'Your service has been started.',
+                ):
+                _RightChild(
+                  disabled: true,
+                  asset: 'assets/delivery/order_placed.png',
+                  title: 'PROCESS STARTED',
+                  message: 'Your service has been started.',
+                ),
+                topLineStyle: const LineStyle(
+                  color: Color(0xFF27AA69),
+                ),
+              ),
+
+              TimelineTile(
+                alignment: TimelineAlign.manual,
+                lineX: 0.1,
+                indicatorStyle: const IndicatorStyle(
+                  indicator: _IconIndicator(
+                    iconData: Icons.done_all,
+                    size: 18,
+                    color: Colors.indigo,
+                  ),
 //              indicatorY: 0.6,
-              drawGap: true,
-              width: 30,
-              height: 30,
-              padding: EdgeInsets.all(6),
-            ),
-            rightChild:
-            widget.bookingProgress == 1 ? _RightChild(
-              disabled: true,
-              asset: 'assets/delivery/order_processed.png',
-              title: 'PROCESS FINISHED',
-              message: 'We are preparing your order.',
-            ): widget.bookingProgress == 2 ? _RightChild(
-              disabled: true,
-              asset: 'assets/delivery/order_processed.png',
-              title: 'PROCESS FINISHED',
-              message: 'We are preparing your order.',
-            ): widget.bookingProgress == 3 ? _RightChild(
-              disabled: false,
-              asset: 'assets/delivery/order_processed.png',
-              title: 'PROCESS FINISHED',
-              message: 'We are preparing your order.',
-            ): widget.bookingProgress == 4 ? _RightChild(
-              disabled: false,
-              asset: 'assets/delivery/order_processed.png',
-              title: 'PROCESS FINISHED',
-              message: 'We are preparing your order.',
-            ): widget.bookingProgress == 5 ? _RightChild(
-              disabled: false,
-              asset: 'assets/delivery/order_processed.png',
-              title: 'PROCESS FINISHED',
-              message: 'We are preparing your order.',
-            ):
-            _RightChild(
-              disabled: true,
-              asset: 'assets/delivery/order_processed.png',
-              title: 'PROCESS FINISHED',
-              message: 'We are preparing your order.',
-            ),
-            topLineStyle: const LineStyle(
-              color: Color(0xFF27AA69),
-            ),
-            bottomLineStyle: const LineStyle(
-              color: Color(0xFFDADADA),
-            ),
+                  drawGap: true,
+                  width: 30,
+                  height: 30,
+                  padding: EdgeInsets.all(6),
+                ),
+                rightChild:
+                widget.bookingProgress == 1 ? _RightChild(
+                  disabled: true,
+                  asset: 'assets/delivery/order_processed.png',
+                  title: 'PROCESS FINISHED',
+                  message: 'We are preparing your order.',
+                ): widget.bookingProgress == 2 ? _RightChild(
+                  disabled: true,
+                  asset: 'assets/delivery/order_processed.png',
+                  title: 'PROCESS FINISHED',
+                  message: 'We are preparing your order.',
+                ): widget.bookingProgress == 3 ? _RightChild(
+                  disabled: false,
+                  asset: 'assets/delivery/order_processed.png',
+                  title: 'PROCESS FINISHED',
+                  message: 'We are preparing your order.',
+                ): widget.bookingProgress == 4 ? _RightChild(
+                  disabled: false,
+                  asset: 'assets/delivery/order_processed.png',
+                  title: 'PROCESS FINISHED',
+                  message: 'We are preparing your order.',
+                ): widget.bookingProgress == 5 ? _RightChild(
+                  disabled: false,
+                  asset: 'assets/delivery/order_processed.png',
+                  title: 'PROCESS FINISHED',
+                  message: 'We are preparing your order.',
+                ):
+                _RightChild(
+                  disabled: true,
+                  asset: 'assets/delivery/order_processed.png',
+                  title: 'PROCESS FINISHED',
+                  message: 'We are preparing your order.',
+                ),
+                topLineStyle: const LineStyle(
+                  color: Color(0xFF27AA69),
+                ),
+                bottomLineStyle: const LineStyle(
+                  color: Color(0xFFDADADA),
+                ),
+              ),
+
+              TimelineTile(
+                alignment: TimelineAlign.manual,
+                lineX: 0.1,
+                indicatorStyle: const IndicatorStyle(
+                  width: 20,
+                  color: Color(0xFF1db884),
+                  padding: EdgeInsets.all(6),
+                ),
+                rightChild:
+                widget.bookingProgress == 1 ? _RightChild(
+                  disabled: true,
+                  asset: 'assets/delivery/ready_to_pickup.png',
+                  title: 'READY TO PICKUP',
+                  message: 'Your vehicle is ready for pickup.',
+                ):
+                widget.bookingProgress == 2 ? _RightChild(
+                  disabled: true,
+                  asset: 'assets/delivery/ready_to_pickup.png',
+                  title: 'READY TO PICKUP',
+                  message: 'Your vehicle is ready for pickup.',
+                ): widget.bookingProgress == 3 ? _RightChild(
+                  disabled: true,
+                  asset: 'assets/delivery/ready_to_pickup.png',
+                  title: 'READY TO PICKUP',
+                  message: 'Your vehicle is ready for pickup.',
+                ):
+                widget.bookingProgress == 4 ? _RightChild(
+                  disabled: false,
+                  asset: 'assets/delivery/ready_to_pickup.png',
+                  title: 'READY TO PICKUP',
+                  message: 'Your vehicle is ready for pickup.',
+                ): widget.bookingProgress == 5 ? _RightChild(
+                  disabled: false,
+                  asset: 'assets/delivery/ready_to_pickup.png',
+                  title: 'READY TO PICKUP',
+                  message: 'Your vehicle is ready for pickup.',
+                ): _RightChild(
+                  disabled: true,
+                  asset: 'assets/delivery/ready_to_pickup.png',
+                  title: 'READY TO PICKUP',
+                  message: 'Your vehicle is ready for pickup.',
+                ),
+                topLineStyle: const LineStyle(
+                  color: Color(0xFFDADADA),
+                ),
+              ),
+
+              TimelineTile(
+                alignment: TimelineAlign.manual,
+                lineX: 0.1,
+                isLast: true,
+                indicatorStyle: const IndicatorStyle(
+                  width: 20,
+                  color: Color(0xFF827265),
+                  padding: EdgeInsets.all(6),
+                ),
+                rightChild:
+                widget.bookingProgress == 1 ? _RightChild(
+                  disabled: true,
+                  asset: 'assets/delivery/ready_to_pickup.png',
+                  title: 'SERVICE COMPLETED',
+                  message: 'Rate and Review Your Service....',
+                ): widget.bookingProgress == 2 ? _RightChild(
+                  disabled: true,
+                  asset: 'assets/delivery/ready_to_pickup.png',
+                  title: 'SERVICE COMPLETED',
+                  message: 'Rate and Review Your Service....',
+                ): widget.bookingProgress == 3 ? _RightChild(
+                  disabled: true,
+                  asset: 'assets/delivery/ready_to_pickup.png',
+                  title: 'SERVICE COMPLETED',
+                  message: 'Rate and Review Your Service....',
+                ): widget.bookingProgress == 4 ? _RightChild(
+                  disabled: true,
+                  asset: 'assets/delivery/ready_to_pickup.png',
+                  title: 'SERVICE COMPLETED',
+                  message: 'Rate and Review Your Service....',
+                ): widget.bookingProgress == 5 ? _RightChild(
+                  disabled: false,
+                  asset: 'assets/delivery/ready_to_pickup.png',
+                  title: 'SERVICE COMPLETED',
+                  message: 'Rate and Review Your Service....',
+                ):
+                _RightChild(
+                  disabled: false,
+                  asset: 'assets/delivery/ready_to_pickup.png',
+                  title: 'SERVICE COMPLETED',
+                  message: 'Rate and Review Your Service....',
+                ),
+                topLineStyle: const LineStyle(
+                  color: Color(0xFFDADADA),
+                ),
+              ),
+            ],
           ),
+        ),
+        widget.bookingProgress == 5 ? RaisedButton(
+          padding: EdgeInsets.symmetric(vertical: 10,horizontal: 20),
+          child: Text("Complete".toUpperCase(),
+            style: GoogleFonts.bebasNeue(
+              fontSize: 25
+            ),
 
-          TimelineTile(
-            alignment: TimelineAlign.manual,
-            lineX: 0.1,
-            indicatorStyle: const IndicatorStyle(
-              width: 20,
-              color: Color(0xFFDADADA),
-              padding: EdgeInsets.all(6),
-            ),
-            rightChild:
-            widget.bookingProgress == 1 ? _RightChild(
-              disabled: true,
-              asset: 'assets/delivery/ready_to_pickup.png',
-              title: 'READY TO PICKUP',
-              message: 'Your vehicle is ready for pickup.',
-            ):
-            widget.bookingProgress == 2 ? _RightChild(
-              disabled: true,
-              asset: 'assets/delivery/ready_to_pickup.png',
-              title: 'READY TO PICKUP',
-              message: 'Your vehicle is ready for pickup.',
-            ): widget.bookingProgress == 3 ? _RightChild(
-              disabled: true,
-              asset: 'assets/delivery/ready_to_pickup.png',
-              title: 'READY TO PICKUP',
-              message: 'Your vehicle is ready for pickup.',
-            ):
-            widget.bookingProgress == 4 ? _RightChild(
-              disabled: false,
-              asset: 'assets/delivery/ready_to_pickup.png',
-              title: 'READY TO PICKUP',
-              message: 'Your vehicle is ready for pickup.',
-            ): widget.bookingProgress == 5 ? _RightChild(
-              disabled: false,
-              asset: 'assets/delivery/ready_to_pickup.png',
-              title: 'READY TO PICKUP',
-              message: 'Your vehicle is ready for pickup.',
-            ): _RightChild(
-              disabled: true,
-              asset: 'assets/delivery/ready_to_pickup.png',
-              title: 'READY TO PICKUP',
-              message: 'Your vehicle is ready for pickup.',
-            ),
-            topLineStyle: const LineStyle(
-              color: Color(0xFFDADADA),
-            ),
           ),
-
-          TimelineTile(
-            alignment: TimelineAlign.manual,
-            lineX: 0.1,
-            isLast: true,
-            indicatorStyle: const IndicatorStyle(
-              width: 20,
-              color: Color(0xFFDADADA),
-              padding: EdgeInsets.all(6),
-            ),
-            rightChild:
-            widget.bookingProgress == 1 ? _RightChild(
-              disabled: true,
-              asset: 'assets/delivery/ready_to_pickup.png',
-              title: 'SERVICE COMPLETED',
-              message: 'Rate and Review Your Service....',
-            ): widget.bookingProgress == 2 ? _RightChild(
-              disabled: true,
-              asset: 'assets/delivery/ready_to_pickup.png',
-              title: 'SERVICE COMPLETED',
-              message: 'Rate and Review Your Service....',
-            ): widget.bookingProgress == 3 ? _RightChild(
-              disabled: true,
-              asset: 'assets/delivery/ready_to_pickup.png',
-              title: 'SERVICE COMPLETED',
-              message: 'Rate and Review Your Service....',
-            ): widget.bookingProgress == 4 ? _RightChild(
-              disabled: true,
-              asset: 'assets/delivery/ready_to_pickup.png',
-              title: 'SERVICE COMPLETED',
-              message: 'Rate and Review Your Service....',
-            ): widget.bookingProgress == 5 ? _RightChild(
-              disabled: false,
-              asset: 'assets/delivery/ready_to_pickup.png',
-              title: 'SERVICE COMPLETED',
-              message: 'Rate and Review Your Service....',
-            ):
-            _RightChild(
-              disabled: false,
-              asset: 'assets/delivery/ready_to_pickup.png',
-              title: 'SERVICE COMPLETED',
-              message: 'Rate and Review Your Service....',
-            ),
-            topLineStyle: const LineStyle(
-              color: Color(0xFFDADADA),
-            ),
-          ),
-
-
-        ],
-      ),
+          textColor: Colors.white,
+          color: Colors.grey,
+          onPressed: () {
+            _customAlertDialog(context, 'Rate And Review Service');
+          },
+          shape: new RoundedRectangleBorder(
+              borderRadius: new BorderRadius.circular(12.0)),
+        ): Container(),
+      ],
     );
   }
   Stream<QuerySnapshot> getUsersTripsStreamSnapshots(BuildContext context) async* {
     final uid = await _auth.getCurrentUID();
     yield* Firestore.instance.collection('Services').document('Flsu3hG8AMUvYAdpN2KT2FOoJ5A3').collection('ongoing').snapshots();
   }
+
+  _customAlertDialog(BuildContext context, String text) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Material(
+              type: MaterialType.transparency,
+              child: Container(
+                alignment: Alignment.center,
+                child: Container(
+                  margin: const EdgeInsets.all(10.0),
+                  padding: const EdgeInsets.all(10.0),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(18.0),
+                    color: Colors.white,
+                  ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      SizedBox(height: 10.0),
+                      Icon(
+                        Icons.done_all,
+                        color: Colors.red,
+                        size: 50,
+                      ),
+                      const SizedBox(height: 10.0),
+                      Text(
+                        'Your Services Process has been Completed',
+                        style: TextStyle(fontSize: 20.0, color: Colors.blue, fontWeight: FontWeight.bold),
+                        textAlign: TextAlign.center,
+                      ),
+                      Divider(),
+                      Text(
+                        text,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 15.0),
+                      ),
+                      Divider(),
+                      SizedBox(
+                        width: double.infinity,
+                        child: FlatButton(
+                          padding: const EdgeInsets.all(5.0),
+                          child: Text('Submit'),
+                          onPressed: () {
+
+                          }
+                        ),
+                      ),
+                      SizedBox(
+                        width: double.infinity,
+                        child: FlatButton(
+                          padding: const EdgeInsets.all(5.0),
+                          child: Text('SKIP'),
+                          onPressed: () {
+                            Navigator.pop(context, true);
+                            Navigator.pop(context, true);
+                          }
+                        ),
+                      ),
+
+                    ],
+                  ),
+                ),
+              )),
+        );
+      },
+    );
+  }
+
+
 }
 
 
@@ -360,7 +450,7 @@ class _IconIndicator extends StatelessWidget {
         Container(
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: Colors.white.withOpacity(0.7),
+            color: Colors.white.withOpacity(0.9),
           ),
         ),
         Positioned.fill(
@@ -417,10 +507,10 @@ class _RightChild extends StatelessWidget {
                 title,
                 style: GoogleFonts.yantramanav(
                   color: disabled
-                      ? Colors.grey[400]
+                      ? Colors.grey[350]
                       :  Colors.white,
                   fontSize: 18,
-                  fontWeight: FontWeight.w500,
+                  fontWeight: FontWeight.w800,
                 ),
               ),
               const SizedBox(height: 6),
@@ -428,7 +518,7 @@ class _RightChild extends StatelessWidget {
                 message,
                 style: GoogleFonts.yantramanav(
                   color: disabled
-                      ? Colors.grey[400]
+                      ? Colors.grey[350]
                       :  Colors.white,
                   fontSize: 16,
                 ),

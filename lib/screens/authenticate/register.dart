@@ -33,10 +33,12 @@ class _RegisterState extends State<Register> {
   Widget build(BuildContext context) {
     return loading ? Loading() : Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () {},
-        ),
+//        leading: IconButton(
+//          icon: Icon(Icons.arrow_back, color: Colors.white),
+//          onPressed: () {
+//            Navigator.pop(context)
+//          },
+//        ),
         backgroundColor: Colors.indigo,
         actions: <Widget>[
           FlatButton.icon(

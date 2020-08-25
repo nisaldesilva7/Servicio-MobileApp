@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:servicio/models/service.dart';
 import 'package:servicio/screens/home/bottom_navs/search.dart';
 import 'package:servicio/screens/service_page/service_detail_view.dart';
+import 'package:servicio/screens/app_settings.dart';
 import 'package:servicio/services/auth.dart';
 import 'package:servicio/shared/SliderImages.dart' as assets;
 
@@ -157,11 +158,14 @@ class _HomeScreenTopState extends State<HomeScreenTop> {
                         ],
                       ),
                       Spacer(),
-                      GestureDetector(
-                          onTap: () {
+                      IconButton(
+                        icon: Icon(Icons.settings),
+                        onPressed: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => AppSettings()));
 
-                          },
-                          child: Icon(Icons.settings, color: Colors.white,))
+                        },
+                        color: Colors.white,
+                      )
                     ],
                   ),
                 ),

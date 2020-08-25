@@ -28,7 +28,7 @@ class OnBooking {
   OnBooking.fromSnapshot(DocumentSnapshot snapshot) :
         bookingStatus = snapshot['BookingStatus'],
         dateTime = snapshot['DateTime'],
-        progressStage = snapshot['ProgressStage'],
+        progressStage = snapshot['progressStage'],
         serviceId = snapshot['ServiceId'],
         vehicleDetails = snapshot['VehicleDetails'],
         serviceType= snapshot['ServiceType'],

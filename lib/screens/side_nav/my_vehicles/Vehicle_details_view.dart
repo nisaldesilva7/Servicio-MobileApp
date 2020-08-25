@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:servicio/models/vehicle.dart';
 
@@ -57,7 +58,7 @@ class _VehiclePageState extends State<VehiclePage> with SingleTickerProviderStat
                 Padding(
                   padding: EdgeInsets.only(right: 15.0),
                   child: Text(
-                    widget.serviceInfo.brand,
+                    widget.serviceInfo.brand.toUpperCase(),
                     style: TextStyle(
                         color: Color(0xFF434C68).withOpacity(0.7),
                         fontSize: 50.0,
@@ -99,7 +100,7 @@ class _VehiclePageState extends State<VehiclePage> with SingleTickerProviderStat
                         children: <Widget>[
                           Icon(Icons.shutter_speed, color: Color(0xFF434C68).withOpacity(0.4)),
                           SizedBox(height: 5.0),
-                          Text('1000KMs',
+                          Text(widget.serviceInfo.mileage,
                             style: TextStyle(fontFamily: 'Cabin', fontSize: 20.0, fontWeight: FontWeight.bold),
                           )
                         ],
@@ -107,9 +108,9 @@ class _VehiclePageState extends State<VehiclePage> with SingleTickerProviderStat
                       SizedBox(width: 10.0),
                       Column(
                         children: <Widget>[
-                          Icon(Icons.timer, color: Color(0xFF434C68).withOpacity(0.4)),
+                          Icon(CupertinoIcons.circle_filled, color: Color(0xFF434C68).withOpacity(0.4)),
                           SizedBox(height: 5.0),
-                          Text('3.2',
+                          Text(widget.serviceInfo.tireSize,
                             style: TextStyle(
                                 fontFamily: 'Oswald',
                                 fontSize: 20.0,
@@ -119,21 +120,21 @@ class _VehiclePageState extends State<VehiclePage> with SingleTickerProviderStat
 
                         ],
                       ),
-                      SizedBox(width: 10.0),
-                      Column(
-                        children: <Widget>[
-                          Icon(Icons.network_cell, color: Color(0xFF434C68).withOpacity(0.4)),
-                          SizedBox(height: 5.0),
-                          Text('443',
-                            style: TextStyle(
-                                fontFamily: 'Oswald',
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.bold
-                            ),
-                          )
-
-                        ],
-                      )
+//                      SizedBox(width: 10.0),
+//                      Column(
+//                        children: <Widget>[
+//                          Icon(Icons.network_cell, color: Color(0xFF434C68).withOpacity(0.4)),
+//                          SizedBox(height: 5.0),
+//                          Text('443',
+//                            style: TextStyle(
+//                                fontFamily: 'Oswald',
+//                                fontSize: 20.0,
+//                                fontWeight: FontWeight.bold
+//                            ),
+//                          )
+//
+//                        ],
+//                      )
                     ],
                   ),
                 ),

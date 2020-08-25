@@ -73,7 +73,7 @@ class _MyVehiclesState extends State<MyVehicles> {
         child: Card(
           shadowColor: Colors.grey,
           elevation: 10.0,
-          color: Colors.indigo,
+          color: Color(0xFF2f69de),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Column(
@@ -81,7 +81,7 @@ class _MyVehiclesState extends State<MyVehicles> {
                 Padding(
                   padding: const EdgeInsets.only(top: 8.0, bottom: 4.0),
                   child: Row(children: <Widget>[
-                    Text(vehicle.brand, style: new TextStyle(fontSize: 30.0, fontFamily: 'Cabin', color: Colors.white),),
+                    Text(vehicle.brand.toUpperCase(), style: new TextStyle(fontSize: 35.0, fontFamily: 'Cabin', color: Colors.white),),
                     Spacer(),
                     IconButton(icon: Icon(Icons.add_to_photos),color: Colors.white, tooltip: 'Modfiy Vehicle',
                       onPressed: ()  {
@@ -99,7 +99,7 @@ class _MyVehiclesState extends State<MyVehicles> {
                 Padding(
                   padding: const EdgeInsets.only(top: 4.0, bottom: 40.0),
                   child: Row(children: <Widget>[
-                    getTextWidgets(vehicle.num),
+
                     Spacer(),
                   ]),
                 ),
@@ -107,7 +107,7 @@ class _MyVehiclesState extends State<MyVehicles> {
                   padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
                   child: Row(
                     children: <Widget>[
-                      Text(vehicle.regNo, style: new TextStyle(fontSize: 35.0,fontFamily: 'Cabin', color: Colors.white),),
+                      Text(vehicle.regNo.toUpperCase(), style: new TextStyle(fontSize: 25.0,fontFamily: 'Cabin', color: Colors.white),),
                       Spacer(),
                       Icon(Icons.directions_car,color: Colors.white,),
                     ],

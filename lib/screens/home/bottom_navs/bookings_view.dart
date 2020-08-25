@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:servicio/models/ongoingBooking.dart';
 import 'package:servicio/screens/home/bottom_navs/bookings_views/booking_progress.dart';
+import 'package:servicio/screens/home/bottom_navs/bookings_views/pending_bookings.dart';
 import 'package:servicio/services/auth.dart';
 import 'bookings_views/upcoming_bookings.dart';
 import 'package:servicio/screens/home/bottom_navs/bookings_views/prev_bookings.dart';
@@ -88,9 +89,9 @@ class _BookingsPageState extends State<BookingsPage> {
                               backgroundColor: Colors.grey[100],
                               center: CircleAvatar(
                                 backgroundColor: LightColors.kBlue,
-                                radius: 22.0,
+                                radius: 30.0,
                                 backgroundImage: AssetImage(
-                                  'assets/booing.png',
+                                  'assets/calendar.png',
                                 ),
                               ),
                             ),
@@ -130,8 +131,8 @@ class _BookingsPageState extends State<BookingsPage> {
                                 stream: getUsersTripsStreamSnapshots(context),
                                 builder: (context, snapshot) {
                                   if (!snapshot.hasData) return const CircularProgressIndicator();
-                                  return
-                                    ListView.builder(
+                                  if (snapshot.data == null) return Center(child: Text("No Active Bookings currently"));
+                                  return ListView.builder(
                                         physics: const NeverScrollableScrollPhysics(),
                                         scrollDirection: Axis.vertical,
                                         shrinkWrap: true,
@@ -166,6 +167,20 @@ class _BookingsPageState extends State<BookingsPage> {
                               ),
                             ],
                           ),
+                          SizedBox(height: 10.0),
+                          Row(
+                            children: <Widget>[
+                              Expanded(
+                                child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => PendingBookings()));
+                                  },
+                                  child: _buildWikiCategory(
+                                      FontAwesomeIcons.fileDownload, "PENDING BOOKINGS", Color(0xff8484ad)),
+                                ),
+                              ),
+                            ],
+                          )
                         ],
                     ),
                 ),
@@ -189,6 +204,9 @@ class _BookingsPageState extends State<BookingsPage> {
       },
       child: Row(
         children: <Widget>[
+          if(onBookings.progressStage == 0)
+            Center(child: Text("Your Booking Has initialized\n please br on time".toUpperCase())),
+          SizedBox(height: 30,),
           if(onBookings.progressStage == 1)
             ActiveProjectsCard(
               cardColor: Color(0xFF84ace8),
@@ -290,6 +308,6 @@ class _BookingsPageState extends State<BookingsPage> {
 
   Stream<QuerySnapshot> getUsersTripsStreamSnapshots(BuildContext context) async* {
     final uid = await _auth.getCurrentUID();
-    yield* Firestore.instance.collection('Services').document('Flsu3hG8AMUvYAdpN2KT2FOoJ5A3').collection('ongoing').where('BookingStatus', isEqualTo: 'Accepted').snapshots();
+    yield* Firestore.instance.collection('Customers').document(uid).collection('ongoing').snapshots();
   }
 }

@@ -96,10 +96,10 @@ class _BookServiceState extends State<BookService> {
                                       'CustName': 'Nisal',
                                       'CustId': uid,
                                       'ServiceId': widget.serviceInfo.serviceId,
+                                      'ServiceName': widget.serviceInfo.serviceName,
                                       'Vehicle': selectedVehicle,
                                       'Description': _description,
                                       'DateTime': _nisalwanttime,
-
                                     }
                                 )
                                     .then((docRef) {
