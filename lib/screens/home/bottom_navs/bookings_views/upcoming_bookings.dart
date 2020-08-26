@@ -85,14 +85,14 @@ class _UpcomingBookingsState extends State<UpcomingBookings> {
   Widget buildList(BuildContext context, DocumentSnapshot document) {
     final bookingDoc = Bookings.fromSnapshot(document);
     print(bookingDoc);
-
+    List date = bookingDoc.date.toString().split('T');
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(22),
         color: Colors.white,
       ),
       width: double.infinity,
-      height: 110,
+      height: 150,
       margin: EdgeInsets.symmetric(vertical: 8, horizontal: 20),
       padding: EdgeInsets.symmetric(vertical: 17, horizontal: 20),
       child: GestureDetector(
@@ -102,43 +102,41 @@ class _UpcomingBookingsState extends State<UpcomingBookings> {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Container(
-              width: 75,
-              height: 110,
-              margin: EdgeInsets.only(right: 15),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(25),
-                border: Border.all(width: 3, color: Colors.red),
-                image: DecorationImage(
-                    image: NetworkImage('serviceDoc.photo}'),
-                    fit: BoxFit.cover),
-              ),
-            ),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    'serviceDoc.serviceName.toUpperCase()',
+                    bookingDoc.serviceType.toUpperCase(),
                     style: TextStyle(color: Colors.indigo, fontWeight: FontWeight.bold, fontSize: 18),),
                   SizedBox(height: 6,),
                   Row(
                     children: <Widget>[
-                      Icon(Icons.location_on, color: Colors.indigo, size: 20,),
+                      Icon(Icons.date_range, color: Colors.indigo, size: 20,),
                       SizedBox(width: 5,),
                       Text(
-                          'location of service',
+                          date[0],
                           style: TextStyle(color: Colors.blue, fontSize: 13, letterSpacing: .3)),
                     ],
                   ),
                   SizedBox(height: 6,),
                   Row(
                     children: <Widget>[
-                      Icon(Icons.format_list_bulleted, color: Colors.indigo, size: 20,),
+                      Icon(Icons.timer, color: Colors.indigo, size: 20,),
                       SizedBox(width: 5,),
                       Text(
-                          '{serviceDoc.serviceTypes[0]}..'.toUpperCase(),
-                          style: TextStyle(color: Colors.white10, fontSize: 13, letterSpacing: .3)),
+                          date[1],
+                          style: TextStyle(color: Colors.blue, fontSize: 13, letterSpacing: .3)),
+                    ],
+                  ),
+                  SizedBox(height: 6,),
+                  Row(
+                    children: <Widget>[
+                      Icon(Icons.airport_shuttle, color: Colors.indigo, size: 20,),
+                      SizedBox(width: 5,),
+                      Text(
+                          bookingDoc.vehicleId,
+                          style: TextStyle(color: Colors.indigoAccent, fontSize: 13, letterSpacing: .3)),
                     ],
                   ),
                 ],

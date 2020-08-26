@@ -2,6 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:servicio/screens/myprofile.dart';
 import 'package:servicio/shared/SliderImages.dart';
 import 'package:servicio/services/auth.dart';
 
@@ -19,7 +21,7 @@ class _AppSettingsState extends State<AppSettings> {
   @override
   void initState() {
     super.initState();
-    _dark = false;
+    _dark = true;
   }
 
   Brightness _getBrightness() {
@@ -34,7 +36,7 @@ class _AppSettingsState extends State<AppSettings> {
         brightness: _getBrightness(),
       ),
       child: Scaffold(
-        backgroundColor: _dark ? null : Colors.grey.shade200,
+        backgroundColor: _dark ? null : Colors.grey[100],
         appBar: AppBar(
           elevation: 0,
           brightness: _getBrightness(),
@@ -67,21 +69,21 @@ class _AppSettingsState extends State<AppSettings> {
                     elevation: 8.0,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0)),
-                    color: Colors.purple,
+                    color: Colors.indigo,
                     child: ListTile(
                       onTap: () {
-                        //open edit profile
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => EditProfile()));
                       },
                       title: Text(
-                        "Edit my profile",
+                        "Edit My profile",
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
-                      leading: CircleAvatar(
-                        backgroundImage: CachedNetworkImageProvider(avatars[0]),
-                      ),
+//                      leading: CircleAvatar(
+//                        backgroundImage: CachedNetworkImageProvider(avatars[0]),
+//                      ),
                       trailing: Icon(
                         Icons.edit,
                         color: Colors.white,
@@ -107,22 +109,22 @@ class _AppSettingsState extends State<AppSettings> {
                             _changePasswordDialog(context);                       },
                         ),
                         _buildDivider(),
-                        ListTile(
-                          leading: Icon(
-                            FontAwesomeIcons.language,
-                            color: Colors.purple,
-                          ),
-                          title: Text("Change Password"),
-                          trailing: Icon(Icons.keyboard_arrow_right),
-                          onTap: () {
-                            //open change language
-                          },
-                        ),
+//                        ListTile(
+//                          leading: Icon(
+//                            FontAwesomeIcons.language,
+//                            color: Colors.indigo,
+//                          ),
+//                          title: Text("Change Password"),
+//                          trailing: Icon(Icons.keyboard_arrow_right),
+//                          onTap: () {
+//                            //open change language
+//                          },
+//                        ),
                         _buildDivider(),
                         ListTile(
                           leading: Icon(
                             Icons.location_on,
-                            color: Colors.purple,
+                            color: Colors.indigo,
                           ),
                           title: Text("Send Verfication mail"),
                           trailing: Icon(Icons.keyboard_arrow_right),
@@ -143,28 +145,28 @@ class _AppSettingsState extends State<AppSettings> {
                     ),
                   ),
                   SwitchListTile(
-                    activeColor: Colors.purple,
+                    activeColor: Colors.indigo,
                     contentPadding: const EdgeInsets.all(0),
                     value: true,
                     title: Text("Received notification"),
                     onChanged: (val) {},
                   ),
                   SwitchListTile(
-                    activeColor: Colors.purple,
+                    activeColor: Colors.indigo,
                     contentPadding: const EdgeInsets.all(0),
                     value: false,
                     title: Text("Received newsletter"),
                     onChanged: null,
                   ),
                   SwitchListTile(
-                    activeColor: Colors.purple,
+                    activeColor: Colors.indigo,
                     contentPadding: const EdgeInsets.all(0),
                     value: true,
                     title: Text("Received Offer Notification"),
                     onChanged: (val) {},
                   ),
                   SwitchListTile(
-                    activeColor: Colors.purple,
+                    activeColor: Colors.indigo,
                     contentPadding: const EdgeInsets.all(0),
                     value: true,
                     title: Text("Received App Updates"),
@@ -174,32 +176,32 @@ class _AppSettingsState extends State<AppSettings> {
                 ],
               ),
             ),
-            Positioned(
-              bottom: -20,
-              left: -20,
-              child: Container(
-                width: 80,
-                height: 80,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: Colors.purple,
-                  shape: BoxShape.circle,
-                ),
-              ),
-            ),
-            Positioned(
-              bottom: 00,
-              left: 00,
-              child: IconButton(
-                icon: Icon(
-                  FontAwesomeIcons.powerOff,
-                  color: Colors.white,
-                ),
-                onPressed: () {
-                  //log out
-                },
-              ),
-            )
+//            Positioned(
+//              bottom: -20,
+//              left: -20,
+//              child: Container(
+//                width: 80,
+//                height: 80,
+//                alignment: Alignment.center,
+//                decoration: BoxDecoration(
+//                  color: Colors.indigo,
+//                  shape: BoxShape.circle,
+//                ),
+//              ),
+//            ),
+//            Positioned(
+//              bottom: 00,
+//              left: 00,
+//              child: IconButton(
+//                icon: Icon(
+//                  FontAwesomeIcons.powerOff,
+//                  color: Colors.white,
+//                ),
+//                onPressed: () {
+//                  //log out
+//                },
+//              ),
+//            )
           ],
         ),
       ),
@@ -223,28 +225,25 @@ class _AppSettingsState extends State<AppSettings> {
     return showDialog(
       context: context,
       builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Enter a New Password'),
-          content: TextField(
-            controller: controller,
-          ),
-          actions: <Widget>[
-            MaterialButton(
-              elevation: 5.0,
-              onPressed: () async {
-                await _auth.changePassword(controller.text.toString());
-//                Navigator.of(context).pop();
-//                final snackBar = SnackBar(
-//                  content: Text('Password Changed success',
-//                    style: TextStyle(color: Colors.white),
-//                  ),
-//                );
-//                Scaffold.of(context).showSnackBar(snackBar);
-              },
-              child: Text('Change Password'),
+        return Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: AlertDialog(
+            title: Text('Enter your Email to Verify and revice password change Email', style: GoogleFonts.poppins(color: Colors.indigo,fontSize: 15),),
+            content: TextField(
+              controller: controller,
+            ),
+            actions: <Widget>[
+              MaterialButton(
+                elevation: 5.0,
+                onPressed: () async {
+                  await _auth.changePassword(controller.text.toString());
+                  Navigator.of(context).pop();
+                },
+                child: Text('Change Password', style: GoogleFonts.poppins(color: Colors.indigo,fontSize: 15),),
 
-            )
-          ],
+              )
+            ],
+          ),
         );
       },
     );

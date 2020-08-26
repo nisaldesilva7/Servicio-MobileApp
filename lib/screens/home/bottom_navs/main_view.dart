@@ -65,11 +65,13 @@ class _MainViewState extends State<MainView> {
           ),
           Container(
               height: 210,
+//              height: MediaQuery.of(context).size.height,
+              width: double.infinity,
               child: StreamBuilder<QuerySnapshot>(
-                  stream: getUsersServicesStreamSnapshots(userFavourites),
+                  stream: getUsersServicesStreamSnapshots(userFavourites).asBroadcastStream(),
                   builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> querySnapshot) {
                     if (!querySnapshot.hasData)
-                      return Text('No Data');
+                      return Center(child: const CircularProgressIndicator());
                     if (querySnapshot.connectionState == ConnectionState.waiting)
                       return const CircularProgressIndicator();
                     else {
@@ -173,7 +175,7 @@ class _HomeScreenTopState extends State<HomeScreenTop> {
                 Container(
                     width: 250,
                     child: Text(
-                      "Where do you want to FIND ?",
+                      "Find Services And Repair centers Easily",
                       style: TextStyle(fontFamily: 'Cabin', fontSize: 24, color: Colors.white, fontWeight: FontWeight.normal),
                       textAlign: TextAlign.center,
                     )),

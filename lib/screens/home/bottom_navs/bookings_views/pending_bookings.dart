@@ -84,6 +84,7 @@ class _PendingBookingsState extends State<PendingBookings> {
   Widget buildList(BuildContext context, DocumentSnapshot document) {
     final bookingDoc = Bookings.fromSnapshot(document);
     print(bookingDoc);
+    List date = bookingDoc.date.toString().split('T');
 
     return Container(
       decoration: BoxDecoration(
@@ -106,26 +107,36 @@ class _PendingBookingsState extends State<PendingBookings> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    bookingDoc.date,
+                    bookingDoc.serviceType.toUpperCase(),
                     style: TextStyle(color: Colors.indigo, fontWeight: FontWeight.bold, fontSize: 18),),
                   SizedBox(height: 8,),
                   Row(
                     children: <Widget>[
-                      Icon(Icons.location_on, color: Colors.indigo, size: 20,),
+                      Icon(Icons.date_range, color: Colors.indigo, size: 20,),
                       SizedBox(width: 5,),
                       Text(
-                          'location of service',
+                          date[0],
                           style: TextStyle(color: Colors.blue, fontSize: 13, letterSpacing: .3)),
                     ],
                   ),
                   SizedBox(height: 6,),
                   Row(
                     children: <Widget>[
-                      Icon(Icons.format_list_bulleted, color: Colors.indigo, size: 20,),
+                      Icon(Icons.access_time, color: Colors.indigo, size: 20,),
                       SizedBox(width: 5,),
                       Text(
-                          '{serviceDoc.serviceTypes[0]}..'.toUpperCase(),
-                          style: TextStyle(color: Colors.white10, fontSize: 13, letterSpacing: .3)),
+                          date[1],
+                          style: TextStyle(color: Colors.indigoAccent, fontSize: 13, letterSpacing: .3)),
+                    ],
+                  ),
+                  SizedBox(height: 6,),
+                  Row(
+                    children: <Widget>[
+                      Icon(Icons.airport_shuttle, color: Colors.indigo, size: 20,),
+                      SizedBox(width: 5,),
+                      Text(
+                          bookingDoc.vehicleId,
+                          style: TextStyle(color: Colors.indigoAccent, fontSize: 13, letterSpacing: .3)),
                     ],
                   ),
                 ],

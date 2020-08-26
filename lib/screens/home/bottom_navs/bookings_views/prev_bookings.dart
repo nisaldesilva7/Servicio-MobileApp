@@ -38,7 +38,7 @@ class PrevBookings extends StatefulWidget{
               },
             ),
             title: Text(
-              "Upcoming Bookings".toUpperCase(),
+              "Previous Bookings".toUpperCase(),
               style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
@@ -102,24 +102,12 @@ class PrevBookings extends StatefulWidget{
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Container(
-              width: 75,
-              height: 110,
-              margin: EdgeInsets.only(right: 15),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(25),
-                border: Border.all(width: 3, color: Colors.red),
-                image: DecorationImage(
-                    image: NetworkImage('serviceDoc.photo}'),
-                    fit: BoxFit.cover),
-              ),
-            ),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    'serviceDoc.serviceName.toUpperCase()',
+                    bookingDoc.serviceType,
                     style: TextStyle(color: Colors.indigo, fontWeight: FontWeight.bold, fontSize: 18),),
                   SizedBox(height: 6,),
                   Row(
@@ -159,8 +147,8 @@ class PrevBookings extends StatefulWidget{
     print('under stream');
     final uid = await _auth.getCurrentUID();
     yield* Firestore.instance.collection("Customers").document(uid)
-        .collection('Bookings')
-        .where('BookingStatus',isEqualTo: 'Accepted')
+        .collection('Completed')
+//        .where('BookingStatus',isEqualTo: 'Accepted')
         .snapshots();
   }
 }

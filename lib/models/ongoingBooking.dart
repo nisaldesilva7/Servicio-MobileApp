@@ -6,20 +6,23 @@ class OnBooking {
   final num progressStage;
   final Timestamp dateTime;
   final String serviceId;
+  final String custId;
+  final String serviceName;
   final Map vehicleDetails;
-//  final List favs;
   String id;
 
 
-  OnBooking(this.progressStage, this.dateTime, this.serviceId, this.bookingStatus, this.id,this.vehicleDetails,this.serviceType);
+  OnBooking(this.progressStage, this.dateTime, this.serviceId,this.serviceName, this.bookingStatus, this.id,this.vehicleDetails,this.serviceType,this.custId);
 
   Map<String, dynamic> toJson() => {
     'BookingStatus': bookingStatus,
     'DateTime': dateTime,
     'ProgressStage': progressStage,
     'ServiceId': serviceId,
+    'CustId': custId,
     'VehicleDetails': vehicleDetails,
     'ServiceType': serviceType,
+    'ServiceName': serviceName,
 
 
   };
@@ -30,7 +33,9 @@ class OnBooking {
         dateTime = snapshot['DateTime'],
         progressStage = snapshot['progressStage'],
         serviceId = snapshot['ServiceId'],
+        custId = snapshot['CustId'],
         vehicleDetails = snapshot['VehicleDetails'],
+        serviceName = snapshot['ServiceName'],
         serviceType= snapshot['ServiceType'],
         id = snapshot.documentID;
 

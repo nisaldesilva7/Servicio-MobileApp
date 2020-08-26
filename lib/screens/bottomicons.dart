@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
           "/home": (BuildContext context)=> new Home(),
 //          "/search": (BuildContext context)=> new Search("Search"),
           "/notifications": (BuildContext context)=> new Notifications(),
-          "/offers": (BuildContext context)=> new Offers("Offers"),
+//          "/offers": (BuildContext context)=> new Offers("Offers"),
 
         }
     );

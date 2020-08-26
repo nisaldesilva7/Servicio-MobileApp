@@ -195,17 +195,25 @@ class _BookingsPageState extends State<BookingsPage> {
 
   Widget progressCard(BuildContext context, DocumentSnapshot document) {
     final onBookings = OnBooking.fromSnapshot(document);
-    print(onBookings.progressStage);
+    print(onBookings.id);
 
     return GestureDetector(
       onTap: () {
         Navigator.push(
-            context,MaterialPageRoute(builder: (context) => BookingProgress(bookingProgress: onBookings.progressStage)));
+            context,MaterialPageRoute(builder: (context) => BookingProgress(
+          bookingProgress: onBookings.progressStage, bookingId: onBookings.id, serviceID: onBookings.serviceId, custId: onBookings.custId
+        )));
       },
       child: Row(
         children: <Widget>[
           if(onBookings.progressStage == 0)
-            Center(child: Text("Your Booking Has initialized\n please br on time".toUpperCase())),
+            Container(
+                child: Center(
+                    child: Text("                     Your Booking Has initialized\n               please be on time at ${onBookings.serviceName}".toUpperCase(),
+                      style: GoogleFonts.montserrat(fontSize: 14,color: Colors.red),
+                    )
+                ),
+            ),
           SizedBox(height: 30,),
           if(onBookings.progressStage == 1)
             ActiveProjectsCard(
@@ -256,7 +264,15 @@ class _BookingsPageState extends State<BookingsPage> {
               serviceType: onBookings.serviceType,
 
             ),
-
+          if(onBookings.progressStage == 6)
+            Column(
+              children: <Widget>[
+                SizedBox(height: 20,),
+                Text("            Thank you! for rating and review\n                                 ${onBookings.serviceName}".toUpperCase(),
+                  style: GoogleFonts.montserrat(fontSize: 14,color: Colors.red),
+                ),
+              ],
+            ),
         ],
       ),
     );

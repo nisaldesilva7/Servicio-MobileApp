@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:servicio/models/reviews.dart';
 import 'package:servicio/screens/bookings/book_service.dart';
 import 'package:servicio/models/service.dart';
 import 'package:servicio/screens/bookings/view_service_schedule.dart';
@@ -66,7 +67,7 @@ class _ServiceDetailPageState extends State<ServiceDetailPage> {
           color: Colors.white,
           icon: Icon(Icons.message),
           onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => ChatBox()));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => ChatBox(service: widget.service)));
             },
         ),
           IconButton(
@@ -243,17 +244,38 @@ class _ServiceDetailPageState extends State<ServiceDetailPage> {
                       ),),
                       const SizedBox(height: 10.0),
                       Text(
-                          widget.service.description, textAlign: TextAlign.justify, style: TextStyle(
-                          fontWeight: FontWeight.w300,
-                          fontSize: 14.0
-                      ),),
+                          widget.service.description, textAlign: TextAlign.justify, style: GoogleFonts.montserrat(fontSize: 14)),
                       const SizedBox(height: 10.0),
-                      Text(
-                        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ratione architecto autem quasi nisi iusto eius ex dolorum velit! Atque, veniam! Atque incidunt laudantium eveniet sint quod harum facere numquam molestias?", textAlign: TextAlign.justify, style: TextStyle(
-                          fontWeight: FontWeight.w300,
-                          fontSize: 14.0),
+                      Center(
+                        child: Text(
+                          'REVIEWS',
+                          textAlign: TextAlign.justify, style: GoogleFonts.montserrat(fontSize: 20,color: Colors.indigo)
+                        ),
                       ),
-                      SizedBox(height: 10.0,),
+                      Container(
+                          height: MediaQuery.of(context).size.height,
+                          width: double.infinity,
+                          child: StreamBuilder<QuerySnapshot>(
+                              stream: getReviews(context),
+                              builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> querySnapshot) {
+                                if (!querySnapshot.hasData)
+                                  return Center(child: CircularProgressIndicator());
+                                if (querySnapshot.connectionState == ConnectionState.waiting)
+                                  return const CircularProgressIndicator();
+                                else {
+                                  final list = querySnapshot.data.documents;
+                                  print(list);
+                                  return ListView.builder(
+                                    itemCount: list.length,
+//                            scrollDirection: Axis.horizontal,
+                                    itemBuilder: (context, index) {
+                                      return buildList(context,list[index]);
+                                    },
+                                  );
+                                }
+                              }
+                          )
+                      ),
                     ],
                   ),
                 ),
@@ -263,6 +285,76 @@ class _ServiceDetailPageState extends State<ServiceDetailPage> {
         ],
       ),
     );
+  }
+
+
+  Widget buildList(BuildContext context, DocumentSnapshot document) {
+    final reviewsInfo = Reviews.fromSnapshot(document);
+    print(Reviews);
+
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(15),
+        color: Color(0xff5b7ccf),
+      ),
+      width: double.infinity,
+      height: 110,
+      margin: EdgeInsets.symmetric(vertical: 4, horizontal: 2),
+      padding: EdgeInsets.symmetric(vertical: 17, horizontal: 20),
+      child: GestureDetector(
+        onTap: () {
+//          Navigator.push(context, MaterialPageRoute(builder: (context) => ServiceDetailPage(service: serviceDoc)));
+        },
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    reviewsInfo.comment,
+                    style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),),
+                  SizedBox(height: 6,),
+                  Row(
+                    children: <Widget>[
+                      Icon(Icons.location_on, color: Colors.white, size: 20,),
+                      SizedBox(width: 5,),
+                      Text(
+                          'location of service',
+                          style: TextStyle(color: Colors.white, fontSize: 13, letterSpacing: .3)),
+                    ],
+                  ),
+                  SizedBox(height: 6,),
+                  Row(
+                    children: <Widget>[
+                      Icon(Icons.format_list_bulleted, color: Colors.white, size: 20,),
+                      SizedBox(width: 5,),
+                      Text(
+                          '{serviceDoc.serviceTypes[0]}..'.toUpperCase(),
+                          style: TextStyle(color: Colors.white, fontSize: 13, letterSpacing: .3)),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(width: 10),
+            Padding(
+              padding: const EdgeInsets.only(top: 20),
+              child: Icon(Icons.chevron_right, size: 40, color: Colors.white,),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  Stream<QuerySnapshot> getReviews(BuildContext context) async* {
+    final uid = await _auth.getCurrentUID();
+    yield* Firestore.instance
+        .collection('Reviews')
+        .limit(20)
+        .snapshots();
   }
 
   Widget showStars(num rating){

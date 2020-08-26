@@ -66,6 +66,7 @@ dependencies:
   table_calendar: ^2.2.3
   timeline_tile: ^0.1.0
 
+  smooth_star_rating: ^1.1.1
 
 
 dev_dependencies:

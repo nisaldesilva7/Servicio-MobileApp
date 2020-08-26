@@ -94,16 +94,13 @@ class AuthServices {
     }
   }
 
-  Future changePassword(String password) async {
-    //Create an instance of the current user.
-    var user = await _auth.currentUser();
-    //Pass in the password to updatePassword.
-    user.updatePassword(password).then((_){
-      print("Succesfull changed password");
-    }).catchError((error){
-      print("Password can't be changed" + error.toString());
-      //This might happen, when the wrong password is in, the user isn't found, or if the user hasn't logged in recently.
-    });
+  Future changePassword(String email) async {
+    try {
+      await _auth.sendPasswordResetEmail(email: email);
+    } catch(e) {
+      error = e.message;
+      print(error);
+    }
   }
 
   //send verification mail

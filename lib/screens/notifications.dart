@@ -1,61 +1,42 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:servicio/shared/SliderImages.dart' as assets;
+import 'package:smooth_star_rating/smooth_star_rating.dart';
+
+class Notifications extends StatefulWidget{
 
 
-class Notifications extends StatelessWidget{
-  final List<String> images = [assets.images[0],assets.images[2],assets.images[1], assets.images[3]];
+  @override
+  _NotificationsState createState() => _NotificationsState();
+}
+
+class _NotificationsState extends State<Notifications> {
+  var rating = 0.0;
+
 
   @override
   Widget build(BuildContext context){
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text("Notifications"),
+        title: new Text("Offers"),
       ),
-      body: new Center(
-        child: _slider(),
+      body: new  Center(
+          child: SmoothStarRating(
+            rating: rating,
+            isReadOnly: false,
+            size: 40,
+            filledIconData: Icons.star,
+            halfFilledIconData: Icons.star_half,
+            defaultIconData: Icons.star_border,
+            starCount: 5,
+            borderColor: Color(0xffe3830e),
+            color: Color(0xffe3830e),
+            allowHalfRating: true,
+            spacing: 2.0,
+            onRated: (value) {
+              print("rating value -> $value");
+              // print("rating value dd -> ${value.truncate()}");
+            },
+          )
       ),
-    );
-  }
-
-  Widget _slider(){
-    return CarouselSlider(
-      options: CarouselOptions(
-        height: 250.0,
-        viewportFraction: 0.8,
-        initialPage: 0,
-        enableInfiniteScroll: true,
-        reverse: false,
-        autoPlay: true,
-        autoPlayInterval: Duration(seconds: 4),
-        autoPlayAnimationDuration: Duration(milliseconds: 1000),
-        autoPlayCurve: Curves.easeInOutCubic,
-        enlargeCenterPage: true,
-//        onPageChanged: callbackFunction,
-        scrollDirection: Axis.horizontal,
-
-    ),
-      items: images.map((i) {
-        return Builder(
-          builder: (BuildContext context) {
-            return ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(25)),
-              child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  margin: EdgeInsets.symmetric(horizontal: 2.0),
-                  decoration: BoxDecoration(
-                      color: Colors.amber
-                  ),
-                  child: Image.network(
-                    i,
-                    fit: BoxFit.cover,
-                  ),
-              ),
-            );
-          },
-        );
-      }).toList(),
     );
   }
 }
