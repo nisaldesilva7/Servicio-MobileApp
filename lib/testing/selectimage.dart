@@ -107,7 +107,7 @@ class _SelectImagesState extends State<SelectImages> {
 
           _image != null ? Padding(
             padding: const EdgeInsets.symmetric(horizontal: 35.0,vertical: 10.0 ),
-            child: ImageUploader(_image),
+            child: ImageUploader(_image,'ccsc'),
           ): Text('Select a Profile Picture'),
         ],
       ),

@@ -5,18 +5,21 @@ class Messages {
   String msg;
   num user;
   String msgId;
+  String type;
 
   Messages(this.dateTime,this.msg,this.user);
 
   Map<String, dynamic> toJson() => {
-    'timestamp': dateTime,
-    'msg': msg,
-    'user': user,
+    'time': dateTime,
+    'text': msg,
+    'id': user,
+    'type': type,
   };
 
   Messages.fromSnapshot(DocumentSnapshot snapshot) :
-        msg = snapshot['msg'],
-        user = snapshot['user'],
-        dateTime = snapshot['timestamp'],
+        msg = snapshot['text'],
+        user = snapshot['id'],
+        dateTime = snapshot['time'],
+        type = snapshot['type'],
         msgId = snapshot.documentID;
 }

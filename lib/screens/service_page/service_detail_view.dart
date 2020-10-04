@@ -188,6 +188,7 @@ class _ServiceDetailPageState extends State<ServiceDetailPage> {
                       ),
                       const SizedBox(height: 10.0),
                       GridView.count(
+                        physics: const NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
                         scrollDirection: Axis.vertical,
                         padding: EdgeInsets.all(1),
@@ -261,13 +262,15 @@ class _ServiceDetailPageState extends State<ServiceDetailPage> {
                                 if (!querySnapshot.hasData)
                                   return Center(child: CircularProgressIndicator());
                                 if (querySnapshot.connectionState == ConnectionState.waiting)
-                                  return const CircularProgressIndicator();
+                                  return Center(child: const CircularProgressIndicator());
                                 else {
                                   final list = querySnapshot.data.documents;
                                   print(list);
                                   return ListView.builder(
+                                    physics: const NeverScrollableScrollPhysics(),
+                                    scrollDirection: Axis.vertical,
+                                    shrinkWrap: true,
                                     itemCount: list.length,
-//                            scrollDirection: Axis.horizontal,
                                     itemBuilder: (context, index) {
                                       return buildList(context,list[index]);
                                     },
@@ -299,13 +302,14 @@ class _ServiceDetailPageState extends State<ServiceDetailPage> {
       ),
       width: double.infinity,
       height: 110,
-      margin: EdgeInsets.symmetric(vertical: 4, horizontal: 2),
+      margin: EdgeInsets.symmetric(vertical: 1 , horizontal: 1),
       padding: EdgeInsets.symmetric(vertical: 17, horizontal: 20),
       child: GestureDetector(
         onTap: () {
 //          Navigator.push(context, MaterialPageRoute(builder: (context) => ServiceDetailPage(service: serviceDoc)));
         },
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Expanded(
@@ -353,6 +357,7 @@ class _ServiceDetailPageState extends State<ServiceDetailPage> {
     final uid = await _auth.getCurrentUID();
     yield* Firestore.instance
         .collection('Reviews')
+        .where('serviceID', isEqualTo: widget.service.serviceId )
         .limit(20)
         .snapshots();
   }

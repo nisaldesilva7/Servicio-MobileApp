@@ -18,7 +18,7 @@ import 'package:servicio/screens/home/bottom_navs/search.dart';
 import 'bottom_navs/main_menu.dart';
 import 'bottom_navs/profile.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-
+import 'package:geolocator/geolocator.dart';
 
 class MyApp extends StatelessWidget {
   @override
@@ -37,6 +37,12 @@ class Home extends StatefulWidget{
 }
 
 class _HomeState extends State<Home>{
+
+
+  Geolocator geolocator = Geolocator();
+
+  Position userLocation;
+
   int _currentIndex = 0;
   final List<Widget> _bottomNavs = [
     MainView(),
@@ -48,7 +54,6 @@ class _HomeState extends State<Home>{
   final AuthServices _auth = AuthServices();
    bool emailverification;
 
-
   final FirebaseMessaging firebaseMessaging = FirebaseMessaging();
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
@@ -58,6 +63,27 @@ class _HomeState extends State<Home>{
     registerNotification();
     configLocalNotification();
     checkEmailVerification();
+    _getLocation().then((position) async {
+      userLocation = position;
+      print('user location $userLocation');
+      final AuthServices _auth = AuthServices();
+      final uid = await _auth.getCurrentUID();
+      Firestore.instance.collection('Customers').document(uid).setData({
+        'Location': new GeoPoint(userLocation.latitude, userLocation.longitude),
+      },merge: true);
+    });
+  }
+
+
+  Future<Position> _getLocation() async {
+    var currentLocation;
+    try {
+      currentLocation = await geolocator.getCurrentPosition(
+          desiredAccuracy: LocationAccuracy.best);
+    } catch (e) {
+      currentLocation = null;
+    }
+    return currentLocation;
   }
 
   void checkEmailVerification() async {

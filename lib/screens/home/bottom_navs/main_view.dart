@@ -89,7 +89,9 @@ class _MainViewState extends State<MainView> {
               )
           ),
         ],
-      )
+      ),
+          repairOrService
+
         ],
 
       ),
@@ -344,6 +346,56 @@ final Widget homeScreenBottom = Column(
 );
 
 
+final Widget repairOrService =  Column(
+  children: <Widget>[
+    Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+      child: Row(
+        mainAxisSize: MainAxisSize.max,
+        children: <Widget>[
+          Text("Nearby Service Centers",
+              style: TextStyle(color: Colors.black87, fontSize: 15, fontFamily: 'icomoon', fontWeight:FontWeight.w400)),
+          Spacer(),
+          Builder(
+              builder: (BuildContext context) => GestureDetector(
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => SearchView()));
+                },
+                child: Text(
+                  "View All",
+                  style: TextStyle(
+                      fontSize: 14, color: Theme.of(context).primaryColor),
+                ),
+              )),
+
+        ],
+      ),
+    ),
+    Container(
+        height: 210,
+        child: FutureBuilder<QuerySnapshot>(
+            future: Firestore.instance.collection('Services').where('').limit(3).getDocuments(),
+            builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> querySnapshot) {
+              if (!querySnapshot.hasData)
+                return Text('No Data');
+              if (querySnapshot.connectionState == ConnectionState.waiting)
+                return const CircularProgressIndicator();
+              else {
+                final list = querySnapshot.data.documents;
+                print(list);
+                return ListView.builder(
+                  itemCount: list.length,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) {
+                    return cityCard(context, list[index]);
+                  },
+                );
+              }
+            }
+        )
+    ),
+  ],
+);
 
 
 //

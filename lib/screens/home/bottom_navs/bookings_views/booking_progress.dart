@@ -25,8 +25,8 @@ class _BookingProgressState extends State<BookingProgress> {
           begin: Alignment.topCenter,
           end: Alignment.bottomLeft,
           colors: [
-            Color(0xFF6563db),
-            Color(0xFF3765ad),
+            Color(0xFf3461eb),
+            Color(0xFF0d48ff),
           ],
         ),
       ),
@@ -350,14 +350,14 @@ class _TimelineDeliveryState extends State<TimelineDelivery> {
             ),
           ),
           widget.bookingProgress == 5 ? RaisedButton(
-            padding: EdgeInsets.symmetric(vertical: 10,horizontal: 20),
-            child: Text("Complete".toUpperCase(),
+            padding: EdgeInsets.symmetric(vertical: 7,horizontal: 30),
+            child: Text("Rate and Review".toUpperCase(),
               style: GoogleFonts.bebasNeue(
                 fontSize: 25
               ),
             ),
             textColor: Colors.white,
-            color: Color(0xff8989f5),
+            color: Color(0xff0032cc),
             onPressed: () {
               _customAlertDialog(context, 'Add a Comment');
             },
@@ -459,9 +459,19 @@ class _TimelineDeliveryState extends State<TimelineDelivery> {
                                   'Rating': rating,
                                   'Comment': controller.text.toString(),
                                   'progressStage': 6,
-                                },
-                                    merge: true)
-                                    .then((docRef) {
+
+                                },merge: true).then((docRef) {
+
+                                  Firestore.instance.collection('Services')
+                                      .document(widget.serviceID)
+                                      .collection('ongoing')
+                                      .document(widget.bookingId).setData({
+                                    'Rating': rating,
+                                    'Comment': controller.text.toString(),
+                                    'progressStage': 6,
+                                  },merge: true).then((value) {
+
+
                                   Firestore.instance.collection('Reviews')
                                       .add(
                                       {
@@ -472,6 +482,9 @@ class _TimelineDeliveryState extends State<TimelineDelivery> {
                                         'datetime': DateTime.now(),
                                         'serviceID': widget.serviceID
                                       }
+
+                                  );
+                                  }
 
                                   );
                                 }

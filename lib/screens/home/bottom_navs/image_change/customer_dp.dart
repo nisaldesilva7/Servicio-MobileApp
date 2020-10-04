@@ -115,7 +115,7 @@ class _CustomerDpState extends State<CustomerDp> {
 
           _image != null ? Padding(
             padding: const EdgeInsets.symmetric(horizontal: 35.0,vertical: 10.0 ),
-            child: ImageUploader(_image),
+            child: ImageUploader(_image, widget.uid),
           ): Text('Select a Profile Picture'),
           widget.customerPhoto != null ? RaisedButton(
             child: new Text("Delete"),

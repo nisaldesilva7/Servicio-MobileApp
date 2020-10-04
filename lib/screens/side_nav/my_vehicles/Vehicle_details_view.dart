@@ -1,6 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:servicio/models/booking.dart';
+import 'package:servicio/models/reviews.dart';
 import 'package:servicio/models/vehicle.dart';
+import 'package:servicio/services/auth.dart';
 
 
 class VehiclePage extends StatefulWidget {
@@ -14,6 +19,7 @@ class VehiclePage extends StatefulWidget {
 class _VehiclePageState extends State<VehiclePage> with SingleTickerProviderStateMixin{
 
   TabController controller;
+  final AuthServices _auth = AuthServices();
 
   @override
   void initState() {
@@ -146,9 +152,10 @@ class _VehiclePageState extends State<VehiclePage> with SingleTickerProviderStat
                 ),
                 SizedBox(height: 10.0),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Icon(Icons.view_headline, size: 35.0, color: Color(0xFF434C68).withOpacity(0.4)),
-                    SizedBox(width: 70.0),
+                    SizedBox(width: 20.0),
                     Text('Repairs & Services'.toUpperCase(),
                       style: TextStyle(
                           color: Color(0xFF434C68).withOpacity(0.7),
@@ -156,15 +163,117 @@ class _VehiclePageState extends State<VehiclePage> with SingleTickerProviderStat
                           fontSize: 17.0,
                           fontFamily: 'Oswald'
                       ),),
-                    SizedBox(width: 80.0),
+                    SizedBox(width: 20.0),
+
                   ],
                 ),
-                Center(child: Text("list view for service history of \n${widget.serviceInfo.vehicleId}"))
+                Container(
+                    height: MediaQuery.of(context).size.height,
+                    width: double.infinity,
+                    child: StreamBuilder<QuerySnapshot>(
+                        stream: getVehicleServices(context),
+                        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> querySnapshot) {
+                          if (!querySnapshot.hasData)
+                            return Center(child: CircularProgressIndicator());
+                          if (querySnapshot.connectionState == ConnectionState.waiting)
+                            return const CircularProgressIndicator();
+                          else {
+                            final list = querySnapshot.data.documents;
+                            print(list);
+                            return ListView.builder(
+                              physics: const NeverScrollableScrollPhysics(),
+                              scrollDirection: Axis.vertical,
+                              shrinkWrap: true,
+                              itemCount: list.length,
+                              itemBuilder: (context, index) {
+                                return buildList(context,list[index]);
+                              },
+                            );
+                          }
+                        }
+                    )
+                ),
               ],
             )
           ],
         ),
       ),
     );
+  }
+
+
+
+  Widget buildList(BuildContext context, DocumentSnapshot document) {
+    final serviceInfo = Bookings.fromSnapshot(document);
+    print(serviceInfo);
+    List date = serviceInfo.date.toString().split('T');
+
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(15),
+        color: Color(0xff5b7ccf),
+      ),
+      width: double.infinity,
+      height: 110,
+      margin: EdgeInsets.only(right: 15),
+      padding: EdgeInsets.symmetric(vertical: 17, horizontal: 20),
+      child: GestureDetector(
+        onTap: () {
+//          Navigator.push(context, MaterialPageRoute(builder: (context) => ServiceDetailPage(service: serviceDoc)));
+        },
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    serviceInfo.serviceType.toUpperCase(),
+                    style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),),
+                  SizedBox(height: 6,),
+                  Row(
+                    children: <Widget>[
+                      Icon(Icons.date_range, color: Colors.white, size: 20,),
+                      SizedBox(width: 5,),
+                      Text(
+                          date[0],
+                          style: TextStyle(color: Colors.white, fontSize: 13, letterSpacing: .3)),
+                    ],
+                  ),
+                  SizedBox(height: 6,),
+                  Row(
+                    children: <Widget>[
+                      Icon(Icons.format_list_bulleted, color: Colors.white, size: 20,),
+                      SizedBox(width: 5,),
+                      Text(
+                          serviceInfo.serviceId.toUpperCase(),
+                          style: TextStyle(color: Colors.white, fontSize: 13, letterSpacing: .3)),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(width: 10),
+            Padding(
+              padding: const EdgeInsets.only(top: 20),
+              child: Icon(Icons.chevron_right, size: 40, color: Colors.white,),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  Stream<QuerySnapshot> getVehicleServices(BuildContext context) async* {
+    final uid = await _auth.getCurrentUID();
+    yield* Firestore.instance
+        .collection('Customers')
+    .document(uid)
+    .collection('Completed')
+        .where('Vehicle', isEqualTo: widget.serviceInfo.vehicleId )
+//        .limit(20)
+        .snapshots();
   }
 }

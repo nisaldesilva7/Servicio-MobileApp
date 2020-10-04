@@ -40,9 +40,9 @@ class _BookingsPageState extends State<BookingsPage> {
   Text subheading(String title) {
     return Text(
       title.toUpperCase(),
-      style: GoogleFonts.abel(
-        fontWeight: FontWeight.w800 ,
-          color: Colors.indigo[300],
+      style: GoogleFonts.montserrat(
+//        fontWeight: FontWeight.w800 ,
+          color: Colors.white,
           fontSize: 20
       )
     );
@@ -123,7 +123,13 @@ class _BookingsPageState extends State<BookingsPage> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Center(child: subheading('Active Bookings')),
+                          Container(
+                            height: 40,
+                              decoration: BoxDecoration(
+                                color: Color(0xff4c68b5),
+                                borderRadius: BorderRadius.circular(15.0),
+                              ),
+                              child: Center(child: subheading('Active Bookings'))),
                           SizedBox(height: 5.0),
                           SingleChildScrollView(
                             scrollDirection: Axis.vertical,

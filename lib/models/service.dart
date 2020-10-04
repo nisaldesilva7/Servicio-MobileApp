@@ -36,4 +36,18 @@ class Service {
         favs = snapshot['Favs'],
         serviceId = snapshot.documentID;
 
+
+  Service.fromElement(Map snapshot) :
+        photo = snapshot['Photo'], 
+        rating = snapshot['Rating'],
+        searchKey = snapshot['SearchKey'],
+        serviceName = snapshot['Service_Name'],
+        telephone = snapshot['Telephone'],
+        description = snapshot['Description'],
+        serviceTypes = List.of(snapshot['Service_Types']).cast<String>(),
+        favs = snapshot['Favs'],
+        serviceId = snapshot['Service_Id'];
+
+
+
 }

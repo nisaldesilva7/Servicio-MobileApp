@@ -175,7 +175,7 @@ exports.sendBookingProgress  = functions.firestore
                                                        payload = {
                                                              notification: {
                                                                title: ServiceName,
-                                                               body: "Your Booking Process Fully completed now\nThanks for suing our service\n "ongoing.Vehicle,
+                                                               body: "Your Booking Process Fully completed now\nThanks for suing our service\n " + ongoing.Vehicle,
                                                                click_action: 'FLUTTER_NOTIFICATION_CLICK'
                                                              }
                                                            };
@@ -192,6 +192,45 @@ exports.sendBookingProgress  = functions.firestore
 
 
             console.log(ongoing.progressStage);
+            return fcm.sendToDevice(recentComments, payload);
+         })
+         .catch(err => console.log(err) )
+  });
+
+
+exports.sendMessages  = functions.firestore
+                         .document('Messaging/{customerId}/Services/{serviceId}/msg/{msgId}')
+                         .onCreate(async (snapshot, context) => {
+
+//    const order = snapshot.after.data();
+//    const uid = snapshot.before.data().CustId;
+//    const serviceId = snapshot.before.data().ServiceName;
+
+//    const serviceRef = admin.firestore().collection('Services').doc(serviceId).get()
+//    const serviceName = serviceRef.before.date().Service_Name
+
+  console.log(context.params);
+  console.log(context.params.id);
+
+    // ref to the parent document
+    const docRef = admin.firestore().collection('Customers').doc('In7gG1gzVOSTvqX68wm4W0vMnD12')
+    // get all comments and aggregate
+    return docRef.collection('tokens')
+         .get()
+         .then(querySnapshot => {
+           const recentComments = [];
+            // add data from the 5 most recent comments to the array
+            querySnapshot.forEach(doc => {
+                recentComments.push( doc.data().token )
+            });
+            console.log(recentComments);
+            payload = {
+                  notification: {
+                    title: 'Received New msg',
+                    body: 'order.ServiceType',
+                    click_action: 'FLUTTER_NOTIFICATION_CLICK'
+                  }
+                };
             return fcm.sendToDevice(recentComments, payload);
          })
          .catch(err => console.log(err) )

@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:servicio/models/service.dart';
+import 'package:servicio/screens/service_page/service_detail_view.dart';
 import 'package:servicio/services/searchservice.dart';
 
 
@@ -11,6 +13,9 @@ class SearchView extends StatefulWidget {
 }
 
 class _SearchViewState extends State<SearchView> {
+
+  QuerySnapshot serviceInfo;
+
   var queryResultSet = [];
   var tempSearchStore = [];
 
@@ -19,6 +24,7 @@ class _SearchViewState extends State<SearchView> {
 
 
   initiateSearch(value) {
+
     if (value.length == 0) {
       setState(() {
         //Should load all services
@@ -28,22 +34,24 @@ class _SearchViewState extends State<SearchView> {
     }
 
     var capitalizedValue = value.substring(0, 1).toUpperCase() + value.substring(1);
-    print('hiiiiiiiii${value.substring(1)}');
+    print('hiiiiiiiii${value.substring(0)}');
 
     if (queryResultSet.length == 0 && value.length == 1) {
       SearchService().searchByName(value).then((QuerySnapshot docs) {
+        serviceInfo = docs;
+        print(docs.documents);
         for (int i = 0; i < docs.documents.length; ++i) {
           queryResultSet.add(docs.documents[i].data);
-          print('helooo$queryResultSet');
-          queryResultSet.forEach((element) {
-            if (element['Service_Name'].startsWith(capitalizedValue)) {
-              setState(() {
-                tempSearchStore.add(element);
-              });
-            }
-          });
-
+          print('helooo$queryResultSet \n');
         }
+        queryResultSet.forEach((element) {
+          if (element['Service_Name'].startsWith(capitalizedValue)) {
+            setState(() {
+              tempSearchStore.add(element);
+              print('tempsearch  $queryResultSet \n');
+            });
+          }
+        });
       });
     } else {
       tempSearchStore = [];
@@ -59,6 +67,8 @@ class _SearchViewState extends State<SearchView> {
 
   @override
   Widget build(BuildContext context) {
+    
+    print('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx$tempSearchStore');
     return new Scaffold(
       backgroundColor: Colors.indigo,
         body: ListView(children: <Widget>[
@@ -108,7 +118,7 @@ class _SearchViewState extends State<SearchView> {
               primary: false,
               shrinkWrap: true,
               children: tempSearchStore.map((element) {
-                return buildResultCard(element);
+                return buildResultCard(context,element,serviceInfo.documents[0]);
               }).toList()
           )
         ]
@@ -117,20 +127,30 @@ class _SearchViewState extends State<SearchView> {
   }
 }
 
-Widget buildResultCard(data) {
-  return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-      elevation: 2.0,
-      child: Container(
-          child: Center(
-              child: Text(data['Service_Name'],
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 20.0,
-                ),
-              )
-          )
-      )
+Widget buildResultCard(BuildContext context,data, DocumentSnapshot serviceInfo) {
+
+  final serviceDoc = Service.fromElement(data);
+  return GestureDetector(
+    onTap: (){
+      Navigator.push(context, MaterialPageRoute(builder: (context) => ServiceDetailPage(service: serviceDoc)));
+    },
+    child: Card(
+//      shadowColor: Colors.grey,
+//      elevation: 10.0,
+        color: Color(0xFF333f8f),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+        child: Container(
+          height: 50,
+            child: Center(
+                child: Text(data['Service_Name'],
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20.0,
+                  ),
+                )
+            )
+        )
+    ),
   );
 }

@@ -103,6 +103,19 @@ class AuthServices {
     }
   }
 
+
+
+  Future deleteUser() async {
+    try {
+       FirebaseUser user = await _auth.currentUser();
+       user.delete();
+
+    } catch(e) {
+      error = e.message;
+      print(error);
+    }
+  }
+
   //send verification mail
   Future sendVerificationMail() async {
     var user = await _auth.currentUser();

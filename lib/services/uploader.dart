@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +7,8 @@ import 'package:flutter/material.dart';
 
 class ImageUploader extends StatefulWidget {
   final File file;
-  const ImageUploader(this.file);
+  final String uid;
+  const ImageUploader(this.file,this.uid);
 
   @override
   _ImageUploaderState createState() => _ImageUploaderState();
@@ -18,12 +20,18 @@ class _ImageUploaderState extends State<ImageUploader> {
 
   StorageUploadTask _uploadTask;
 
-  void _startUpload() {
+  void _startUpload()  async {
     /// Unique file name for the file
     String filePath = 'images/${DateTime.now()}.png';
+
     setState(() {
       _uploadTask = _storage.ref().child(filePath).putFile(widget.file);
     });
+
+    await Firestore.instance.collection('Customers').document(widget.uid).setData({
+      'Photo' : _storage.ref().getDownloadURL()
+    },
+        merge: true);
   }
 
   @override

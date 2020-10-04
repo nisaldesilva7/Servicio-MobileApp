@@ -109,21 +109,21 @@ class _AppSettingsState extends State<AppSettings> {
                             _changePasswordDialog(context);                       },
                         ),
                         _buildDivider(),
-//                        ListTile(
-//                          leading: Icon(
-//                            FontAwesomeIcons.language,
-//                            color: Colors.indigo,
-//                          ),
-//                          title: Text("Change Password"),
-//                          trailing: Icon(Icons.keyboard_arrow_right),
-//                          onTap: () {
-//                            //open change language
-//                          },
-//                        ),
+                        ListTile(
+                          leading: Icon(
+                            Icons.delete,
+                            color: Colors.indigo,
+                          ),
+                          title: Text("Delete Account"),
+                          trailing: Icon(Icons.keyboard_arrow_right),
+                          onTap: () {
+                            _auth.deleteUser();
+                           },
+                        ),
                         _buildDivider(),
                         ListTile(
                           leading: Icon(
-                            Icons.location_on,
+                            Icons.mail_outline,
                             color: Colors.indigo,
                           ),
                           title: Text("Send Verfication mail"),

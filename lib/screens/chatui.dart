@@ -159,10 +159,11 @@ class _ChatBoxState extends State<ChatBox> {
 //      for(int i=0; i<5; i++) print(messages[i].description);
     });
 
-    Firestore.instance.collection('Messages').document(uID).collection('Services').document(widget.service.serviceId).collection('msg').add({
-      'msg': _controller.text,
-      'user': 0,
-      'timestamp': DateTime.now(),
+    Firestore.instance.collection('Messaging').document(uID).collection('Services').document(widget.service.serviceId).collection('msg').add({
+      'text': _controller.text,
+      'id': 0,
+      'type': 'text',
+      'time': DateTime.now(),
     });
     _controller.clear();
 
@@ -186,6 +187,7 @@ class _ChatBoxState extends State<ChatBox> {
           const SizedBox(width: 5.0),
         ],
         Container(
+          width: 250 ,
           padding: const EdgeInsets.symmetric(
             vertical: 8.0,
             horizontal: 16.0,
@@ -218,12 +220,12 @@ class _ChatBoxState extends State<ChatBox> {
   Stream<QuerySnapshot> getMessageStream(BuildContext context) async* {
     final uid = await _auth.getCurrentUID();
     yield* Firestore.instance
-        .collection('Messages')
+        .collection('Messaging')
         .document(uid)
         .collection('Services')
         .document(widget.service.serviceId)
         .collection('msg')
-        .orderBy('timestamp', descending: true)
+        .orderBy('time', descending: true)
         .limit(20)
         .snapshots();
   }

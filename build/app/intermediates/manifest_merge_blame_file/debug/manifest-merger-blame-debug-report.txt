@@ -17,173 +17,175 @@
 15    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 15-->[:image_picker] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-80
 15-->[:image_picker] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:7:22-77
-16    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- Although the *SdkVersion is captured in gradle build files, this is required for non gradle builds -->
+16    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 16-->[:image_picker] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:8:5-81
 16-->[:image_picker] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:8:22-78
-17    <!-- <uses-sdk android:minSdkVersion="14"/> -->
-18    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-18-->[com.google.firebase:firebase-storage:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\d72512d7990195efc98cae7b44d13da5\jetified-firebase-storage-17.0.0\AndroidManifest.xml:26:5-79
-18-->[com.google.firebase:firebase-storage:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\d72512d7990195efc98cae7b44d13da5\jetified-firebase-storage-17.0.0\AndroidManifest.xml:26:22-76
-19    <uses-permission android:name="android.permission.WAKE_LOCK" /> <!-- Required by older versions of Google Play services to create IID tokens -->
-19-->[com.google.firebase:firebase-iid:20.0.1] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\71dc868852144548b68266a076cea9c7\firebase-iid-20.0.1\AndroidManifest.xml:24:5-68
-19-->[com.google.firebase:firebase-iid:20.0.1] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\71dc868852144548b68266a076cea9c7\firebase-iid-20.0.1\AndroidManifest.xml:24:22-65
-20    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
-20-->[com.google.firebase:firebase-iid:20.0.1] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\71dc868852144548b68266a076cea9c7\firebase-iid-20.0.1\AndroidManifest.xml:26:5-82
-20-->[com.google.firebase:firebase-iid:20.0.1] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\71dc868852144548b68266a076cea9c7\firebase-iid-20.0.1\AndroidManifest.xml:26:22-79
-21    <!--
-22 io.flutter.app.FlutterApplication is an android.app.Application that
-23         calls FlutterMain.startInitialization(this); in its onCreate method.
-24         In most cases you can leave this as-is, but you if you want to provide
-25         additional functionality it is fine to subclass or reimplement
-26         FlutterApplication and put your custom class here.
-27    -->
-28    <application
-28-->C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\android\app\src\main\AndroidManifest.xml:8:5-37:19
-29        android:name="io.flutter.app.FlutterApplication"
-29-->C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\android\app\src\main\AndroidManifest.xml:9:9-57
-30        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-30-->[androidx.core:core:1.2.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\51d1d935949ee00722ec77da84be2a70\core-1.2.0\AndroidManifest.xml:24:18-86
-31        android:debuggable="true"
-32        android:icon="@mipmap/launcher_icon"
-32-->C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\android\app\src\main\AndroidManifest.xml:11:9-45
-33        android:label="Servicio" >
-33-->C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\android\app\src\main\AndroidManifest.xml:10:9-33
-34        <activity
-34-->C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\android\app\src\main\AndroidManifest.xml:12:9-27:20
-35            android:name="com.example.servicio.MainActivity"
-35-->C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\android\app\src\main\AndroidManifest.xml:13:13-41
-36            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
-36-->C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\android\app\src\main\AndroidManifest.xml:16:13-163
-37            android:hardwareAccelerated="true"
-37-->C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\android\app\src\main\AndroidManifest.xml:17:13-47
-38            android:launchMode="singleTop"
-38-->C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\android\app\src\main\AndroidManifest.xml:14:13-43
-39            android:theme="@style/LaunchTheme"
-39-->C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\android\app\src\main\AndroidManifest.xml:15:13-47
-40            android:windowSoftInputMode="adjustResize" >
-40-->C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\android\app\src\main\AndroidManifest.xml:18:13-55
-41            <intent-filter>
-41-->C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\android\app\src\main\AndroidManifest.xml:19:13-22:29
-42                <action android:name="android.intent.action.MAIN" />
-42-->C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\android\app\src\main\AndroidManifest.xml:20:17-68
-42-->C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\android\app\src\main\AndroidManifest.xml:20:25-66
-43
-44                <category android:name="android.intent.category.LAUNCHER" />
-44-->C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\android\app\src\main\AndroidManifest.xml:21:17-76
-44-->C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\android\app\src\main\AndroidManifest.xml:21:27-74
-45            </intent-filter>
-46            <intent-filter>
-46-->C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\android\app\src\main\AndroidManifest.xml:23:13-26:29
-47                <action android:name="FLUTTER_NOTIFICATION_CLICK" />
-47-->C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\android\app\src\main\AndroidManifest.xml:24:17-69
-47-->C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\android\app\src\main\AndroidManifest.xml:24:25-66
-48
-49                <category android:name="android.intent.category.DEFAULT" />
-49-->C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\android\app\src\main\AndroidManifest.xml:25:17-76
-49-->C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\android\app\src\main\AndroidManifest.xml:25:27-73
-50            </intent-filter>
-51        </activity>
-52        <activity
-52-->C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\android\app\src\main\AndroidManifest.xml:28:9-31:71
-53            android:name="com.yalantis.ucrop.UCropActivity"
-53-->C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\android\app\src\main\AndroidManifest.xml:29:13-60
-54            android:screenOrientation="portrait"
-54-->C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\android\app\src\main\AndroidManifest.xml:30:13-49
-55            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-55-->C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\android\app\src\main\AndroidManifest.xml:31:13-69
-56        <!--
-57             Don't delete the meta-data below.
-58             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
-59        -->
-60        <meta-data
-60-->C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\android\app\src\main\AndroidManifest.xml:34:9-36:33
-61            android:name="flutterEmbedding"
-61-->C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\android\app\src\main\AndroidManifest.xml:35:13-44
-62            android:value="2" />
-62-->C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\android\app\src\main\AndroidManifest.xml:36:13-30
-63
-64        <service
-64-->[:firebase_storage] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\firebase_storage\intermediates\library_manifest\debug\AndroidManifest.xml:8:9-12:19
-65            android:name="com.google.firebase.components.ComponentDiscoveryService"
-65-->[:firebase_storage] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\firebase_storage\intermediates\library_manifest\debug\AndroidManifest.xml:8:18-89
-66            android:directBootAware="true"
-66-->[com.google.firebase:firebase-common:19.3.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\efce6419cef185abce48282468c18d20\jetified-firebase-common-19.3.0\AndroidManifest.xml:34:13-43
-67            android:exported="false" >
-67-->[com.google.firebase:firebase-firestore:21.3.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\853da31ec23fd22cf25a46a1d9dcf8af\jetified-firebase-firestore-21.3.0\AndroidManifest.xml:19:13-37
-68            <meta-data
-68-->[:firebase_storage] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\firebase_storage\intermediates\library_manifest\debug\AndroidManifest.xml:9:13-11:85
-69                android:name="com.google.firebase.components:io.flutter.plugins.firebase.storage.FlutterFirebaseAppRegistrar"
-69-->[:firebase_storage] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\firebase_storage\intermediates\library_manifest\debug\AndroidManifest.xml:10:17-126
-70                android:value="com.google.firebase.components.ComponentRegistrar" />
-70-->[:firebase_storage] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\firebase_storage\intermediates\library_manifest\debug\AndroidManifest.xml:11:17-82
-71            <meta-data
-71-->[:cloud_firestore] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\cloud_firestore\intermediates\library_manifest\debug\AndroidManifest.xml:9:13-11:85
-72                android:name="com.google.firebase.components:io.flutter.plugins.firebase.cloudfirestore.FlutterFirebaseAppRegistrar"
-72-->[:cloud_firestore] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\cloud_firestore\intermediates\library_manifest\debug\AndroidManifest.xml:10:17-133
-73                android:value="com.google.firebase.components.ComponentRegistrar" />
-73-->[:cloud_firestore] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\cloud_firestore\intermediates\library_manifest\debug\AndroidManifest.xml:11:17-82
-74            <meta-data
-74-->[:firebase_auth] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\firebase_auth\intermediates\library_manifest\debug\AndroidManifest.xml:9:13-11:85
-75                android:name="com.google.firebase.components:io.flutter.plugins.firebaseauth.FlutterFirebaseAppRegistrar"
-75-->[:firebase_auth] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\firebase_auth\intermediates\library_manifest\debug\AndroidManifest.xml:10:17-122
-76                android:value="com.google.firebase.components.ComponentRegistrar" />
-76-->[:firebase_auth] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\firebase_auth\intermediates\library_manifest\debug\AndroidManifest.xml:11:17-82
-77            <meta-data
-77-->[:firebase_core] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\firebase_core\intermediates\library_manifest\debug\AndroidManifest.xml:9:13-11:85
-78                android:name="com.google.firebase.components:io.flutter.plugins.firebase.core.FlutterFirebaseAppRegistrar"
-78-->[:firebase_core] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\firebase_core\intermediates\library_manifest\debug\AndroidManifest.xml:10:17-123
-79                android:value="com.google.firebase.components.ComponentRegistrar" />
-79-->[:firebase_core] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\firebase_core\intermediates\library_manifest\debug\AndroidManifest.xml:11:17-82
-80            <meta-data
-80-->[:firebase_messaging] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:14:13-16:85
-81                android:name="com.google.firebase.components:io.flutter.plugins.firebasemessaging.FlutterFirebaseAppRegistrar"
-81-->[:firebase_messaging] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:15:17-127
-82                android:value="com.google.firebase.components.ComponentRegistrar" />
-82-->[:firebase_messaging] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:16:17-82
-83            <meta-data
-83-->[com.google.firebase:firebase-storage:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\d72512d7990195efc98cae7b44d13da5\jetified-firebase-storage-17.0.0\AndroidManifest.xml:31:13-33:85
-84                android:name="com.google.firebase.components:com.google.firebase.storage.StorageRegistrar"
-84-->[com.google.firebase:firebase-storage:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\d72512d7990195efc98cae7b44d13da5\jetified-firebase-storage-17.0.0\AndroidManifest.xml:32:17-107
-85                android:value="com.google.firebase.components.ComponentRegistrar" />
-85-->[com.google.firebase:firebase-storage:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\d72512d7990195efc98cae7b44d13da5\jetified-firebase-storage-17.0.0\AndroidManifest.xml:33:17-82
-86            <meta-data
-86-->[com.google.firebase:firebase-firestore:21.3.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\853da31ec23fd22cf25a46a1d9dcf8af\jetified-firebase-firestore-21.3.0\AndroidManifest.xml:20:13-22:85
-87                android:name="com.google.firebase.components:com.google.firebase.firestore.FirestoreRegistrar"
-87-->[com.google.firebase:firebase-firestore:21.3.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\853da31ec23fd22cf25a46a1d9dcf8af\jetified-firebase-firestore-21.3.0\AndroidManifest.xml:21:17-111
-88                android:value="com.google.firebase.components.ComponentRegistrar" />
-88-->[com.google.firebase:firebase-firestore:21.3.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\853da31ec23fd22cf25a46a1d9dcf8af\jetified-firebase-firestore-21.3.0\AndroidManifest.xml:22:17-82
-89            <meta-data
-89-->[com.google.firebase:firebase-auth:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\3c89e438db4a5b07154cd874213f0909\jetified-firebase-auth-17.0.0\AndroidManifest.xml:36:13-38:85
-90                android:name="com.google.firebase.components:com.google.firebase.auth.FirebaseAuthRegistrar"
-90-->[com.google.firebase:firebase-auth:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\3c89e438db4a5b07154cd874213f0909\jetified-firebase-auth-17.0.0\AndroidManifest.xml:37:17-109
-91                android:value="com.google.firebase.components.ComponentRegistrar" />
-91-->[com.google.firebase:firebase-auth:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\3c89e438db4a5b07154cd874213f0909\jetified-firebase-auth-17.0.0\AndroidManifest.xml:38:17-82
-92            <meta-data
-92-->[com.google.firebase:firebase-iid:20.0.1] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\71dc868852144548b68266a076cea9c7\firebase-iid-20.0.1\AndroidManifest.xml:32:13-34:85
-93                android:name="com.google.firebase.components:com.google.firebase.iid.Registrar"
-93-->[com.google.firebase:firebase-iid:20.0.1] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\71dc868852144548b68266a076cea9c7\firebase-iid-20.0.1\AndroidManifest.xml:33:17-96
-94                android:value="com.google.firebase.components.ComponentRegistrar" />
-94-->[com.google.firebase:firebase-iid:20.0.1] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\71dc868852144548b68266a076cea9c7\firebase-iid-20.0.1\AndroidManifest.xml:34:17-82
-95        </service>
-96
-97        <provider
-97-->[:image_picker] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:11:9-19:20
-98            android:name="io.flutter.plugins.imagepicker.ImagePickerFileProvider"
-98-->[:image_picker] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:12:13-82
-99            android:authorities="com.example.servicio.flutter.image_provider"
-99-->[:image_picker] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:13:13-74
-100            android:exported="false"
-100-->[:image_picker] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:14:13-37
-101            android:grantUriPermissions="true" >
-101-->[:image_picker] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:15:13-47
-102            <meta-data
-102-->[:image_picker] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:16:13-18:75
-103                android:name="android.support.FILE_PROVIDER_PATHS"
-103-->[:image_picker] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:17:17-67
-104                android:resource="@xml/flutter_image_picker_file_paths" />
-104-->[:image_picker] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:18:17-72
-105        </provider>
-106
+17    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- Although the *SdkVersion is captured in gradle build files, this is required for non gradle builds -->
+17-->[:geolocator] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\geolocator\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-79
+17-->[:geolocator] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\geolocator\intermediates\library_manifest\debug\AndroidManifest.xml:7:22-76
+18    <!-- <uses-sdk android:minSdkVersion="14" /> -->
+19    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+19-->[com.google.firebase:firebase-firestore:21.3.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\853da31ec23fd22cf25a46a1d9dcf8af\jetified-firebase-firestore-21.3.0\AndroidManifest.xml:13:5-79
+19-->[com.google.firebase:firebase-firestore:21.3.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\853da31ec23fd22cf25a46a1d9dcf8af\jetified-firebase-firestore-21.3.0\AndroidManifest.xml:13:22-76
+20    <uses-permission android:name="android.permission.WAKE_LOCK" /> <!-- Required by older versions of Google Play services to create IID tokens -->
+20-->[com.google.firebase:firebase-iid:20.0.1] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\71dc868852144548b68266a076cea9c7\firebase-iid-20.0.1\AndroidManifest.xml:24:5-68
+20-->[com.google.firebase:firebase-iid:20.0.1] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\71dc868852144548b68266a076cea9c7\firebase-iid-20.0.1\AndroidManifest.xml:24:22-65
+21    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+21-->[com.google.firebase:firebase-iid:20.0.1] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\71dc868852144548b68266a076cea9c7\firebase-iid-20.0.1\AndroidManifest.xml:26:5-82
+21-->[com.google.firebase:firebase-iid:20.0.1] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\71dc868852144548b68266a076cea9c7\firebase-iid-20.0.1\AndroidManifest.xml:26:22-79
+22    <!--
+23 io.flutter.app.FlutterApplication is an android.app.Application that
+24         calls FlutterMain.startInitialization(this); in its onCreate method.
+25         In most cases you can leave this as-is, but you if you want to provide
+26         additional functionality it is fine to subclass or reimplement
+27         FlutterApplication and put your custom class here.
+28    -->
+29    <application
+29-->C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\android\app\src\main\AndroidManifest.xml:8:5-37:19
+30        android:name="io.flutter.app.FlutterApplication"
+30-->C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\android\app\src\main\AndroidManifest.xml:9:9-57
+31        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+31-->[androidx.core:core:1.2.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\51d1d935949ee00722ec77da84be2a70\core-1.2.0\AndroidManifest.xml:24:18-86
+32        android:debuggable="true"
+33        android:icon="@mipmap/launcher_icon"
+33-->C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\android\app\src\main\AndroidManifest.xml:11:9-45
+34        android:label="Servicio" >
+34-->C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\android\app\src\main\AndroidManifest.xml:10:9-33
+35        <activity
+35-->C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\android\app\src\main\AndroidManifest.xml:12:9-27:20
+36            android:name="com.example.servicio.MainActivity"
+36-->C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\android\app\src\main\AndroidManifest.xml:13:13-41
+37            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+37-->C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\android\app\src\main\AndroidManifest.xml:16:13-163
+38            android:hardwareAccelerated="true"
+38-->C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\android\app\src\main\AndroidManifest.xml:17:13-47
+39            android:launchMode="singleTop"
+39-->C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\android\app\src\main\AndroidManifest.xml:14:13-43
+40            android:theme="@style/LaunchTheme"
+40-->C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\android\app\src\main\AndroidManifest.xml:15:13-47
+41            android:windowSoftInputMode="adjustResize" >
+41-->C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\android\app\src\main\AndroidManifest.xml:18:13-55
+42            <intent-filter>
+42-->C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\android\app\src\main\AndroidManifest.xml:19:13-22:29
+43                <action android:name="android.intent.action.MAIN" />
+43-->C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\android\app\src\main\AndroidManifest.xml:20:17-68
+43-->C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\android\app\src\main\AndroidManifest.xml:20:25-66
+44
+45                <category android:name="android.intent.category.LAUNCHER" />
+45-->C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\android\app\src\main\AndroidManifest.xml:21:17-76
+45-->C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\android\app\src\main\AndroidManifest.xml:21:27-74
+46            </intent-filter>
+47            <intent-filter>
+47-->C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\android\app\src\main\AndroidManifest.xml:23:13-26:29
+48                <action android:name="FLUTTER_NOTIFICATION_CLICK" />
+48-->C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\android\app\src\main\AndroidManifest.xml:24:17-69
+48-->C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\android\app\src\main\AndroidManifest.xml:24:25-66
+49
+50                <category android:name="android.intent.category.DEFAULT" />
+50-->C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\android\app\src\main\AndroidManifest.xml:25:17-76
+50-->C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\android\app\src\main\AndroidManifest.xml:25:27-73
+51            </intent-filter>
+52        </activity>
+53        <activity
+53-->C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\android\app\src\main\AndroidManifest.xml:28:9-31:71
+54            android:name="com.yalantis.ucrop.UCropActivity"
+54-->C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\android\app\src\main\AndroidManifest.xml:29:13-60
+55            android:screenOrientation="portrait"
+55-->C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\android\app\src\main\AndroidManifest.xml:30:13-49
+56            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+56-->C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\android\app\src\main\AndroidManifest.xml:31:13-69
+57        <!--
+58             Don't delete the meta-data below.
+59             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
+60        -->
+61        <meta-data
+61-->C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\android\app\src\main\AndroidManifest.xml:34:9-36:33
+62            android:name="flutterEmbedding"
+62-->C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\android\app\src\main\AndroidManifest.xml:35:13-44
+63            android:value="2" />
+63-->C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\android\app\src\main\AndroidManifest.xml:36:13-30
+64
+65        <provider
+65-->[:image_picker] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:11:9-19:20
+66            android:name="io.flutter.plugins.imagepicker.ImagePickerFileProvider"
+66-->[:image_picker] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:12:13-82
+67            android:authorities="com.example.servicio.flutter.image_provider"
+67-->[:image_picker] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:13:13-74
+68            android:exported="false"
+68-->[:image_picker] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:14:13-37
+69            android:grantUriPermissions="true" >
+69-->[:image_picker] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:15:13-47
+70            <meta-data
+70-->[:image_picker] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:16:13-18:75
+71                android:name="android.support.FILE_PROVIDER_PATHS"
+71-->[:image_picker] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:17:17-67
+72                android:resource="@xml/flutter_image_picker_file_paths" />
+72-->[:image_picker] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:18:17-72
+73        </provider>
+74
+75        <service
+75-->[:cloud_firestore] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\cloud_firestore\intermediates\library_manifest\debug\AndroidManifest.xml:8:9-12:19
+76            android:name="com.google.firebase.components.ComponentDiscoveryService"
+76-->[:cloud_firestore] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\cloud_firestore\intermediates\library_manifest\debug\AndroidManifest.xml:8:18-89
+77            android:directBootAware="true"
+77-->[com.google.firebase:firebase-common:19.3.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\efce6419cef185abce48282468c18d20\jetified-firebase-common-19.3.0\AndroidManifest.xml:34:13-43
+78            android:exported="false" >
+78-->[com.google.firebase:firebase-firestore:21.3.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\853da31ec23fd22cf25a46a1d9dcf8af\jetified-firebase-firestore-21.3.0\AndroidManifest.xml:19:13-37
+79            <meta-data
+79-->[:cloud_firestore] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\cloud_firestore\intermediates\library_manifest\debug\AndroidManifest.xml:9:13-11:85
+80                android:name="com.google.firebase.components:io.flutter.plugins.firebase.cloudfirestore.FlutterFirebaseAppRegistrar"
+80-->[:cloud_firestore] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\cloud_firestore\intermediates\library_manifest\debug\AndroidManifest.xml:10:17-133
+81                android:value="com.google.firebase.components.ComponentRegistrar" />
+81-->[:cloud_firestore] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\cloud_firestore\intermediates\library_manifest\debug\AndroidManifest.xml:11:17-82
+82            <meta-data
+82-->[:firebase_auth] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\firebase_auth\intermediates\library_manifest\debug\AndroidManifest.xml:9:13-11:85
+83                android:name="com.google.firebase.components:io.flutter.plugins.firebaseauth.FlutterFirebaseAppRegistrar"
+83-->[:firebase_auth] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\firebase_auth\intermediates\library_manifest\debug\AndroidManifest.xml:10:17-122
+84                android:value="com.google.firebase.components.ComponentRegistrar" />
+84-->[:firebase_auth] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\firebase_auth\intermediates\library_manifest\debug\AndroidManifest.xml:11:17-82
+85            <meta-data
+85-->[:firebase_storage] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\firebase_storage\intermediates\library_manifest\debug\AndroidManifest.xml:9:13-11:85
+86                android:name="com.google.firebase.components:io.flutter.plugins.firebase.storage.FlutterFirebaseAppRegistrar"
+86-->[:firebase_storage] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\firebase_storage\intermediates\library_manifest\debug\AndroidManifest.xml:10:17-126
+87                android:value="com.google.firebase.components.ComponentRegistrar" />
+87-->[:firebase_storage] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\firebase_storage\intermediates\library_manifest\debug\AndroidManifest.xml:11:17-82
+88            <meta-data
+88-->[:firebase_core] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\firebase_core\intermediates\library_manifest\debug\AndroidManifest.xml:9:13-11:85
+89                android:name="com.google.firebase.components:io.flutter.plugins.firebase.core.FlutterFirebaseAppRegistrar"
+89-->[:firebase_core] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\firebase_core\intermediates\library_manifest\debug\AndroidManifest.xml:10:17-123
+90                android:value="com.google.firebase.components.ComponentRegistrar" />
+90-->[:firebase_core] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\firebase_core\intermediates\library_manifest\debug\AndroidManifest.xml:11:17-82
+91            <meta-data
+91-->[:firebase_messaging] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:14:13-16:85
+92                android:name="com.google.firebase.components:io.flutter.plugins.firebasemessaging.FlutterFirebaseAppRegistrar"
+92-->[:firebase_messaging] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:15:17-127
+93                android:value="com.google.firebase.components.ComponentRegistrar" />
+93-->[:firebase_messaging] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:16:17-82
+94            <meta-data
+94-->[com.google.firebase:firebase-firestore:21.3.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\853da31ec23fd22cf25a46a1d9dcf8af\jetified-firebase-firestore-21.3.0\AndroidManifest.xml:20:13-22:85
+95                android:name="com.google.firebase.components:com.google.firebase.firestore.FirestoreRegistrar"
+95-->[com.google.firebase:firebase-firestore:21.3.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\853da31ec23fd22cf25a46a1d9dcf8af\jetified-firebase-firestore-21.3.0\AndroidManifest.xml:21:17-111
+96                android:value="com.google.firebase.components.ComponentRegistrar" />
+96-->[com.google.firebase:firebase-firestore:21.3.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\853da31ec23fd22cf25a46a1d9dcf8af\jetified-firebase-firestore-21.3.0\AndroidManifest.xml:22:17-82
+97            <meta-data
+97-->[com.google.firebase:firebase-auth:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\3c89e438db4a5b07154cd874213f0909\jetified-firebase-auth-17.0.0\AndroidManifest.xml:36:13-38:85
+98                android:name="com.google.firebase.components:com.google.firebase.auth.FirebaseAuthRegistrar"
+98-->[com.google.firebase:firebase-auth:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\3c89e438db4a5b07154cd874213f0909\jetified-firebase-auth-17.0.0\AndroidManifest.xml:37:17-109
+99                android:value="com.google.firebase.components.ComponentRegistrar" />
+99-->[com.google.firebase:firebase-auth:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\3c89e438db4a5b07154cd874213f0909\jetified-firebase-auth-17.0.0\AndroidManifest.xml:38:17-82
+100            <meta-data
+100-->[com.google.firebase:firebase-storage:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\d72512d7990195efc98cae7b44d13da5\jetified-firebase-storage-17.0.0\AndroidManifest.xml:31:13-33:85
+101                android:name="com.google.firebase.components:com.google.firebase.storage.StorageRegistrar"
+101-->[com.google.firebase:firebase-storage:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\d72512d7990195efc98cae7b44d13da5\jetified-firebase-storage-17.0.0\AndroidManifest.xml:32:17-107
+102                android:value="com.google.firebase.components.ComponentRegistrar" />
+102-->[com.google.firebase:firebase-storage:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\d72512d7990195efc98cae7b44d13da5\jetified-firebase-storage-17.0.0\AndroidManifest.xml:33:17-82
+103            <meta-data
+103-->[com.google.firebase:firebase-iid:20.0.1] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\71dc868852144548b68266a076cea9c7\firebase-iid-20.0.1\AndroidManifest.xml:32:13-34:85
+104                android:name="com.google.firebase.components:com.google.firebase.iid.Registrar"
+104-->[com.google.firebase:firebase-iid:20.0.1] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\71dc868852144548b68266a076cea9c7\firebase-iid-20.0.1\AndroidManifest.xml:33:17-96
+105                android:value="com.google.firebase.components.ComponentRegistrar" />
+105-->[com.google.firebase:firebase-iid:20.0.1] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\71dc868852144548b68266a076cea9c7\firebase-iid-20.0.1\AndroidManifest.xml:34:17-82
+106        </service>
 107        <service android:name="io.flutter.plugins.firebasemessaging.FlutterFirebaseMessagingService" >
 107-->[:firebase_messaging] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:8:9-12:19
 107-->[:firebase_messaging] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:8:18-101
@@ -203,81 +205,80 @@
 115-->[:url_launcher] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\url_launcher\intermediates\library_manifest\debug\AndroidManifest.xml:10:13-37
 116            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
 116-->[:url_launcher] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\url_launcher\intermediates\library_manifest\debug\AndroidManifest.xml:11:13-71
-117        <!--
-118             FirebaseMessagingService performs security checks at runtime,
-119             but set to not exported to explicitly avoid allowing another app to call it.
-120        -->
-121        <service
-121-->[com.google.firebase:firebase-messaging:20.0.1] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\48222d1eef8a978e3e0d33ab60727530\jetified-firebase-messaging-20.0.1\AndroidManifest.xml:28:9-34:19
-122            android:name="com.google.firebase.messaging.FirebaseMessagingService"
-122-->[com.google.firebase:firebase-messaging:20.0.1] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\48222d1eef8a978e3e0d33ab60727530\jetified-firebase-messaging-20.0.1\AndroidManifest.xml:29:13-82
-123            android:exported="false" >
-123-->[com.google.firebase:firebase-messaging:20.0.1] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\48222d1eef8a978e3e0d33ab60727530\jetified-firebase-messaging-20.0.1\AndroidManifest.xml:30:13-37
-124            <intent-filter android:priority="-500" >
-124-->[:firebase_messaging] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:9:13-11:29
-125                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-125-->[:firebase_messaging] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:10:17-78
-125-->[:firebase_messaging] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:10:25-75
-126            </intent-filter>
-127        </service>
-128
-129        <activity
-129-->[com.google.firebase:firebase-auth:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\3c89e438db4a5b07154cd874213f0909\jetified-firebase-auth-17.0.0\AndroidManifest.xml:24:9-31:50
-130            android:name="com.google.firebase.auth.internal.FederatedSignInActivity"
-130-->[com.google.firebase:firebase-auth:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\3c89e438db4a5b07154cd874213f0909\jetified-firebase-auth-17.0.0\AndroidManifest.xml:25:13-85
-131            android:excludeFromRecents="true"
-131-->[com.google.firebase:firebase-auth:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\3c89e438db4a5b07154cd874213f0909\jetified-firebase-auth-17.0.0\AndroidManifest.xml:26:13-46
-132            android:exported="true"
-132-->[com.google.firebase:firebase-auth:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\3c89e438db4a5b07154cd874213f0909\jetified-firebase-auth-17.0.0\AndroidManifest.xml:27:13-36
-133            android:launchMode="singleTask"
-133-->[com.google.firebase:firebase-auth:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\3c89e438db4a5b07154cd874213f0909\jetified-firebase-auth-17.0.0\AndroidManifest.xml:28:13-44
-134            android:permission="com.google.firebase.auth.api.gms.permission.LAUNCH_FEDERATED_SIGN_IN"
-134-->[com.google.firebase:firebase-auth:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\3c89e438db4a5b07154cd874213f0909\jetified-firebase-auth-17.0.0\AndroidManifest.xml:29:13-102
-135            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-135-->[com.google.firebase:firebase-auth:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\3c89e438db4a5b07154cd874213f0909\jetified-firebase-auth-17.0.0\AndroidManifest.xml:30:13-72
-136
-137        <receiver
-137-->[com.google.firebase:firebase-iid:20.0.1] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\71dc868852144548b68266a076cea9c7\firebase-iid-20.0.1\AndroidManifest.xml:37:9-44:20
-138            android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver"
-138-->[com.google.firebase:firebase-iid:20.0.1] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\71dc868852144548b68266a076cea9c7\firebase-iid-20.0.1\AndroidManifest.xml:38:13-78
-139            android:exported="true"
-139-->[com.google.firebase:firebase-iid:20.0.1] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\71dc868852144548b68266a076cea9c7\firebase-iid-20.0.1\AndroidManifest.xml:39:13-36
-140            android:permission="com.google.android.c2dm.permission.SEND" >
-140-->[com.google.firebase:firebase-iid:20.0.1] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\71dc868852144548b68266a076cea9c7\firebase-iid-20.0.1\AndroidManifest.xml:40:13-73
-141            <intent-filter>
-141-->[com.google.firebase:firebase-iid:20.0.1] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\71dc868852144548b68266a076cea9c7\firebase-iid-20.0.1\AndroidManifest.xml:41:13-43:29
-142                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-142-->[com.google.firebase:firebase-iid:20.0.1] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\71dc868852144548b68266a076cea9c7\firebase-iid-20.0.1\AndroidManifest.xml:42:17-81
-142-->[com.google.firebase:firebase-iid:20.0.1] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\71dc868852144548b68266a076cea9c7\firebase-iid-20.0.1\AndroidManifest.xml:42:25-78
-143            </intent-filter>
-144        </receiver>
-145
-146        <provider
-146-->[com.google.firebase:firebase-common:19.3.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\efce6419cef185abce48282468c18d20\jetified-firebase-common-19.3.0\AndroidManifest.xml:26:9-30:39
-147            android:name="com.google.firebase.provider.FirebaseInitProvider"
-147-->[com.google.firebase:firebase-common:19.3.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\efce6419cef185abce48282468c18d20\jetified-firebase-common-19.3.0\AndroidManifest.xml:27:13-77
-148            android:authorities="com.example.servicio.firebaseinitprovider"
-148-->[com.google.firebase:firebase-common:19.3.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\efce6419cef185abce48282468c18d20\jetified-firebase-common-19.3.0\AndroidManifest.xml:28:13-72
-149            android:exported="false"
-149-->[com.google.firebase:firebase-common:19.3.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\efce6419cef185abce48282468c18d20\jetified-firebase-common-19.3.0\AndroidManifest.xml:29:13-37
-150            android:initOrder="100" />
-150-->[com.google.firebase:firebase-common:19.3.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\efce6419cef185abce48282468c18d20\jetified-firebase-common-19.3.0\AndroidManifest.xml:30:13-36
-151
-152        <activity
-152-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\dfda874e59ae708b9dea8d783cda1c4f\play-services-base-17.0.0\AndroidManifest.xml:23:9-26:75
-153            android:name="com.google.android.gms.common.api.GoogleApiActivity"
-153-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\dfda874e59ae708b9dea8d783cda1c4f\play-services-base-17.0.0\AndroidManifest.xml:24:13-79
-154            android:exported="false"
-154-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\dfda874e59ae708b9dea8d783cda1c4f\play-services-base-17.0.0\AndroidManifest.xml:25:13-37
-155            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-155-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\dfda874e59ae708b9dea8d783cda1c4f\play-services-base-17.0.0\AndroidManifest.xml:26:13-72
-156
-157        <meta-data
-157-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\31cd1bf96086511c6babe8e40e870ce1\jetified-play-services-basement-17.0.0\AndroidManifest.xml:23:9-25:69
-158            android:name="com.google.android.gms.version"
-158-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\31cd1bf96086511c6babe8e40e870ce1\jetified-play-services-basement-17.0.0\AndroidManifest.xml:24:13-58
-159            android:value="@integer/google_play_services_version" />
-159-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\31cd1bf96086511c6babe8e40e870ce1\jetified-play-services-basement-17.0.0\AndroidManifest.xml:25:13-66
-160    </application>
-161
-162</manifest>
+117        <activity
+117-->[com.google.firebase:firebase-auth:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\3c89e438db4a5b07154cd874213f0909\jetified-firebase-auth-17.0.0\AndroidManifest.xml:24:9-31:50
+118            android:name="com.google.firebase.auth.internal.FederatedSignInActivity"
+118-->[com.google.firebase:firebase-auth:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\3c89e438db4a5b07154cd874213f0909\jetified-firebase-auth-17.0.0\AndroidManifest.xml:25:13-85
+119            android:excludeFromRecents="true"
+119-->[com.google.firebase:firebase-auth:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\3c89e438db4a5b07154cd874213f0909\jetified-firebase-auth-17.0.0\AndroidManifest.xml:26:13-46
+120            android:exported="true"
+120-->[com.google.firebase:firebase-auth:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\3c89e438db4a5b07154cd874213f0909\jetified-firebase-auth-17.0.0\AndroidManifest.xml:27:13-36
+121            android:launchMode="singleTask"
+121-->[com.google.firebase:firebase-auth:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\3c89e438db4a5b07154cd874213f0909\jetified-firebase-auth-17.0.0\AndroidManifest.xml:28:13-44
+122            android:permission="com.google.firebase.auth.api.gms.permission.LAUNCH_FEDERATED_SIGN_IN"
+122-->[com.google.firebase:firebase-auth:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\3c89e438db4a5b07154cd874213f0909\jetified-firebase-auth-17.0.0\AndroidManifest.xml:29:13-102
+123            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+123-->[com.google.firebase:firebase-auth:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\3c89e438db4a5b07154cd874213f0909\jetified-firebase-auth-17.0.0\AndroidManifest.xml:30:13-72
+124        <!--
+125             FirebaseMessagingService performs security checks at runtime,
+126             but set to not exported to explicitly avoid allowing another app to call it.
+127        -->
+128        <service
+128-->[com.google.firebase:firebase-messaging:20.0.1] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\48222d1eef8a978e3e0d33ab60727530\jetified-firebase-messaging-20.0.1\AndroidManifest.xml:28:9-34:19
+129            android:name="com.google.firebase.messaging.FirebaseMessagingService"
+129-->[com.google.firebase:firebase-messaging:20.0.1] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\48222d1eef8a978e3e0d33ab60727530\jetified-firebase-messaging-20.0.1\AndroidManifest.xml:29:13-82
+130            android:exported="false" >
+130-->[com.google.firebase:firebase-messaging:20.0.1] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\48222d1eef8a978e3e0d33ab60727530\jetified-firebase-messaging-20.0.1\AndroidManifest.xml:30:13-37
+131            <intent-filter android:priority="-500" >
+131-->[:firebase_messaging] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:9:13-11:29
+132                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+132-->[:firebase_messaging] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:10:17-78
+132-->[:firebase_messaging] C:\Users\ASUS\Desktop\servicio_app\Servicio-MobileApp\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:10:25-75
+133            </intent-filter>
+134        </service>
+135
+136        <receiver
+136-->[com.google.firebase:firebase-iid:20.0.1] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\71dc868852144548b68266a076cea9c7\firebase-iid-20.0.1\AndroidManifest.xml:37:9-44:20
+137            android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver"
+137-->[com.google.firebase:firebase-iid:20.0.1] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\71dc868852144548b68266a076cea9c7\firebase-iid-20.0.1\AndroidManifest.xml:38:13-78
+138            android:exported="true"
+138-->[com.google.firebase:firebase-iid:20.0.1] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\71dc868852144548b68266a076cea9c7\firebase-iid-20.0.1\AndroidManifest.xml:39:13-36
+139            android:permission="com.google.android.c2dm.permission.SEND" >
+139-->[com.google.firebase:firebase-iid:20.0.1] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\71dc868852144548b68266a076cea9c7\firebase-iid-20.0.1\AndroidManifest.xml:40:13-73
+140            <intent-filter>
+140-->[com.google.firebase:firebase-iid:20.0.1] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\71dc868852144548b68266a076cea9c7\firebase-iid-20.0.1\AndroidManifest.xml:41:13-43:29
+141                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+141-->[com.google.firebase:firebase-iid:20.0.1] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\71dc868852144548b68266a076cea9c7\firebase-iid-20.0.1\AndroidManifest.xml:42:17-81
+141-->[com.google.firebase:firebase-iid:20.0.1] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\71dc868852144548b68266a076cea9c7\firebase-iid-20.0.1\AndroidManifest.xml:42:25-78
+142            </intent-filter>
+143        </receiver>
+144
+145        <activity
+145-->[com.google.android.gms:play-services-base:17.2.1] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\8579fc6adf0794193ceab2327387e370\play-services-base-17.2.1\AndroidManifest.xml:23:9-26:75
+146            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+146-->[com.google.android.gms:play-services-base:17.2.1] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\8579fc6adf0794193ceab2327387e370\play-services-base-17.2.1\AndroidManifest.xml:24:13-79
+147            android:exported="false"
+147-->[com.google.android.gms:play-services-base:17.2.1] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\8579fc6adf0794193ceab2327387e370\play-services-base-17.2.1\AndroidManifest.xml:25:13-37
+148            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+148-->[com.google.android.gms:play-services-base:17.2.1] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\8579fc6adf0794193ceab2327387e370\play-services-base-17.2.1\AndroidManifest.xml:26:13-72
+149
+150        <provider
+150-->[com.google.firebase:firebase-common:19.3.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\efce6419cef185abce48282468c18d20\jetified-firebase-common-19.3.0\AndroidManifest.xml:26:9-30:39
+151            android:name="com.google.firebase.provider.FirebaseInitProvider"
+151-->[com.google.firebase:firebase-common:19.3.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\efce6419cef185abce48282468c18d20\jetified-firebase-common-19.3.0\AndroidManifest.xml:27:13-77
+152            android:authorities="com.example.servicio.firebaseinitprovider"
+152-->[com.google.firebase:firebase-common:19.3.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\efce6419cef185abce48282468c18d20\jetified-firebase-common-19.3.0\AndroidManifest.xml:28:13-72
+153            android:exported="false"
+153-->[com.google.firebase:firebase-common:19.3.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\efce6419cef185abce48282468c18d20\jetified-firebase-common-19.3.0\AndroidManifest.xml:29:13-37
+154            android:initOrder="100" />
+154-->[com.google.firebase:firebase-common:19.3.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\efce6419cef185abce48282468c18d20\jetified-firebase-common-19.3.0\AndroidManifest.xml:30:13-36
+155
+156        <meta-data
+156-->[com.google.android.gms:play-services-basement:17.2.1] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\2294c8eaa2b7fd51736b8e741799ef27\jetified-play-services-basement-17.2.1\AndroidManifest.xml:23:9-25:69
+157            android:name="com.google.android.gms.version"
+157-->[com.google.android.gms:play-services-basement:17.2.1] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\2294c8eaa2b7fd51736b8e741799ef27\jetified-play-services-basement-17.2.1\AndroidManifest.xml:24:13-58
+158            android:value="@integer/google_play_services_version" />
+158-->[com.google.android.gms:play-services-basement:17.2.1] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\2294c8eaa2b7fd51736b8e741799ef27\jetified-play-services-basement-17.2.1\AndroidManifest.xml:25:13-66
+159    </application>
+160
+161</manifest>

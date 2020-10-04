@@ -17,24 +17,49 @@ class _MyVehiclesState extends State<MyVehicles> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: new AppBar(
-        title: new Text("My Vehicles"),
-        actions: <Widget>[
-          IconButton(
-              tooltip: 'Add New Vehicle',
-              icon: Icon(Icons.add),
+      appBar: PreferredSize(
+        child: Container(
+          height: 90,
+          padding: const EdgeInsets.only(top: 20.0),
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+              color: Colors.indigo,
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(25.0),
+                bottomRight: Radius.circular(25.0),
+              )),
+          child: ListTile(
+            trailing: IconButton(
+                tooltip: 'Add New Vehicle',
+                icon: Icon(Icons.add,color: Colors.white,),
+                onPressed: () {
+                  return Navigator.of(context).pushNamed('/addnewvehicle');
+                }
+            ),
+            leading: IconButton(
+              color: Colors.white,
+              icon: Icon(Icons.arrow_back_ios),
               onPressed: () {
-                return Navigator.of(context).pushNamed('/addnewvehicle');
-              }
-          )
-        ],
+                Navigator.pop(context);
+              },
+            ),
+            title: Text(
+              "My Vehicles".toUpperCase(),
+              style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20.0),
+            ),
+          ),
+        ),
+        preferredSize: Size.fromHeight(90.0),
       ),
       body: Container(
         padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
         child: StreamBuilder(
             stream: getUsersTripsStreamSnapshots(context),
             builder: (context, snapshot) {
-              if (!snapshot.hasData) return const CircularProgressIndicator();
+              if (!snapshot.hasData) return Center(child: const CircularProgressIndicator());
               return
                 ListView.builder(
                   itemCount: snapshot.data.documents.length,
