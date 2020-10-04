@@ -5,13 +5,13 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:servicio/services/auth.dart';
 
-class HelpAndFeedback extends StatefulWidget {
+class Complaint extends StatefulWidget {
 
   @override
-  _HelpAndFeedbackState createState() => _HelpAndFeedbackState();
+  _ComplaintState createState() => _ComplaintState();
 }
 
-class _HelpAndFeedbackState extends State<HelpAndFeedback> {
+class _ComplaintState extends State<Complaint> {
 
   final db = Firestore.instance;
 
@@ -25,11 +25,11 @@ class _HelpAndFeedbackState extends State<HelpAndFeedback> {
 
   String _complaint = '';
   bool _isSolved ;
-  String _dateofComplaint ;
+  date _dateOfComplaint ;
   var selectedYear,selectedType;
 
   List solvedState  = ['Solved', 'Not Solved'];
-
+  
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +72,7 @@ class _HelpAndFeedbackState extends State<HelpAndFeedback> {
                       Icon(CupertinoIcons.car_detailed, color: Colors.white, size: 60,),
                       SizedBox(height: 20,),
                       Text(
-                        "Complaint Form".toUpperCase(),
+                        "Complaints Form".toUpperCase(),
                         style: TextStyle(color: Colors.white, fontWeight: FontWeight.w900, fontSize: 20),
                       ),
                     ],
@@ -97,12 +97,10 @@ class _HelpAndFeedbackState extends State<HelpAndFeedback> {
                   )),
                   SizedBox(height: 15.0, width:15.0),
                   _buildComplaint(),
-                  
-                  SizedBox(height: 15.0),
-                  _buildDate(),
-
                   SizedBox(height: 15.0),
                   _builSolvedState(),
+                  SizedBox(height: 15.0),
+                  _buildDate(),
                   SizedBox(height: 20.0),
 
                   RaisedButton(
@@ -119,7 +117,7 @@ class _HelpAndFeedbackState extends State<HelpAndFeedback> {
                               .add(
                               {
                                 'brand': _complaint,
-                                'date' : _dateofComplaint,
+                                'date' : _dateOfComplaint,
                                 'is_solved': selectedType,
                                 'user_id': uid,
                               }
@@ -129,7 +127,7 @@ class _HelpAndFeedbackState extends State<HelpAndFeedback> {
 
                       }
                       else{
-                        _customAlertDialog(context, 'Please enter your Complaint'.toUpperCase());
+                        _customAlertDialog(context, 'Please enter your complaint'.toUpperCase());
                       }
                     },
                     child: Row(
@@ -159,7 +157,7 @@ class _HelpAndFeedbackState extends State<HelpAndFeedback> {
 
   Widget _buildComplaint() {
     return TextFormField(
-      decoration: InputDecoration(labelText: 'Complaint', icon: Icon(Icons.feedback, color: Colors.indigo,),),
+      decoration: InputDecoration(labelText: 'Complaint', icon: Icon(Icons.airport_shuttle, color: Colors.indigo,),),
       validator: (String value) {
         if (value.isEmpty) {
           return 'Message is Required';
@@ -204,8 +202,8 @@ class _HelpAndFeedbackState extends State<HelpAndFeedback> {
   }
 Widget _buildDate() {
     return TextFormField(
-      decoration: InputDecoration(labelText: 'Date', icon: Icon(Icons.date_range, color: Colors.indigo,),),
-      validator: (String value) {
+      decoration: InputDecoration(labelText: 'Date', icon: Icon(Icons.airport_shuttle, color: Colors.indigo,),),
+      validator: (date value) {
         if (value.isEmpty) {
           return 'Enter your date';
         }

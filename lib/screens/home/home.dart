@@ -290,7 +290,7 @@ class _HomeState extends State<Home>{
                 onTap: () => Navigator.of(context).pushNamed("/image"),
               ),
               new ListTile(
-                title: new Text("Help & Feedback"),
+                title: new Text("Complaints"),
                 trailing: new Icon(Icons.feedback,color: Colors.indigo,),
                 onTap: () => Navigator.of(context).pushNamed("/feedback"),
               ),
