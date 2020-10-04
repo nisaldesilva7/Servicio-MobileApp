@@ -25,11 +25,10 @@ class _HelpAndFeedbackState extends State<HelpAndFeedback> {
 
   String _complaint = '';
   bool _isSolved ;
-  String _dateofComplaint ;
   var selectedYear,selectedType;
 
   List solvedState  = ['Solved', 'Not Solved'];
-
+  DateTime selectedDate = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -97,10 +96,6 @@ class _HelpAndFeedbackState extends State<HelpAndFeedback> {
                   )),
                   SizedBox(height: 15.0, width:15.0),
                   _buildComplaint(),
-                  
-                  SizedBox(height: 15.0),
-                  _buildDate(),
-
                   SizedBox(height: 15.0),
                   _builSolvedState(),
                   SizedBox(height: 20.0),
@@ -119,7 +114,7 @@ class _HelpAndFeedbackState extends State<HelpAndFeedback> {
                               .add(
                               {
                                 'brand': _complaint,
-                                'date' : _dateofComplaint,
+                                'date' : selectedDate,
                                 'is_solved': selectedType,
                                 'user_id': uid,
                               }
@@ -195,7 +190,7 @@ class _HelpAndFeedbackState extends State<HelpAndFeedback> {
           },
           value: selectedType,
           isExpanded: false,
-          hint: Text('Choose your state',
+          hint: Text('Solved or not',
             style: TextStyle(color: Colors.indigo),
           ),
         )
