@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:servicio/services/auth.dart';
+import 'package:intl/intl.dart';
 
 class HelpAndFeedback extends StatefulWidget {
 
@@ -25,7 +26,7 @@ class _HelpAndFeedbackState extends State<HelpAndFeedback> {
 
   String _complaint = '';
   bool _isSolved ;
-  var selectedYear,selectedType;
+  var selectedType;
 
   List solvedState  = ['Solved', 'Not Solved'];
   DateTime selectedDate = DateTime.now();
@@ -108,9 +109,7 @@ class _HelpAndFeedbackState extends State<HelpAndFeedback> {
                     onPressed: () async {
                       if (_formKey.currentState.validate() && selectedType != null) {
                           final uid = await _auth.getCurrentUID();
-                          db.collection('Customers')
-                              .document(uid)
-                              .collection('Complains')
+                          db.collection('Complains')
                               .add(
                               {
                                 'brand': _complaint,
