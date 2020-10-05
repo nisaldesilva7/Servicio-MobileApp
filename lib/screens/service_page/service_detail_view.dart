@@ -8,8 +8,10 @@ import 'package:servicio/screens/bookings/book_service.dart';
 import 'package:servicio/models/service.dart';
 import 'package:servicio/screens/bookings/view_service_schedule.dart';
 import 'package:servicio/screens/chatui.dart';
+import 'package:servicio/screens/service_page/complaint_service.dart';
 import 'package:servicio/services/service_locator.dart';
 import 'package:servicio/services/urlService.dart';
+import 'package:smooth_star_rating/smooth_star_rating.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:servicio/services/auth.dart';
 
@@ -63,6 +65,13 @@ class _ServiceDetailPageState extends State<ServiceDetailPage> {
         elevation: 0,
         title: Text(widget.service.serviceName.toUpperCase()),
         actions: <Widget>[
+          IconButton(
+            color: Colors.white,
+            icon: Icon(Icons.report),
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => Complaint(service: widget.service)));
+            },
+          ),
         IconButton(
           color: Colors.white,
           icon: Icon(Icons.message),
@@ -103,23 +112,17 @@ class _ServiceDetailPageState extends State<ServiceDetailPage> {
                 Row(
                   children: <Widget>[
                     const SizedBox(width: 16.0),
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 8.0,
-                        horizontal: 16.0,
+                      Row(
+                        children: <Widget>[
+                          Icon(Icons.location_city, color: Colors.white,),
+                          SizedBox(width: 5,),
+                          Text(widget.service.city.toUpperCase(), style:GoogleFonts.teko(fontSize: 30,color: Colors.white),),
+                        ],
                       ),
-                      decoration: BoxDecoration(
-                          color: Colors.grey,
-                          borderRadius: BorderRadius.circular(20.0)),
-                      child: Text(
-                        "8.4/85 reviews",
-                        style: TextStyle(color: Colors.white, fontSize: 13.0),
-                      ),
-                    ),
                     Spacer(),
                     isFav == true ? IconButton(
                       color: Colors.white,
-                      icon: Icon(Icons.favorite),
+                      icon: Icon(Icons.favorite, color: Colors.red,),
                       onPressed: () async {
                         setState(() {
                           isFav = false;
@@ -160,29 +163,38 @@ class _ServiceDetailPageState extends State<ServiceDetailPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                 showStars(widget.service.rating),
-                                Text.rich(TextSpan(children: [
-                                  WidgetSpan(
-                                      child: Icon(Icons.location_on, size: 16.0, color: Colors.grey,)
-                                  ),
-                                  TextSpan(
-                                      text: "Show location"
-                                  )
-                                ]), style: TextStyle(color: Colors.grey, fontSize: 12.0),)
-                              ],
+                               ],
                             ),
                           ),
-                          Column(
-                            children: <Widget>[
-                              Text("Categories", style: TextStyle(
-                                  color: Colors.purple,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20.0
-                              ),),
-                              Text("Showing Tabs",style: TextStyle(
-                                  fontSize: 12.0,
-                                  color: Colors.grey
-                              ),)
-                            ],
+                          GestureDetector(
+                            onTap: () {
+                              _launchMapsUrl(6.90893,79.8616667);
+                            },
+                            child: Column(
+                              children: <Widget>[
+                                Row(
+                                  children: <Widget>[
+                                    Container(
+                                      width: 150,
+                                        height: 35,
+                                        decoration: BoxDecoration(
+                                            color: Colors.indigo[400],
+                                            borderRadius: BorderRadius.circular(12.0)),
+                                        child: Center(child: Text.rich(TextSpan(children: [
+                                          WidgetSpan(
+                                              child: Icon(Icons.location_on, size: 22.0, color: Colors.grey[200],)
+                                          ),
+                                          TextSpan(
+                                              text: "View Location"
+                                          )
+                                        ]), style: TextStyle(color: Colors.grey[200], fontSize: 17.0),)
+                                        )
+                                    ),
+                                  ],
+                                ),
+//                                Text("     Click to view".toUpperCase(), style: GoogleFonts.roboto(fontSize: 10,color: Colors.grey[400])),
+                              ],
+                            ),
                           )
                         ],
                       ),
@@ -200,7 +212,7 @@ class _ServiceDetailPageState extends State<ServiceDetailPage> {
                               (serviceTypes) => Column(
                             children: <Widget>[
                               Container(
-                                height: 50.0,
+                                height: 45.0,
                                 width: 100.0,
                                 padding: const EdgeInsets.symmetric(
                                   vertical: 6.0,
@@ -212,7 +224,7 @@ class _ServiceDetailPageState extends State<ServiceDetailPage> {
                                 child: Center(
                                   child: Text(
                                     serviceTypes.toString().toUpperCase(),
-                                    style: TextStyle(color: Colors.white,fontFamily: 'cabin', fontSize: 13.0),
+                                    style: TextStyle(color: Colors.white,fontFamily: 'cabin', fontSize: 11.0),
                                   ),
                                 ),
                               ),
@@ -239,44 +251,69 @@ class _ServiceDetailPageState extends State<ServiceDetailPage> {
                         ),
                       ),
                       const SizedBox(height: 20.0),
-                      Text("Description".toUpperCase(), style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 14.0
-                      ),),
+                      Row(
+                        children: <Widget>[
+                          Icon(Icons.description, color: Colors.indigo,),
+                          SizedBox(width: 5,),
+                          Text("Description".toUpperCase(), style: GoogleFonts.montserrat(fontSize: 20,color: Colors.black54)),
+                        ],
+                      ),
                       const SizedBox(height: 10.0),
                       Text(
-                          widget.service.description, textAlign: TextAlign.justify, style: GoogleFonts.montserrat(fontSize: 14)),
+                          widget.service.description, textAlign: TextAlign.justify, style: GoogleFonts.quicksand(fontSize: 14)),
+                      const SizedBox(height: 20.0),
+                      Row(
+                        children: <Widget>[
+                          Icon(CupertinoIcons.location_solid, color: Colors.indigo,),
+                          SizedBox(width: 5,),
+                          Text("ADdress".toUpperCase(), style: GoogleFonts.montserrat(fontSize: 20,color: Colors.black54)),
+                        ],
+                      ),
                       const SizedBox(height: 10.0),
-                      Center(
-                        child: Text(
-                          'REVIEWS',
-                          textAlign: TextAlign.justify, style: GoogleFonts.montserrat(fontSize: 20,color: Colors.indigo)
-                        ),
+
+                      Text(
+                          widget.service.address1, textAlign: TextAlign.justify, style: GoogleFonts.quicksand(fontSize: 14)),
+                      Text(
+                          widget.service.address2, textAlign: TextAlign.justify, style: GoogleFonts.quicksand(fontSize: 14)),
+                      const SizedBox(height: 25.0),
+                      Row(
+                        children: <Widget>[
+                          Icon(CupertinoIcons.location_solid, color: Colors.indigo,),
+                          SizedBox(width: 5,),
+                          Text(
+                              'REVIEWS',
+                              textAlign: TextAlign.justify,
+                              style: GoogleFonts.montserrat(fontSize: 20,color: Colors.black54)
+                          ),
+                        ],
                       ),
                       Container(
-                          height: MediaQuery.of(context).size.height,
-                          width: double.infinity,
-                          child: StreamBuilder<QuerySnapshot>(
-                              stream: getReviews(context),
-                              builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> querySnapshot) {
-                                if (!querySnapshot.hasData)
-                                  return Center(child: CircularProgressIndicator());
-                                if (querySnapshot.connectionState == ConnectionState.waiting)
-                                  return Center(child: const CircularProgressIndicator());
-                                else {
-                                  final list = querySnapshot.data.documents;
-                                  print(list);
-                                  return ListView.builder(
-                                    physics: const NeverScrollableScrollPhysics(),
-                                    scrollDirection: Axis.vertical,
-                                    shrinkWrap: true,
-                                    itemCount: list.length,
-                                    itemBuilder: (context, index) {
-                                      return buildList(context,list[index]);
-                                    },
-                                  );
-                                }
-                              }
+                          child: Column(
+                            children: <Widget>[
+
+                              StreamBuilder<QuerySnapshot>(
+                                  stream: getReviews(context),
+                                  builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> querySnapshot) {
+                                    if (!querySnapshot.hasData)
+                                      return Center(child: CircularProgressIndicator());
+                                    if (querySnapshot.connectionState == ConnectionState.waiting)
+                                      return Center(child: const CircularProgressIndicator());
+                                    else {
+                                      final list = querySnapshot.data.documents;
+                                      print(list);
+                                      return ListView.builder(
+                                        physics: const NeverScrollableScrollPhysics(),
+                                        scrollDirection: Axis.vertical,
+                                        shrinkWrap: true,
+                                        itemCount: list.length,
+                                        itemBuilder: (context, index) {
+                                          return buildList(context,list[index]);
+                                        },
+                                      );
+                                    }
+                                  }
+                              ),
+                            ],
                           )
                       ),
                     ],
@@ -290,6 +327,14 @@ class _ServiceDetailPageState extends State<ServiceDetailPage> {
     );
   }
 
+  void _launchMapsUrl(double lat, double lon) async {
+    final url = 'https://www.google.com/maps/search/?api=1&query=$lat,$lon';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
 
   Widget buildList(BuildContext context, DocumentSnapshot document) {
     final reviewsInfo = Reviews.fromSnapshot(document);
@@ -298,12 +343,12 @@ class _ServiceDetailPageState extends State<ServiceDetailPage> {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
-        color: Color(0xff5b7ccf),
+        color: Color(0xff267bc9),
       ),
       width: double.infinity,
-      height: 110,
-      margin: EdgeInsets.symmetric(vertical: 1 , horizontal: 1),
-      padding: EdgeInsets.symmetric(vertical: 17, horizontal: 20),
+      height: 84,
+      margin: EdgeInsets.symmetric(vertical: 4 , horizontal: 1),
+      padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
       child: GestureDetector(
         onTap: () {
 //          Navigator.push(context, MaterialPageRoute(builder: (context) => ServiceDetailPage(service: serviceDoc)));
@@ -316,37 +361,58 @@ class _ServiceDetailPageState extends State<ServiceDetailPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(
-                    reviewsInfo.comment,
-                    style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),),
+                  Row(
+                    children: <Widget>[
+                      Icon(Icons.comment, color: Colors.white, size: 20,),
+                      SizedBox(width: 6,),
+                      Text(
+                        reviewsInfo.comment,
+                        style: GoogleFonts.roboto(fontSize: 15,color: Colors.white),
+                      )
+                    ],
+                  ),
                   SizedBox(height: 6,),
                   Row(
                     children: <Widget>[
                       Icon(Icons.location_on, color: Colors.white, size: 20,),
-                      SizedBox(width: 5,),
-                      Text(
-                          'location of service',
-                          style: TextStyle(color: Colors.white, fontSize: 13, letterSpacing: .3)),
+                      SizedBox(width: 6,),
+                      SmoothStarRating(
+                           color: Colors.white,
+                           borderColor: Colors.white,
+                           rating: reviewsInfo.rate,
+                           isReadOnly: false,
+                           size: 20,
+                           filledIconData: Icons.star,
+                           halfFilledIconData: Icons.star_half,
+                           defaultIconData: Icons.star_border,
+                           starCount: 5,
+                           allowHalfRating: true,
+                           spacing: 2.0,
+                           onRated: (value) {
+                             print("rating value -> $value");
+                             // print("rating value dd -> ${value.truncate()}");
+                    },
+                  ),
                     ],
                   ),
-                  SizedBox(height: 6,),
-                  Row(
-                    children: <Widget>[
-                      Icon(Icons.format_list_bulleted, color: Colors.white, size: 20,),
-                      SizedBox(width: 5,),
-                      Text(
-                          '{serviceDoc.serviceTypes[0]}..'.toUpperCase(),
-                          style: TextStyle(color: Colors.white, fontSize: 13, letterSpacing: .3)),
-                    ],
-                  ),
+//                  SizedBox(height: 6,),
+//                  Row(
+//                    children: <Widget>[
+//                      Icon(Icons.format_list_bulleted, color: Colors.white, size: 20,),
+//                      SizedBox(width: 5,),
+//                      Text(
+//                          '{serviceDoc.serviceTypes[0]}..'.toUpperCase(),
+//                          style: TextStyle(color: Colors.white, fontSize: 13, letterSpacing: .3)),
+//                    ],
+//                  ),
                 ],
               ),
             ),
-            SizedBox(width: 10),
-            Padding(
-              padding: const EdgeInsets.only(top: 20),
-              child: Icon(Icons.chevron_right, size: 40, color: Colors.white,),
-            )
+//            SizedBox(width: 10),
+//            Padding(
+//              padding: const EdgeInsets.only(top: 20),
+//              child: Icon(Icons.chevron_right, size: 40, color: Colors.white,),
+//            )
           ],
         ),
       ),
@@ -366,8 +432,8 @@ class _ServiceDetailPageState extends State<ServiceDetailPage> {
     print(rating);
       return Row(
         children: [
-          for (num i = 0; i < rating.round(); i++) Icon(Icons.star, color: Colors.purple,),
-          for (num i = 0; i < (5-rating.round()); i++) Icon(Icons.star_border, color: Colors.purple,)
+          for (num i = 0; i < rating.round(); i++) Icon(Icons.star, color: Colors.purple, size: 30,),
+          for (num i = 0; i < (5-rating.round()); i++) Icon(Icons.star_border, color: Colors.purple,size: 30,)
         ],
       );
   }

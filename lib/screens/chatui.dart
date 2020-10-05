@@ -28,7 +28,6 @@ class _ChatBoxState extends State<ChatBox> {
     assets.avatars[4],
   ];
 
-
   final List<Message> messages = [
     Message(1, "But I may not gher is bad."),
     Message(0, "But I may not go if the we bad."),

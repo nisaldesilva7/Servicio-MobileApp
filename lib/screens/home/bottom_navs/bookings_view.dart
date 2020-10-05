@@ -136,7 +136,7 @@ class _BookingsPageState extends State<BookingsPage> {
                             child: StreamBuilder(
                                 stream: getUsersTripsStreamSnapshots(context),
                                 builder: (context, snapshot) {
-                                  if (!snapshot.hasData) return const CircularProgressIndicator();
+                                  if (!snapshot.hasData) return Center(child: const CircularProgressIndicator(strokeWidth: 1,));
                                   if (snapshot.data == null) return Center(child: Text("No Active Bookings currently"));
                                   return ListView.builder(
                                         physics: const NeverScrollableScrollPhysics(),

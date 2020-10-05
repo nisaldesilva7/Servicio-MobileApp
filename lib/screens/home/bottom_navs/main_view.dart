@@ -4,10 +4,12 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:servicio/models/service.dart';
 import 'package:servicio/screens/home/bottom_navs/search.dart';
 import 'package:servicio/screens/service_page/service_detail_view.dart';
 import 'package:servicio/screens/app_settings.dart';
+import 'package:servicio/screens/side_nav/my_vehicles/addNew_vehicle.dart';
 import 'package:servicio/services/auth.dart';
 import 'package:servicio/shared/SliderImages.dart' as assets;
 
@@ -21,13 +23,27 @@ class MainView extends StatefulWidget {
 class _MainViewState extends State<MainView> {
   final AuthServices _auth = AuthServices();
   List userFavourites ;
+  bool vehiclesNull = true;
 
   @override
   void initState()  {
     super.initState();
     getUserFavs();
+    checkVehicleNull();
   }
 
+  checkVehicleNull() async {
+    final AuthServices _auth = AuthServices();
+    final uid = await _auth.getCurrentUID();
+    QuerySnapshot result = await Firestore.instance.collection('Customers').document(uid).collection('Vehicles').getDocuments();
+    print('zzzzzzzzzz${result.documents}');
+    if(result.documents.length == 0){
+     vehiclesNull = false;
+   }
+   else{
+     vehiclesNull = true;
+   }
+  }
 
   getUserFavs() async {
     final AuthServices _auth = AuthServices();
@@ -46,6 +62,25 @@ class _MainViewState extends State<MainView> {
     return Scaffold(
       body: ListView(
         children: <Widget>[
+          vehiclesNull == false ? Container(
+            height: 47,
+            color: Color(0xff9bf500),
+            child: Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Row(
+                children: <Widget>[
+                  Text("Please Add a Vehicel before start Booking", style: GoogleFonts.roboto(),),
+                  Spacer(),
+                  GestureDetector(
+                      onTap: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => AddNewVehicle()));
+                      },
+                      child: Icon(Icons.add,size: 25,color: Colors.indigo,)),
+
+                ],
+              ),
+            ),
+          ): Container(),
           HomeScreenTop(),
           homeScreenBottom,
           SizedBox(height: 15.0,),
