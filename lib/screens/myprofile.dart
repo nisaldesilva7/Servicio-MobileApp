@@ -280,7 +280,7 @@ class MapScreenState extends State<EditProfile>
                                       Expanded(
                                         child: Container(
                                           child: new Text(
-                                            'State',
+                                            'District',
                                             style: TextStyle(
                                                 fontSize: 16.0,
                                                 fontWeight: FontWeight.bold),
@@ -311,7 +311,7 @@ class MapScreenState extends State<EditProfile>
                                       Flexible(
                                         child: new TextField(
                                           decoration: const InputDecoration(
-                                              hintText: "Enter State"),
+                                              hintText: "Enter District"),
                                           enabled: !_status,
                                         ),
                                         flex: 2,
