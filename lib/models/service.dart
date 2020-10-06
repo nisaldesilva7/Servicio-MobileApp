@@ -9,13 +9,14 @@ class Service {
   final String description;
   final String address1;
   final String address2;
+  final GeoPoint location;
   final String serviceName;
   final List serviceTypes;
   final List favs;
   String serviceId;
 
 
-  Service(this.photo, this.rating, this.city, this.searchKey, this.serviceName, this.serviceTypes,this.favs,this.telephone,this.description,this.address1,this.address2);
+  Service(this.photo, this.location, this.rating, this.city, this.searchKey, this.serviceName, this.serviceTypes,this.favs,this.telephone,this.description,this.address1,this.address2);
   
   Map<String, dynamic> toJson() => {
     'Photo': photo,
@@ -37,6 +38,7 @@ class Service {
         address1 = snapshot['Address'],
         address2 = snapshot['AddressTwo'],
         telephone = snapshot['Telephone'],
+        location = snapshot['Location'],
         description = snapshot['Description'],
         serviceTypes = List.of(snapshot['Service_Types']).cast<String>(),
         favs = snapshot['Favs'],
@@ -48,6 +50,7 @@ class Service {
         rating = snapshot['Rating'],
         searchKey = snapshot['SearchKey'],
         serviceName = snapshot['Service_Name'],
+        location = snapshot['Location'],
         address1 = snapshot['Address'],
         city = snapshot['City'],
         address2 = snapshot['AddressTwo'],

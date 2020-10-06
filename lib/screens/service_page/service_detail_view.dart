@@ -168,7 +168,7 @@ class _ServiceDetailPageState extends State<ServiceDetailPage> {
                           ),
                           GestureDetector(
                             onTap: () {
-                              _launchMapsUrl(6.90893,79.8616667);
+                              _launchMapsUrl(widget.service.location.latitude,widget.service.location.longitude);
                             },
                             child: Column(
                               children: <Widget>[
@@ -176,18 +176,18 @@ class _ServiceDetailPageState extends State<ServiceDetailPage> {
                                   children: <Widget>[
                                     Container(
                                       width: 150,
-                                        height: 35,
+                                        height: 32,
                                         decoration: BoxDecoration(
                                             color: Colors.indigo[400],
                                             borderRadius: BorderRadius.circular(12.0)),
                                         child: Center(child: Text.rich(TextSpan(children: [
                                           WidgetSpan(
-                                              child: Icon(Icons.location_on, size: 22.0, color: Colors.grey[200],)
+                                              child: Icon(Icons.location_on, size: 17.0, color: Colors.grey[200],)
                                           ),
                                           TextSpan(
                                               text: "View Location"
                                           )
-                                        ]), style: TextStyle(color: Colors.grey[200], fontSize: 17.0),)
+                                        ]), style: TextStyle(color: Colors.grey[200], fontSize: 14.0),)
                                         )
                                     ),
                                   ],
