@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -85,15 +86,16 @@ class _BookingsPageState extends State<BookingsPage> {
                               animation: true,
                               percent: 0.5,
                               circularStrokeCap: CircularStrokeCap.round,
-                              progressColor: Colors.blueGrey,
+                              progressColor: Colors.grey,
                               backgroundColor: Colors.grey[100],
-                              center: CircleAvatar(
-                                backgroundColor: LightColors.kBlue,
-                                radius: 30.0,
-                                backgroundImage: AssetImage(
-                                  'assets/calendar.png',
-                                ),
-                              ),
+                              center: Icon(CupertinoIcons.home,color: Colors.white, size: 45,),
+//                              center: CircleAvatar(
+//                                backgroundColor: LightColors.kBlue,
+//                                radius: 30.0,
+//                                backgroundImage: AssetImage(
+//                                  'assets/calendar.png',
+//                                ),
+//                              ),
                             ),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.center,

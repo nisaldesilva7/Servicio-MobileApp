@@ -278,7 +278,7 @@ class _ServiceDetailPageState extends State<ServiceDetailPage> {
                       const SizedBox(height: 25.0),
                       Row(
                         children: <Widget>[
-                          Icon(CupertinoIcons.location_solid, color: Colors.indigo,),
+                          Icon(CupertinoIcons.person_solid, color: Colors.indigo,),
                           SizedBox(width: 5,),
                           Text(
                               'REVIEWS',
@@ -289,9 +289,7 @@ class _ServiceDetailPageState extends State<ServiceDetailPage> {
                       ),
                       Container(
                           child: Column(
-                            children: <Widget>[
-
-                              StreamBuilder<QuerySnapshot>(
+                            children: <Widget>[StreamBuilder<QuerySnapshot>(
                                   stream: getReviews(context),
                                   builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> querySnapshot) {
                                     if (!querySnapshot.hasData)

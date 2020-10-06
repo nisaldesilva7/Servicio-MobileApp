@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:servicio/models/booking.dart';
 import 'package:servicio/models/service.dart';
+import 'package:servicio/models/vehicle.dart';
 import 'package:servicio/services/auth.dart';
 
 class PendingBookings extends StatefulWidget{
@@ -48,7 +49,7 @@ class _PendingBookingsState extends State<PendingBookings> {
         ),
         preferredSize: Size.fromHeight(90.0),
       ),
-      backgroundColor: Color(0xfff5f2f2),
+//      backgroundColor: Color(0xfff5f2f2),
       body: Container(
           padding: EdgeInsets.only(top: 10),
           height: MediaQuery
@@ -86,13 +87,15 @@ class _PendingBookingsState extends State<PendingBookings> {
     print(bookingDoc);
     List date = bookingDoc.date.toString().split('T');
 
+
+
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(22),
         color: Colors.white,
       ),
       width: double.infinity,
-      height: 150,
+      height: 165,
       margin: EdgeInsets.symmetric(vertical: 8, horizontal: 20),
       padding: EdgeInsets.symmetric(vertical: 17, horizontal: 20),
       child: GestureDetector(
@@ -109,6 +112,16 @@ class _PendingBookingsState extends State<PendingBookings> {
                   Text(
                     bookingDoc.serviceType.toUpperCase(),
                     style: TextStyle(color: Colors.indigo, fontWeight: FontWeight.bold, fontSize: 18),),
+                  SizedBox(height: 6,),
+                  Row(
+                    children: <Widget>[
+                      Icon(Icons.home, color: Colors.indigo, size: 20,),
+                      SizedBox(width: 5,),
+                      Text(
+                          bookingDoc.serviceName,
+                          style: TextStyle(color: Colors.indigoAccent, fontSize: 13, letterSpacing: .3)),
+                    ],
+                  ),
                   SizedBox(height: 8,),
                   Row(
                     children: <Widget>[
@@ -151,6 +164,7 @@ class _PendingBookingsState extends State<PendingBookings> {
         ),
       ),
     );
+
   }
 
 
