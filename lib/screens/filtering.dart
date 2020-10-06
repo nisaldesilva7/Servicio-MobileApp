@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:servicio/screens/filter_list.dart';
 
-class Filter extends StatefulWidget {
+class Filter  extends StatefulWidget {
   @override
-  _FilterState createState() => _FilterState();
+  _FilterState  createState() => _FilterState();
 }
 
-class _FilterState extends State<Filter> {
+class _FilterState  extends State<Filter> {
+  TextEditingController textFieldController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,7 +40,8 @@ class _FilterState extends State<Filter> {
           decoration: BoxDecoration(color: Color.fromRGBO(114, 234, 148, 1.0)),
           child: new InkWell(
             onTap: () {
-             
+               Navigator.push(context,MaterialPageRoute(builder: (context) => FilterList(searchType:"Full Service",),
+              ));
             },
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -71,7 +74,8 @@ class _FilterState extends State<Filter> {
           decoration: BoxDecoration(color: Color.fromRGBO(79, 190, 222, 1.0)),
           child: new InkWell(
             onTap: () {
-             
+              Navigator.push(context,MaterialPageRoute(builder: (context) => FilterList(searchType:"Body Wash",),
+              ));
             },
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -104,7 +108,8 @@ class _FilterState extends State<Filter> {
           decoration: BoxDecoration(color: Color.fromRGBO(245, 244, 54, 1.0)),
           child: new InkWell(
             onTap: () {
-             
+              Navigator.push(context,MaterialPageRoute(builder: (context) => FilterList(searchType:"Interior Clean",),
+              ));
             },
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -137,7 +142,8 @@ class _FilterState extends State<Filter> {
           decoration: BoxDecoration(color: Color.fromRGBO(243, 123, 107, 1.0)),
           child: new InkWell(
             onTap: () {
-             
+              Navigator.push(context,MaterialPageRoute(builder: (context) => FilterList(searchType:"Engine Checkup",),
+              ));
             },
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -162,6 +168,7 @@ class _FilterState extends State<Filter> {
           ),
         ));
   }
+  
   /*await _db.collection('Services').limit(limit).where('Service_Types',
 				arrayContains: string).getDocuments().then((result){
 //do stuff with the result
