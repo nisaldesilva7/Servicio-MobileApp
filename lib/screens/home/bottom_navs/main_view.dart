@@ -388,8 +388,8 @@ final Widget repairOrService =  Column(
       child: Row(
         mainAxisSize: MainAxisSize.max,
         children: <Widget>[
-          Text("Nearby Service Centers",
-              style: TextStyle(color: Colors.black87, fontSize: 15, fontFamily: 'icomoon', fontWeight:FontWeight.w400)),
+          Text("Services",
+              style: TextStyle(color: Colors.black87, fontSize: 20, fontFamily: 'icomoon', fontWeight:FontWeight.w400)),
           Spacer(),
           Builder(
               builder: (BuildContext context) => GestureDetector(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 //      child: Text(widget.serviceInfo['ratings']),
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:servicio/models/service.dart';
 import 'package:servicio/screens/bookings/select_date_time/notifcation_dialog.dart';
@@ -47,112 +48,140 @@ class _BookServiceState extends State<BookService> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            _buildHeader(),
-            SizedBox(height: 20.0),
-            Padding(
-              padding: const EdgeInsets.only(left: 10.0),
-              child: Container(
-                child: Form(
-                  key: _formKey,
-                  child: Column(
-                    children: <Widget>[
-                      SizedBox(height: 15.0),
-                      _buildServiceType(),
-                      SizedBox(height: 15.0),
-                      _vehicle(),
-                      SizedBox(height: 15.0),
-                      _datetime(),
-                      SizedBox(height: 15.0),
-                      _buildName(),
-                      SizedBox(height: 20.0),
-                      //_buildCalories(),
+      body: Stack(
+        children: <Widget>[
+//          Container(
+//            decoration:
+//            BoxDecoration(
+//              color: const Color(0xff7c94b6),
+//              image: new DecorationImage(
+//                fit: BoxFit.cover,
+//                colorFilter:
+//                ColorFilter.mode(Colors.black.withOpacity(0.2),
+//                    BlendMode.dstATop),
+//                image: new NetworkImage(
+//                  'http://www.server.com/image.jpg',
+//                ),
+//              ),
+//            ),
+//          ),
+          Image.asset(
+            "assets/image/chat-background-1.jpg",
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            fit: BoxFit.cover,
+          ),
+          SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                _buildHeader(),
+                SizedBox(height: 10.0),
+                Padding(
+                  padding: const EdgeInsets.only(left: 1.0),
+                  child: Container(
+                    child: Form(
+                      key: _formKey,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 40.0),
+                        child: Column(
+                          children: <Widget>[
+                            SizedBox(height: 15.0),
+                            _buildServiceType(),
+                            SizedBox(height: 15.0),
+                            _vehicle(),
+                            SizedBox(height: 15.0),
+                            _datetime(),
+                            SizedBox(height: 15.0),
+                            _buildName(),
+                            SizedBox(height: 10.0),
+                            //_buildCalories(),
 
-                      Text(error, style: TextStyle(color: Colors.black,)),
-                      const SizedBox(height: 60.0),
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: RaisedButton(
-                          padding: const EdgeInsets.fromLTRB(40.0, 16.0, 30.0, 16.0),
-                          color: Colors.indigo,
-                          elevation: 0,
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(topLeft: Radius.circular(30.0), bottomLeft: Radius.circular(30.0))),
-                          onPressed: () async {
-                            if (_formKey.currentState.validate() && selectedVehicle != null && selectedType != null) {
-                              if (_dateandtime != null) {
-                                final uid = await _auth.getCurrentUID();
-                                db.collection('Services')
-                                    .document('${widget.serviceInfo.serviceId}')
-                                    .collection('Bookings')
-                                    .add(
-                                    {
-                                      'ServiceType': selectedType,
-                                      'BookingStatus': 'Pending',
-                                      'Date': _dateandtime,
-                                      'EndDate': _dateandtime,
-                                      'CustName': 'Nisal',
-                                      'CustId': uid,
-                                      'ServiceId': widget.serviceInfo.serviceId,
-                                      'ServiceName': widget.serviceInfo.serviceName,
-                                      'Vehicle': selectedVehicle,
-                                      'Description': _description,
-                                      'DateTime': _nisalwanttime,
-                                    }
-                                )
-                                    .then((docRef) {
-                                  var temp = docRef.documentID;
-                                  print('hello ${docRef.documentID}');
-                                  db.collection('Customers').document('$uid')
-                                      .collection('Bookings').document('$temp')
-                                      .setData(
-                                      {
-                                        'ServiceType': selectedType,
-                                        'BookingStatus': 'Pending',
-                                        'Date': _dateandtime,
-                                        'EndDate': _dateandtime,
-                                        'CustName': 'Nisal',
-                                        'CustId': uid,
-                                        'ServiceId': widget.serviceInfo
-                                            .serviceId,
-                                        'Vehicle': selectedVehicle,
-                                        'Description': _description,
+                            Text(error, style: TextStyle(color: Colors.black,)),
+                            const SizedBox(height: 30.0),
+                            Align(
+                              alignment: Alignment.centerRight,
+                              child: RaisedButton(
+                                padding: const EdgeInsets.fromLTRB(40.0, 16.0, 30.0, 16.0),
+                                color: Colors.indigo,
+                                elevation: 0,
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(topLeft: Radius.circular(30.0), bottomLeft: Radius.circular(30.0))),
+                                onPressed: () async {
+                                  if (_formKey.currentState.validate() && selectedVehicle != null && selectedType != null) {
+                                    if (_dateandtime != null) {
+                                      final uid = await _auth.getCurrentUID();
+                                      db.collection('Services')
+                                          .document('${widget.serviceInfo.serviceId}')
+                                          .collection('Bookings')
+                                          .add(
+                                          {
+                                            'ServiceType': selectedType,
+                                            'BookingStatus': 'Pending',
+                                            'Date': _dateandtime,
+                                            'EndDate': _dateandtime,
+                                            'CustName': 'Nisal',
+                                            'CustId': uid,
+                                            'ServiceId': widget.serviceInfo.serviceId,
+                                            'ServiceName': widget.serviceInfo.serviceName,
+                                            'Vehicle': selectedVehicle,
+                                            'Description': _description,
+                                            'DateTime': _nisalwanttime,
+                                          }
+                                      )
+                                          .then((docRef) {
+                                        var temp = docRef.documentID;
+                                        print('hello ${docRef.documentID}');
+                                        db.collection('Customers').document('$uid')
+                                            .collection('Bookings').document('$temp')
+                                            .setData(
+                                            {
+                                              'ServiceType': selectedType,
+                                              'BookingStatus': 'Pending',
+                                              'Date': _dateandtime,
+                                              'EndDate': _dateandtime,
+                                              'CustName': 'Nisal',
+                                              'ServiceName': widget.serviceInfo.serviceName,
+                                              'CustId': uid,
+                                              'ServiceId': widget.serviceInfo.serviceId,
+                                              'Vehicle': selectedVehicle,
+                                              'Description': _description,
+                                            }
+                                        );
                                       }
-                                  );
-                                }
-                                );
-                                await _showMyDialog();
-                                Navigator.pop(context);
-                              }
-                              else{
-                                _customAlertDialog(context, 'Please Select Date And Time for the Booking'.toUpperCase());
+                                      );
+                                      await _showMyDialog();
+                                      Navigator.pop(context);
+                                    }
+                                    else{
+                                      _customAlertDialog(context, 'Please Select Date And Time for the Booking'.toUpperCase());
 
-                              }
-                            }
-                            else{
-                              _customAlertDialog(context, 'Please Select a Vehicle and Service Type'.toUpperCase());
-                            }
-                          },
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: <Widget>[
-                              Text("Book".toUpperCase(), style: TextStyle( color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16.0),),
-                              const SizedBox(width: 40.0),
-                              Icon(FontAwesomeIcons.arrowRight, size: 18.0, color: Colors.white,)
-                            ],
-                          ),
+                                    }
+                                  }
+                                  else{
+                                    _customAlertDialog(context, 'Please Select a Vehicle and Service Type'.toUpperCase());
+                                  }
+                                },
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: <Widget>[
+                                    Text("Book".toUpperCase(), style: TextStyle( color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16.0),),
+                                    const SizedBox(width: 40.0),
+                                    Icon(FontAwesomeIcons.arrowRight, size: 18.0, color: Colors.white,)
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                    ],
+                    ),
                   ),
                 ),
-              ),
+                const SizedBox(height: 50.0),
+              ],
             ),
-            const SizedBox(height: 50.0),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -177,7 +206,7 @@ class _BookServiceState extends State<BookService> {
 
   Widget _buildServiceType() {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
         Icon(FontAwesomeIcons.checkSquare, size: 25.0, color: Colors.indigo,),
         SizedBox(width: 50.0),
@@ -209,10 +238,10 @@ class _BookServiceState extends State<BookService> {
   Future<void> _showMyDialog() async {
     return showDialog<void>(
       context: context,
-      barrierDismissible: false, // user must tap button!
+      barrierDismissible: true, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
-          backgroundColor: Colors.grey,
+//          backgroundColor: Colors.grey,
           title: Text('BOOKING DONE!',style: TextStyle(color: Colors.indigo),),
           actions: <Widget>[
             FlatButton(
@@ -289,7 +318,7 @@ class _BookServiceState extends State<BookService> {
         children: <Widget>[
           RaisedButton(
           color: Colors.indigo,
-          child: Text('Choose date & time ',
+          child: Text('Choose Date & Time ',
             style: TextStyle(color: Colors.white, fontFamily: 'cabin'),
           ),
           onPressed: () async {
@@ -306,12 +335,12 @@ class _BookServiceState extends State<BookService> {
           },
            ),
           _dateandtime != null ? Text('Selected Date and Time',
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 15 , color: Colors.grey[800]),
+            textAlign: TextAlign.start,
+            style: GoogleFonts.quicksand(fontSize: 15 , color: Colors.grey[800]),
           ): Container(),
 
           _dateandtime != null ? Text('${ShowDateTime.format(selectedDate)}',
-            textAlign: TextAlign.center,
+            textAlign: TextAlign.start,
             style: TextStyle(fontSize: 25, color: Colors.grey[800], fontWeight: FontWeight.w800),
           ): Container(),
 
@@ -341,7 +370,7 @@ Widget _vehicle(){
             );
           }
           return Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               Icon(FontAwesomeIcons.car, size: 25.0, color: Colors.indigo),
               SizedBox(width: 50.0),
@@ -384,38 +413,38 @@ Widget _vehicle(){
           ListTile(
             title: Text(
               widget.serviceInfo.serviceName.toUpperCase(),
-              style:TextStyle(
-                color: Colors.white,
-                fontSize: 22.0,
-                fontWeight: FontWeight.w500,
-              ),
+              style: GoogleFonts.abrilFatface(color: Colors.white,
+                fontSize: 30.0,
+                fontWeight: FontWeight.w500,)
             ),
-            trailing: FloatingActionButton(
-              onPressed: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context) => ServiceSchedule()));
-              },
-              tooltip: 'View Schedule',
-              child: Icon(Icons.calendar_today),
-            )
+              trailing: Padding(
+                padding: const EdgeInsets.only(right: 15 ,top: 25),
+                child: Icon(Icons.book, size: 50,color: Colors.white,),
+              ),
+//            trailing: FloatingActionButton(
+//              onPressed: (){
+//                Navigator.push(context, MaterialPageRoute(builder: (context) => ServiceSchedule()));
+//              },
+//              tooltip: 'View Schedule',
+//              child: Icon(Icons.calendar_today),
+//            )
           ),
           const SizedBox(height: 10.0),
           Padding(
             padding: const EdgeInsets.only(left: 16.0),
             child: Text(
-              "cccccccccccccccc",
-              style:TextStyle(
-                color: Colors.white,
-                fontSize: 18.0,
-                fontWeight: FontWeight.w500,
-              ),
+              "Please Fill Your Details",
+              style:GoogleFonts.barlow(color: Colors.white,
+                fontSize: 22.0,
+                fontWeight: FontWeight.w500,)
             ),
           ),
           const SizedBox(height: 5.0),
           Padding(
             padding: const EdgeInsets.only(left: 16.0),
             child: Text(
-              "kkkkkkkkkkkkkk",
-              style: TextStyle(color: Colors.white,),
+              "*Once you place the booking it will reviewed by Service and confiremed".toUpperCase(),
+              style: TextStyle(color: Colors.grey[200],fontSize: 12),
             ),
           ),
         ],
