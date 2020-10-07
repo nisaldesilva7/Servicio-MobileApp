@@ -4,7 +4,7 @@ class Service {
   final String photo;
   final num rating;
   final String searchKey;
-  final String telephone;
+  final num telephone;
   final String city;
   final String description;
   final String address1;

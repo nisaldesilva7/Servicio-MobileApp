@@ -73,6 +73,9 @@ exports.sendBookingConfirmation  = functions.firestore
     const order = snapshot.after.data();
     const uid = snapshot.before.data().CustId;
     const serviceId = snapshot.before.data().ServiceName;
+    const bookingStatus = snapshot.after.data().BookingStatus;
+    console.log("The value of Booking  is " + context.params.BookingsId);
+    console.log("The value of Service is " + context.params.ServicesId);
 
 //    const serviceRef = admin.firestore().collection('Services').doc(serviceId).get()
 //    const serviceName = serviceRef.before.date().Service_Name
@@ -90,13 +93,26 @@ exports.sendBookingConfirmation  = functions.firestore
                 recentComments.push( doc.data().token )
             });
             console.log(recentComments);
-            payload = {
-                  notification: {
-                    title: 'Booking Confirmed by ' + serviceId,
-                    body: order.ServiceType,
-                    click_action: 'FLUTTER_NOTIFICATION_CLICK'
-                  }
-                };
+
+            if(bookingStatus === "Declined"){
+                payload = {
+                      notification: {
+                        title: 'Booking Declined by ' + serviceId,
+                        body: order.ServiceType,
+                        click_action: 'FLUTTER_NOTIFICATION_CLICK'
+                      }
+                    };
+                }
+             else if(bookingStatus === "Accepted"){
+                 payload = {
+                                  notification: {
+                                    title: 'Booking Confirmed by ' + serviceId,
+                                    body: order.ServiceType,
+                                    click_action: 'FLUTTER_NOTIFICATION_CLICK'
+                                  }
+                                };
+              }
+
             return fcm.sendToDevice(recentComments, payload);
          })
          .catch(err => console.log(err) )
@@ -202,18 +218,32 @@ exports.sendMessages  = functions.firestore
                          .document('Messaging/{customerId}/Services/{serviceId}/msg/{msgId}')
                          .onCreate(async (snapshot, context) => {
 
-//    const order = snapshot.after.data();
-//    const uid = snapshot.before.data().CustId;
-//    const serviceId = snapshot.before.data().ServiceName;
+    const uid = context.params.customerId;
+    const serviceId = context.params.serviceId;
 
-//    const serviceRef = admin.firestore().collection('Services').doc(serviceId).get()
+    var docRef1 = admin.firestore().collection("Services").doc("serviceId");
+
+    docRef1.get().then(function(doc) {
+        if (doc.exists) {
+            console.log("Document data:", doc.data());
+        } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+        }
+    }).catch(function(error) {
+        console.log("Error getting document:", error);
+    });
+
 //    const serviceName = serviceRef.before.date().Service_Name
 
-  console.log(context.params);
-  console.log(context.params.id);
+    console.log("The value of customer is " + context.params.customerId);
+    console.log("The value of service is " + context.params.serviceId);
+
+    console.log("Send msg1" + context.params);
+    console.log("Send msg2" + context.params.id);
 
     // ref to the parent document
-    const docRef = admin.firestore().collection('Customers').doc('In7gG1gzVOSTvqX68wm4W0vMnD12')
+    const docRef = admin.firestore().collection('Customers').doc(uid)
     // get all comments and aggregate
     return docRef.collection('tokens')
          .get()
