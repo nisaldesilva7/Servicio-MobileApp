@@ -495,7 +495,7 @@ Widget getTextWidgets(List<String> strings)
 Widget cityCard(BuildContext context, DocumentSnapshot serviceList) {
 
   final serviceDoc = Service.fromSnapshot(serviceList);
-  print(serviceDoc.searchKey);
+  print(serviceDoc.telephone.toString());
 
     return GestureDetector(
       onTap: (){

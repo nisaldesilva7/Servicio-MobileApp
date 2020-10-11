@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:servicio/models/customer.dart';
 import 'package:servicio/screens/home/bottom_navs/theme/light_colors.dart';
@@ -102,14 +103,14 @@ class _ProfileThreePageState extends State<ProfileThreePage> {
                             Navigator.push(context, MaterialPageRoute(builder: (context) => MyVehicles()));
                           },
                           child: _buildWikiCategory(FontAwesomeIcons.car,
-                              "My Vehicles", Colors.deepOrange.withOpacity(0.7)),
+                              "My Vehicles".toUpperCase(), Colors.deepOrange.withOpacity(0.7)),
                         ),
                       ),
-                      const SizedBox(width: 10.0),
-                      Expanded(
-                        child: _buildWikiCategory(FontAwesomeIcons.lock,
-                            "My private notes", Colors.blue.withOpacity(0.6)),
-                      ),
+//                      const SizedBox(width: 10.0),
+//                      Expanded(
+//                        child: _buildWikiCategory(FontAwesomeIcons.lock,
+//                            "My private notes", Colors.blue.withOpacity(0.6)),
+//                      ),
                     ],
                   ),
                   SizedBox(height: 10.0),
@@ -141,22 +142,6 @@ class _ProfileThreePageState extends State<ProfileThreePage> {
                                title: Text("Phone"),
                                subtitle: Text(customer.number),
                                leading: Icon(Icons.phone),
-                             ),
-                             ListTile(
-                               title: Text("Website"),
-                               subtitle: Text(customer.name),
-                               leading: Icon(Icons.web),
-                             ),
-                             ListTile(
-                               title: Text("About"),
-                               subtitle: Text(
-                                   "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nulla, illo repellendus quas beatae reprehenderit nemo, debitis explicabo officiis sit aut obcaecati iusto porro? Exercitationem illum consequuntur magnam eveniet delectus ab."),
-                               leading: Icon(Icons.person),
-                             ),
-                             ListTile(
-                               title: Text("Joined Date"),
-                               subtitle: Text("15 February 2019"),
-                               leading: Icon(Icons.calendar_view_day),
                              ),
                            ],
                          ),
@@ -276,12 +261,13 @@ class _ProfileThreePageState extends State<ProfileThreePage> {
                 icon,
                 color: Colors.white,
               ),
-              const SizedBox(height: 16.0),
+              const SizedBox(height: 10.0),
               Text(
                 label,
-                style: TextStyle(
+                style: GoogleFonts.quicksand(
                   color: Colors.white,
-                  fontWeight: FontWeight.bold,
+                  fontSize: 20.0
+
                 ),
               )
             ],

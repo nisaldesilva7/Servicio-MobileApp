@@ -1,7 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:servicio/models/service.dart';
+import 'package:servicio/screens/home/bottom_navs/filter/filter_categories.dart';
 import 'package:servicio/screens/service_page/service_detail_view.dart';
+import 'package:servicio/screens/side_nav/my_vehicles/my_vehicles.dart';
 import 'package:servicio/services/searchservice.dart';
 
 
@@ -73,7 +77,17 @@ class _SearchViewState extends State<SearchView> {
       backgroundColor: Colors.indigo,
         body: ListView(children: <Widget>[
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 5.0),
+            padding: const EdgeInsets.symmetric(horizontal:15,vertical: 8),
+            child: GestureDetector(
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context) => Filter()));
+              },
+              child: _buildWikiCategory(FontAwesomeIcons.filter,
+                  "Filtered by Categories", Colors.orangeAccent.withOpacity(0.8)),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top:5,bottom: 20.0, right: 5.0 ,left: 5.0),
             child: Container(
               alignment: Alignment.center,
               margin: EdgeInsets.symmetric(horizontal: 10),
@@ -152,5 +166,48 @@ Widget buildResultCard(BuildContext context,data, DocumentSnapshot serviceInfo) 
             )
         )
     ),
+  );
+}
+Stack _buildWikiCategory(IconData icon, String label, Color color) {
+  return Stack(
+    children: <Widget>[
+      Container(
+        padding: const EdgeInsets.all(26.0),
+        alignment: Alignment.centerRight,
+        child: Opacity(
+            opacity: 0.3,
+            child: Icon(
+              icon,
+              size: 40,
+              color: Colors.white,
+            )),
+        decoration: BoxDecoration(
+          color: color,
+          borderRadius: BorderRadius.circular(20.0),
+        ),
+      ),
+      Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Icon(
+              icon,
+              color: Colors.white,
+            ),
+            const SizedBox(height: 16.0),
+            Text(
+              label,
+              style: GoogleFonts.quicksand(
+                fontSize: 15,
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            )
+          ],
+        ),
+      )
+    ],
   );
 }

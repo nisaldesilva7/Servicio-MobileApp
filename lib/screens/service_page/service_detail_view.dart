@@ -82,7 +82,7 @@ class _ServiceDetailPageState extends State<ServiceDetailPage> {
           IconButton(
             color: Colors.white,
             icon: Icon(Icons.call),
-            onPressed: () => _service.call(widget.service.telephone),
+            onPressed: () => _service.call(widget.service.telephone.toString()),
           ),
         ],
       ),
@@ -168,7 +168,7 @@ class _ServiceDetailPageState extends State<ServiceDetailPage> {
                           ),
                           GestureDetector(
                             onTap: () {
-                              _launchMapsUrl(6.90893,79.8616667);
+                              _launchMapsUrl(widget.service.location.latitude,widget.service.location.longitude);
                             },
                             child: Column(
                               children: <Widget>[
@@ -176,18 +176,18 @@ class _ServiceDetailPageState extends State<ServiceDetailPage> {
                                   children: <Widget>[
                                     Container(
                                       width: 150,
-                                        height: 35,
+                                        height: 32,
                                         decoration: BoxDecoration(
                                             color: Colors.indigo[400],
                                             borderRadius: BorderRadius.circular(12.0)),
                                         child: Center(child: Text.rich(TextSpan(children: [
                                           WidgetSpan(
-                                              child: Icon(Icons.location_on, size: 22.0, color: Colors.grey[200],)
+                                              child: Icon(Icons.location_on, size: 17.0, color: Colors.grey[200],)
                                           ),
                                           TextSpan(
                                               text: "View Location"
                                           )
-                                        ]), style: TextStyle(color: Colors.grey[200], fontSize: 17.0),)
+                                        ]), style: TextStyle(color: Colors.grey[200], fontSize: 14.0),)
                                         )
                                     ),
                                   ],
@@ -205,33 +205,28 @@ class _ServiceDetailPageState extends State<ServiceDetailPage> {
                         scrollDirection: Axis.vertical,
                         padding: EdgeInsets.all(1),
                         crossAxisCount: 4,
-                        crossAxisSpacing: 4,
-                        mainAxisSpacing: 0.0,
+                        crossAxisSpacing: 5,
+                        mainAxisSpacing: 5.0,
                         children: widget.service.serviceTypes
                             .map(
-                              (serviceTypes) => Column(
-                            children: <Widget>[
-                              Container(
-                                height: 45.0,
-                                width: 100.0,
-                                padding: const EdgeInsets.symmetric(
-                                  vertical: 6.0,
-                                  horizontal: 6.0,
-                                ),
+                              (serviceTypes) =>
+                                  Container(
+                                height: 20.0,
+                                width: 10.0,
+                                padding: const EdgeInsets.symmetric(vertical: 1.0,horizontal: 6.0),
                                 decoration: BoxDecoration(
-                                    color: Colors.indigo[400],
-                                    borderRadius: BorderRadius.circular(12.0)),
+                                    color: Colors.indigo[600],
+                                    borderRadius: BorderRadius.circular(15.0)),
                                 child: Center(
                                   child: Text(
                                     serviceTypes.toString().toUpperCase(),
-                                    style: TextStyle(color: Colors.white,fontFamily: 'cabin', fontSize: 11.0),
+                                    style: GoogleFonts.anton(color: Colors.white, fontSize: 12.0),
                                   ),
                                 ),
                               ),
-                            ],
-                          ),
                         ).toList(),
                       ),
+                      SizedBox(height: 10,),
                       SizedBox(
                         width: double.infinity,
                         child: RaisedButton(
