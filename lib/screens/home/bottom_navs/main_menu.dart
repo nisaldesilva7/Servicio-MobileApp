@@ -30,19 +30,27 @@ class _MainMenuState extends State<MainMenu> {
       backgroundColor: Color(0xfff0f0f0),
       body: SingleChildScrollView(
         child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(12.0),
+            image: DecorationImage(
+              image: AssetImage(
+                  'assets/image/chat-background-1.jpg'),
+              fit: BoxFit.cover,
+            ),
+          ),
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
           child: Stack(
             children: <Widget>[
               Container(
-                child: Center(child: Text("All services and repairs".toUpperCase(),style: GoogleFonts.montserrat(color: Colors.white, fontSize: 18 ),)),
+                child: Center(child: Text("All services and repair centers".toUpperCase(),style: GoogleFonts.montserrat(color: Colors.white, fontSize: 18 ),)),
                 height: 55,
                 width: double.infinity,
                 decoration: BoxDecoration(
                     color: Colors.indigo,
                     borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(30),
-                        bottomRight: Radius.circular(30))),
+                        bottomLeft: Radius.circular(20),
+                        bottomRight: Radius.circular(20))),
               ),
               Container(
                 child: Column(
@@ -87,7 +95,7 @@ class _MainMenuState extends State<MainMenu> {
               Padding(
                 padding: const EdgeInsets.only(top: 50),
                 child: Container(
-                    padding: EdgeInsets.only(top: 10),
+                    padding: EdgeInsets.only(top: 10,bottom: 10),
                     height: MediaQuery.of(context).size.height,
                     width: double.infinity,
                     child: StreamBuilder<QuerySnapshot>(
@@ -97,7 +105,7 @@ class _MainMenuState extends State<MainMenu> {
                           if (!querySnapshot.hasData)
                             return Center(child: CircularProgressIndicator());
                           if (querySnapshot.connectionState == ConnectionState.waiting)
-                            return const CircularProgressIndicator();
+                            return Center(child: const CircularProgressIndicator());
                           else {
                             final list = querySnapshot.data.documents;
                             print(list);
@@ -151,8 +159,8 @@ class _MainMenuState extends State<MainMenu> {
               height: 110,
               margin: EdgeInsets.only(right: 15),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(25),
-                border: Border.all(width: 3, color: Color(0xff9494b3)),
+                borderRadius: BorderRadius.circular(20),
+//                border: Border.all(width: 3, color: Color(0xff828bed)),
                 image: DecorationImage(
                     image: NetworkImage('${serviceDoc.photo}'),
                     fit: BoxFit.cover),
@@ -164,25 +172,25 @@ class _MainMenuState extends State<MainMenu> {
                 children: <Widget>[
                   Text(
                     serviceDoc.serviceName.toUpperCase(),
-                    style: TextStyle(color: primary, fontWeight: FontWeight.bold, fontSize: 18),),
+                    style: GoogleFonts.dmSans(color: primary, fontWeight: FontWeight.bold, fontSize: 18),),
                   SizedBox(height: 6,),
                   Row(
                     children: <Widget>[
                       Icon(Icons.location_on, color: Colors.indigo, size: 20,),
                       SizedBox(width: 5,),
                       Text(
-                          'location of service',
-                          style: TextStyle(color: primary, fontSize: 13, letterSpacing: .3)),
+                          serviceDoc.city,
+                          style: GoogleFonts.quicksand(color: primary, fontSize: 13, letterSpacing: .3)),
                     ],
                   ),
                   SizedBox(height: 6,),
                   Row(
                     children: <Widget>[
-                      Icon(Icons.format_list_bulleted, color: Colors.indigo, size: 20,),
+                      Icon(Icons.home, color: Colors.indigo, size: 20,),
                       SizedBox(width: 5,),
                       Text(
-                          '${serviceDoc.serviceTypes[0]}..'.toUpperCase(),
-                          style: TextStyle(color: primary, fontSize: 13, letterSpacing: .3)),
+                          '${serviceDoc.type}'.toUpperCase(),
+                          style: GoogleFonts.quicksand(color: primary, fontSize: 13, letterSpacing: .3)),
                     ],
                   ),
                 ],

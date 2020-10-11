@@ -74,20 +74,24 @@ class _SearchViewState extends State<SearchView> {
     
     print('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx$tempSearchStore');
     return new Scaffold(
+      appBar: AppBar(
+        title: Text('Search'.toUpperCase(), style: GoogleFonts.dmSans(fontWeight: FontWeight.w600),),
+
+      ),
       backgroundColor: Colors.indigo,
         body: ListView(children: <Widget>[
+//          Padding(
+//            padding: const EdgeInsets.symmetric(horizontal:15,vertical: 8),
+//            child: GestureDetector(
+//              onTap: (){
+//                Navigator.push(context, MaterialPageRoute(builder: (context) => Filter()));
+//              },
+//              child: _buildWikiCategory(FontAwesomeIcons.filter,
+//                  "Filtered by Categories", Colors.orangeAccent.withOpacity(0.8)),
+//            ),
+//          ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal:15,vertical: 8),
-            child: GestureDetector(
-              onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context) => Filter()));
-              },
-              child: _buildWikiCategory(FontAwesomeIcons.filter,
-                  "Filtered by Categories", Colors.orangeAccent.withOpacity(0.8)),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top:5,bottom: 20.0, right: 5.0 ,left: 5.0),
+            padding: const EdgeInsets.only(top:20,bottom: 20.0, right: 5.0 ,left: 5.0),
             child: Container(
               alignment: Alignment.center,
               margin: EdgeInsets.symmetric(horizontal: 10),

@@ -16,7 +16,7 @@ class DatabaseService {
       'email': email,
       'tel_num': telNum,
       'user_id': uid,
-      'Photo': photo,
+      'Photo': 'https://firebasestorage.googleapis.com/v0/b/servicio-11f11.appspot.com/o/images%2Fno_dp.png?alt=media&token=f83a02f3-e9f3-4cc9-83b7-d62c596938bb',
     });
   }
 

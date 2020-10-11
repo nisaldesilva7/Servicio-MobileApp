@@ -72,7 +72,7 @@ class ActiveProjectsCard extends StatelessWidget {
                         Text(
                           title.toUpperCase(),
                           style: TextStyle(
-                            fontSize: 14.0,
+                            fontSize: 12.0,
                             color: Colors.white,
                             fontWeight: FontWeight.w700,
                           ),

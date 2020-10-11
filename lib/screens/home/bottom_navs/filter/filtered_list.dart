@@ -21,7 +21,7 @@ class _FilterListState extends State<FilterList> {
   final TextStyle dropdownMenuItem =
   TextStyle(color: Colors.black, fontSize: 10);
 
-  final primary = Colors.indigoAccent;
+  final primary = Colors.indigo;
   final secondary = Color(0xfff29a94);
   final List<HotelCard> hotel = StubData().hotels;
 
@@ -104,6 +104,10 @@ class _FilterListState extends State<FilterList> {
                             final list = querySnapshot.data.documents;
                             print(list);
                             return ListView.builder(
+                              controller: ScrollController(),
+                              physics: const NeverScrollableScrollPhysics(),
+                              scrollDirection: Axis.vertical,
+                              shrinkWrap: true,
                               itemCount: list.length,
 //                            scrollDirection: Axis.horizontal,
                               itemBuilder: (context, index) {
@@ -153,8 +157,8 @@ class _FilterListState extends State<FilterList> {
               height: 110,
               margin: EdgeInsets.only(right: 15),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(25),
-                border: Border.all(width: 3, color: Color(0xff9494b3)),
+                borderRadius: BorderRadius.circular(20),
+//                border: Border.all(width: 3, color: Color(0xff828bed)),
                 image: DecorationImage(
                     image: NetworkImage('${serviceDoc.photo}'),
                     fit: BoxFit.cover),
@@ -166,25 +170,25 @@ class _FilterListState extends State<FilterList> {
                 children: <Widget>[
                   Text(
                     serviceDoc.serviceName.toUpperCase(),
-                    style: TextStyle(color: primary, fontWeight: FontWeight.bold, fontSize: 18),),
+                    style: GoogleFonts.dmSans(color: primary, fontWeight: FontWeight.bold, fontSize: 18),),
                   SizedBox(height: 6,),
                   Row(
                     children: <Widget>[
                       Icon(Icons.location_on, color: Colors.indigo, size: 20,),
                       SizedBox(width: 5,),
                       Text(
-                          'location of service',
-                          style: TextStyle(color: primary, fontSize: 13, letterSpacing: .3)),
+                          serviceDoc.city,
+                          style: GoogleFonts.quicksand(color: primary, fontSize: 13, letterSpacing: .3)),
                     ],
                   ),
                   SizedBox(height: 6,),
                   Row(
                     children: <Widget>[
-                      Icon(Icons.format_list_bulleted, color: Colors.indigo, size: 20,),
+                      Icon(Icons.home, color: Colors.indigo, size: 20,),
                       SizedBox(width: 5,),
                       Text(
-                          '${serviceDoc.serviceTypes[0]}..'.toUpperCase(),
-                          style: TextStyle(color: primary, fontSize: 13, letterSpacing: .3)),
+                          '${serviceDoc.type}'.toUpperCase(),
+                          style: GoogleFonts.quicksand(color: primary, fontSize: 13, letterSpacing: .3)),
                     ],
                   ),
                 ],

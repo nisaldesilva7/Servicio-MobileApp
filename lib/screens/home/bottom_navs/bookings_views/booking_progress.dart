@@ -25,8 +25,8 @@ class _BookingProgressState extends State<BookingProgress> {
           begin: Alignment.topCenter,
           end: Alignment.bottomLeft,
           colors: [
-            Color(0xFf3461eb),
-            Color(0xFF0d48ff),
+            Colors.indigoAccent,
+            Colors.indigo,
           ],
         ),
       ),
@@ -37,12 +37,12 @@ class _BookingProgressState extends State<BookingProgress> {
         child: Scaffold(
           appBar: AppBar(
             elevation: 0,
-            backgroundColor: Colors.transparent,
+            backgroundColor: Colors.blue,
             title: Text(
               'Bookings Progress',
-              style: GoogleFonts.manrope(
+              style: GoogleFonts.quicksand(
                 color: Colors.white,
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.w600,
               ),
             ),
           ),
@@ -50,6 +50,10 @@ class _BookingProgressState extends State<BookingProgress> {
           extendBodyBehindAppBar: false,
           body: Column(
             children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(left:8.0,bottom: 15,top: 25),
+                child: Text('Current Status of the Booking', style: GoogleFonts.quicksand(fontSize: 17,color: Colors.white),),
+              ),
               Expanded(child: TimelineDelivery(bookingProgress: widget.bookingProgress, bookingId:widget.bookingId, serviceID: widget.serviceID, custId: widget.custId)),
             ],
           ),
@@ -201,15 +205,8 @@ class _TimelineDeliveryState extends State<TimelineDelivery> {
                   alignment: TimelineAlign.manual,
                   lineX: 0.1,
                   indicatorStyle: const IndicatorStyle(
-                    indicator: _IconIndicator(
-                      iconData: Icons.done_all,
-                      size: 18,
-                      color: Colors.indigo,
-                    ),
-//              indicatorY: 0.6,
-                    drawGap: true,
-                    width: 30,
-                    height: 30,
+                    width: 20,
+                    color: Colors.orangeAccent,
                     padding: EdgeInsets.all(6),
                   ),
                   rightChild:
@@ -217,33 +214,33 @@ class _TimelineDeliveryState extends State<TimelineDelivery> {
                     disabled: true,
                     asset: 'assets/delivery/order_processed.png',
                     title: 'PROCESS FINISHED',
-                    message: 'We are preparing your order.',
+                    message: 'Your Service Process Finished.',
                   ): widget.bookingProgress == 2 ? _RightChild(
                     disabled: true,
                     asset: 'assets/delivery/order_processed.png',
                     title: 'PROCESS FINISHED',
-                    message: 'We are preparing your order.',
+                    message: 'Your Service Process Finished.',
                   ): widget.bookingProgress == 3 ? _RightChild(
                     disabled: false,
                     asset: 'assets/delivery/order_processed.png',
                     title: 'PROCESS FINISHED',
-                    message: 'We are preparing your order.',
+                    message: 'Your Service Process Finished.',
                   ): widget.bookingProgress == 4 ? _RightChild(
                     disabled: false,
                     asset: 'assets/delivery/order_processed.png',
                     title: 'PROCESS FINISHED',
-                    message: 'We are preparing your order.',
+                    message: 'Your Service Process Finished.',
                   ): widget.bookingProgress == 5 ? _RightChild(
                     disabled: false,
                     asset: 'assets/delivery/order_processed.png',
                     title: 'PROCESS FINISHED',
-                    message: 'We are preparing your order.',
+                    message: 'Your Service Process Finished.',
                   ):
                   _RightChild(
                     disabled: true,
                     asset: 'assets/delivery/order_processed.png',
                     title: 'PROCESS FINISHED',
-                    message: 'We are preparing your order.',
+                    message: 'Your Service Process Finished.',
                   ),
                   topLineStyle: const LineStyle(
                     color: Color(0xFF27AA69),
@@ -337,7 +334,7 @@ class _TimelineDeliveryState extends State<TimelineDelivery> {
                     message: 'Rate and Review Your Service....',
                   ):
                   _RightChild(
-                    disabled: false,
+                    disabled: true,
                     asset: 'assets/delivery/ready_to_pickup.png',
                     title: 'SERVICE COMPLETED',
                     message: 'Rate and Review Your Service....',
@@ -349,20 +346,23 @@ class _TimelineDeliveryState extends State<TimelineDelivery> {
               ],
             ),
           ),
-          widget.bookingProgress == 5 ? RaisedButton(
-            padding: EdgeInsets.symmetric(vertical: 7,horizontal: 30),
-            child: Text("Rate and Review".toUpperCase(),
-              style: GoogleFonts.bebasNeue(
-                fontSize: 25
+          widget.bookingProgress == 5 ? Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: RaisedButton(
+              padding: EdgeInsets.symmetric(vertical: 10,horizontal: 30),
+              child: Text("Rate and Review".toUpperCase(),
+                style: GoogleFonts.quicksand(
+                  fontSize: 20
+                ),
               ),
+              textColor: Colors.white,
+              color: Colors.blueAccent,
+              onPressed: () {
+                _customAlertDialog(context, 'Add a Comment');
+              },
+              shape: new RoundedRectangleBorder(
+                  borderRadius: new BorderRadius.circular(12.0)),
             ),
-            textColor: Colors.white,
-            color: Color(0xff0032cc),
-            onPressed: () {
-              _customAlertDialog(context, 'Add a Comment');
-            },
-            shape: new RoundedRectangleBorder(
-                borderRadius: new BorderRadius.circular(12.0)),
           ): Container(),
         ],
       ),
@@ -401,7 +401,7 @@ class _TimelineDeliveryState extends State<TimelineDelivery> {
                         const SizedBox(height: 10.0),
                         Text(
                           'Your Services Process has been Completed',
-                          style: TextStyle(fontSize: 20.0, color: Colors.blue, fontWeight: FontWeight.bold),
+                          style: GoogleFonts.quicksand(fontSize: 20.0, color: Colors.blue, fontWeight: FontWeight.w600),
                           textAlign: TextAlign.center,
                         ),
                         Center(
@@ -422,8 +422,7 @@ class _TimelineDeliveryState extends State<TimelineDelivery> {
                                   rating = value;
                                 });
                                 print(" value -> $value");
-                                print("rating value -> $rating");
-                                // print("rating value dd -> ${value.truncate()}");
+                                print(" rating value -> $rating");
                               },
                             )
                         ),
@@ -471,7 +470,6 @@ class _TimelineDeliveryState extends State<TimelineDelivery> {
                                     'progressStage': 6,
                                   },merge: true).then((value) {
 
-
                                   Firestore.instance.collection('Reviews')
                                       .add(
                                       {
@@ -489,10 +487,19 @@ class _TimelineDeliveryState extends State<TimelineDelivery> {
                                   );
                                 }
                                 );
+//                                var result = Firestore.instance.collection('Service').document(widget.serviceID).get();
+
+
                                 print('Succesfully Rated');
                                 Navigator.pop(context);
                                 Navigator.pop(context);
                               }
+
+//                              DocumentSnapshot snapshot= await Firestore.instance.collection('Services').document(widget.serviceID).get();
+//                              var channelName = snapshot['channelName'];
+//                              print(channelName);
+
+
                             }
                           ),
                         ),
@@ -585,10 +592,16 @@ class _RightChild extends StatelessWidget {
       padding: const EdgeInsets.all(16.0),
       child: Row(
         children: <Widget>[
-          Opacity(
-            child: Image.asset(asset, height: 50),
-            opacity: disabled ? 0.5 : 1,
+          disabled == false ? Icon(Icons.done_all,color: Colors.white,size: 28,):
+          CircularProgressIndicator(
+            valueColor: new AlwaysStoppedAnimation<Color>(Colors.white),
+
+            strokeWidth: 4,
           ),
+//          Opacity(
+//            child: Image.asset(asset, height: 50),
+//            opacity: disabled ? 0.5 : 1,
+//          ),
           const SizedBox(width: 16),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -596,9 +609,9 @@ class _RightChild extends StatelessWidget {
             children: <Widget>[
               Text(
                 title,
-                style: GoogleFonts.yantramanav(
+                style: GoogleFonts.dmSans(
                   color: disabled
-                      ? Colors.grey[350]
+                      ? Colors.white24
                       :  Colors.white,
                   fontSize: 18,
                   fontWeight: FontWeight.w800,
@@ -607,9 +620,9 @@ class _RightChild extends StatelessWidget {
               const SizedBox(height: 6),
               Text(
                 message,
-                style: GoogleFonts.yantramanav(
+                style: GoogleFonts.quicksand(
                   color: disabled
-                      ? Colors.grey[350]
+                      ? Colors.white24
                       :  Colors.white,
                   fontSize: 16,
                 ),

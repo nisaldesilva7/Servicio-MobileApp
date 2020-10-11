@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:servicio/services/auth.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
 
 class Notifications extends StatefulWidget{
@@ -10,33 +12,27 @@ class Notifications extends StatefulWidget{
 
 class _NotificationsState extends State<Notifications> {
   var rating = 0.0;
-
+  final db = Firestore.instance;
+  final AuthServices _auth = AuthServices();
 
   @override
   Widget build(BuildContext context){
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text("Offers"),
+        title: new Text("Latest Notifications"),
       ),
       body: new  Center(
-          child: SmoothStarRating(
-            rating: rating,
-            isReadOnly: false,
-            size: 40,
-            filledIconData: Icons.star,
-            halfFilledIconData: Icons.star_half,
-            defaultIconData: Icons.star_border,
-            starCount: 5,
-            borderColor: Color(0xffe3830e),
-            color: Color(0xffe3830e),
-            allowHalfRating: true,
-            spacing: 2.0,
-            onRated: (value) {
-              print("rating value -> $value");
-              // print("rating value dd -> ${value.truncate()}");
-            },
-          )
+
       ),
     );
+  }
+
+  Stream<QuerySnapshot> getUsersServicesStreamSnapshots() async* {
+    print('under stream');
+    final uid = await _auth.getCurrentUID();
+    yield* Firestore.instance.collection("Customers").document(uid)
+        .collection('Bookings')
+        .where('BookingStatus',isEqualTo: 'Pending')
+        .snapshots();
   }
 }

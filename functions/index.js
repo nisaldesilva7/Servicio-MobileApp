@@ -97,7 +97,7 @@ exports.sendBookingConfirmation  = functions.firestore
             if(bookingStatus === "Declined"){
                 payload = {
                       notification: {
-                        title: 'Booking Declined by ' + serviceId,
+                        title: 'Booking Declined By ' + serviceId,
                         body: order.ServiceType,
                         click_action: 'FLUTTER_NOTIFICATION_CLICK'
                       }
@@ -106,12 +106,21 @@ exports.sendBookingConfirmation  = functions.firestore
              else if(bookingStatus === "Accepted"){
                  payload = {
                                   notification: {
-                                    title: 'Booking Confirmed by ' + serviceId,
+                                    title: 'Booking Confirmed By ' + serviceId,
                                     body: order.ServiceType,
                                     click_action: 'FLUTTER_NOTIFICATION_CLICK'
                                   }
                                 };
               }
+              else if(bookingStatus === "Not Available"){
+                               payload = {
+                                                notification: {
+                                                  title: 'Please Select Another Available Time' + serviceId,
+                                                  body: order.ServiceType,
+                                                  click_action: 'FLUTTER_NOTIFICATION_CLICK'
+                                                }
+                                              };
+                            }
 
             return fcm.sendToDevice(recentComments, payload);
          })
@@ -145,8 +154,8 @@ exports.sendBookingProgress  = functions.firestore
             if(ongoing.progressStage  == 1){
             payload = {
                   notification: {
-                    title: 'Vehicle Reached to ' + ServiceName,
-                    body: ongoing.Vehicle,
+                    title: 'Vehicle Reached To ' + ServiceName,
+                    body: ongoing.VehicleDetails.brand,
                     click_action: 'FLUTTER_NOTIFICATION_CLICK'
                   }
                 };
@@ -154,8 +163,8 @@ exports.sendBookingProgress  = functions.firestore
             else if(ongoing.progressStage == 2){
                         payload = {
                               notification: {
-                                title: 'Service Started by ' + ServiceName,
-                                body: ongoing.Vehicle,
+                                title: 'Service Started By ' + ServiceName,
+                                body: ongoing.VehicleDetails.brand,
                                 click_action: 'FLUTTER_NOTIFICATION_CLICK'
                               }
                             };
@@ -163,8 +172,8 @@ exports.sendBookingProgress  = functions.firestore
               else if(ongoing.progressStage == 3){
                          payload = {
                                notification: {
-                                 title: 'Service Finished  ' + ServiceName,
-                                 body: ongoing.Vehicle,
+                                 title: 'Service Finished By ' + ServiceName,
+                                 body: ongoing.VehicleDetails.brand,
                                  click_action: 'FLUTTER_NOTIFICATION_CLICK'
                                }
                              };
@@ -172,8 +181,8 @@ exports.sendBookingProgress  = functions.firestore
                else if(ongoing.progressStage == 4){
                                        payload = {
                                              notification: {
-                                               title: 'Ready to Pick up your vehicle now',
-                                               body: ongoing.Vehicle,
+                                               title: 'Ready To Pick Up Your Vehicle Now',
+                                               body: 'Please Pick Your Vehicle ' + ongoing.VehicleDetails.brand,
                                                click_action: 'FLUTTER_NOTIFICATION_CLICK'
                                              }
                                            };
@@ -181,8 +190,8 @@ exports.sendBookingProgress  = functions.firestore
                 else if(ongoing.progressStage == 5){
                                         payload = {
                                               notification: {
-                                                title: 'Service Completed by ' + ServiceName,
-                                                body: ongoing.Vehicle,
+                                                title: 'Service Completed By ' + ServiceName,
+                                                body: 'Please Rate and Review. Vehicle: ' + ongoing.VehicleDetails.brand,
                                                 click_action: 'FLUTTER_NOTIFICATION_CLICK'
                                               }
                                             };
@@ -191,7 +200,7 @@ exports.sendBookingProgress  = functions.firestore
                                                        payload = {
                                                              notification: {
                                                                title: ServiceName,
-                                                               body: "Your Booking Process Fully completed now\nThanks for suing our service\n " + ongoing.Vehicle,
+                                                               body: "Your Booking Process Fully Completed Now \n Thanks For Using Our Service\n " + ongoing.Vehicle,
                                                                click_action: 'FLUTTER_NOTIFICATION_CLICK'
                                                              }
                                                            };
@@ -218,23 +227,30 @@ exports.sendMessages  = functions.firestore
                          .document('Messaging/{customerId}/Services/{serviceId}/msg/{msgId}')
                          .onCreate(async (snapshot, context) => {
 
+
     const uid = context.params.customerId;
     const serviceId = context.params.serviceId;
 
-    var docRef1 = admin.firestore().collection("Services").doc("serviceId");
+    const user = snapshot.data().id;
+    const textMsg = snapshot.data().text;
+    console.log("xxxxxxxxxx" + user);
+    var nameOfService;
+
+    var docRef1 = admin.firestore().collection("Services").doc(serviceId);
 
     docRef1.get().then(function(doc) {
         if (doc.exists) {
-            console.log("Document data:", doc.data());
+            console.log("Document data:" + doc.data().Service_Name);
+            nameOfService = doc.data().Service_Name;
+
         } else {
             // doc.data() will be undefined in this case
             console.log("No such document!");
         }
     }).catch(function(error) {
-        console.log("Error getting document:", error);
+        console.log("Error getting document:" + error);
     });
 
-//    const serviceName = serviceRef.before.date().Service_Name
 
     console.log("The value of customer is " + context.params.customerId);
     console.log("The value of service is " + context.params.serviceId);
@@ -253,22 +269,22 @@ exports.sendMessages  = functions.firestore
             querySnapshot.forEach(doc => {
                 recentComments.push( doc.data().token )
             });
+
             console.log(recentComments);
+            if(user == 1){
             payload = {
                   notification: {
-                    title: 'Received New msg',
-                    body: 'order.ServiceType',
+                    title: 'Received a New Message From ' + nameOfService ,
+                    body: textMsg,
                     click_action: 'FLUTTER_NOTIFICATION_CLICK'
                   }
                 };
-            return fcm.sendToDevice(recentComments, payload);
+                return fcm.sendToDevice(recentComments, payload);
+                }
+
          })
          .catch(err => console.log(err) )
   });
-
-
-
-
 
 
 

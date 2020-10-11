@@ -9,10 +9,15 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:servicio/models/customer.dart';
 import 'package:servicio/screens/home/bottom_navs/bookings_view.dart';
+import 'package:servicio/screens/home/bottom_navs/filter/filter_categories.dart';
 import 'package:servicio/screens/home/bottom_navs/main_view.dart';
 import 'package:servicio/services/auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:servicio/screens/home/bottom_navs/search.dart';
+import '../app_settings.dart';
+import '../geo_filter.dart';
+import '../notifications.dart';
+import 'bottom_navs/bookings_views/prev_bookings.dart';
 import 'bottom_navs/main_menu.dart';
 import 'bottom_navs/profile.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -44,7 +49,7 @@ class _HomeState extends State<Home>{
   int _currentIndex = 0;
   final List<Widget> _bottomNavs = [
     MainView(),
-    SearchView(),
+    Filter(),
     MainMenu(),
     BookingsPage(),
     ProfileThreePage(),
@@ -184,6 +189,8 @@ class _HomeState extends State<Home>{
       enableVibration: true,
       importance: Importance.Max,
       priority: Priority.High,
+      styleInformation: BigTextStyleInformation(''),
+
     );
     var iOSPlatformChannelSpecifics = new IOSNotificationDetails();
     var platformChannelSpecifics =
@@ -207,13 +214,14 @@ class _HomeState extends State<Home>{
       return Scaffold(
         backgroundColor: Colors.grey[100],
         appBar: AppBar(
-          title: Text('Servicio', style: TextStyle(fontFamily: 'icomoon'),),
+          title: Text('Servicio'.toUpperCase(), style: GoogleFonts.dmSans(fontWeight: FontWeight.w600),),
           elevation: defaultTargetPlatform == TargetPlatform.android ? 5.0 : 0.0,
           backgroundColor: Colors.blue[600],
           actions: <Widget>[
             IconButton(
               icon: Icon(Icons.notifications),
               onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => Notifications()));
 
               },
             ),
@@ -240,17 +248,19 @@ class _HomeState extends State<Home>{
                    }
                    final customer = Customer.fromSnapshot(snapshot.data);
                    return UserAccountsDrawerHeader(
-                     accountName: Text(customer.name),
+                     accountName: Text(customer.name, style: TextStyle(fontSize: 20),),
                      accountEmail: Text(customer.email),
                      currentAccountPicture: InkWell(
                        child: CircleAvatar(
                          backgroundColor: Colors.black26,
-                         child: customer.photo == null ? Image.asset('assets/image/no_dp.png'):
-                         Image.network(customer.photo, )
+                         backgroundImage: customer.photo == null ? AssetImage('assets/image/no_dp.png'):
+                         NetworkImage(
+                           customer.photo,
+                         )
                        ),
-                       onTap: () {
-                         return Navigator.of(context).pushNamed("/image");
-                       },
+//                       onTap: () {
+//                         return Navigator.of(context).pushNamed("/image");
+//                       },
                      ),
                    );
                  }
@@ -274,19 +284,26 @@ class _HomeState extends State<Home>{
               new ListTile(
                 title: new Text("My Bookings"),
                 trailing: new Icon(Icons.bookmark,color: Colors.indigo,),
-                onTap: () => Navigator.of(context).pushNamed("/bookings"),
+                onTap: () =>
+                    Navigator.of(context).pushNamed("/bookings"),
+//                Navigator.push(context, MaterialPageRoute(builder: (context) => PrevBookings())),
+
               ),
               _divider(),
               new ListTile(
                 title: new Text("Settings"),
-                trailing: new Icon(Icons.message,color: Colors.indigo,),
-                onTap: () => Navigator.of(context).pushNamed("/notifications"),
+                trailing: new Icon(Icons.settings,color: Colors.indigo,),
+                onTap: () =>
+//                    Navigator.of(context).pushNamed("/image"),
+//                    Navigator.push(context, MaterialPageRoute(builder: (context) => GeoFilter())),
+                Navigator.push(context, MaterialPageRoute(builder: (context) => AppSettings())),
+
               ),
-              new ListTile(
-                title: new Text("Select Image"),
-                trailing: new Icon(Icons.image, color: Colors.indigo,),
-                onTap: () => Navigator.of(context).pushNamed("/image"),
-              ),
+//              new ListTile(
+//                title: new Text("Select Image"),
+//                trailing: new Icon(Icons.image, color: Colors.indigo,),
+//                onTap: () => Navigator.of(context).pushNamed("/image"),
+//              ),
               new ListTile(
                 title: new Text("Help & Feedback"),
                 trailing: new Icon(Icons.feedback,color: Colors.indigo,),

@@ -214,8 +214,8 @@ class _VehiclePageState extends State<VehiclePage> with SingleTickerProviderStat
         color: Color(0xff5b7ccf),
       ),
       width: double.infinity,
-      height: 110,
-      margin: EdgeInsets.only(right: 15),
+      height: 120,
+      margin: EdgeInsets.only(top: 5,right: 15),
       padding: EdgeInsets.symmetric(vertical: 17, horizontal: 20),
       child: GestureDetector(
         onTap: () {
@@ -235,6 +235,16 @@ class _VehiclePageState extends State<VehiclePage> with SingleTickerProviderStat
                   SizedBox(height: 6,),
                   Row(
                     children: <Widget>[
+                      Icon(Icons.home, color: Colors.white, size: 20,),
+                      SizedBox(width: 5,),
+                      Text(
+                          serviceInfo.serviceName,
+                          style: TextStyle(color: Colors.white, fontSize: 13, letterSpacing: .3)),
+                    ],
+                  ),
+                  SizedBox(height: 6,),
+                  Row(
+                    children: <Widget>[
                       Icon(Icons.date_range, color: Colors.white, size: 20,),
                       SizedBox(width: 5,),
                       Text(
@@ -243,15 +253,15 @@ class _VehiclePageState extends State<VehiclePage> with SingleTickerProviderStat
                     ],
                   ),
                   SizedBox(height: 6,),
-                  Row(
-                    children: <Widget>[
-                      Icon(Icons.format_list_bulleted, color: Colors.white, size: 20,),
-                      SizedBox(width: 5,),
-                      Text(
-                          serviceInfo.serviceId.toUpperCase(),
-                          style: TextStyle(color: Colors.white, fontSize: 13, letterSpacing: .3)),
-                    ],
-                  ),
+//                  Row(
+//                    children: <Widget>[
+//                      Icon(Icons.format_list_bulleted, color: Colors.white, size: 20,),
+//                      SizedBox(width: 5,),
+//                      Text(
+//                          serviceInfo.serviceId.toUpperCase(),
+//                          style: TextStyle(color: Colors.white, fontSize: 13, letterSpacing: .3)),
+//                    ],
+//                  ),
                 ],
               ),
             ),

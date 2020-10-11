@@ -14,28 +14,31 @@ class _FilterState  extends State<Filter> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Categories".toUpperCase(), style: GoogleFonts.quicksand(),),
-        elevation: .1,
-        backgroundColor: Colors.indigo,
-      ),
-
-      body: Container(
-        padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 2.0),
-        child: GridView.count(
-          crossAxisCount: 2,
-          padding: EdgeInsets.all(3.0),
-          children: <Widget>[
-            makeFilterItem("Full Service", Icons.build, Colors.indigo,'assets/image/fullservice.jpg' ),
-            makeFilterItem("Oil Change", FontAwesomeIcons.oilCan, Colors.amber, 'assets/image/oil.jpg'),
-            makeFilterItem("Body Painting", Icons.format_paint, Colors.orangeAccent, 'assets/image/painting.jpg'),
-            makeFilterItem("Engine Checkup", FontAwesomeIcons.userCheck, Colors.blue, 'assets/image/engine.jpg'),
-            makeFilterItem("Wheel Alignment", Icons.adjust, Colors.blue, 'assets/image/wheel.jpg'),
-            makeFilterItem("Interior Clean", FontAwesomeIcons.car, Colors.blue, 'assets/image/interior.jpg'),
-            makeFilterItem("Collision Repairs", FontAwesomeIcons.carCrash, Colors.blue, 'assets/image/collisions.jpg'),
-            makeFilterItem("Body Wash", Icons.local_car_wash, Colors.blue, 'assets/image/wash.jpg'),
-          ],
-        ),
+      body: Stack(
+        children: <Widget>[
+//          Padding(
+//            padding: const EdgeInsets.only(top:15.0,bottom: 25,left: 165),
+//            child: Text("Categories".toUpperCase(), style: GoogleFonts.quicksand(color: Colors.indigoAccent,fontSize: 15),),
+//          ),
+          Container(
+//            margin: EdgeInsets.only(top: 10),
+            padding: EdgeInsets.only(left: 2.0,right: 2),
+            child: GridView.count(
+              crossAxisCount: 2,
+              padding: EdgeInsets.all(3.0),
+              children: <Widget>[
+                makeFilterItem("Full Service", Icons.build, Colors.indigo,'assets/image/fullservice.jpg' ),
+                makeFilterItem("Oil Change", FontAwesomeIcons.oilCan, Colors.amber, 'assets/image/oil.jpg'),
+                makeFilterItem("Body Painting", Icons.format_paint, Colors.orangeAccent, 'assets/image/painting.jpg'),
+                makeFilterItem("Engine Checkup", FontAwesomeIcons.userCheck, Colors.blue, 'assets/image/engine.jpg'),
+                makeFilterItem("Wheel Alignment", Icons.adjust, Colors.blue, 'assets/image/wheel.jpg'),
+                makeFilterItem("Interior Clean", FontAwesomeIcons.car, Colors.blue, 'assets/image/interior.jpg'),
+                makeFilterItem("Collision Repairs", FontAwesomeIcons.carCrash, Colors.blue, 'assets/image/collisions.jpg'),
+                makeFilterItem("Body Wash", Icons.local_car_wash, Colors.blue, 'assets/image/wash.jpg'),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

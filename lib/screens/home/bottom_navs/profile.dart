@@ -54,15 +54,33 @@ class _ProfileThreePageState extends State<ProfileThreePage> {
                                   circularStrokeCap: CircularStrokeCap.round,
                                   progressColor: Colors.blueAccent ,
                                   backgroundColor: LightColors.kDarkYellow,
-                                  center: GestureDetector(
-                                    onTap: () => _showImageDialog(context, 'assets/image/no_dp.png'),
-                                    child: CircleAvatar(
-                                      backgroundColor: LightColors.kBlue,
-                                      radius: 35.0,
-                                      backgroundImage: AssetImage(
-                                        'assets/image/no_dp.png',
-                                      ),
-                                    ),
+                                  center: FutureBuilder(
+                                    future: getUsersTripsStreamSnapshots(),
+                                    builder: (context, snapshot) {
+                                      if (!snapshot.hasData) {
+                                        return Padding(
+                                          padding: const EdgeInsets.only(top: 100),
+                                          child: Center(child: CircularProgressIndicator()),
+                                        );
+                                      }
+                                      final customer = Customer.fromSnapshot(snapshot.data);
+                                      return GestureDetector(
+                                        onTap: () => _showImageDialog(context, customer.photo),
+                                        child: InkWell(
+                                          child: CircleAvatar(
+                                            radius: 38,
+                                              backgroundColor: Colors.black26,
+                                              backgroundImage: customer.photo == null ? AssetImage('assets/image/no_dp.png'):
+                                              NetworkImage(
+                                                customer.photo,
+                                              )
+                                          ),
+                                          onTap: () {
+                                            return Navigator.of(context).pushNamed("/image");
+                                          },
+                                        ),
+                                      );
+                                    }
                                   ),
                                 ),
                                 Column(
@@ -131,7 +149,7 @@ class _ProfileThreePageState extends State<ProfileThreePage> {
                          ),
                          child: Column(
                            children: <Widget>[
-                             ListTile(title: Center(child: Text(customer.name,style: TextStyle(fontWeight: FontWeight.bold,fontFamily: 'Cabin',fontSize: 18,color: Colors.indigo),))),
+                             ListTile(title: Center(child: Text(customer.name.toUpperCase(),style: GoogleFonts.ubuntu(fontSize: 25,color: Colors.indigo),))),
                              Divider(),
                              ListTile(
                                title: Text("Email"),
@@ -237,7 +255,7 @@ class _ProfileThreePageState extends State<ProfileThreePage> {
     return Stack(
       children: <Widget>[
         Container(
-          padding: const EdgeInsets.all(26.0),
+          padding: const EdgeInsets.all(30.0),
           alignment: Alignment.centerRight,
           child: Opacity(
               opacity: 0.3,

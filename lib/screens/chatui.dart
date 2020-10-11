@@ -164,6 +164,13 @@ class _ChatBoxState extends State<ChatBox> {
       'type': 'text',
       'time': DateTime.now(),
     });
+
+    Firestore.instance.collection('Services').document(widget.service.serviceId).collection('Customers').document(uID).updateData({
+      'count': 1,
+    });
+
+    // increment count by 1
+
     _controller.clear();
 
   }
