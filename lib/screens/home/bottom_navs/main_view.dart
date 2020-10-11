@@ -717,14 +717,14 @@ Widget cityCard(BuildContext context, DocumentSnapshot serviceList, String userT
           child: Stack(
             children: <Widget>[
               Container(
-                  width: 170,
+                  width: 180,
                   height: 210,
                   child: Image.network(
                     serviceDoc.photo,
                     fit: BoxFit.cover,
                   ),
               ),
-              Positioned(left: 0, bottom: 0, width: 170, height: 60,
+              Positioned(left: 0, bottom: 0, width: 180, height: 60,
                 child: Container(
                   decoration: BoxDecoration(
                       gradient: LinearGradient(
@@ -733,7 +733,7 @@ Widget cityCard(BuildContext context, DocumentSnapshot serviceList, String userT
                           colors: [Colors.black54, Colors.transparent])),
                 ),
               ),
-              Positioned(left: 10, bottom: 10, width: 155,
+              Positioned(left: 10, bottom: 10, width: 165,
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -743,7 +743,7 @@ Widget cityCard(BuildContext context, DocumentSnapshot serviceList, String userT
                       children: <Widget>[
                         Text(
                           serviceDoc.serviceName.toUpperCase(),
-                          style: GoogleFonts.quicksand(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w800, letterSpacing: 1),
+                          style: GoogleFonts.quicksand(color: Colors.white, fontSize: 13, fontWeight: FontWeight.w800, letterSpacing: 1),
                         ),
                          SingleChildScrollView(
                            scrollDirection: Axis.horizontal,

@@ -75,7 +75,7 @@ class _VehiclePageState extends State<VehiclePage> with SingleTickerProviderStat
                   ),
                 ),
                 SizedBox(height: 10.0),
-                Image.asset('assets/image/3.jpg',
+                Image.asset('assets/image/Carbg.png',
                     fit: BoxFit.cover,
                     height: 175.0,
                     width: MediaQuery.of(context).size.width - 30.0
@@ -150,9 +150,9 @@ class _VehiclePageState extends State<VehiclePage> with SingleTickerProviderStat
                   width: MediaQuery.of(context).size.width - 30.0,
                   color: Color(0xFF434C68).withOpacity(0.4),
                 ),
-                SizedBox(height: 10.0),
+                SizedBox(height: 15.0),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
                     Icon(Icons.view_headline, size: 35.0, color: Color(0xFF434C68).withOpacity(0.4)),
                     SizedBox(width: 20.0),
@@ -167,9 +167,9 @@ class _VehiclePageState extends State<VehiclePage> with SingleTickerProviderStat
 
                   ],
                 ),
-                Container(
-                    height: MediaQuery.of(context).size.height,
-                    width: double.infinity,
+                SingleChildScrollView(
+//                    height: MediaQuery.of(context).size.height,
+//                    width: double.infinity,
                     child: StreamBuilder<QuerySnapshot>(
                         stream: getVehicleServices(context),
                         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> querySnapshot) {
@@ -180,14 +180,19 @@ class _VehiclePageState extends State<VehiclePage> with SingleTickerProviderStat
                           else {
                             final list = querySnapshot.data.documents;
                             print(list);
-                            return ListView.builder(
-                              physics: const NeverScrollableScrollPhysics(),
-                              scrollDirection: Axis.vertical,
-                              shrinkWrap: true,
-                              itemCount: list.length,
-                              itemBuilder: (context, index) {
-                                return buildList(context,list[index]);
-                              },
+                            return Column(
+                              children: <Widget>[
+                                Text('Number of Services: ${list.length}',style: GoogleFonts.quicksand(fontSize: 18,fontWeight: FontWeight.w600,color: Colors.blueAccent),),
+                                ListView.builder(
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  scrollDirection: Axis.vertical,
+                                  shrinkWrap: true,
+                                  itemCount: list.length,
+                                  itemBuilder: (context, index) {
+                                    return buildList(context,list[index]);
+                                  },
+                                ),
+                              ],
                             );
                           }
                         }
@@ -210,6 +215,10 @@ class _VehiclePageState extends State<VehiclePage> with SingleTickerProviderStat
 
     return Container(
       decoration: BoxDecoration(
+        gradient: LinearGradient(colors: [
+          Colors.indigo,
+          Colors.blue
+        ], begin: Alignment.topLeft, end: Alignment.bottomRight),
         borderRadius: BorderRadius.circular(15),
         color: Color(0xff5b7ccf),
       ),
@@ -231,7 +240,7 @@ class _VehiclePageState extends State<VehiclePage> with SingleTickerProviderStat
                 children: <Widget>[
                   Text(
                     serviceInfo.serviceType.toUpperCase(),
-                    style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),),
+                    style: GoogleFonts.quicksand(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 19),),
                   SizedBox(height: 6,),
                   Row(
                     children: <Widget>[
@@ -239,7 +248,7 @@ class _VehiclePageState extends State<VehiclePage> with SingleTickerProviderStat
                       SizedBox(width: 5,),
                       Text(
                           serviceInfo.serviceName,
-                          style: TextStyle(color: Colors.white, fontSize: 13, letterSpacing: .3)),
+                          style: TextStyle(color: Colors.white, fontSize: 15, letterSpacing: .3)),
                     ],
                   ),
                   SizedBox(height: 6,),
@@ -249,7 +258,7 @@ class _VehiclePageState extends State<VehiclePage> with SingleTickerProviderStat
                       SizedBox(width: 5,),
                       Text(
                           date[0],
-                          style: TextStyle(color: Colors.white, fontSize: 13, letterSpacing: .3)),
+                          style: TextStyle(color: Colors.white, fontSize: 15, letterSpacing: .3)),
                     ],
                   ),
                   SizedBox(height: 6,),
@@ -287,3 +296,5 @@ class _VehiclePageState extends State<VehiclePage> with SingleTickerProviderStat
         .snapshots();
   }
 }
+
+

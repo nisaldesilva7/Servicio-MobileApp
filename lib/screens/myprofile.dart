@@ -22,6 +22,9 @@ class MapScreenState extends State<EditProfile>
   final FocusNode myFocusNode = FocusNode();
   int _currentIndex = 0;
 
+  TextEditingController controller1 = TextEditingController();
+  TextEditingController controller2 = TextEditingController();
+
   String uid;
   String photo;
 
@@ -189,6 +192,7 @@ class MapScreenState extends State<EditProfile>
                                     children: <Widget>[
                                       Flexible(
                                         child: TextField(
+                                          controller: controller1,
                                           decoration: InputDecoration(
                                             hoverColor: Colors.indigo,
                                             hintText: customer.name,
@@ -229,6 +233,7 @@ class MapScreenState extends State<EditProfile>
                                     children: <Widget>[
                                        Flexible(
                                         child: TextField(
+                                          controller: controller2,
                                           decoration: InputDecoration(
                                               hintText: customer.number),
                                           enabled: !_status,
@@ -310,13 +315,16 @@ class MapScreenState extends State<EditProfile>
                     textColor: Colors.white,
                     color: Colors.green,
                     onPressed: () async {
+                      String name = controller1.text.toString();
+                      String tel = controller2.text.toString();
+                      print('QQQQQQQ   $name, $tel');
                       final uid = await _auth.getCurrentUID();
                       Firestore.instance
                           .collection('Customers')
                           .document(uid)
                           .updateData({
-                            'name': 'nisal',
-                            'tel_num': '1111111111'
+                            'name': name,
+                            'tel_num': tel,
                       });
                       setState(() {
                         _status = true;

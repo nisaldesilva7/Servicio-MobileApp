@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:servicio/models/vehicle.dart';
 import 'package:servicio/screens/side_nav/my_vehicles/Vehicle_details_view.dart';
@@ -109,9 +110,9 @@ class _MyVehiclesState extends State<MyVehicles> {
                   child: Row(children: <Widget>[
                     Text(vehicle.brand.toUpperCase(), style: new TextStyle(fontSize: 35.0, fontFamily: 'Cabin', color: Colors.white),),
                     Spacer(),
-                    IconButton(icon: Icon(Icons.add_to_photos),color: Colors.white, tooltip: 'Modfiy Vehicle',
+                    IconButton(icon: Icon(Icons.format_line_spacing),color: Colors.white, tooltip: 'Modfiy Vehicle',
                       onPressed: ()  {
-                        _tripEditModalBottomSheet(context);
+                        _tripEditModalBottomSheet(vehicle.vehicleId);
                         },
                     ),
                     IconButton(icon: Icon(Icons.delete_outline),color: Colors.white, tooltip: 'Delete Vehicle',
@@ -166,7 +167,7 @@ class _MyVehiclesState extends State<MyVehicles> {
         decoration: BoxDecoration(
           gradient: LinearGradient(colors: [
             Colors.indigo,
-            Colors.blue
+            Colors.blueAccent
           ], begin: Alignment.topLeft, end: Alignment.bottomRight),
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(8.0),
@@ -181,9 +182,9 @@ class _MyVehiclesState extends State<MyVehicles> {
           ],
         ),
         width: double.infinity,
-        height: 210,
-        margin: EdgeInsets.symmetric(vertical: 8, horizontal: 20),
-        padding: EdgeInsets.symmetric(vertical: 17, horizontal: 20),
+        height: 204,
+        margin: EdgeInsets.symmetric(vertical: 6, horizontal: 20),
+        padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
         child: Padding(
           padding: const EdgeInsets.only(right: 12.0,left: 5.0),
           child: Column(
@@ -193,9 +194,9 @@ class _MyVehiclesState extends State<MyVehicles> {
                 child: Row(children: <Widget>[
                   Text(vehicle.brand.toUpperCase(), style: GoogleFonts.dmSans(fontSize: 35.0,  color: Colors.white),),
                   Spacer(),
-                  IconButton(icon: Icon(Icons.add_to_photos),color: Colors.white, tooltip: 'Modfiy Vehicle',
+                  IconButton(icon: Icon(Icons.timer),color: Colors.white, tooltip: 'Modfiy Vehicle',
                     onPressed: ()  {
-                      _tripEditModalBottomSheet(context);
+                      _tripEditModalBottomSheet(vehicle.vehicleId);
                     },
                   ),
                   IconButton(icon: Icon(Icons.delete_outline),color: Colors.white, tooltip: 'Delete Vehicle',
@@ -285,23 +286,28 @@ class _MyVehiclesState extends State<MyVehicles> {
       },
     );
   }
+  String _mileage;
 
+  void _tripEditModalBottomSheet(String id) {
+    final _formKey = GlobalKey<FormState>();
 
-  void _tripEditModalBottomSheet(context) {
     showModalBottomSheet(context: context, builder: (BuildContext bc) {
       return Container(
-          height: MediaQuery.of(context).size.height * .60,
-          color: Colors.grey[100],
+          height: MediaQuery.of(context).size.height * .7,
+          color: Colors.white,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
               children: <Widget>[
                 Row(
                   children: <Widget>[
-                    Text("Edit Vehicle"),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Center(child: Text("Edit Vehicle Mileage", style: GoogleFonts.quicksand(fontSize: 20,color: Colors.indigoAccent),)),
+                    ),
                     Spacer(),
                     IconButton(
-                      icon: Icon(Icons.cancel, color: Colors.orange, size: 25,),
+                      icon: Icon(Icons.cancel, color: Colors.indigoAccent, size: 25,),
                       onPressed: () {
                         Navigator.of(context).pop();
                       },
@@ -309,14 +315,53 @@ class _MyVehiclesState extends State<MyVehicles> {
 
                   ],
                 ),
-                Row(
-                    children: [
-                      Text(
-                        'trip.title',
-                        style: TextStyle(fontSize: 30, color: Colors.green[900]),
-                      ),
-                    ]
-                )
+                Form(
+                  key: _formKey,
+                  child: Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        TextFormField(
+                          decoration: new InputDecoration(labelText: "Update Vehicle mileage"),
+                          keyboardType: TextInputType.number,
+                          inputFormatters: <TextInputFormatter>[
+                            WhitelistingTextInputFormatter.digitsOnly
+                          ],
+                          validator: (value) {
+                            if (value.isEmpty) {
+                              return 'Please enter some text';
+                            }
+                            return null;
+                          },
+                          onChanged: (val) {
+                            setState(() => _mileage = val);
+                          },
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 16.0),
+                          child: RaisedButton(
+                            onPressed: () async {
+                              // Validate returns true if the form is valid, or false
+                              // otherwise.
+                              if (_formKey.currentState.validate()) {
+                                final uid = await _auth.getCurrentUID();
+                                await Firestore.instance
+                                    .collection('Customers')
+                                    .document(uid).collection('Vehicles').document(id)
+                                    .updateData({
+                                  'mileage': '$_mileage KMs',
+                                });
+                                Navigator.of(context).pop();
+                              }
+                            },
+                            child: Text('Update'),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
               ],
             ),
           )
@@ -324,3 +369,6 @@ class _MyVehiclesState extends State<MyVehicles> {
     });
   }
 }
+
+
+
