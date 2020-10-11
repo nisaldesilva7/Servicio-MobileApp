@@ -145,6 +145,8 @@ class _BookServiceState extends State<BookService> {
                                               'ServiceId': widget.serviceInfo.serviceId,
                                               'Vehicle': selectedVehicle,
                                               'Description': _description,
+                                              'DateTime': _nisalwanttime,
+
                                             }
                                         );
                                       }
@@ -242,7 +244,7 @@ class _BookServiceState extends State<BookService> {
       builder: (BuildContext context) {
         return AlertDialog(
 //          backgroundColor: Colors.grey,
-          title: Text('BOOKING DONE!',style: TextStyle(color: Colors.indigo),),
+          title: Text('BOOKING PLACED SUCCESFULLY!',style: TextStyle(color: Colors.indigo),),
           actions: <Widget>[
             FlatButton(
               child: Text('OK'),

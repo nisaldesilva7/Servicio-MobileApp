@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:servicio/models/service.dart';
+import 'package:servicio/screens/chatui.dart';
 import 'package:servicio/services/auth.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
 import 'package:timeline_tile/timeline_tile.dart';
@@ -15,6 +17,7 @@ class BookingProgress extends StatefulWidget{
   @override
   _BookingProgressState createState() => _BookingProgressState();
 }
+
 
 class _BookingProgressState extends State<BookingProgress> {
   @override
@@ -36,6 +39,29 @@ class _BookingProgressState extends State<BookingProgress> {
         ),
         child: Scaffold(
           appBar: AppBar(
+            actions: <Widget>[
+              FutureBuilder<Object>(
+                future: getUsersTripsStreamSnapshots(widget.serviceID),
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData) {
+                    return Padding(
+                      padding: const EdgeInsets.only(top: 100),
+                      child: Center(child: CircularProgressIndicator()),
+                    );
+                  }
+                  final service = Service.fromSnapshot(snapshot.data);
+                  return Padding(
+                    padding: const EdgeInsets.only(right: 8.0),
+                    child: IconButton(
+                      icon: Icon(Icons.message),
+                      onPressed: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => ChatBox(service: service)));
+                      },
+                    ),
+                  );
+                }
+              ),
+            ],
             elevation: 0,
             backgroundColor: Colors.blue,
             title: Text(
@@ -62,7 +88,9 @@ class _BookingProgressState extends State<BookingProgress> {
     );
   }
 }
-
+Future<DocumentSnapshot> getUsersTripsStreamSnapshots(String uid) async {
+  return Firestore.instance.collection('Services').document(uid).get();
+}
 
 // ignore: must_be_immutable
 class TimelineDelivery extends StatefulWidget {

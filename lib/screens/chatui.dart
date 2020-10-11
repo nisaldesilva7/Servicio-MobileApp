@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:servicio/models/message.dart';
 import 'package:servicio/models/service.dart';
 import 'package:servicio/services/auth.dart';
@@ -70,7 +71,7 @@ class _ChatBoxState extends State<ChatBox> {
         Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
-            title: Text("Chat Box"),
+            title: Text(widget.service.serviceName.toUpperCase(), style: GoogleFonts.quicksand(),),
           ),
           body: Column(
             children: <Widget>[
@@ -203,8 +204,8 @@ class _ChatBoxState extends State<ChatBox> {
               borderRadius: BorderRadius.circular(10.0)),
           child: Text(
             message.msg,
-            style: TextStyle(
-                color: current ? Colors.white : Colors.black, fontSize: 18.0, fontFamily: 'cabin'),
+            style: GoogleFonts.quicksand(
+                color: current ? Colors.white : Colors.black, fontSize: 17.0, fontWeight: FontWeight.w400),
           ),
         ),
         if (current) ...[
