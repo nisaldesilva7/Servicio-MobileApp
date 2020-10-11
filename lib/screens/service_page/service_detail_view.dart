@@ -2,7 +2,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:servicio/models/customer.dart';
 import 'package:servicio/models/reviews.dart';
 import 'package:servicio/screens/bookings/book_service.dart';
 import 'package:servicio/models/service.dart';
@@ -114,7 +116,7 @@ class _ServiceDetailPageState extends State<ServiceDetailPage> {
                     const SizedBox(width: 16.0),
                       Row(
                         children: <Widget>[
-                          Icon(Icons.location_city, color: Colors.white,),
+                          Icon(Icons.home, color: Colors.white,),
                           SizedBox(width: 5,),
                           Text(widget.service.city.toUpperCase(), style:GoogleFonts.teko(fontSize: 30,color: Colors.white),),
                         ],
@@ -150,7 +152,7 @@ class _ServiceDetailPageState extends State<ServiceDetailPage> {
                   ],
                 ),
                 Container(
-                  padding: const EdgeInsets.all(20.0),
+                  padding: const EdgeInsets.all(15.0),
                   color: Colors.white,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -162,7 +164,24 @@ class _ServiceDetailPageState extends State<ServiceDetailPage> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                showStars(widget.service.rating),
+                                SmoothStarRating(
+                                  rating: widget.service.rating.toDouble(),
+                                  isReadOnly: false,
+                                  size: 35,
+                                  filledIconData: Icons.star,
+                                  halfFilledIconData: Icons.star_half,
+                                  defaultIconData: Icons.star_border,
+                                  starCount: 5,
+                                  borderColor: Colors.indigo,
+                                  color: Colors.indigo,
+                                  allowHalfRating: true,
+                                  spacing: 2.0,
+                                  onRated: (value) {
+                                    print("rating value -> $value");
+                                    // print("rating value dd -> ${value.truncate()}");
+                                  },
+                                ),
+//                                showStars(widget.service.rating),
                                ],
                             ),
                           ),
@@ -177,17 +196,14 @@ class _ServiceDetailPageState extends State<ServiceDetailPage> {
                                     Container(
                                       width: 150,
                                         height: 32,
-                                        decoration: BoxDecoration(
-                                            color: Colors.indigo[400],
-                                            borderRadius: BorderRadius.circular(12.0)),
                                         child: Center(child: Text.rich(TextSpan(children: [
                                           WidgetSpan(
-                                              child: Icon(Icons.location_on, size: 17.0, color: Colors.grey[200],)
+                                              child: Icon(Icons.location_on, size: 30.0, color: Colors.red,)
                                           ),
                                           TextSpan(
                                               text: "View Location"
                                           )
-                                        ]), style: TextStyle(color: Colors.grey[200], fontSize: 14.0),)
+                                        ]), style: GoogleFonts.bebasNeue(color: Colors.indigo, fontSize: 22.0),)
                                         )
                                     ),
                                   ],
@@ -199,6 +215,10 @@ class _ServiceDetailPageState extends State<ServiceDetailPage> {
                         ],
                       ),
                       const SizedBox(height: 10.0),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom:8.0,left: 8),
+                        child: Text('Categories', style: GoogleFonts.quicksand(fontSize: 15, color: Colors.indigo),),
+                      ),
                       GridView.count(
                         physics: const NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
@@ -215,36 +235,35 @@ class _ServiceDetailPageState extends State<ServiceDetailPage> {
                                 width: 10.0,
                                 padding: const EdgeInsets.symmetric(vertical: 1.0,horizontal: 6.0),
                                 decoration: BoxDecoration(
-                                    color: Colors.indigo[600],
+                                    color: Color(0xff134987),
                                     borderRadius: BorderRadius.circular(15.0)),
                                 child: Center(
                                   child: Text(
                                     serviceTypes.toString().toUpperCase(),
-                                    style: GoogleFonts.anton(color: Colors.white, fontSize: 12.0),
+                                    style: GoogleFonts.barlow(color: Colors.white, fontSize: 12.0),
                                   ),
                                 ),
                               ),
                         ).toList(),
                       ),
                       SizedBox(height: 10,),
-                      SizedBox(
-                        width: double.infinity,
-                        child: RaisedButton(
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
-                          color: Colors.purple,
-                          textColor: Colors.white,
-                          child: Text("Book Now".toUpperCase(), style: GoogleFonts.bebasNeue(
-                            fontSize: 30,
-                          ),),
-                          padding: const EdgeInsets.symmetric(
-                            vertical: 10.0,
-                            horizontal: 32.0,
-                          ),
-                          onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => BookService(serviceInfo: widget.service)));
-                          },
-                        ),
-                      ),
+//                      SizedBox(
+//                        width: double.infinity,
+//                        child: RaisedButton(
+//                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
+//                          color: Color(0xff3d73c4),
+//                          textColor: Colors.white,
+//                          child: Text("Book Now".toUpperCase(), style: GoogleFonts.bebasNeue(
+//                            fontSize: 30,
+//                          ),),
+//                          padding: const EdgeInsets.symmetric(
+//                            vertical: 10.0,
+//                            horizontal: 32.0,
+//                          ),
+//                          onPressed: () {
+//                          },
+//                        ),
+//                      ),
                       const SizedBox(height: 20.0),
                       Row(
                         children: <Widget>[
@@ -282,38 +301,53 @@ class _ServiceDetailPageState extends State<ServiceDetailPage> {
                           ),
                         ],
                       ),
-                      Container(
-                          child: Column(
-                            children: <Widget>[StreamBuilder<QuerySnapshot>(
-                                  stream: getReviews(context),
-                                  builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> querySnapshot) {
-                                    if (!querySnapshot.hasData)
-                                      return Center(child: CircularProgressIndicator());
-                                    if (querySnapshot.connectionState == ConnectionState.waiting)
-                                      return Center(child: const CircularProgressIndicator());
-                                    else {
-                                      final list = querySnapshot.data.documents;
-                                      print(list);
-                                      return ListView.builder(
-                                        physics: const NeverScrollableScrollPhysics(),
-                                        scrollDirection: Axis.vertical,
-                                        shrinkWrap: true,
-                                        itemCount: list.length,
-                                        itemBuilder: (context, index) {
-                                          return buildList(context,list[index]);
-                                        },
-                                      );
-                                    }
+                      Column(
+                        children: <Widget>[
+                          StreamBuilder<QuerySnapshot>(
+                                stream: getReviews(context),
+                                builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> querySnapshot) {
+                                  if (!querySnapshot.hasData)
+                                    return Center(child: CircularProgressIndicator());
+                                  if (querySnapshot.connectionState == ConnectionState.waiting)
+                                    return Center(child: const CircularProgressIndicator());
+                                  else {
+                                    final list = querySnapshot.data.documents;
+                                    print(list);
+                                    return ListView.builder(
+                                      controller: ScrollController(),
+                                      physics: const NeverScrollableScrollPhysics(),
+                                      scrollDirection: Axis.vertical,
+                                      shrinkWrap: true,
+                                      itemCount: list.length,
+                                      itemBuilder: (context, index) {
+                                        return buildList(context,list[index]);
+                                      },
+                                    );
                                   }
-                              ),
-                            ],
-                          )
+                                }
+                            ),
+                        ],
                       ),
                     ],
                   ),
                 ),
               ],
             ),
+          ),
+        ],
+      ),
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          SizedBox(width: 30,),
+          FloatingActionButton.extended(
+            backgroundColor: Colors.deepOrangeAccent,
+            label: Text("Book Now", style: GoogleFonts.dmSans(fontSize: 15),),
+            onPressed: () => {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => BookService(serviceInfo: widget.service)))
+            },
+            heroTag: UniqueKey(),
+            icon: Icon(Icons.chevron_right),
           ),
         ],
       ),
@@ -333,61 +367,90 @@ class _ServiceDetailPageState extends State<ServiceDetailPage> {
     final reviewsInfo = Reviews.fromSnapshot(document);
     print(Reviews);
 
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15),
-        color: Color(0xff267bc9),
-      ),
-      width: double.infinity,
-      height: 84,
-      margin: EdgeInsets.symmetric(vertical: 4 , horizontal: 1),
-      padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-      child: GestureDetector(
-        onTap: () {
+    return FutureBuilder<Object>(
+      future: getUsersTripsStreamSnapshots(reviewsInfo.custID),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) {
+          return Padding(
+            padding: const EdgeInsets.only(top: 100),
+            child: Center(child: CircularProgressIndicator()),
+          );
+        }
+        final customer = Customer.fromSnapshot(snapshot.data);
+        return Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(colors: [
+              Colors.indigo,
+              Colors.blue
+            ], begin: Alignment.topLeft, end: Alignment.bottomRight),
+            boxShadow: <BoxShadow>[
+              BoxShadow(
+                  color: Colors.grey.withOpacity(0.6),
+                  offset: Offset(1.1, 1.1),
+                  blurRadius: 10.0),
+            ],
+            borderRadius: BorderRadius.circular(15),
+            color: Color(0xff267bc9),
+          ),
+          width: double.infinity,
+          height: 90,
+          margin: EdgeInsets.symmetric(vertical: 4 , horizontal: 1),
+          padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+          child: GestureDetector(
+            onTap: () {
 //          Navigator.push(context, MaterialPageRoute(builder: (context) => ServiceDetailPage(service: serviceDoc)));
-        },
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Row(
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Icon(Icons.comment, color: Colors.white, size: 20,),
-                      SizedBox(width: 6,),
-                      Text(
-                        reviewsInfo.comment,
-                        style: GoogleFonts.roboto(fontSize: 15,color: Colors.white),
-                      )
-                    ],
-                  ),
-                  SizedBox(height: 6,),
-                  Row(
-                    children: <Widget>[
-                      Icon(Icons.location_on, color: Colors.white, size: 20,),
-                      SizedBox(width: 6,),
-                      SmoothStarRating(
-                           color: Colors.white,
-                           borderColor: Colors.white,
-                           rating: reviewsInfo.rate,
-                           isReadOnly: false,
-                           size: 20,
-                           filledIconData: Icons.star,
-                           halfFilledIconData: Icons.star_half,
-                           defaultIconData: Icons.star_border,
-                           starCount: 5,
-                           allowHalfRating: true,
-                           spacing: 2.0,
-                           onRated: (value) {
-                             print("rating value -> $value");
-                             // print("rating value dd -> ${value.truncate()}");
-                    },
-                  ),
-                    ],
-                  ),
+
+                      Row(
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 1),
+                            child: Row(
+                              children: <Widget>[
+                                Icon(Icons.person, color: Colors.white,),
+                                Text(customer.name, style: GoogleFonts.quicksand(fontSize: 18,color: Colors.white,fontWeight: FontWeight.w600),),
+                              ],
+                            ),
+                          ),
+                          Spacer(),
+                          SmoothStarRating(
+                               color: Colors.white,
+                               borderColor: Colors.white,
+                               rating: reviewsInfo.rate,
+                               isReadOnly: false,
+                               size: 20,
+                               filledIconData: Icons.star,
+                               halfFilledIconData: Icons.star_half,
+                               defaultIconData: Icons.star_border,
+                               starCount: 5,
+                               allowHalfRating: true,
+                               spacing: 2.0,
+                               onRated: (value) {
+                                 print("rating value -> $value");
+                                 // print("rating value dd -> ${value.truncate()}");
+                        },
+                      ),
+                        ],
+                      ),
+                      SizedBox(height: 9),
+                      Row(
+                        children: <Widget>[
+                          Icon(Icons.comment, color: Colors.white, size: 20,),
+                          SizedBox(width: 6,),
+                          Text(
+                            reviewsInfo.comment,
+                            style: GoogleFonts.quicksand(fontSize: 15,color: Colors.white),
+                          )
+                        ],
+                      ),
 //                  SizedBox(height: 6,),
 //                  Row(
 //                    children: <Widget>[
@@ -398,17 +461,19 @@ class _ServiceDetailPageState extends State<ServiceDetailPage> {
 //                          style: TextStyle(color: Colors.white, fontSize: 13, letterSpacing: .3)),
 //                    ],
 //                  ),
-                ],
-              ),
-            ),
+                    ],
+                  ),
+                ),
 //            SizedBox(width: 10),
 //            Padding(
 //              padding: const EdgeInsets.only(top: 20),
 //              child: Icon(Icons.chevron_right, size: 40, color: Colors.white,),
 //            )
-          ],
-        ),
-      ),
+              ],
+            ),
+          ),
+        );
+      }
     );
   }
 
@@ -430,4 +495,7 @@ class _ServiceDetailPageState extends State<ServiceDetailPage> {
         ],
       );
   }
+}
+Future<DocumentSnapshot> getUsersTripsStreamSnapshots(String uid) async {
+  return Firestore.instance.collection('Customers').document(uid).get();
 }

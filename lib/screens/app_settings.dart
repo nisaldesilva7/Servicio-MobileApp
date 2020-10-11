@@ -65,6 +65,7 @@ class _AppSettingsState extends State<AppSettings> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
+                  SizedBox(height: 25,),
                   Card(
                     elevation: 8.0,
                     shape: RoundedRectangleBorder(
@@ -147,61 +148,15 @@ class _AppSettingsState extends State<AppSettings> {
                   SwitchListTile(
                     activeColor: Colors.indigo,
                     contentPadding: const EdgeInsets.all(0),
-                    value: true,
-                    title: Text("Received notification"),
-                    onChanged: (val) {},
-                  ),
-                  SwitchListTile(
-                    activeColor: Colors.indigo,
-                    contentPadding: const EdgeInsets.all(0),
                     value: false,
-                    title: Text("Received newsletter"),
-                    onChanged: null,
+                    title: Text("Received notification"),
+                    onChanged: (val) {
+                        val = true;
+                    },
                   ),
-                  SwitchListTile(
-                    activeColor: Colors.indigo,
-                    contentPadding: const EdgeInsets.all(0),
-                    value: true,
-                    title: Text("Received Offer Notification"),
-                    onChanged: (val) {},
-                  ),
-                  SwitchListTile(
-                    activeColor: Colors.indigo,
-                    contentPadding: const EdgeInsets.all(0),
-                    value: true,
-                    title: Text("Received App Updates"),
-                    onChanged: null,
-                  ),
-                  const SizedBox(height: 60.0),
                 ],
               ),
             ),
-//            Positioned(
-//              bottom: -20,
-//              left: -20,
-//              child: Container(
-//                width: 80,
-//                height: 80,
-//                alignment: Alignment.center,
-//                decoration: BoxDecoration(
-//                  color: Colors.indigo,
-//                  shape: BoxShape.circle,
-//                ),
-//              ),
-//            ),
-//            Positioned(
-//              bottom: 00,
-//              left: 00,
-//              child: IconButton(
-//                icon: Icon(
-//                  FontAwesomeIcons.powerOff,
-//                  color: Colors.white,
-//                ),
-//                onPressed: () {
-//                  //log out
-//                },
-//              ),
-//            )
           ],
         ),
       ),

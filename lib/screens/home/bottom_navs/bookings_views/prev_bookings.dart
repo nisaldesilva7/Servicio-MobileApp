@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:servicio/models/booking.dart';
 import 'package:servicio/models/service.dart';
+import 'package:servicio/screens/service_page/service_detail_view.dart';
 import 'package:servicio/services/auth.dart';
 
 
@@ -24,7 +26,7 @@ class PrevBookings extends StatefulWidget{
           padding: const EdgeInsets.only(top: 20.0),
           alignment: Alignment.center,
           decoration: BoxDecoration(
-              color: Colors.indigo,
+              color: Colors.indigoAccent,
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(20.0),
                 bottomRight: Radius.circular(20.0),
@@ -39,7 +41,7 @@ class PrevBookings extends StatefulWidget{
             ),
             title: Text(
               "Previous Bookings".toUpperCase(),
-              style: TextStyle(
+              style: GoogleFonts.quicksand(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
                   fontSize: 20.0),
@@ -48,15 +50,21 @@ class PrevBookings extends StatefulWidget{
         ),
         preferredSize: Size.fromHeight(90.0),
       ),
-      body: Padding(
-        padding: const EdgeInsets.only(top: 10),
-        child: Container(
-            padding: EdgeInsets.only(top: 10),
-            height: MediaQuery.of(context).size.height,
-            width: double.infinity,
+      body: Container(
+          height: MediaQuery.of(context).size.height,
+          width: double.infinity,
+//          decoration: BoxDecoration(
+////              borderRadius: BorderRadius.circular(12.0),
+//            image: DecorationImage(
+//              image: AssetImage(
+//                  'assets/image/chat-background-1.jpg'),
+//              fit: BoxFit.cover,
+//            ),
+//          ),
+          child: Padding(
+            padding: const EdgeInsets.only(top: 8.0),
             child: StreamBuilder<QuerySnapshot>(
                 stream: getUsersServicesStreamSnapshots(),
-//                        stream: Firestore.instance.collection("Services").where('searchKey', isEqualTo: 'K').snapshots(),
                 builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> querySnapshot) {
                   if (!querySnapshot.hasData)
                     return Center(child: CircularProgressIndicator());
@@ -76,8 +84,8 @@ class PrevBookings extends StatefulWidget{
                     );
                   }
                 }
-            )
-        ),
+            ),
+          )
       ),
     );
   }
@@ -85,63 +93,112 @@ class PrevBookings extends StatefulWidget{
   Widget buildList(BuildContext context, DocumentSnapshot document) {
     final bookingDoc = Bookings.fromSnapshot(document);
     print(bookingDoc);
+    List date = bookingDoc.date.toString().split('T');
 
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(22),
-        color: Colors.white,
-      ),
-      width: double.infinity,
-      height: 110,
-      margin: EdgeInsets.symmetric(vertical: 8, horizontal: 20),
-      padding: EdgeInsets.symmetric(vertical: 17, horizontal: 20),
-      child: GestureDetector(
-        onTap: () {
+//    DocumentSnapshot snapshot = await Firestore.instance.collection('Services').document().get();
+//                              var channelName = snapshot['channelName'];
+//                              print(channelName);
+    return FutureBuilder<Object>(
+      future:     getUsersTripsStreamSnapshots(bookingDoc.serviceId),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) {
+          return Padding(
+            padding: const EdgeInsets.only(top: 100),
+            child: Center(child: CircularProgressIndicator()),
+          );
+        }
+        final service = Service.fromSnapshot(snapshot.data);
+        return GestureDetector(
+          onTap: (){
+        Navigator.push(context, MaterialPageRoute(builder: (context) => ServiceDetailPage(service: service)));
+          },
+          child: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(colors: [
+                Colors.indigo,
+                Colors.blue
+              ], begin: Alignment.topLeft, end: Alignment.bottomRight),
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(8.0),
+                  bottomLeft: Radius.circular(8.0),
+                  bottomRight: Radius.circular(8.0),
+                  topRight: Radius.circular(50.0)),
+              boxShadow: <BoxShadow>[
+                BoxShadow(
+                    color: Colors.grey.withOpacity(0.6),
+                    offset: Offset(1.1, 1.1),
+                    blurRadius: 10.0),
+              ],
+            ),
+            width: double.infinity,
+            height: 150,
+            margin: EdgeInsets.symmetric(vertical: 8, horizontal: 20),
+            padding: EdgeInsets.symmetric(vertical: 17, horizontal: 20),
+            child: GestureDetector(
+              onTap: () {
 //          Navigator.push(context, MaterialPageRoute(builder: (context) => ServiceDetailPage(service: serviceDoc)));
-        },
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Expanded(
-              child: Column(
+              },
+              child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(
-                    bookingDoc.serviceType,
-                    style: TextStyle(color: Colors.indigo, fontWeight: FontWeight.bold, fontSize: 18),),
-                  SizedBox(height: 6,),
-                  Row(
-                    children: <Widget>[
-                      Icon(Icons.location_on, color: Colors.indigo, size: 20,),
-                      SizedBox(width: 5,),
-                      Text(
-                          'location of service',
-                          style: TextStyle(color: Colors.blue, fontSize: 13, letterSpacing: .3)),
-                    ],
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          bookingDoc.serviceType,
+                          style: GoogleFonts.dmSans(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),),
+                        SizedBox(height: 6,),
+                        Row(
+                          children: <Widget>[
+                            Icon(Icons.home, color: Colors.white, size: 20,),
+                            SizedBox(width: 5,),
+                            Text(
+                                bookingDoc.serviceName,
+                                style: TextStyle(color: Colors.grey[300], fontSize: 13, letterSpacing: .3)),
+                          ],
+                        ),
+                        SizedBox(height: 6,),
+                        Row(
+                          children: <Widget>[
+                            Icon(Icons.directions_car, color: Colors.white, size: 20,),
+                            SizedBox(width: 5,),
+                            Text(
+                                 bookingDoc.vehicleDetails['brand'],
+                                style: TextStyle(color: Colors.white, fontSize: 13, letterSpacing: .3)),
+                          ],
+                        ),
+                        SizedBox(height: 8,),
+                        Row(
+                          children: <Widget>[
+                            Icon(Icons.date_range, color: Colors.white, size: 20,),
+                            SizedBox(width: 5,),
+                            Text(
+                                date[0],
+                                style: TextStyle(color: Colors.white, fontSize: 13, letterSpacing: .3)),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
-                  SizedBox(height: 6,),
-                  Row(
-                    children: <Widget>[
-                      Icon(Icons.format_list_bulleted, color: Colors.indigo, size: 20,),
-                      SizedBox(width: 5,),
-                      Text(
-                          '{serviceDoc.serviceTypes[0]}..'.toUpperCase(),
-                          style: TextStyle(color: Colors.white10, fontSize: 13, letterSpacing: .3)),
-                    ],
-                  ),
+                  SizedBox(width: 10),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 25),
+                    child: Icon(Icons.chevron_right, size: 40, color: Colors.white,),
+                  )
                 ],
               ),
             ),
-            SizedBox(width: 10),
-            Padding(
-              padding: const EdgeInsets.only(top: 20),
-              child: Icon(Icons.chevron_right, size: 40, color: Colors.indigo,),
-            )
-          ],
-        ),
-      ),
+          ),
+        );
+      }
     );
   }
+
+        Future<DocumentSnapshot> getUsersTripsStreamSnapshots(String serviceID) async {
+//          final uid = await _auth.getCurrentUID();
+          return Firestore.instance.collection('Services').document(serviceID).get();
+        }
 
   Stream<QuerySnapshot> getUsersServicesStreamSnapshots() async* {
     print('under stream');

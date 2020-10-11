@@ -3,6 +3,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 
 class ImageUploader extends StatefulWidget {
@@ -27,9 +29,9 @@ class _ImageUploaderState extends State<ImageUploader> {
     setState(() {
       _uploadTask = _storage.ref().child(filePath).putFile(widget.file);
     });
-
+    print("hiii${_storage.ref().getDownloadURL().toString()}");
     await Firestore.instance.collection('Customers').document(widget.uid).setData({
-      'Photo' : _storage.ref().getDownloadURL()
+      'Photo' : '123'
     },
         merge: true);
   }
@@ -76,8 +78,8 @@ class _ImageUploaderState extends State<ImageUploader> {
     else {
       // Allows user to decide when to start the upload
       return FlatButton.icon(
-        label: Text('Set As Profile Picture'),
-        icon: Icon(CupertinoIcons.profile_circled, color: Colors.blueAccent,),
+        label: Text('Set As Profile Picture'.toUpperCase(), style: GoogleFonts.barlow(fontSize: 15,fontWeight: FontWeight.w600, color: Colors.indigo),),
+        icon: Icon(FontAwesomeIcons.user, color: Colors.blueAccent,),
         onPressed: _startUpload,
       );
 

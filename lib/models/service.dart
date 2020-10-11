@@ -6,6 +6,7 @@ class Service {
   final String searchKey;
   final num telephone;
   final String city;
+  final String type;
   final String description;
   final String address1;
   final String address2;
@@ -16,7 +17,7 @@ class Service {
   String serviceId;
 
 
-  Service(this.photo, this.location, this.rating, this.city, this.searchKey, this.serviceName, this.serviceTypes,this.favs,this.telephone,this.description,this.address1,this.address2);
+  Service(this.photo,this.type, this.location, this.rating, this.city, this.searchKey, this.serviceName, this.serviceTypes,this.favs,this.telephone,this.description,this.address1,this.address2);
   
   Map<String, dynamic> toJson() => {
     'Photo': photo,
@@ -30,12 +31,13 @@ class Service {
   };
 
   Service.fromSnapshot(DocumentSnapshot snapshot) :
-        photo = snapshot['Photo'],
+        photo = snapshot['Image'],
         rating = snapshot['Rating'],
         searchKey = snapshot['SearchKey'],
         city = snapshot['City'],
         serviceName = snapshot['Service_Name'],
         address1 = snapshot['Address'],
+        type = snapshot['user_type'],
         address2 = snapshot['AddressTwo'],
         telephone = snapshot['Telephone'],
         location = snapshot['Location'],
@@ -46,12 +48,13 @@ class Service {
 
 
   Service.fromElement(Map snapshot) :
-        photo = snapshot['Photo'], 
+        photo = snapshot['Image'],
         rating = snapshot['Rating'],
         searchKey = snapshot['SearchKey'],
         serviceName = snapshot['Service_Name'],
         location = snapshot['Location'],
-        address1 = snapshot['Address'],
+        type = snapshot['user_type'],
+      address1 = snapshot['Address'],
         city = snapshot['City'],
         address2 = snapshot['AddressTwo'],
         telephone = snapshot['Telephone'],

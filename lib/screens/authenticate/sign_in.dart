@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:servicio/services/auth.dart';
 import 'package:servicio/shared/loading.dart';
 import 'package:servicio/testing/dep/animations.dart';
@@ -107,7 +109,7 @@ class _SignInState extends State<SignIn> {
                       onPressed: () {
                         Navigator.pushNamed(context, "/forgotPassword");
                       },
-                      child: Text("Forgot Password", style: TextStyle(color: Colors.white,),),
+                      child: Text("Forgot Password", style: GoogleFonts.quicksand(color: Colors.white,fontSize: 15),),
                     ),
                   ),
                 ),
@@ -153,7 +155,7 @@ class _SignInState extends State<SignIn> {
                     ),
                   ),
                 ),
-                SizedBox(height: 35.0),
+                SizedBox(height: 80.0),
                 FadeAnimation(1,
                   Center(
                     child: FlatButton(
@@ -161,13 +163,22 @@ class _SignInState extends State<SignIn> {
                       //toggle between sign up and sign in
                         widget.toggleView();
                       },
-                      child: Text("Create My Account",
-                        style: TextStyle(
-                          fontSize: 15.0,
-                          color: Colors.white,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text("Create My Account ",
+                            style: GoogleFonts.quicksand(
+                              fontSize: 15.0,
+                              color: Colors.white,
 
-                        ),
+                            ),
+                          ),
+                          Text("Sign Up",
+                              style: GoogleFonts.quicksand(color:Colors.orangeAccent, fontWeight: FontWeight.w500,fontSize: 15, decoration: TextDecoration.underline )),
+                        ],
                       ),
+
                     ),
                   ),
                 ),

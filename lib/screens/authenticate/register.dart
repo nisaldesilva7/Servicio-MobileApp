@@ -204,7 +204,11 @@ class _RegisterState extends State<Register> {
       keyboardType: TextInputType.visiblePassword,
       obscureText: true,
       validator: (String value) {
-        if (value.isEmpty) {
+        Pattern pattern = r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
+        RegExp regex = new RegExp(pattern);
+          if (!regex.hasMatch(value))
+          return 'Password should have Capital Letter, Number\nand a Symbol(Ex- Test@123)';
+          if (value.isEmpty) {
           return 'Password is Required';
         }
         if(value.length < 6) {

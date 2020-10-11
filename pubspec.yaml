@@ -46,6 +46,9 @@ dependencies:
   image_cropper: ^1.2.2
   flutter_image_compress: ^0.6.8
 
+  geoflutterfire: ^2.0.3+5
+  google_maps_flutter: ^0.5.31
+  rxdart: ^0.22.5
 
   flutter_svg: ^0.17.0
   page_indicator: ^0.3.0
