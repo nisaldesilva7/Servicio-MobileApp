@@ -1,0 +1,206 @@
+﻿SERVICIO                                                                               
+SOFTWARE LICENSE
+©copyrights reserved SERVICIO™
+
+1. Software License Agreement
+
+   1.1 Acceptance
+
+	Welcome to SERVICIO, the website and mobile app of SERVICIO (together with its affiliates, "SERVICIO" "we," or "us"). This page explains the terms by which you may use our service. By accessing or using the SERVICIO services, website and mobile app provided through or in connection with the service ("Service"), you signify that you have read, understood, and agree to be bound by this Terms of Use Agreement, the SERVICIO Privacy Policy, the Conditions of Use, and the other applicable rules, policies and terms posted on the SERVICIO website or mobile app provided with the Service (collectively, this "Agreement"), whether or not you are a registered user of our Service.
+We reserve the right to amend this Agreement at any time in our sole discretion by posting the revised Agreement on the SERVICIO website. Your continued use of the Service after any such changes constitutes your acceptance of the revised Agreement. This Agreement applies to all visitors, users, and others who access the Service ("Users").
+
+Please read these user terms carefully before downloading our application and/or using our service
+
+   1.2 OwnerShip
+
+	This Software Application is owned and operated by Team SERVICIO. By accessing or using our service, you agree that the Services, including but not limited to Content, graphics, User Interfaces, video clips, and the scripts and software used to implement the services, contain proprietary information and material owned by Team Servicio and is protected by applicable intellectual property and other laws, including but not limited to copyright. You agree that you will not use such proprietary information or materials in any way whatsoever except to use the services for personal, noncommercial uses in compliance with this agreement. No portion of the services may be reproduced in any form or by any means. You agree not to modify, rent, loan, sell or distribute the services or content in any manner and you shall not exploit the services in any manner not expressly authorized.
+
+
+
+2. Use of Our Services
+
+   2.1 The Services we provide 
+
+	Our mission is to provide customers with a better platform to find service & repair centres according to their requirements, thereby facilitating easy online booking and enhancing customer satisfaction.
+
+Connect CarCare centres and customers who care about
+
+We help you find and connect with people, businesses, organizations, and others that matter to you across the SERVICIO. We use the data we have to make suggestions for customers - for example, nearest car care centres that you need to do the services. Stronger ties make for better communities, and we believe our services are most useful to find a better car care centre.
+
+Do the online bookings for CarCare centres
+
+We provide a platform to customers to book time slots that they conveniently take their vehicle for the car-care centres, people can go through the calendar and select dates and time slots in the mobile application and car care centres can accept those booking requests and suggest new date or time with a reason if they are not available. 
+
+Empower the CarCare centres by generating more inquiries to them
+
+Car care centres can easily register in SERVICIO by paying an annual subscription fee and list their profile in SERVICIO car care list. It will be easy for customers to find the services and car care centres around them. 
+
+Use and develop applicable technologies to provide safe and functional services for everyone
+
+We use and develop applicable technologies - so that people can use our Products safely regardless of physical ability or geographic location. We also implemented messaging to help more people connect to the internet in areas with limited access. And all the contents and profiles should be verified before listing in the SERVICIO.
+
+
+  2.2 Limitations of Use 
+
+Providing a safe and open Service for a broad community requires that we all do our part.
+
+
+* You can't do anything unlawful, misleading, or fraudulent or for an illegal or unauthorized purpose.
+* You can't impersonate others or provide inaccurate information.
+* you must provide us with accurate and up to date information (including registration information). Also, you may not impersonate someone you aren't, and you can't create an account for   someone else unless you have their express permission.
+* You can't violate (or help or encourage others to violate) these Terms or our policies. You can report any violations to our admins.
+* You can't do anything to interfere with or impair the intended operation of the Service.
+* You can't attempt to create accounts or access or collect information in unauthorized ways.
+* This includes creating accounts or collecting information in an automated way without our express permission.
+* You can't attempt to buy, sell, or transfer any aspect of your account (including your username) or solicit, collect, or use login credentials or badges of other users.
+* You can't post private or confidential information or do anything that violates someone else's rights, including intellectual property.
+
+
+
+3. User Consent
+
+   3.1 Who can use ‘SERVICIO’...
+
+	We want our Service to be as open and inclusive as possible, but we also want it to be safe, secure, and in accordance with the law. So, we need you to commit to a few restrictions in order to use  SERVICIO.
+
+1. You must give a valid email address and phone number  and validate your account through email and OTP.
+2. You must upload a copy of your business registration documents in order to register in the SERVICIO system as a Garage or Service station.
+3. You must not be prohibited from receiving any aspect of our Service under applicable laws or engaging in payments related Services if you are on an applicable denied party listing.
+4. We must not have previously disabled your account for violation of law or any of our policies.
+
+
+   3.2 Permissions You Give to Us.
+
+1. As part of our agreement, you also give us permissions that we need to provide the Service.
+2. We do not claim ownership of your content, but you grant us a license to use it.
+3. Permission to use your username, profile picture, and information about your vehicle, garage and service station and actions with accounts.
+4. You agree that we can download and install updates to the Service on your device.
+
+
+   3.3 Additional Rights We Retain
+
+1. If you select a username or similar identifier for your account, we may change it if we believe it is appropriate or necessary (for example, if it infringes someone's intellectual      	   property or impersonates another user).
+2. If you use content covered by intellectual property rights that we have and make available in our Service (for example, images or videos we provide that you add to content you share), we    retain all rights to our content (but not yours).
+3. You must obtain written permission from us or under an open source license to modify, create derivative works of, decompile, or otherwise attempt to extract source code from us.
+
+
+
+
+
+4. Data Policy
+
+This Policy describes the information we process to support SERVICIO products and features offered by SERVICIO. You can find additional tools and information in SERVICIO settings.
+
+
+   4.1 What kinds of information do we collect?
+       To provide the SERVICIO Product, we must process information about you. The type of information that we collect depends on how you use our Products. You can learn how to access and        delete information that we collect by visiting the SERVICIO settings.
+
+   4.2 Things that you and others do and provide.
+      1. Information and content you provide. 
+         We collect the content, communications and other information you provide when you use our Products, including when you sign up for an account, create or share content and message 	 or communicate with others. This can include information in or about the content that you provide, such as the location of a photo or the date a file was created. Our systems 	 automatically process content and communications that you and others provide to analyse context and what's in them for the purposes.
+
+
+      2. Networks and connections. 
+	We collect information about the people, accounts, data about your vehicle and current location of you.
+
+
+      3. Information about transactions made on our Products. If you use our Products for transactions (such as when you make a payment to book your time slot in any service or repair 	 centre ), we collect information about the payment. This includes payment information, such as your credit or debit card number and other card information, other account and 	 authentication information, and billing and contact details.
+
+
+   4.3 Device information.
+
+	With our Products, and we combine this information across different devices that you use. For example, we use information collected about your use of our Products on your phone to 	better personalise the content or features that you see when you use our Products on another device, such as your laptop or tablet, or to measure whether you took an action in response to an ad that we showed you on your phone on a different device.
+
+As described above, we collect information from and about the computers, phones  and other web-connected devices you use that integrate.
+
+   4.4 Information that we obtain from these devices includes:
+
+      1. Device attributes: information such as the operating system, hardware and software versions, available storage space, browser type, app and file names and types, and plugins.
+      2. Device operations: information about operations and behaviours performed on the device, such as whether a window is foreground or background, or mouse movements (which can help 	 	 distinguish humans from bots).
+      3. Data from device settings: information that you allow us to receive through device settings that you turn on, such as access to your GPS location, camera or photos.
+      4. Network and connections: information such as the name of your mobile operator or ISP, language, time zone, mobile phone number, IP address, connection speed.
+
+
+   4.5 How do we use this Information?
+
+      1. We use the information that we have (subject to choices you make) as described below, and to provide and support the SERVICIO Products and related services described in the SERVICIO Terms. 
+
+
+Here's how:
+
+   Provide, personalise and improve our Products.
+
+We use the information we have to deliver our Products, including to personalise features and content and make suggestions for you (such as nearest service or repair centre) on and off our Products. To create personalised Products that are unique and relevant to you, we use your connections, preferences, interests and activities based on the data that we collect and learn from you and others; how you use and interact with our Products.
+
+* Location- related information: We use location-related information – such as your current location. Location-related information can be based on things such as precise device location (if you've allowed us to collect it), IP addresses and information from your and others' use of SERVICIO Products (such as check-ins or events you attend).
+
+* Product research and development: We use the information we have to develop, test and improve our Product, including 
+
+* by conducting surveys and research and testing and troubleshooting new features.
+
+   1. Promote safety, integrity and security.
+	We use the information that we have to verify accounts and activity, combat harmful conduct, detect and prevent spam and other bad experiences, maintain the integrity of our Products, and promote safety and security on and off SERVICIO Products. For example, we use data that we have to investigate suspicious activity or breaches of our Terms or Policies, or to detect when someone needs help.
+
+   2. Communicate with you.
+	We use the information that we have to send you marketing communications, communicate with you about our product and let you know about our Policies and Terms. We also use your information to respond to you when you contact us.
+
+   3. How is this information shared?
+        Your information is shared with others in the following ways:
+
+
+Sharing through SERVICIO Product
+* People and accounts that you communicate with.
+* When you share and communicate using our Products, you choose the audience for what you share. For example, when you do a booking on SERVICIO, you select the repair or service centre of your choice, those people and businesses can see the content you send.
+* Public information can be seen by anyone, on or off our Products. This includes any information you share with a public audience, information in your public profile on SERVICIO, and content you share on a SERVICIO Page. Public information can also be seen, accessed, reshared or downloaded through third-party services such as search engines, APIs and offline media such as by apps, websites and other services that integrate with our Products.
+   1. Content that others share about you.
+* You should consider who you choose to share with because people who can see your activity on our Products can choose to download, screenshot.  
+
+
+5. Paid Services
+
+	The use of the Mobile Application and the Services of  are free of charge.  ‘SERVICIO’ is willing to reserve the right to introduce a fee for the use of the Application and/or the Service. If ‘SERVICIO’ decides to introduce such a fee, ‘SERVICIO’ shall inform you accordingly and allow you to either continue or terminate the Contract.
+The rates that apply for the Subscription for Services/Garage can be found on the Website and through the Web Application. These may be modified or updated by ‘SERVICIO’ from time to time. It is your own responsibility to remain informed about the current rates.
+Certain aspects of the Service may be provided for a fee or other charge. These fees and charges, if any, are described on the website. If you elect to use paid aspects of the System, you agree to the pricing, payment and billing policies applicable to such fees and charges, posted at the website. ‘Servcio’ may add new services for additional fees and charges, or amend fees and charges for existing services, at any time in its sole discretion.
+SERVICIO may charge your credit card account as provided by you when registering for the system (including any taxes and late fees, as applicable) that may be accrued by or in connection with your account.  Any payment made is non-refundable.
+
+         You may cancel your ‘SERVICIO’ Account at any time; however, there are no refunds for cancellation. As permitted under the terms of this Agreement, ‘SERVICIO’ has the right at any time for any reason or no reason to suspend or terminate your Account, terminate this Agreement, and/or refuse any and all current or future use of the system without notice, refund, obligation, or liability to you. In the event that ‘SERVICIO’ suspends or terminates your ‘SERVICIO’ Account or this Agreement, you understand and agree that you shall receive no refund or exchange for any unused time on a subscription, any license or subscription fees for any portion of the Service, any content or data associated with your ‘SERVICIO’ account, or for anything else. You acknowledge that ‘SERVICIO’ has the perpetual and irrevocable right to delete any or all of your content and data from ‘SERVICIO'  servers and from the system, whether intentionally or unintentionally, and for any reason or no reason, without any liability of any kind to you or any other party.
+‘SERVICIO’ uses a third-party payment processor ( "PayHere") to link your credit card account to the Application and Service. The processing of payments or credits, as applicable, in connection with your use of the Application and Service will be subject to the terms, conditions and privacy policies of the Payment Processor and your credit card issuer in addition to these User Terms. ‘SERVICIO’ is not responsible for any errors by the Payment Processor. 
+
+
+
+6. Third-Party Websites, Advertisers or Services
+
+	Users acknowledge that in order for ‘SERVICIO’ to perform the Services, Customers may need to obtain additional third party services ("Google Services & etc.") or third party technology ("Google maps & etc"). User agrees that the rights and licenses with respect to Third-Party Technology and Third Party Services shall be under terms set forth in the pertinent purchase, license or services agreements between Customer and the vendors of such Third Party Software or Third Party Services. Customers shall execute and comply with appropriate purchase, license, or services agreements with respect to any Third Party Software or Third Party Services. Any amounts payable to third party vendors or service providers under such agreements are the sole responsibility of Customer and shall be paid directly by Customer to such third party vendors or service providers.
+
+
+7. Additional Provisions 
+
+   7.1 Updating our terms
+
+	We work constantly to improve our services and develop new features to make our Products better for you and our user community. As a result, we may need to update these Terms from time to time to accurately reflect our services and practices. We will only make any changes if the provisions are no longer appropriate or if they are incomplete, and only if the changes are reasonable and take due account of your interests.
+
+	We will notify you (for example, by email or through our Products) at least 30 days before we make changes to these Terms and give you an opportunity to review them before they go into effect unless changes are required by law. And you are responsible for updating contact information and regularly reviewing the Terms and any applicable Product for updates and information from SERVICIO. Continued use of the SERVICIO Services after any such modifications or updates shall constitute User’s consent to such changes. but if you do not agree to our updated Terms and no longer want to be a part of our user community, you can delete your account at any time.
+
+   7.2 Account suspension and termination
+
+         If we determine that you have clearly, seriously or repeatedly breached our Terms or Policies, including in particular our Community Standards, or if you repeatedly infringe other people’s intellectual property rights or where we are required to do so for legal reasons
+
+SERVICIO may permanently or temporarily terminate, suspend, or otherwise refuse to permit your access to the Service without notice and liability for any reason, including for no reason. Upon termination for any reason or no reason, you continue to be bound by this Agreement.
+ 
+  7.3 Limits on liability
+
+	We work hard to provide the best Products we can and to specify clear guidelines for everyone who uses them. Our Products, however, are provided "as is," and we make no guarantees that they always will be safe, secure, or error-free, or that they will function without disruptions, delays, or imperfections. We do not control or direct what people and others do or say, and we are not responsible for their actions or conduct (whether online or offline) or any content they share (including offensive, inappropriate, obscene, unlawful, and other objectionable content).
+
+	We cannot predict when issues might arise with our Products. Accordingly, our liability shall be limited to the fullest extent permitted by applicable law, and under no circumstance will we be liable to you for any lost profits, revenues, information, or data, or consequential, special, indirect, exemplary, punitive, or incidental damages arising out of or related to these Terms or the Servicio Products, even if we have been advised of the possibility of such damages.
+
+   7.4 Disputes
+
+	We try to provide clear rules so that we can limit or hopefully avoid disputes between you and us. If a dispute does arise, however, it's useful to know upfront where it can be resolved and what laws will apply.
+
+	If you are a consumer, the laws of the Democratic Socialist Republic of Sri Lanka will apply to any claim, cause of action, or dispute you have against us that arises out of or relates to these Terms or the SERVICIO Products, and you may resolve your claim in any competent court in the country that has jurisdiction over the claim
+
+
+
+
+Please contact us with any questions regarding this Agreement.
+©copyrights reserved SERVICIO™
